@@ -6,10 +6,10 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>919,2890</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>959,2962</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Cliente_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="62">
+    <scg:List x:TypeArguments="x:String" Capacity="55">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -68,7 +68,7 @@
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="48">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="46">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -114,10 +114,10 @@
       <AssemblyReference>UiPath.CV.Activities</AssemblyReference>
       <AssemblyReference>Roboluze.Libre.Config</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Cliente" sap:VirtualizedContainerService.HintSize="604,2825" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Cliente" sap:VirtualizedContainerService.HintSize="644,2897" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:List(x:String)" Default="[New List(Of String)]" Name="TODOList" />
       <Variable x:TypeArguments="x:String" Name="LoginCodigo">
@@ -128,13 +128,14 @@
       <Variable x:TypeArguments="x:Boolean" Name="Processar" />
       <Variable x:TypeArguments="x:Int32" Name="PeriodoAtual" />
       <Variable x:TypeArguments="x:Int32" Name="PeriodoRobo" />
+      <Variable x:TypeArguments="x:String" Name="Periodo" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="562,255" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="582,287" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -161,12 +162,20 @@
               <InArgument x:TypeArguments="x:Boolean">[Convert.ToBoolean(io_TransactionItem("FAZ_XML_SAIDA")) Or Convert.ToBoolean(io_TransactionItem("FAZ_XML_ENTRADA")) Or Convert.ToBoolean(io_TransactionItem("FAZ_DECLARACAO_PRESTADOS")) Or Convert.ToBoolean(io_TransactionItem("FAZ_DECLARACAO_TOMADOS")) Or Convert.ToBoolean(io_TransactionItem("FAZ_SIMPLES"))]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_10">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[Periodo]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[in_Config("PERIODO").ToString]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
             <ui:AssignOperation.To>
               <OutArgument x:TypeArguments="x:Int32">[PeriodoAtual]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:Int32">[DateTime.Now.Year+DateTime.Now.Month]</InArgument>
+              <InArgument x:TypeArguments="x:Int32">[Convert.ToInt32(DateTime.Now.ToString("yy")+DateTime.Now.ToString("MM"))]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
@@ -174,7 +183,7 @@
               <OutArgument x:TypeArguments="x:Int32">[PeriodoRobo]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:Int32">[Convert.ToDateTime(in_Config("DATA_INICIO")).Year+Convert.ToDateTime(in_Config("DATA_INICIO")).Month]</InArgument>
+              <InArgument x:TypeArguments="x:Int32">[Convert.ToInt32(Periodo.Substring(Periodo.IndexOf("/")+3)+Periodo.Substring(0,Periodo.IndexOf("/")))]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
@@ -194,7 +203,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:MultipleAssign>
-    <If Condition="[Processar]" DisplayName="Processar" sap:VirtualizedContainerService.HintSize="562,2438" sap2010:WorkflowViewState.IdRef="If_6">
+    <If Condition="[Processar]" DisplayName="Processar" sap:VirtualizedContainerService.HintSize="582,2459" sap2010:WorkflowViewState.IdRef="If_6">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -202,7 +211,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <Sequence sap:VirtualizedContainerService.HintSize="526,2251" sap2010:WorkflowViewState.IdRef="Sequence_7">
+        <Sequence sap:VirtualizedContainerService.HintSize="546,2270" sap2010:WorkflowViewState.IdRef="Sequence_7">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
