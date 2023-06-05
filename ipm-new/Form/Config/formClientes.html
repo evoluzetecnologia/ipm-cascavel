@@ -1,0 +1,272 @@
+﻿<!-- form
+{
+  "Metadata": {
+    "Id": "037b0558-a808-4165-96e4-cd5f356e77d7",
+    "Kind": "Html"
+  }
+}
+-->
+<!DOCTYPE html>
+<html>
+<head lang="pt-BR">
+	<meta charset="utf-8">
+	<title>Roboluze</title>
+	<!--
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../Files/www/css/roboluze.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	-->
+	<link rel="stylesheet" href="https://roboluze.com.br/_roboluze/www/css/bootstrap.5.2.3.min.css">
+	<link rel="stylesheet" href="https://roboluze.com.br/_roboluze/www/css/roboluze.css">
+	<script src="https://roboluze.com.br/_roboluze/www/js/bootstrap.5.2.3.js"></script>
+	<script src="https://roboluze.com.br/_roboluze/www/js/ajax.jquery.3.2.0.min.js"></script>
+	<script src="https://roboluze.com.br/_roboluze/www/js/roboluze.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/imask"></script>
+		
+	
+	<script type="text/javascript">
+			var uiPathApi = {
+                getValue: function (elementId) {
+                    // this is a callback, being called from the workflow
+                    // enter your own code to get element values
+                    var el = document.getElementById(elementId);
+                    if (el.value == undefined) {
+                        return el.innerHTML;
+                    } else {
+                        if (el.checked == undefined) {
+                            return el.value;
+                        } else {
+                            return el.checked;
+                        }
+                    }
+                },
+        
+                setValue: function (elementId, value) {
+                    var el = document.getElementById(elementId);
+					
+					if (el == null) {
+						var el = document.getElementById(value);
+					} 
+					
+					if ((el.tagName === 'INPUT' && el.type === 'text') || el.type === 'email') {
+						el.value = value;
+					} else if (el.tagName === 'SELECT') {
+						el.value = value;
+					} else if (el.tagName === 'TBODY') {
+						
+						var jsonData = value;
+						var data = JSON.parse(jsonData);
+						initializePagination(data);
+						
+						var processCheckboxAll = document.querySelector('.ProcessCheckboxAll');
+						var processCheckboxes = document.querySelectorAll('.ProcessCheckbox');
+
+						processCheckboxAll.addEventListener('change', function() {
+
+						if (processCheckboxAll.checked) {
+						  // Marca todos os checkboxes "ProcessCheckbox"
+						  processCheckboxes.forEach(function(processCheckbox) {
+							processCheckbox.checked = true;
+						  });
+						} else {
+						  // Desmarca todos os checkboxes "ProcessCheckbox"
+						  processCheckboxes.forEach(function(processCheckbox) {
+							processCheckbox.checked = false;
+						  });
+						}
+						});
+					} else if (el.tagName === 'INPUT' && el.type === 'radio') {
+						if (value === el.id) {
+						  el.checked = true;
+						} else {
+						  el.checked = false;
+						}
+					  } else {
+						el.innerHTML = value;
+					}
+                },
+				
+				
+                // Call this to trigger a "Form Message" event
+                // This function is set by the forms engine after the page loads,
+                // but declaring it here as empty helps with code autocompletion
+                sendMessage: function (id, value) { },
+			};
+	</script>
+	<script>
+		
+		function closedClicked() {
+			uiPathApi.sendMessage("close");
+		}
+		function saveClicked() {
+			/*var contrato = document.getElementById("checkTermos").checked;
+			//var outputString = "{\"cnpj\":\"" + cnpj + "\"}";
+			var nome = document.getElementById("razaoSocial").value;
+			var fantasia = document.getElementById("nomeFantasia").value;
+			var ie = document.getElementById("ie").value;
+			var email = document.getElementById("email").value;
+			var endereco = document.getElementById("endereco").value;
+			var cidade = document.getElementById("cidade").value;
+			var uf = document.getElementById("uf").value;
+			var cep = document.getElementById("cep").value;
+			var jsonData = {
+			  "nome": nome,
+			  "fantasia": fantasia,
+			  "ie": ie,
+			  "email": email,
+			  "cep": cep,
+			  "endereco": endereco,
+			  "cidade": cidade,
+			  "uf": uf
+			};
+			
+			*/
+			
+			var jsonData = []; // Array para armazenar os objetos JSON de cada linha
+
+			$('table tr').each(function() {
+				var row = $(this);
+				var rowData = {}; // Objeto para armazenar os dados de cada linha
+	
+				// Obter o ID da linha
+				var id = row.find('th').attr('id');
+				if (typeof id !== 'undefined') {
+					// Obter o estado do checkbox
+					var checkboxState = row.find('td:last-child input[type="checkbox"]').prop('checked');
+					if (checkboxState !== true) {
+						rowData['ID_CLIENTE'] = id;
+						//rowData['checkboxState'] = checkboxState;
+						// Obter o valor da célula
+						//var value = row.find('td').eq(0).text(); // Altere o índice '0' conforme necessário
+						//rowData['value'] = value;
+						jsonData.push(rowData); // Adicionar o objeto rowData ao array jsonData
+					}
+				}
+			});
+
+			var jsonResult = JSON.stringify(jsonData); // 
+		
+			uiPathApi.sendMessage("save", jsonResult );
+		}
+	</script>
+</head>
+<body>
+	<div class="container-fluid mt-2">
+		<div class="row">
+			<div class="col-sm-11">
+				<div class="d-flex align-items-center mb-3">
+					<img src="https://roboluze.com.br/img/evoluze_logo.png" alt="Logo" class="logo">
+					<h4 class="m-0" id="formName"></h4>
+			   </div>
+			</div>
+			<div class="col-sm-1">
+				<button type="button" class="btn-close float-end" aria-label="Close" onclick="closedClicked()"></button>
+			</div>
+		</div>
+		
+		<div class="row">
+		  <div class="col-sm-3">
+			<input type="text" class="form-control form-control-sm" id="myInput" placeholder="Filtro">
+		  </div>
+		  <div class="col-sm-6 d-flex justify-content-center">
+			<div class="pagination pagination-sm" id="pagination"></div>
+		  </div>
+		  <div class="col-sm-3">
+			<button id="SubmitButton" type="submit" class="btn btn-primary btn-sm w-100" onclick="saveClicked()">Iniciar</button>
+		  </div>
+		</div>
+		<!--hr class="my-4"-->
+		<div class="table-responsive-sm">
+			<table class="table table-sm table-striped ">
+				 <thead>
+					<tr>
+					  <th class="col-0" scope="col">Cód</th>
+					  <th class="col-2" scope="col"><div class="d-flex justify-content-center">CNPJ</div></th>
+					  <th class="col-3" scope="col">Empresa</th>
+					  <th class="col-7" scope="col">Observação</th>
+					  <th class="col-0">
+						<div class="d-flex justify-content-end"><input type="checkbox" class="ProcessCheckboxAll form-check-input"checked></div>
+					  </th>
+					</tr>
+				  </thead>
+				  <tbody id="myTable" class="table-group-divider">
+				  </tbody>
+			</table>
+		</div>
+	</div>
+
+	<script>
+		function initializePagination(data) {
+		  var itemsPerPage = 20; // Number of items to display per page
+		  var totalPages = Math.ceil(data.length / itemsPerPage);
+		  var container = $('#myTable');
+		  container.empty();
+		  var nItem = 0;
+
+		  $.each(data, function(index, item) {
+			var row = $('<tr>');
+			nItem++;
+			if(nItem > itemsPerPage){
+				row.css('display', 'none');
+			}
+			var checkbox = $('<input>').attr('type', 'checkbox').prop('checked', item.PROCESSAR).prop('class','ProcessCheckbox form-check-input');
+			var divCk = $('<div>').prop('class','d-flex justify-content-end').append(checkbox);
+			row.append($("<th>").text(item.CODIGO).prop('scope', 'row').prop('id',item.ID_CLIENTE).prop('class','col-0'));
+			
+			var divCnpj = $('<div>').addClass('d-flex justify-content-center').text(item.CNPJ);
+			row.append($('<td>').prop('class','col-1').append(divCnpj));
+			
+			row.append($('<td>').text(item.EMPRESA).prop('class','col-3'));
+			row.append($('<td>').text(item.OBSERVACAO).prop('class','col-7'));
+			row.append($("<td>").prop('class','col-0').append(divCk));
+			container.append(row);
+		  });
+		  
+		  
+		  // Initialize the bootpag plugin
+		  var pagination = $('#pagination').bootpag({
+			total: totalPages,
+			page: 1,
+			maxVisible: 10, // Maximum number of visible pages
+			leaps: true, // Enable/disable next/previous leaps through maxVisible
+			firstLastUse: true, // Enable/disable first/last buttons
+			href: "#pro-page-{{number}}",
+			
+			
+		  }).on("page", function(event, num) {
+			var startIndex = (num - 1) * itemsPerPage;
+			var endIndex = startIndex + itemsPerPage;
+
+			// Hide all rows
+			container.find('tr').hide();
+
+			// Show rows for the current page
+			container.find('tr').slice(startIndex, endIndex).show();
+		  });
+
+	  // Click on the first page after loading
+	  container.find('tr').slice(0, itemsPerPage).show();
+}
+
+
+    </script>
+	
+
+	<script>
+		$(document).ready(function(){
+		  $("#myInput").on("keyup", function() {
+			var value = $(this).val().toLowerCase();
+			$("#myTable tr").filter(function() {
+			  $(this).toggle( $(this).text().toLowerCase().indexOf(value) > -1 );
+			});
+		  });
+		});
+	</script>
+
+	<!--script src="https://code.jquery.com/jquery-3.6.0.min.js"></script-->
+	<script src="https://roboluze.com.br/_roboluze/www/js/jquery-3.6.0.min.js"></script>
+	<script src="https://roboluze.com.br/_roboluze/www/js/bootpag.js"></script>
+
+</body>
+</html>

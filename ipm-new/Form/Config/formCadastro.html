@@ -1,0 +1,331 @@
+﻿<!-- form
+{
+  "Metadata": {
+    "Id": "0677cd0f-64a7-44e4-867a-f9045f1d6888",
+    "Kind": "Html"
+  }
+}
+-->
+<!DOCTYPE html>
+<html>
+<head lang="pt-BR">
+	<meta charset="utf-8">
+	<title>Roboluze</title>
+	<!--
+	<link rel="stylesheet" href="https://roboluze.com.br/_roboluze/www/css/bootstrap.5.2.3.min.css">
+	
+	<link rel="stylesheet" href="../../Files/www/css/roboluze.css">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	-->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://roboluze.com.br/_roboluze/www/css/roboluze.css">
+	<script src="https://roboluze.com.br/_roboluze/www/js/bootstrap.5.2.3.js"></script>
+	<script src="https://roboluze.com.br/_roboluze/www/js/ajax.jquery.3.2.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.min.js"></script>
+	<script src="https://roboluze.com.br/_roboluze/www/js/roboluze.js"></script>
+	<script src="https://roboluze.com.br/_roboluze/www/js/imask.js"></script>
+	<!--script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script-->
+
+		
+	
+	<script type="text/javascript">
+			var uiPathApi = {
+                getValue: function (elementId) {
+                    var el = document.getElementById(elementId);
+                    if (el.value == undefined) {
+                        return el.innerHTML;
+                    } else {
+                        if (el.checked == undefined) {
+                            return el.value;
+                        } else {
+                            return el.checked;
+                        }
+                    }
+                },
+        
+                setValue: function (elementId, value) {
+				
+					var el = document.getElementById(elementId);
+					if (el == null) {
+						el = document.getElementById(value);
+					} 
+					
+					if ((el.tagName === 'INPUT' && el.type === 'text') || el.type === 'email') {
+						el.value = value;
+					} else if (el.tagName === 'SELECT') {
+						el.value = value;
+					} else if (el.tagName === 'TBODY') {
+						var tabela = document.getElementById('myTable');
+						while (tabela.rows.length > 0) {
+							tabela.deleteRow(0);
+						}
+						var jsonData = value;
+						var data = JSON.parse(jsonData);
+						var tableBody = $("#myTable");
+						var nItem = 0;
+						data.forEach(function(item) {
+							var row = $('<tr>');
+							nItem++;
+							if(nItem > 20){
+								row.css('display', 'none');
+							}
+							var codigoInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm').prop('id', 'CODIGO').prop('name', 'CODIGO').prop("value",item.CODIGO).prop('readonly', false);;
+							var codigoCell = $("<td>").prop('class', 'col-1').append(codigoInput);
+							row.append(codigoCell);
+							var cnpjInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm input-mask-cnpj').prop('id', 'CNPJ').prop('name', 'CNPJ').prop("value",item.CNPJ).prop('readonly', false);;
+							var cnpjCell = $("<td>").prop('class', 'col-1').append(cnpjInput);
+							row.append(cnpjCell);
+							var empresaInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm').prop('id', 'EMPRESA').prop('name', 'EMPRESA').prop("value",item.EMPRESA).prop('readonly', false);;
+							var empresaCell = $("<td>").prop('class', 'col-4').append(empresaInput);
+							row.append(empresaCell);
+							var emailInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm').prop('id', 'EMAIL').prop('name', 'EMAIL').prop("value",item.EMAIL).prop('readonly', false);;
+							var emailCell = $("<td>").prop('class', 'col-4').append(emailInput);
+							row.append(emailCell);
+					  
+					
+							
+							var regimeSelect = $('<select>').prop('class', 'form-select form-select-sm').prop('id', 'REGIME_TRIBUTARIO');
+							regimeSelect.append(new Option("", ""));
+							regimeSelect.append(new Option("Lucro Real", "LUCRO_REAL"));
+							regimeSelect.append(new Option("Lucro Presumido", "LUCRO_PRESUMIDO"));
+							regimeSelect.append(new Option("Simples Nacional", "SIMPLES_NACIONAL"));
+							regimeSelect.append(new Option("MEI", "MEI"));
+							regimeSelect.val(item.REGIME_TRIBUTARIO);
+							var regimeCell = $("<td>").prop('class', 'col-2').append(regimeSelect);
+							row.append(regimeCell);
+							var checkbox = $('<input>').attr('type', 'checkbox').prop('checked', item.SITUACAO).prop('class','ProcessCheckbox form-check-input');
+							var checkboxCell = $("<td>").prop('class', 'col-0').append($('<div>').prop('class', 'd-flex justify-content-end').append(checkbox));
+							row.append(checkboxCell);
+							tableBody.append(row);
+						});
+						
+						initializePagination(data);
+						
+						var processCheckboxAll = document.querySelector('.ProcessCheckboxAll');
+						var processCheckboxes = document.querySelectorAll('.ProcessCheckbox');
+
+						processCheckboxAll.addEventListener('change', function() {
+
+						if (processCheckboxAll.checked) {
+						  // Marca todos os checkboxes "ProcessCheckbox"
+						  processCheckboxes.forEach(function(processCheckbox) {
+							processCheckbox.checked = true;
+						  });
+						} else {
+						  // Desmarca todos os checkboxes "ProcessCheckbox"
+						  processCheckboxes.forEach(function(processCheckbox) {
+							processCheckbox.checked = false;
+						  });
+						}
+						});
+						
+
+					} else if (el.tagName === 'INPUT' && el.type === 'radio') {
+						if (value === el.id) {
+							el.checked = true;
+						} else {
+							el.checked = false;
+						}
+					} else {
+						el.innerHTML = value;
+					}
+				},
+
+				sendMessage: function (id, value) { },
+			};
+	</script>
+	<script>
+		
+		function closedClicked() {
+			uiPathApi.sendMessage("close");
+		}
+		
+		function addClicked() {
+			sendRoboluze("add");
+		}
+		
+		
+		function saveClicked() {
+			sendRoboluze("save");
+		}
+		
+		function sendRoboluze(id){
+			var jsonData = []; // Array para armazenar os objetos JSON de cada linha
+			$('table tr').each(function() {
+				var row = $(this);
+				var codigo = row.find("#CODIGO").val(); // Captura o valor do campo com ID "CODIGO"
+				var cnpj = row.find("#CNPJ").val(); // Captura o valor do campo com ID "CNPJ"
+				var empresa = row.find("#EMPRESA").val(); // Captura o valor do campo com ID "EMPRESA"
+				var email = row.find("#EMAIL").val(); // Captura o valor do campo com EMAIL"
+				var regimeTributario = row.find("#REGIME_TRIBUTARIO").val(); // Captura o valor do campo com ID "REGIME_TRIBUTARIO"
+				var processCheckbox = row.find(".ProcessCheckbox").is(":checked"); // Captura o estado do checkbox
+				var rowValues = {
+				  CODIGO: codigo,
+				  CNPJ: cnpj,
+				  EMPRESA: empresa,
+				  EMAIL: email,
+				  REGIME_TRIBUTARIO: regimeTributario,
+				  SITUACAO: processCheckbox
+				};
+				if(codigo){
+					jsonData.push(rowValues);
+				}
+			});
+			var jsonResult = JSON.stringify(jsonData);
+			uiPathApi.sendMessage(id, jsonResult);
+		}
+	</script>
+</head>
+<body>
+	<div class="container-fluid mt-2">
+		<div class="row">
+			<div class="col-sm-11">
+				<div class="d-flex align-items-center mb-3">
+					<img src="https://roboluze.com.br/img/evoluze_logo.png" alt="Logo" class="logo">
+					<h4 class="m-0" id="formName"></h4>
+			   </div>
+			</div>
+			<div class="col-sm-1">
+				<button type="button" class="btn-close float-end" aria-label="Close" onclick="closedClicked()"></button>
+			</div>
+		</div>
+		
+		<div class="row">
+		  <div class="col-sm-4">
+			<input type="text" class="form-control form-control-sm" id="myInput" placeholder="Filtro">
+		  </div>
+		  <div class="col-sm-4 d-flex justify-content-center">
+			<div class="pagination pagination-sm" id="pagination"></div>
+		  </div>
+		  <div class="col-sm-2">
+			<button id="AddButton" type="submit" class="btn btn-success btn-sm w-100" onclick="addClicked()">Novo</button>
+		  </div>
+		  <div class="col-sm-2">
+			<button id="SubmitButton" type="submit" class="btn btn-primary btn-sm w-100" onclick="saveClicked()">Salvar</button>
+		  </div>
+		</div>
+		<!--hr class="my-4"-->
+		<div class="table-responsive-sm">
+			<table class="table table-sm table-striped ">
+				 <thead>
+					<tr>
+					  <th class="col-1" scope="col">Cód</th>
+					  <th class="col-1" scope="col"><div class="d-flex justify-content-center">CNPJ</div></th>
+					  <th class="col-4" scope="col">Empresa</th>
+					  <th class="col-4" scope="col">Email</th>
+					  <th class="col-2" scope="col">Regime Trib.</th>
+					  <th class="col-0">
+						<div class="d-flex justify-content-end"><input type="checkbox" class="ProcessCheckboxAll form-check-input"checked></div>
+					  </th>
+					</tr>
+				  </thead>
+				  <tbody id="myTable" class="table-group-divider">
+				  </tbody>
+			</table>
+		</div>
+	</div>
+
+	<script>
+		function initializePagination(data) {
+		  var itemsPerPage = 20; // Number of items to display per page
+		  var totalPages = Math.ceil(data.length / itemsPerPage);
+		  var container = $('#myTable');
+		  /*
+		  container.empty();
+		  var nItem = 0;
+
+		  $.each(data, function(index, item) {
+			var row = $('<tr>');
+			nItem++;
+			if(nItem > itemsPerPage){
+				row.css('display', 'none');
+			}
+			var codigoInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm').prop('id', 'CODIGO').prop('name', 'CODIGO').prop("value",item.CODIGO);
+			var codigoCell = $("<td>").prop('class', 'col-1').append(codigoInput);
+			row.append(codigoCell);
+			var cnpjInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm').prop('id', 'CNPJ').prop('name', 'CNPJ').prop("value",item.CNPJ);
+			var cnpjCell = $("<td>").prop('class', 'col-2').append(cnpjInput);
+			row.append(cnpjCell);
+			var empresaInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm').prop('id', 'EMPRESA').prop('name', 'EMPRESA').prop("value",item.EMPRESA);
+			var empresaCell = $("<td>").prop('class', 'col-5').append(empresaInput);
+			row.append(empresaCell);
+			
+			var regimeSelect = $('<select>').prop('class', 'form-select form-select-sm').prop('id', 'REGIME_TRIBUTARIO').prop('required');
+			
+			var regimeCell = $("<td>").prop('class', 'col-3').append(regimeSelect);
+			row.append(regimeCell);
+			
+			
+			
+			var regimeSelect = $('<select>').prop('class', 'form-select form-select-sm').prop('id', 'REGIME_TRIBUTARIO');
+			regimeSelect.append($('<option>').prop('value', '').text(''));
+			regimeSelect.append($('<option>').prop('value', 'LUCRO_REAL').text('Lucro Real'));
+			regimeSelect.append($('<option>').prop('value', 'LUCRO_PRESUMIDO').text('Lucro Presumido'));
+			regimeSelect.append($('<option>').prop('value', 'SIMPLES_NACIONAL').text('Simples Nacional'));
+			regimeSelect.append($('<option>').prop('value', 'MEI').text('MEI'));
+			regimeSelect.append($('<option>').prop('value', 'OUTRO').text('Outro'));
+			var regimeCell = $("<td>").prop('class', 'col-3').append(regimeSelect);
+			row.append(regimeCell);
+
+			
+			
+			var checkbox = $('<input>').attr('type', 'checkbox').prop('checked', item.SITUACAO).prop('class', 'form-check-input').prop('id', 'ProcessCheckbox').prop('name', 'ProcessCheckbox');
+			var checkboxCell = $("<td>").prop('class', 'col-1').append($('<div>').prop('class', 'd-flex justify-content-end').append(checkbox));
+			row.append(checkboxCell);
+			container.append(row);
+
+		  });
+		  
+		  */
+		  // Initialize the bootpag plugin
+		  var pagination = $('#pagination').bootpag({
+			total: totalPages,
+			page: 1,
+			maxVisible: 10, // Maximum number of visible pages
+			leaps: true, // Enable/disable next/previous leaps through maxVisible
+			firstLastUse: true, // Enable/disable first/last buttons
+			href: "#pro-page-{{number}}",
+			
+			
+		  }).on("page", function(event, num) {
+			var startIndex = (num - 1) * itemsPerPage;
+			var endIndex = startIndex + itemsPerPage;
+
+			// Hide all rows
+			container.find('tr').hide();
+
+			// Show rows for the current page
+			container.find('tr').slice(startIndex, endIndex).show();
+		  });
+
+	  // Click on the first page after loading
+			container.find('tr').slice(0, itemsPerPage).show();
+		}
+		
+    </script>
+	<script>
+		$(document).ready(function(){
+		  $("#myInput").on("keyup", function() {
+			var value = $(this).val().toLowerCase();
+			$("#myTable tr").filter(function() {
+				var row = $(this);
+				  var inputValues = row.find("input[type='text']").map(function() {
+					return $(this).val().toLowerCase();
+				  }).get();
+				  var rowMatches = inputValues.some(function(inputValue) {
+					return inputValue.indexOf(value) > -1;
+				  });
+				  row.toggle(rowMatches);
+			  //$(this).toggle( $(this).text().toLowerCase().indexOf(value) > -1 );
+			});
+		  });
+		});
+	</script>
+	<!--script src="https://code.jquery.com/jquery-3.6.0.min.js"></script-->
+	<script src="https://roboluze.com.br/_roboluze/www/js/bootpag.js"></script>
+	
+
+</body>
+</html>
