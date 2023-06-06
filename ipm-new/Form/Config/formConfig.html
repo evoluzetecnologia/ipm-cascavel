@@ -151,6 +151,10 @@
 			var simplesNacional = document.getElementById("SimplesNacional").checked;
 			var emitirNFS = document.getElementById("EmitirNFS").checked;
 			
+			var codigoServico = document.getElementById("CodigoServico").value;
+			var observacaoNFS = document.getElementById("ObservacaoNFS").value;
+			var observacaoFinanceira = document.getElementById("ObservacaoFinanceira").value;
+			
 			// IPM Parametros
 			var ipmLogin = document.getElementById("IPMLogin").value;
 			var ipmPassword = document.getElementById("IPMPassword").value;
@@ -187,6 +191,9 @@
 				"ProtocolarNFEntrada": protocolarNFEntrada,
 				"SimplesNacional": simplesNacional,
 				"EmitirNFS": emitirNFS,
+				"CodigoServico": codigoServico,
+				"ObservacaoNFS": observacaoNFS,
+				"ObservacaoFinanceira": observacaoFinanceira,
 				
 				"IPMLogin": ipmLogin,
 				"IPMPassword": ipmPassword,
@@ -391,33 +398,9 @@
 										
 										<div class="row">
 											<div class="col-3 d-flex align-items-center">
-												<label class="col-form-label">Protocolar Prestados</label>
+												<label class="col-form-label">Tipo Download Saidas</label>
 											</div>
-											<div class="col-9 d-flex align-items-center ">
-												<select class="form-select form-select-sm" id="ProtocoloPrestados" required>
-													<option value="Todos">Todos</option>
-													<option value="ISS">Com Recolhimento</option>
-													<option value="Nenhum">Nenhum</option>
-												</select>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-3 d-flex align-items-center">
-												<label class="col-form-label">Protocolar Tomados</label>
-											</div>
-											<div class="col-9 d-flex align-items-center ">
-												<select class="form-select form-select-sm" id="ProtocoloTomados" required>
-													<option value="Todos">Todos</option>
-													<option value="ISS">Com Recolhimento</option>
-													<option value="Nenhum">Nenhum</option>
-												</select>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-3 d-flex align-items-center">
-												<label class="col-form-label">Tipo Arquivo Prestados</label>
-											</div>
-											<div class="col-9 d-flex align-items-center ">
+											<div class="col-3 d-flex align-items-center ">
 												<div class="form-check form-check-inline">
 													<input class="form-check-input" type="radio" name="ArquivoPrestados" id="ArquivoPrestadosXML" value="XML" checked>
 													<label class="form-check-label" for="ArquivoPrestadosXML">.xml</label>
@@ -427,12 +410,24 @@
 												  <label class="form-check-label" for="ArquivoPrestadosTXT">.txt</label>
 												</div>
 											</div>
+											<div class="col-1 d-flex align-items-center"></div>
+											<div class="col-3 d-flex align-items-center">
+												<label class="col-form-label">Protocolar Prestados</label>
+											</div>
+											<div class="col-2 d-flex align-items-center ">
+												<select class="form-select form-select-sm" id="ProtocoloPrestados" required>
+													<option value="Todos">Todos</option>
+													<option value="ISS">Com Recolhimento</option>
+													<option value="Nenhum">Nenhum</option>
+												</select>
+											</div>
+
 										</div>
 										<div class="row">
 											<div class="col-3 d-flex align-items-center">
-												<label class="col-form-label">Tipo Arquivo Prestados</label>
+												<label class="col-form-label">Tipo Download Entradas</label>
 											</div>
-											<div class="col-9 d-flex align-items-center ">
+											<div class="col-3 d-flex align-items-center ">
 												<div class="form-check form-check-inline">
 													<input class="form-check-input" type="radio" name="ArquivoTomados" id="ArquivoTomadosXML" value="XML" checked>
 													<label class="form-check-label" for="ArquivoTomadosXML">.xml</label>
@@ -441,6 +436,43 @@
 												  <input class="form-check-input form-sm" type="radio" name="ArquivoTomados" id="ArquivoTomadosTXT" value="TXT">
 												  <label class="form-check-label form-sm" for="ArquivoTomadosTXT">.txt</label>
 												</div>
+											</div>
+											<div class="col-1 d-flex align-items-center"></div>
+											<div class="col-3 d-flex align-items-center">
+												<label class="col-form-label">Protocolar Tomados</label>
+											</div>
+											<div class="col-2 d-flex align-items-center ">
+												<select class="form-select form-select-sm" id="ProtocoloTomados" required>
+													<option value="Todos">Todos</option>
+													<option value="ISS">Com Recolhimento</option>
+													<option value="Nenhum">Nenhum</option>
+												</select>
+											</div>
+										</div>
+										
+										<div class="row mb-1">
+											<div class="col-3 d-flex align-items-center">
+												<label class="col-form-label">Código Serviço Emissão NFS</label>
+											</div>
+											<div class="col-9 d-flex align-items-center ">
+												<input type="text" class="form-control form-control-sm" id="CodigoServico" name="CodigoServico" placeholder="Código de serviço para emissão da Nota Fiscal" value="">
+											</div>
+										</div>
+										
+										<div class="row mb-1">
+											<div class="col-3 d-flex align-items-start">
+												<label class="col-form-label">Observação na Emissao NFS</label>
+											</div>
+											<div class="col-9 d-flex align-items-center">
+												  <textarea class="form-control form-control-sm" placeholder="Observação para emissão de NFS" rows="7" id="ObservacaoNFS"></textarea>
+											</div>
+										</div>
+										<div class="row mb-1">
+											<div class="col-3 d-flex align-items-start">
+												<label class="col-form-label">Observação Financeira na NFS</label>
+											</div>
+											<div class="col-9 d-flex align-items-center">
+												  <textarea class="form-control form-control-sm" placeholder="Observação financeira na NFS" rows="5" id="ObservacaoFinanceira"></textarea>
 											</div>
 										</div>
 										
