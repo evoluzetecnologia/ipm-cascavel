@@ -101,16 +101,14 @@
 			uiPathApi.sendMessage("close");
 		}
 		function changedPerfil(perfil) {
+			var jsonDataObj = jsonData();
 			
-			var jsonData = {
-				"perfil": perfil
-			};
-
-			var jsonString = JSON.stringify(jsonData);
-			//alert(jsonString);
+			jsonDataObj['perfil'] = perfil;
+			var jsonString = JSON.stringify(jsonDataObj);
 			uiPathApi.sendMessage("perfil", jsonString );
 		}
-		function startClicked() {
+		
+		function jsonData(){
 			var perfil = document.getElementById("perfil").value;
 			var periodo = document.getElementById("periodo").value;
 			var exibirClientes = document.getElementById("exibirClientes").checked;
@@ -136,10 +134,12 @@
 				"emitirNFS": emitirNFS
 			};
 
-			var jsonString = JSON.stringify(jsonData);
-			//alert(jsonString);
-			//alert("Ok");
-			uiPathApi.sendMessage("start", jsonString );
+			return jsonData;
+		}
+		
+		function startClicked() {
+			var jsonString = JSON.stringify(jsonData());
+			uiPathApi.sendMessage("start", jsonString);
 		}
 		function addPerfilClicked(){
 			uiPathApi.sendMessage("addPerfil");
