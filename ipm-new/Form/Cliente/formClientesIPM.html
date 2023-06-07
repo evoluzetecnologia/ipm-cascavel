@@ -89,7 +89,7 @@
 							row.append(empresaCell);
 							
 							//Emite NFS
-							var th = $('<th>').prop('class', 'col-1 fw-normal');
+							var td = $('<td>').prop('class', 'col-1 fw-normal');
 							var div = $('<div>').prop('class', 'd-flex justify-content-center');
 							var formCheck = $('<div>').prop('class', 'form-check form-switch form-check-inline');
 							var input = $('<input>').prop('class', 'form-check-input EMITE_NFS').attr('type', 'checkbox').attr('role', 'switch').attr('id', 'EMITE_NFS_'+ nItem).attr('name', 'EMITE_NFS'+ nItem);
@@ -99,36 +99,36 @@
 							label = $('<label>').prop('class', 'form-check-label').attr('for', 'EMITE_NFS_'+ nItem).text(item.EMITE_NFS ? 'Sim' : 'Não');
 							formCheck.append(input, label);
 							div.append(formCheck);
-							th.append(div);
-							row.append(th);
+							td.append(div);
+							row.append(td);
 							
 							//Declara Prestados
-							th = $('<th>').prop('class', 'col-1 fw-normal');
+							td = $('<td>').prop('class', 'col-1 fw-normal');
 							div = $('<div>').prop('class', 'd-flex justify-content-center');
 							formCheck = $('<div>').prop('class', 'form-check form-switch form-check-inline');
-							input = $('<input>').prop('class', 'form-check-input').attr('type', 'checkbox').attr('role', 'switch').attr('id', 'DECLARA_ENTRADA_'+ nItem).attr('name', 'DECLARA_ENTRADA'+ nItem);
+							input = $('<input>').prop('class', 'form-check-input DECLARA_ENTRADA').attr('type', 'checkbox').attr('role', 'switch').attr('id', 'DECLARA_ENTRADA_'+ nItem).attr('name', 'DECLARA_ENTRADA'+ nItem);
 							if (item.DECLARA_ENTRADA) {
 							  input.prop('checked', true);
 							}
-							label = $('<label>').prop('class', 'form-check-label DECLARA_ENTRADA').attr('for', 'DECLARA_ENTRADA_'+ nItem).text(item.DECLARA_ENTRADA ? 'Sim' : 'Não');
+							label = $('<label>').prop('class', 'form-check-label').attr('for', 'DECLARA_ENTRADA_'+ nItem).text(item.DECLARA_ENTRADA ? 'Sim' : 'Não');
 							formCheck.append(input, label);
 							div.append(formCheck);
-							th.append(div);
-							row.append(th);
+							td.append(div);
+							row.append(td);
 							
 							// Lanca Entradas
-							th = $('<th>').prop('class', 'col-1 fw-normal');
+							td = $('<td>').prop('class', 'col-1 fw-normal');
 							div = $('<div>').prop('class', 'd-flex justify-content-center');
 							formCheck = $('<div>').prop('class', 'form-check form-switch form-check-inline');
-							input = $('<input>').prop('class', 'form-check-input').attr('type', 'checkbox').attr('role', 'switch').attr('id', 'LANCA_NOTA_ENTRADA_'+ nItem).attr('name', 'LANCA_NOTA_ENTRADA'+ nItem);
+							input = $('<input>').prop('class', 'form-check-input LANCA_NOTA_ENTRADA').attr('type', 'checkbox').attr('role', 'switch').attr('id', 'LANCA_NOTA_ENTRADA_'+ nItem).attr('name', 'LANCA_NOTA_ENTRADA'+ nItem);
 							if (item.DECLARA_ENTRADA) {
 							  input.prop('checked', true);
 							}
-							label = $('<label>').prop('class', 'form-check-label LANCA_NOTA_ENTRADA').attr('for', 'LANCA_NOTA_ENTRADA_'+ nItem).text(item.DECLARA_ENTRADA ? 'Sim' : 'Não');
+							label = $('<label>').prop('class', 'form-check-label').attr('for', 'LANCA_NOTA_ENTRADA_'+ nItem).text(item.DECLARA_ENTRADA ? 'Sim' : 'Não');
 							formCheck.append(input, label);
 							div.append(formCheck);
-							th.append(div);
-							row.append(th);;
+							td.append(div);
+							row.append(td);;
 							
 							var regimeSelect = $('<select>').prop('class', 'form-select form-select-sm fw-normal').prop('id', 'REGIME_TRIBUTARIO');
 							regimeSelect.append(new Option("", ""));
@@ -140,17 +140,16 @@
 							var regimeCell = $("<td>").prop('class', 'col-flex').append(regimeSelect);
 							row.append(regimeCell);
 							
-							th = $('<th>').prop('class', 'col-1 fw-normal');
-							
+							td = $('<td>').prop('class', 'col-1 fw-normal');
 							formCheck = $('<div>').prop('class', 'form-check form-switch form-check-inline');
-							input = $('<input>').prop('class', 'form-check-input').attr('type', 'checkbox').attr('role', 'switch').attr('id', 'SITUACAO_'+ nItem).attr('name', 'SITUACAO'+ nItem);
+							input = $('<input>').prop('class', 'form-check-input SITUACAO').attr('type', 'checkbox').attr('role', 'switch').attr('id', 'SITUACAO_'+ nItem).attr('name', 'SITUACAO'+ nItem);
 							if (item.SITUACAO) {
 							  input.prop('checked', true);
 							}
-							label = $('<label>').prop('class', 'form-check-label SITUACAO').attr('for', 'SITUACAO_'+ nItem).text(item.SITUACAO ? 'Ativo' : 'Inativo');
+							label = $('<label>').prop('class', 'form-check-label').attr('for', 'SITUACAO_'+ nItem).text(item.SITUACAO ? 'Ativo' : 'Inativo');
 							formCheck.append(input, label);
-							th.append(formCheck);
-							row.append(th);
+							td.append(formCheck);
+							row.append(td);
 							
 							
 							var checkbox = $('<input>').attr('type', 'checkbox').prop('class','ProcessCheckbox form-check-input');
@@ -278,7 +277,7 @@
 				var regimeTributario = row.find("#REGIME_TRIBUTARIO").val(); // Captura o valor do campo com ID "REGIME_TRIBUTARIO"
 				
 				var emiteNFS = row.find(".EMITE_NFS").is(":checked");
-				var declaraEntrada = row.find(".DECLARA_ENTRADA_1").is(":checked");
+				var declaraEntrada = row.find(".DECLARA_ENTRADA").is(":checked");
 				var lancaEntrada = row.find(".LANCA_NOTA_ENTRADA").is(":checked");
 				var situacao = row.find(".SITUACAO").is(":checked");
 				
