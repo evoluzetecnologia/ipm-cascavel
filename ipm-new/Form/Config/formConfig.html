@@ -38,8 +38,44 @@
                 },
         
                 setValue: function (elementId, value) {
-				
-					if (elementId === 'parametros') {
+					
+					if (elementId === 'financeiro'){
+						if (value === 'Fatura'){
+							var divElement = document.createElement('div');
+							  divElement.classList.add('row');
+							  var linkElement = document.createElement('a');
+							  linkElement.classList.add('btn', 'btn-full', 'btn-warning');
+							  linkElement.href = '#';
+							  linkElement.textContent = 'Sua fatura já está disponível aqui!';
+
+							  divElement.appendChild(linkElement);
+							  var containerElement = document.getElementById('financeiro');
+							  containerElement.appendChild(divElement);
+							
+						
+						} else if (value === 'Atencao' || value === 'Bloqueado')  {
+						  
+						  var texto = 'Atenção! Sua licença está expirada, efetue o pagamento da fatura para liberar todas as funções da automação.'
+						  if (value === 'Bloqueado'){
+							var texto = 'Atenção! O seu sistema está bloqueado no momento, efetue o pagamento para continuar usando as automações'
+						  }
+						  
+						  var spanElement = document.createElement('span');
+						  spanElement.classList.add('d-block', 'p-1', 'text-bg-danger');
+						  spanElement.textContent = texto;
+
+						  var linkElement = document.createElement('a');
+						  linkElement.classList.add('btn', 'btn-light', 'btn-sm');
+						  linkElement.href = '#';
+						  linkElement.textContent = 'Gerar Fatura Online';
+
+						  spanElement.appendChild(linkElement);
+						  var containerElement = document.getElementById('financeiro');
+						  containerElement.appendChild(spanElement);
+						}
+						
+						
+					} else if (elementId === 'parametros') {
 						var jsonData = value;
 						var data = JSON.parse(jsonData);
 						
@@ -223,7 +259,19 @@
 	</script>
 </head>
 <body class="body">
-	<div class="container-fluid mt-2">
+	<div id="financeiro"></div>
+	<!--span class="d-block p-1 text-bg-danger">
+		Atenção! sua lisença está expirada, efetue o pagamento da fatura para liberar todas as função da automação.
+		<a class="btn btn-light btn-sm" href="#" role="button">Gerar Fatura Online</a>
+	</span>
+	
+	<div class="row"> 
+		<a class="btn btn-full btn-warning" href="#" role="button">
+			Sua fatura já está dispinível aqui!	
+		</a>
+	</div-->
+		
+	<div class="container-fluid mt-2" >
 		<div class="row">
 			<div class="col-sm-7">
 				<div class="d-flex align-items-center mb-3">
@@ -245,8 +293,9 @@
 				<button type="button" class="btn-close float-end" aria-label="Close" onclick="closedClicked()"></button>
 			</div>
 		</div>
+		
 		<hr class="my-1">
-		<div class="container-fluid mt-2">
+		<div class="row">
 			<form class="needs-validation rneeds-validation">
 				<div class="tab-content" id="pills-tabContent">
 					<!-- Aba Principal-->
@@ -537,6 +586,8 @@
 		
 	</script>
 	<script>
+	
+		
 	  var ckDominioWeb = document.getElementById('DominioWeb');
 	  var labelDominioWeb = document.querySelector('label[for="DominioWeb"]');
 
