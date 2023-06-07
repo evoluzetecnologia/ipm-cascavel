@@ -1,0 +1,463 @@
+﻿<!-- form
+{
+  "Metadata": {
+    "Id": "1071c246-f0e4-4c16-808c-c8d9f05c5e39",
+    "Kind": "Html"
+  }
+}
+-->
+<!DOCTYPE html>
+<html>
+<head lang="pt-BR">
+	<meta charset="utf-8">
+	<title>Roboluze</title>
+	<!--
+	<link rel="stylesheet" href="https://roboluze.com.br/_roboluze/www/css/bootstrap.5.2.3.min.css">
+	
+	<link rel="stylesheet" href="../../Files/www/css/roboluze.css">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	-->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://roboluze.com.br/_roboluze/www/css/roboluze.css">
+	<script src="https://roboluze.com.br/_roboluze/www/js/bootstrap.5.2.3.js"></script>
+	<script src="https://roboluze.com.br/_roboluze/www/js/ajax.jquery.3.2.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.min.js"></script>
+	<script src="https://roboluze.com.br/_roboluze/www/js/roboluze.js"></script>
+	<script src="https://roboluze.com.br/_roboluze/www/js/imask.js"></script>
+	<!--script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script-->
+
+		
+	
+	<script type="text/javascript">
+			var uiPathApi = {
+                getValue: function (elementId) {
+                    var el = document.getElementById(elementId);
+                    if (el.value == undefined) {
+                        return el.innerHTML;
+                    } else {
+                        if (el.checked == undefined) {
+                            return el.value;
+                        } else {
+                            return el.checked;
+                        }
+                    }
+                },
+        
+                setValue: function (elementId, value) {
+				
+					var el = document.getElementById(elementId);
+					if (el == null) {
+						el = document.getElementById(value);
+					} 
+					if (elementId === 'FitroCheckbox'){
+						if (value == 'Todos') {
+							el.checked = true;
+						} else if (value =='Nenhum'){
+							el.checked = false;
+						} else {
+							$('#FitroCheckbox').prop('indeterminate', true);
+						} 
+					} else if ((el.tagName === 'INPUT' && el.type === 'text') || el.type === 'email') {
+						el.value = value;
+					} else if (el.tagName === 'SELECT') {
+						el.value = value;
+					} else if (el.tagName === 'TBODY') {
+						var tabela = document.getElementById('myTable');
+						while (tabela.rows.length > 0) {
+							tabela.deleteRow(0);
+						}
+						var jsonData = value;
+						var data = JSON.parse(jsonData);
+						var tableBody = $("#myTable");
+						var nItem = 0;
+						data.forEach(function(item) {
+							var row = $('<tr>');
+							nItem++;
+							if(nItem > 20){
+								row.css('display', 'none');
+							}
+							var codigoInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm').prop('id', 'CODIGO').prop('name', 'CODIGO').prop("value",item.CODIGO).prop('readonly', false);
+							var codigoCell = $("<td>").prop('class', 'col-1 fw-normal').append(codigoInput);
+							row.append(codigoCell);
+							var cnpjInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm input-mask-cnpj').prop('id', 'CNPJ').prop('name', 'CNPJ').prop("value",item.CNPJ).prop('readonly', false);
+							var cnpjCell = $("<td>").prop('class', 'col-2 fw-normal').append(cnpjInput);
+							row.append(cnpjCell);
+							var empresaInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm').prop('id', 'EMPRESA').prop('name', 'EMPRESA').prop("value",item.EMPRESA).prop('readonly', false);
+							var empresaCell = $("<td>").prop('class', 'col-3 fw-normal').append(empresaInput);
+							row.append(empresaCell);
+							
+							//Emite NFS
+							var th = $('<th>').prop('class', 'col-1 fw-normal');
+							var div = $('<div>').prop('class', 'd-flex justify-content-center');
+							var formCheck = $('<div>').prop('class', 'form-check form-switch form-check-inline');
+							var input = $('<input>').prop('class', 'form-check-input EMITE_NFS').attr('type', 'checkbox').attr('role', 'switch').attr('id', 'EMITE_NFS_'+ nItem).attr('name', 'EMITE_NFS'+ nItem);
+							if (item.EMITE_NFS) {
+							  input.prop('checked', true);
+							}
+							label = $('<label>').prop('class', 'form-check-label').attr('for', 'EMITE_NFS_'+ nItem).text(item.EMITE_NFS ? 'Sim' : 'Não');
+							formCheck.append(input, label);
+							div.append(formCheck);
+							th.append(div);
+							row.append(th);
+							
+							//Declara Prestados
+							th = $('<th>').prop('class', 'col-1 fw-normal');
+							div = $('<div>').prop('class', 'd-flex justify-content-center');
+							formCheck = $('<div>').prop('class', 'form-check form-switch form-check-inline');
+							input = $('<input>').prop('class', 'form-check-input').attr('type', 'checkbox').attr('role', 'switch').attr('id', 'DECLARA_ENTRADA_'+ nItem).attr('name', 'DECLARA_ENTRADA'+ nItem);
+							if (item.DECLARA_ENTRADA) {
+							  input.prop('checked', true);
+							}
+							label = $('<label>').prop('class', 'form-check-label DECLARA_ENTRADA').attr('for', 'DECLARA_ENTRADA_'+ nItem).text(item.DECLARA_ENTRADA ? 'Sim' : 'Não');
+							formCheck.append(input, label);
+							div.append(formCheck);
+							th.append(div);
+							row.append(th);
+							
+							// Lanca Entradas
+							th = $('<th>').prop('class', 'col-1 fw-normal');
+							div = $('<div>').prop('class', 'd-flex justify-content-center');
+							formCheck = $('<div>').prop('class', 'form-check form-switch form-check-inline');
+							input = $('<input>').prop('class', 'form-check-input').attr('type', 'checkbox').attr('role', 'switch').attr('id', 'LANCA_NOTA_ENTRADA_'+ nItem).attr('name', 'LANCA_NOTA_ENTRADA'+ nItem);
+							if (item.DECLARA_ENTRADA) {
+							  input.prop('checked', true);
+							}
+							label = $('<label>').prop('class', 'form-check-label LANCA_NOTA_ENTRADA').attr('for', 'LANCA_NOTA_ENTRADA_'+ nItem).text(item.DECLARA_ENTRADA ? 'Sim' : 'Não');
+							formCheck.append(input, label);
+							div.append(formCheck);
+							th.append(div);
+							row.append(th);;
+							
+							var regimeSelect = $('<select>').prop('class', 'form-select form-select-sm fw-normal').prop('id', 'REGIME_TRIBUTARIO');
+							regimeSelect.append(new Option("", ""));
+							regimeSelect.append(new Option("Lucro Real", "LUCRO_REAL"));
+							regimeSelect.append(new Option("Lucro Presumido", "LUCRO_PRESUMIDO"));
+							regimeSelect.append(new Option("Simples Nacional", "SIMPLES_NACIONAL"));
+							regimeSelect.append(new Option("MEI", "MEI"));
+							regimeSelect.val(item.REGIME_TRIBUTARIO);
+							var regimeCell = $("<td>").prop('class', 'col-flex').append(regimeSelect);
+							row.append(regimeCell);
+							
+							th = $('<th>').prop('class', 'col-1 fw-normal');
+							
+							formCheck = $('<div>').prop('class', 'form-check form-switch form-check-inline');
+							input = $('<input>').prop('class', 'form-check-input').attr('type', 'checkbox').attr('role', 'switch').attr('id', 'SITUACAO_'+ nItem).attr('name', 'SITUACAO'+ nItem);
+							if (item.SITUACAO) {
+							  input.prop('checked', true);
+							}
+							label = $('<label>').prop('class', 'form-check-label SITUACAO').attr('for', 'SITUACAO_'+ nItem).text(item.SITUACAO ? 'Ativo' : 'Inativo');
+							formCheck.append(input, label);
+							th.append(formCheck);
+							row.append(th);
+							
+							
+							var checkbox = $('<input>').attr('type', 'checkbox').prop('class','ProcessCheckbox form-check-input');
+							if (item.EXECUTAR) {
+							  checkbox.prop('checked', true);
+							}
+							var checkboxCell = $("<td>").prop('class', 'col-0').append($('<div>').prop('class', 'd-flex justify-content-end').append(checkbox));
+							
+							row.append(checkboxCell);
+							tableBody.append(row);
+						});
+						
+						initializePagination(data);
+						
+						var processCheckboxAll = document.querySelector('.ProcessCheckboxAll');
+						var processCheckboxes = document.querySelectorAll('.ProcessCheckbox');
+
+						processCheckboxAll.addEventListener('change', function() {
+
+						if (processCheckboxAll.checked) {
+						  // Marca todos os checkboxes "ProcessCheckbox"
+						  processCheckboxes.forEach(function(processCheckbox) {
+							processCheckbox.checked = true;
+						  });
+						} else {
+						  // Desmarca todos os checkboxes "ProcessCheckbox"
+						  processCheckboxes.forEach(function(processCheckbox) {
+							processCheckbox.checked = false;
+						  });
+						}
+						});
+						
+						var ckEmiteNFS = document.querySelectorAll('input[id^="EMITE_NFS_"]');
+						ckEmiteNFS.forEach(function(checkbox) {
+						  var labelNFS = document.querySelector('label[for="' + checkbox.id + '"]');
+
+						  checkbox.addEventListener('change', function() {
+							if (this.checked) {
+							  labelNFS.textContent = 'Sim';
+							} else {
+							  labelNFS.textContent = 'Não';
+							}
+						  });
+						});
+						
+						var ckDeclaraEntrada = document.querySelectorAll('input[id^="DECLARA_ENTRADA_"]');
+						ckDeclaraEntrada.forEach(function(checkbox) {
+						  var labelDeclara = document.querySelector('label[for="' + checkbox.id + '"]');
+
+						  checkbox.addEventListener('change', function() {
+							if (this.checked) {
+							  labelDeclara.textContent = 'Sim';
+							} else {
+							  labelDeclara.textContent = 'Não';
+							}
+						  });
+						});
+						
+						var ckLancaEntrada = document.querySelectorAll('input[id^="LANCA_NOTA_ENTRADA_"]');
+						ckLancaEntrada.forEach(function(checkbox) {
+						  var labelLancaEntrada= document.querySelector('label[for="' + checkbox.id + '"]');
+
+						  checkbox.addEventListener('change', function() {
+							if (this.checked) {
+							  labelLancaEntrada.textContent = 'Sim';
+							} else {
+							  labelLancaEntrada.textContent = 'Não';
+							}
+						  });
+						});
+						
+						var ckSituacao = document.querySelectorAll('input[id^="SITUACAO_"]');
+						ckSituacao.forEach(function(checkbox) {
+						  var labelSituacao= document.querySelector('label[for="' + checkbox.id + '"]');
+
+						  checkbox.addEventListener('change', function() {
+							if (this.checked) {
+							  labelSituacao.textContent = 'Ativo';
+							} else {
+							  labelSituacao.textContent = 'Inativo';
+							}
+						  });
+						});
+
+						
+
+					} else if (el.tagName === 'INPUT' && el.type === 'radio') {
+						if (value === el.id) {
+							el.checked = true;
+						} else {
+							el.checked = false;
+						}
+					}
+					else {
+						el.innerHTML = value;
+					}
+				},
+
+				sendMessage: function (id, value) { },
+			};
+	</script>
+	<script>
+		
+		function closedClicked() {
+			uiPathApi.sendMessage("close");
+		}
+		
+		function addClicked() {
+			sendRoboluze("add");
+		}
+		
+		
+		function saveClicked() {
+			sendRoboluze("save");
+		}
+		
+		function sendRoboluze(id){
+			var jsonData = []; // Array para armazenar os objetos JSON de cada linha
+			$('table tr').each(function() {
+				var row = $(this);
+				var codigo = row.find("#CODIGO").val(); // Captura o valor do campo com ID "CODIGO"
+				var cnpj = row.find("#CNPJ").val(); // Captura o valor do campo com ID "CNPJ"
+				var empresa = row.find("#EMPRESA").val(); // Captura o valor do campo com ID "EMPRESA"
+				var email = row.find("#EMAIL").val(); // Captura o valor do campo com EMAIL"
+				var regimeTributario = row.find("#REGIME_TRIBUTARIO").val(); // Captura o valor do campo com ID "REGIME_TRIBUTARIO"
+				
+				var emiteNFS = row.find(".EMITE_NFS").is(":checked");
+				var declaraEntrada = row.find(".DECLARA_ENTRADA_1").is(":checked");
+				var lancaEntrada = row.find(".LANCA_NOTA_ENTRADA").is(":checked");
+				var situacao = row.find(".SITUACAO").is(":checked");
+				
+				var processCheckbox = row.find(".ProcessCheckbox").is(":checked"); // Captura o estado do checkbox
+				var rowValues = {
+				  CODIGO: codigo,
+				  CNPJ: cnpj,
+				  EMPRESA: empresa,
+				  REGIME_TRIBUTARIO: regimeTributario,
+				  EMITE_NFS: emiteNFS,
+				  LANCA_NOTA_ENTRADA: lancaEntrada,
+				  SITUACAO: situacao,
+				  EXECUTAR: processCheckbox
+				};
+				if(codigo){
+					jsonData.push(rowValues);
+				}
+			});
+			var jsonResult = JSON.stringify(jsonData);
+			alert(jsonResult);
+			uiPathApi.sendMessage(id, jsonResult);
+		}
+	</script>
+</head>
+<body>
+	<div class="container-fluid mt-2">
+		<div class="row">
+			<div class="col-sm-11">
+				<div class="d-flex align-items-center mb-3">
+					<img src="https://roboluze.com.br/img/evoluze_logo.png" alt="Logo" class="logo">
+					<h4 class="m-0" id="title"></h4>
+			   </div>
+			</div>
+			<div class="col-sm-1">
+				<button type="button" class="btn-close float-end" aria-label="Close" onclick="closedClicked()"></button>
+			</div>
+		</div>
+		
+		<div class="row">
+		  <div class="col-sm-4">
+			<input type="text" class="form-control form-control-sm" id="myInput" placeholder="Filtro">
+		  </div>
+		  <div class="col-sm-4 d-flex justify-content-center">
+			<div class="pagination pagination-sm" id="pagination"></div>
+		  </div>
+		  <div class="col-sm-2">
+			<button id="AddButton" type="submit" class="btn btn-success btn-sm w-100" onclick="addClicked()">Novo</button>
+		  </div>
+		  <div class="col-sm-2">
+			<button id="SubmitButton" type="submit" class="btn btn-primary btn-sm w-100" onclick="saveClicked()">Salvar</button>
+		  </div>
+		</div>
+		<!--hr class="my-4"-->
+		<div class="table-responsive-sm">
+			<table class="table table-sm table-striped ">
+				 <thead>
+					<tr>
+						<th class="col-0 fw-normal" scope="col">Cód</th>
+						<th class="col-2 fw-normal" scope="col"><div class="d-flex justify-content-center">CNPJ/CPF</div></th>
+						<th class="col-3 fw-normal" scope="col">Empresa</th>
+						<th class="col-1 fw-normal" scope="col"><div class="d-flex justify-content-center">Emite NFS</div></th>
+						<th class="col-1 fw-normal" scope="col"><div class="d-flex justify-content-center">Protola Entrada</div></th>
+						<th class="col-1 fw-normal" scope="col"><div class="d-flex justify-content-center">Lancar Entrada</div></th>
+						<th class="col-flex fw-normal" scope="col">Regime Trib.</th>
+						<th class="col-1 fw-normal" scope="col">Situacao</th>
+						<th class="col-0">
+							<div class="form-check">
+								<div class="d-flex justify-content-end"><input type="checkbox" class="ProcessCheckboxAll form-check-input" value="" id="FitroCheckbox"></div>
+							</div>
+						</th>
+						
+					</tr>
+				  </thead>
+				  <tbody id="myTable" class="table-group-divider">
+				  </tbody>
+			</table>
+		</div>
+	</div>
+
+	<script>
+		function initializePagination(data) {
+		  var itemsPerPage = 20; // Number of items to display per page
+		  var totalPages = Math.ceil(data.length / itemsPerPage);
+		  var container = $('#myTable');
+		  /*
+		  container.empty();
+		  var nItem = 0;
+
+		  $.each(data, function(index, item) {
+			var row = $('<tr>');
+			nItem++;
+			if(nItem > itemsPerPage){
+				row.css('display', 'none');
+			}
+			var codigoInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm').prop('id', 'CODIGO').prop('name', 'CODIGO').prop("value",item.CODIGO);
+			var codigoCell = $("<td>").prop('class', 'col-1').append(codigoInput);
+			row.append(codigoCell);
+			var cnpjInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm').prop('id', 'CNPJ').prop('name', 'CNPJ').prop("value",item.CNPJ);
+			var cnpjCell = $("<td>").prop('class', 'col-2').append(cnpjInput);
+			row.append(cnpjCell);
+			var empresaInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm').prop('id', 'EMPRESA').prop('name', 'EMPRESA').prop("value",item.EMPRESA);
+			var empresaCell = $("<td>").prop('class', 'col-5').append(empresaInput);
+			row.append(empresaCell);
+			
+			var regimeSelect = $('<select>').prop('class', 'form-select form-select-sm').prop('id', 'REGIME_TRIBUTARIO').prop('required');
+			
+			var regimeCell = $("<td>").prop('class', 'col-3').append(regimeSelect);
+			row.append(regimeCell);
+			
+			
+			
+			var regimeSelect = $('<select>').prop('class', 'form-select form-select-sm').prop('id', 'REGIME_TRIBUTARIO');
+			regimeSelect.append($('<option>').prop('value', '').text(''));
+			regimeSelect.append($('<option>').prop('value', 'LUCRO_REAL').text('Lucro Real'));
+			regimeSelect.append($('<option>').prop('value', 'LUCRO_PRESUMIDO').text('Lucro Presumido'));
+			regimeSelect.append($('<option>').prop('value', 'SIMPLES_NACIONAL').text('Simples Nacional'));
+			regimeSelect.append($('<option>').prop('value', 'MEI').text('MEI'));
+			regimeSelect.append($('<option>').prop('value', 'OUTRO').text('Outro'));
+			var regimeCell = $("<td>").prop('class', 'col-3').append(regimeSelect);
+			row.append(regimeCell);
+
+			
+			
+			var checkbox = $('<input>').attr('type', 'checkbox').prop('checked', item.SITUACAO).prop('class', 'form-check-input').prop('id', 'ProcessCheckbox').prop('name', 'ProcessCheckbox');
+			var checkboxCell = $("<td>").prop('class', 'col-1').append($('<div>').prop('class', 'd-flex justify-content-end').append(checkbox));
+			row.append(checkboxCell);
+			container.append(row);
+
+		  });
+		  
+		  */
+		  // Initialize the bootpag plugin
+		  var pagination = $('#pagination').bootpag({
+			total: totalPages,
+			page: 1,
+			maxVisible: 10, // Maximum number of visible pages
+			leaps: true, // Enable/disable next/previous leaps through maxVisible
+			firstLastUse: true, // Enable/disable first/last buttons
+			href: "#pro-page-{{number}}",
+			
+			
+		  }).on("page", function(event, num) {
+			var startIndex = (num - 1) * itemsPerPage;
+			var endIndex = startIndex + itemsPerPage;
+
+			// Hide all rows
+			container.find('tr').hide();
+
+			// Show rows for the current page
+			container.find('tr').slice(startIndex, endIndex).show();
+		  });
+
+	  // Click on the first page after loading
+			container.find('tr').slice(0, itemsPerPage).show();
+		}
+		
+    </script>
+	<script>
+		
+		$(document).ready(function(){
+		  $("#myInput").on("keyup", function() {
+			var value = $(this).val().toLowerCase();
+			$("#myTable tr").filter(function() {
+				var row = $(this);
+				  var inputValues = row.find("input[type='text']").map(function() {
+					return $(this).val().toLowerCase();
+				  }).get();
+				  var rowMatches = inputValues.some(function(inputValue) {
+					return inputValue.indexOf(value) > -1;
+				  });
+				  row.toggle(rowMatches);
+			  //$(this).toggle( $(this).text().toLowerCase().indexOf(value) > -1 );
+			});
+		  });
+		});
+	</script>
+	<!--script src="https://code.jquery.com/jquery-3.6.0.min.js"></script-->
+	<script src="https://roboluze.com.br/_roboluze/www/js/bootpag.js"></script>
+	
+
+</body>
+</html>
