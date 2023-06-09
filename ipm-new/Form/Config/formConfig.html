@@ -7,163 +7,259 @@
 }
 -->
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="pt-BR" data-bs-theme="auto">
+  <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Roboluze</title>
-	<link rel="stylesheet" href="https://roboluze.com.br/_roboluze/www/css/bootstrap.5.2.3.min.css">
-	<script src="https://roboluze.com.br/_roboluze/www/js/bootstrap.5.2.3.js"></script>
-	<link rel="stylesheet" href="https://roboluze.com.br/_roboluze/www/css/roboluze.css">
-	<script src="https://roboluze.com.br/_roboluze/www/js/ajax.jquery.3.2.0.min.js"></script>
-	<script src="https://roboluze.com.br/_roboluze/www/js/roboluze.js"></script>
-	<script src="https://roboluze.com.br/_roboluze/www/js/imask.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Roboluze</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-
+	<script src="https://roboluze.com.br/_roboluze/www/js/ajax.jquery.3.2.0.min.js"></script>
+	
 	<script type="text/javascript">
-			var uiPathApi = {
-                getValue: function (elementId) {
-                    // this is a callback, being called from the workflow
-                    // enter your own code to get element values
-                    var el = document.getElementById(elementId);
-                    if (el.value == undefined) {
-                        return el.innerHTML;
-                    } else {
-                        if (el.checked == undefined) {
-                            return el.value;
-                        } else {
-                            return el.checked;
-                        }
-                    }
-                },
-        
-                setValue: function (elementId, value) {
-					
-					if (elementId === 'financeiro'){
-						if (value === 'Fatura'){
-							var divElement = document.createElement('div');
-							  divElement.classList.add('row');
-							  var linkElement = document.createElement('a');
-							  linkElement.classList.add('btn', 'btn-full', 'btn-warning');
-							  linkElement.href = '#';
-							  linkElement.textContent = 'Sua fatura já está disponível aqui!';
-
-							  divElement.appendChild(linkElement);
-							  var containerElement = document.getElementById('financeiro');
-							  containerElement.appendChild(divElement);
-							
-						
-						} else if (value === 'Atencao' || value === 'Bloqueado')  {
-						  
-						  var texto = 'Atenção! Sua licença está expirada, efetue o pagamento da fatura para liberar todas as funções da automação.'
-						  if (value === 'Bloqueado'){
-							var texto = 'Atenção! O seu sistema está bloqueado no momento, efetue o pagamento para continuar usando as automações'
-						  }
-						  
-						  var spanElement = document.createElement('span');
-						  spanElement.classList.add('d-block', 'p-1', 'text-bg-danger');
-						  spanElement.textContent = texto;
-
-						  var linkElement = document.createElement('a');
-						  linkElement.classList.add('btn', 'btn-light', 'btn-sm');
-						  linkElement.href = '#';
-						  linkElement.textContent = 'Gerar Fatura Online';
-
-						  spanElement.appendChild(linkElement);
-						  var containerElement = document.getElementById('financeiro');
-						  containerElement.appendChild(spanElement);
-						}
-						
-						
-					} else if (elementId === 'parametros') {
-						var jsonData = value;
-						var data = JSON.parse(jsonData);
-						
-						for (var key in data) {
-							if (data.hasOwnProperty(key)) {
-								var el = document.getElementById(key);
-								if (el == null) {
-									var elements = document.querySelectorAll('[name="' + key + '"]');
-									el = elements[0];
-								}
-								if (el) {
-									if (el.tagName === 'INPUT' && el.type === 'radio') {
-										var radioButtonXML = document.getElementById(key + 'XML');
-										var radioButtonTXT = document.getElementById(key + 'TXT');
-										if (data[key] === 'XML') {
-											radioButtonXML.checked = true;
-											radioButtonTXT.checked = false;
-										} else {
-											radioButtonXML.checked = false;
-											radioButtonTXT.checked = true;
-										}
-									} else if (typeof data[key] === 'boolean') {
-										var label = document.querySelector('label[for="' + key + '"]');
-										el.checked = data[key];
-										if (key === 'FiltrarClientesPendentes'){
-											label.textContent = data[key] ? 'Clientes Pendentes' : 'Todos os Clientes';
-										} else {
-											label.textContent = data[key] ? 'Sim' : 'Não';
-										}
-									}  else {
-										el.value = data[key];
-									}
-								}
-							}
-						}
-					} else if (elementId === 'dominio') {
-						var jsonData = value;
-						var data = JSON.parse(jsonData);
-						
-						for (var key in data) {
-							if (data.hasOwnProperty(key)) {
-								var el = document.getElementById(key);
-								if (el) {
-									if (typeof data[key] === 'boolean') {
-										var label = document.querySelector('label[for="' + key + '"]');
-										el.checked = data[key];
-										label.textContent = data[key] ? 'Sim' : 'Não';
-									} else {
-										el.value = data[key];
-									}
-								}
-							}
-						}
-					} else if (elementId === 'listaPerfil') {
-						var jsonData = value;
-						var data = JSON.parse(jsonData);
-						var perfilSelect  = document.getElementById('Perfil');
-						perfilSelect.innerHTML = '';
-						data.forEach(function(item) {
-						  var option = document.createElement('option');
-						  option.value = item.ID_PERFIL;
-						  option.text = item.PERFIL;
-						  perfilSelect.appendChild(option);
-						});
+		var uiPathApi = {
+			getValue: function (elementId) {
+				// this is a callback, being called from the workflow
+				// enter your own code to get element values
+				var el = document.getElementById(elementId);
+				if (el.value == undefined) {
+					return el.innerHTML;
+				} else {
+					if (el.checked == undefined) {
+						return el.value;
 					} else {
-						var el = document.getElementById(elementId);
-						if (el == null) {
-							var el = document.getElementById(value);
-						} 
-						if ((el.tagName === 'INPUT' && el.type === 'text') || el.type === 'email') {
-							el.value = value;
-						} else if (el.tagName === 'SELECT') {
-							el.value = value;
-						}  else {
-							el.innerHTML = value;
-						}			
+						return el.checked;
 					}
-				    
-                },
+				}
+			},
+	
+			setValue: function (elementId, value) {
 				
+				if (elementId === 'financeiro'){
+					if (value === 'Fatura'){
+						var divElement = document.createElement('div');
+						  divElement.classList.add('row');
+						  var linkElement = document.createElement('a');
+						  linkElement.classList.add('btn', 'btn-full', 'btn-warning');
+						  linkElement.href = '#';
+						  linkElement.textContent = 'Sua fatura já está disponível aqui!';
+
+						  divElement.appendChild(linkElement);
+						  var containerElement = document.getElementById('financeiro');
+						  containerElement.appendChild(divElement);
+						
+					
+					} else if (value === 'Atencao' || value === 'Bloqueado')  {
+					  
+					  var texto = 'Atenção! Sua licença está expirada, efetue o pagamento da fatura para liberar todas as funções da automação.'
+					  if (value === 'Bloqueado'){
+						var texto = 'Atenção! O seu sistema está bloqueado no momento, efetue o pagamento para continuar usando as automações'
+					  }
+					  
+					  var spanElement = document.createElement('span');
+					  spanElement.classList.add('d-block', 'p-1', 'text-bg-danger');
+					  spanElement.textContent = texto;
+
+					  var linkElement = document.createElement('a');
+					  linkElement.classList.add('btn', 'btn-light', 'btn-sm');
+					  linkElement.href = '#';
+					  linkElement.textContent = 'Gerar Fatura Online';
+
+					  spanElement.appendChild(linkElement);
+					  var containerElement = document.getElementById('financeiro');
+					  containerElement.appendChild(spanElement);
+					}
+					
+					
+				} else if (elementId === 'parametros') {
+					var jsonData = value;
+					var data = JSON.parse(jsonData);
+					
+					for (var key in data) {
+						if (data.hasOwnProperty(key)) {
+							var el = document.getElementById(key);
+							if (el == null) {
+								var elements = document.querySelectorAll('[name="' + key + '"]');
+								el = elements[0];
+							}
+							if (el) {
+								if (el.tagName === 'INPUT' && el.type === 'radio') {
+									var radioButtonXML = document.getElementById(key + 'XML');
+									var radioButtonTXT = document.getElementById(key + 'TXT');
+									if (data[key] === 'XML') {
+										radioButtonXML.checked = true;
+										radioButtonTXT.checked = false;
+									} else {
+										radioButtonXML.checked = false;
+										radioButtonTXT.checked = true;
+									}
+								} else if (typeof data[key] === 'boolean') {
+									var label = document.querySelector('label[for="' + key + '"]');
+									el.checked = data[key];
+									if (key === 'FiltrarClientesPendentes'){
+										label.textContent = data[key] ? 'Clientes Pendentes' : 'Todos os Clientes';
+									} else {
+										label.textContent = data[key] ? 'Sim' : 'Não';
+									}
+								}  else {
+									el.value = data[key];
+								}
+							}
+						}
+					}
+				} else if (elementId === 'dominio') {
+					var jsonData = value;
+					var data = JSON.parse(jsonData);
+					
+					for (var key in data) {
+						if (data.hasOwnProperty(key)) {
+							var el = document.getElementById(key);
+							if (el) {
+								if (typeof data[key] === 'boolean') {
+									var label = document.querySelector('label[for="' + key + '"]');
+									el.checked = data[key];
+									label.textContent = data[key] ? 'Sim' : 'Não';
+								} else {
+									el.value = data[key];
+								}
+							}
+						}
+					}
+				} else if (elementId === 'listaPerfil') {
+					var jsonData = value;
+					var data = JSON.parse(jsonData);
+					var perfilSelect  = document.getElementById('Perfil');
+					
+					while (perfilSelect.options.length > 0) {
+					  perfilSelect.remove(0);
+					}
+					perfilSelect.innerHTML = '';
+					
+					var tabela = document.getElementById('myTablePerfil');
+					
+					while (tabela.rows.length > 0) {
+						tabela.deleteRow(0);
+					}
+					
+					var tableBody = $("#myTablePerfil");
+					
+					data.forEach(function(item) {
+						
+						if (item.SITUACAO) {
+							var option = document.createElement('option');
+							option.value = item.ID_PERFIL;
+							option.text = item.PERFIL;
+						  perfilSelect.appendChild(option);
+						}
+					  
+					 
+						var row = $('<tr>');
+						
+						
+						var codigoInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm').prop('id', 'ID_PERFIL').prop('name', 'ID_PERFIL').prop("value",item.ID_PERFIL).prop('readonly', true);
+						var codigoCell = $("<td>").prop('class', 'col-2 fw-normal').append(codigoInput);
+						row.append(codigoCell);
+										
+						var perfilInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm').prop('id', 'PERFIL').prop('name', 'PERFIL').prop("value",item.PERFIL);
+						var perfilCell = $("<td>").prop('class', 'col-10').append(perfilInput);
+						row.append(perfilCell);
+						
+						//Ativou ou Inativo
+						var td = $('<td>').prop('class', 'col-2 fw-normal');
+						var div = $('<div>').prop('class', 'd-flex justify-content-center');
+						var formCheck = $('<div>').prop('class', 'form-check form-switch form-check-inline');
+						var input = $('<input>').prop('class', 'form-check-input SITUACAO').attr('type', 'checkbox').attr('role', 'switch').attr('id', 'SITUACAO_'+ item.ID_PERFIL).attr('name', 'SITUACAO_'+ item.ID_PERFIL);
+						if (item.SITUACAO) {
+						  input.prop('checked', true);
+						}
+						var label = $('<label>').prop('class', 'form-check-label').attr('for', 'SITUACAO_'+ item.ID_PERFIL).text(item.SITUACAO ? 'Ativo' : 'Inativo');
+						formCheck.append(input, label);
+						div.append(formCheck);
+						td.append(div);
+						row.append(td);
+						
+						tableBody.append(row);
+						
+						$('.btn-excluir-perfil').click(function() {
+						  var id = $(this).attr('id');
+						  excluirPerfil(id);
+						});
+						
+					  
+					});
+					
+					var ckPerfilSituacao = document.querySelectorAll('input[id^="SITUACAO_"]');
+						ckPerfilSituacao.forEach(function(checkbox) {
+						  var labelPerfil = document.querySelector('label[for="' + checkbox.id + '"]');
+
+						  checkbox.addEventListener('change', function() {
+							if (this.checked) {
+							  labelPerfil.textContent = 'Sim';
+							} else {
+							  labelPerfil.textContent = 'Não';
+							}
+						  });
+						});
+					
+				} else {
+					var el = document.getElementById(elementId);
+					if (el == null) {
+						var el = document.getElementById(value);
+					} 
+					if ((el.tagName === 'INPUT' && el.type === 'text') || el.type === 'email') {
+						el.value = value;
+					} else if (el.tagName === 'SELECT') {
+						el.value = value;
+					}  else {
+						el.innerHTML = value;
+					}			
+				}
 				
-                // Call this to trigger a "Form Message" event
-                // This function is set by the forms engine after the page loads,
-                // but declaring it here as empty helps with code autocompletion
-                sendMessage: function (id, value) { },
-			};
+			},
+			
+			sendMessage: function (id, value) { },
+		};
 	</script>
 	<script>
+		function addNovoPerfilClicked(){
+			var perfilNome = document.getElementById("novoPerfil").value;
+			if (perfilNome !== null && perfilNome !== '') {
+				var jsonData = {
+					"Perfil": perfilNome
+				}
+				var jsonString = JSON.stringify(jsonData);
+				uiPathApi.sendMessage("addPerfil", jsonString );
+			}
+		}
+		function atualizaPerfil(value){
+			
+			var jsonData = [];
+			$('table tr').each(function() {
+				var row = $(this);
+				var ID_PERFIL = row.find("#ID_PERFIL").val();
+				var PERFIL = row.find("#PERFIL").val();
+				var SITUACAO = row.find(".SITUACAO").is(":checked");
+				
+				var rowValues = {
+				  'ID_PERFIL': ID_PERFIL,
+				  'PERFIL': PERFIL,
+				  'SITUACAO': SITUACAO
+				};
+				if(ID_PERFIL){
+					jsonData.push(rowValues);
+				}
+			});
+			var jsonResult = JSON.stringify(jsonData);
+			uiPathApi.sendMessage('atualizarPerfil', jsonResult);
+			
+		
+			var jsonData = {
+				"idPerfil": value
+			}
+			var jsonString = JSON.stringify(jsonData);
+			alert(perfil);
+			uiPathApi.sendMessage("excluirPerfil", jsonString );
+		}
 		function closedClicked() {
 			uiPathApi.sendMessage("close");
 		}
@@ -252,14 +348,12 @@
 			var jsonString = JSON.stringify(jsonData());
 			uiPathApi.sendMessage("start", jsonString);
 		}
-		function addPerfilClicked(){
-			uiPathApi.sendMessage("addPerfil");
-		}
 		
 	</script>
 </head>
-<body class="body">
+<body >
 	<div id="financeiro"></div>
+	
 	<!--span class="d-block p-1 text-bg-danger">
 		Atenção! sua lisença está expirada, efetue o pagamento da fatura para liberar todas as função da automação.
 		<a class="btn btn-light btn-sm" href="#" role="button">Gerar Fatura Online</a>
@@ -270,324 +364,376 @@
 			Sua fatura já está dispinível aqui!	
 		</a>
 	</div-->
-		
-	<div class="container-fluid mt-2" >
-		<div class="row">
-			<div class="col-sm-7">
-				<div class="d-flex align-items-center mb-3">
-					<img src="https://roboluze.com.br/img/evoluze_logo.png" alt="Logo" class="logo">
-					<h4 class="m-0" id="title">Roboluze - Folha</h4>
-			   </div>
-			</div>
-			<div class="col-sm-4">
-				<ul class="nav nav-pills nav-justified" id="pills-tab" role="tablist">
-				  <li class="nav-item">
-					<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
-				  </li>
-				  <li class="nav-item">
-					<a class="nav-link" id="pills-parametro-tab" data-toggle="pill" href="#pills-parametro" role="tab" aria-controls="pills-parametro" aria-selected="false">Parametro</a>
-				  </li>
-				</ul>
-			</div>
-			<div class="col-sm-1">
-				<button type="button" class="btn-close float-end" aria-label="Close" onclick="closedClicked()"></button>
+	
+	<!--Botão Fixo Iniciar -->
+	<div class="position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+      <button class="btn btn-primary py-50 d-flex align-items-center" type="button" onclick="startClicked()"> Iniciar a Automação </button>
+    </div>
+	
+	<!--Menu automação -->
+	<nav class="navbar navbar-expand-lg border-bottom">
+		<div class="col-4">
+			<div class="d-flex justify-content-strat align-items-center">
+				<img src="https://roboluze.com.br/img/evoluze_logo.png" width="40" height="40" class="me-2" alt="Roboluze">
+				<h5 class="mb-0"  id="title">Roboluze</h5>
 			</div>
 		</div>
 		
-		<hr class="my-1">
-		<div class="row">
-			<form class="needs-validation rneeds-validation">
-				<div class="tab-content" id="pills-tabContent">
-					<!-- Aba Principal-->
-					<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+		
+		<!--div class="container-fluid d-flex justify-content-end" style="background-color: #b0b0b0;"-->
+		<div class="col-8 justify-content-end">
+			<div class="d-flex justify-content-end">
+				<div class="col-6 d-flex me-3">
+					<select class="form-select me-1" id="Perfil"></select>
+					<div class="d-flex align-items-center justify-content-end">
+						<div class="d-grid">
+							<button id="addPerfil" type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#perfilModal">
+								<i class="bi bi-person-plus-fill"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="d-flex justify-content-end">
+					<div class="collapse navbar-collapse" id="pills-iniciar-tab">
+					  <ul class="nav nav-pills" id="pills-tab" role="tablist">
+						<li class="nav-item" role="presentation">
+								<button class="nav-link active" id="pills-iniciar-tab" data-bs-toggle="pill" data-bs-target="#pills-iniciar" type="button" role="tab" aria-controls="pills-iniciar" aria-selected="true">Home</button>
+							</li>
+						<div class="dropdown nav-item" role="presentation">
+						  <button class="nav-link dropdown-toggle" type="button" role="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+							Configurações
+						  </button>
+						  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<li><a class="dropdown-item" id="pills-automacao-tab" data-bs-target="#pills-automacao" role="tab" aria-controls="pills-automacao">IPM</a></li>
+							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item" id="pills-dominio-tab" data-bs-target="#pills-dominio" role="tab" aria-controls="pills-dominio" aria-selected="false">Dominio</a></li>
+						  </ul>
+						</div>
+					  </ul>
+					  <hr class="dropdown-divider">
+					  <button id="fechar-automacao" type="button" class="btn btn-close" aria-label="Close" onclick="closedClicked()" data-bs-toggle="tooltip" data-bs-placement="right" title="Fechar Automação"></button>
+					</div>
+				</div>
+			
+				
+			</div>
+		</div>
+	</nav>
+	
+	
+	<!--Corpo Automação-->
+	<div class="container-fluid overflow-auto" style="max-height: 600px;">
+		<div class="tab-content" id="pills-tabContent">
+			<div class="tab-pane fade show active" id="pills-iniciar" role="tabpanel" aria-labelledby="pills-iniciar-tab" tabindex="0">
+				<div class="container-fluid d-flex justify-content-center"><h5>Filtros</h5></div>
+				<div class="row align-items-center">
+					<div class="col-6">
 						<div class="row">
-							<div class="col-3 d-flex align-items-center">
+							<div class="col-2 d-flex align-items-center">
 								<label class="col-form-label">Período</label>
 							</div>
-							<div class="col-2 d-flex align-items-center ">
+							<div class="col-3 d-flex align-items-center">
 								<input type="text" class="form-control form-control-sm" id="Periodo" name="Periodo" placeholder="" value="">
 							</div>
-							<div class="col-1 d-flex align-items-center "></div>
-							<div class="col-2 align-items-center">
-								<label class="col-form-label">Perfil</label>
-							</div>
-							<div class="col-4 d-flex align-items-center">
-								<select class="form-select  form-select-sm" id="Perfil">
-								</select>
-								<div class="d-flex align-items-center justify-content-end">
-									<div class="d-grid">
-										<button id="addPerfil" type="submit" class="btn btn-primary btn-sm" onclick="addPerfilClicked()">
-										<i class="bi bi-person-plus-fill"></i>
-										</button>
-									</div>
-								</div>
-							</div>
 						</div>
+					</div>
+					<div class="col-6" >
 						<div class="row">
 							<div class="col-3 d-flex align-items-center">
 								<label class="col-form-label">Exibir clientes</label>
 							</div>
-							<div class="col-2 d-flex align-items-center ">
+							<div class="col-8 d-flex align-items-center">
 								<div class="form-check form-switch form-check-inline">
 									<input class="form-check-input" type="checkbox" role="switch" id="ExibirClientes" name="ExibirClientes" checked>
 									<label class="form-check-label" for="ExibirClientes">Sim</label>
 								</div>
 							</div>
-							<div class="col-1 d-flex align-items-center "></div>
-							<div class="col-2 d-flex align-items-center">
-								<label class="col-form-label">Filtrar</label>
+						</div>
+						<div class="row">
+							<div class="col-3 d-flex align-items-center">
+								<label class="col-form-label">Automatizar</label>
 							</div>
-							<div class="col-4 d-flex align-items-center ">
+							<div class="col-8 d-flex align-items-center">
 								<div class="form-check form-switch form-check-inline">
 									<input class="form-check-input" type="checkbox" role="switch" id="FiltrarClientesPendentes" name="FiltrarClientesPendentes" checked>
 									<label class="form-check-label" for="FiltrarClientesPendentes">Clientes pendentes</label>
 								</div>
 							</div>
-							
 						</div>
-						<hr class="my-3">
-						<div class="row">
-							<div class="col-3 d-flex align-items-center">
-								<label class="col-form-label">Download NFs Saída</label>
-							</div>
-							<div class="col-2 d-flex align-items-center ">
-								<div class="form-check form-switch form-check-inline">
-									<input class="form-check-input" type="checkbox" role="switch" id="DownloadNFSaida" name="DownloadNFSaida" checked>
-									<label class="form-check-label" for="DownloadNFSaida">Sim</label>
-								</div>
-							</div>
-							<div class="col-1 d-flex align-items-center "></div>
-							<div class="col-2 d-flex align-items-center">
-								<label class="col-form-label">Protocolar Saídas</label>
-							</div>
-							<div class="col-4 d-flex align-items-center ">
-								<div class="form-check form-switch form-check-inline">
-									<input class="form-check-input" type="checkbox" role="switch" id="ProtocolarNFSaida" name="ProtocolarNFSaida" checked>
-									<label class="form-check-label" for="ProtocolarNFSaida">Sim</label>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-3 d-flex align-items-center">
-								<label class="col-form-label">Download NFs Entrada</label>
-							</div>
-							<div class="col-2 d-flex align-items-center ">
-								<div class="form-check form-switch form-check-inline">
-									<input class="form-check-input" type="checkbox" role="switch" id="DownloadNFEntrada" name="DownloadNFEntrada"checked>
-									<label class="form-check-label" for="DownloadNFEntrada">Sim</label>
-								</div>
-							</div>
-							<div class="col-1 d-flex align-items-center "></div>
-							<div class="col-2 d-flex align-items-center">
-								<label for="periodo" class="col-form-label">Protocolar Entradas</label>
-							</div>
-							<div class="col-4 d-flex align-items-center ">
-								<div class="form-check form-switch form-check-inline">
-									<input class="form-check-input" type="checkbox" role="switch" id="ProtocolarNFEntrada" name="ProtocolarNFEntrada"checked>
-									<label class="form-check-label" for="ProtocolarNFEntrada">Sim</label>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-3 d-flex align-items-center">
-								<label class="col-form-label">Informar Simples Nacional</label>
-							</div>
-							<div class="col-2 d-flex align-items-center ">
-								<div class="form-check form-switch form-check-inline">
-									<input class="form-check-input" type="checkbox" role="switch" id="SimplesNacional" name="SimplesNacional">
-									<label class="form-check-label" for="SimplesNacional">Sim</label>
-								</div>
-							</div>
-							<div class="col-1 d-flex align-items-center "></div>
-							<div class="col-2 d-flex align-items-center">
-								<label class="col-form-label">Emitir NFS</label>
-							</div>
-							<div class="col-4 d-flex align-items-center ">
-								<div class="form-check form-switch form-check-inline">
-									<input class="form-check-input" type="checkbox" role="switch" id="EmitirNFS" name="EmitirNFS">
-									<label class="form-check-label" for="EmitirNFS">Sim</label>
-								</div>
-							</div>
-						</div>
-						
 					</div>
 					
-					<!-- Aba Parametros -->
-					<div class="tab-pane fade" id="pills-parametro" role="tabpanel" aria-labelledby="pills-parametro-tab">
-						
-						
-						<div class="tab-content" id="v-pills-tabContent">
-							<div class="tab-pane fade show active" id="v-pills-tab" role="tabpanel2" aria-labelledby="pills-nova-subtab-tab">
-								<ul class="nav nav-tabs nav-justified" id="pills-subtab" role="tablist2">
-									<li class="nav-item">
-										<a class="nav-link active" id="pills-robo-tab" data-toggle="pill" href="#pills-robo" role="tab" aria-controls="pills-robo" aria-selected="false">IPM</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" id="pills-dominio-tab" data-toggle="pill" href="#pills-dominio" role="tab" aria-controls="pills-dominio" aria-selected="false">Dominio</a>
-									</li>
-								</ul>
-								<div class="tab-content" id="pills-subtabContent">
-									<!-- IPM -->
-									<div class="tab-pane fade show active" id="pills-robo" role="tabpanel" aria-labelledby="pills-robo-tab">
-										<div class="row">
-											<div class="col-3 d-flex align-items-center">
-												<label class="col-form-label">IPM Login</label>
-											</div>
-											<div class="col-9 d-flex align-items-center ">
-												<input type="text" class="form-control form-control-sm" id="IPMLogin" name="IPMLogin" placeholder="Usuário de acesso do contado no IPM" value="">
-											</div>
-										</div>
-										
-										<div class="row">
-											<div class="col-3 d-flex align-items-center">
-												<label class="col-form-label">IPM Password</label>
-											</div>
-											<div class="col-9 d-flex align-items-center ">
-												<input type="password" class="form-control form-control-sm" id="IPMPassword" name="IPMPassword" placeholder="Senha de acesso do contador no IPM" value="">
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-3 d-flex align-items-center">
-												<label class="col-form-label">IPM Código Empresa</label>
-											</div>
-											<div class="col-9 d-flex align-items-center ">
-												<input type="text" class="form-control form-control-sm" id="IPMCodigoLogin" name="IPMCodigoLogin" placeholder="Código de acesso IPM" value="">
-											</div>
-										</div>
-										
-										<div class="row">
-											<div class="col-3 d-flex align-items-center">
-												<label class="col-form-label">Tipo Download Saidas</label>
-											</div>
-											<div class="col-3 d-flex align-items-center ">
-												<div class="form-check form-check-inline">
-													<input class="form-check-input" type="radio" name="ArquivoSaida" id="ArquivoSaidaXML" value="XML" checked>
-													<label class="form-check-label" for="ArquivoSaidaXML">.xml</label>
-												</div>
-												<div class="form-check form-check-inline">
-												  <input class="form-check-input" type="radio" name="ArquivoSaida" id="ArquivoSaidaTXT" value="TXT">
-												  <label class="form-check-label" for="ArquivoSaidaTXT">.txt</label>
-												</div>
-											</div>
-											<div class="col-1 d-flex align-items-center"></div>
-											<div class="col-3 d-flex align-items-center">
-												<label class="col-form-label">Protocolar Saidas</label>
-											</div>
-											<div class="col-2 d-flex align-items-center ">
-												<select class="form-select form-select-sm" id="ProtocoloSaida" required>
-													<option value="Todos">Todos</option>
-													<option value="ISS">Com Recolhimento</option>
-													<option value="Nenhum">Nenhum</option>
-												</select>
-											</div>
-
-										</div>
-										<div class="row">
-											<div class="col-3 d-flex align-items-center">
-												<label class="col-form-label">Tipo Download Entradas</label>
-											</div>
-											<div class="col-3 d-flex align-items-center ">
-												<div class="form-check form-check-inline">
-													<input class="form-check-input" type="radio" name="ArquivoEntrada" id="ArquivoEntradaXML" value="XML" checked>
-													<label class="form-check-label" for="ArquivoEntradaXML">.xml</label>
-												</div>
-												<div class="form-check form-check-inline">
-												  <input class="form-check-input form-sm" type="radio" name="ArquivoEntrada" id="ArquivoEntradaTXT" value="TXT">
-												  <label class="form-check-label form-sm" for="ArquivoEntradaTXT">.txt</label>
-												</div>
-											</div>
-											<div class="col-1 d-flex align-items-center"></div>
-											<div class="col-3 d-flex align-items-center">
-												<label class="col-form-label">Protocolar Entradas</label>
-											</div>
-											<div class="col-2 d-flex align-items-center ">
-												<select class="form-select form-select-sm" id="ProtocoloEntrada" required>
-													<option value="Todos">Todos</option>
-													<option value="ISS">Com Recolhimento</option>
-													<option value="Nenhum">Nenhum</option>
-												</select>
-											</div>
-										</div>
-										
-										<div class="row mb-1">
-											<div class="col-3 d-flex align-items-center">
-												<label class="col-form-label">Código Serviço Emissão NFS</label>
-											</div>
-											<div class="col-9 d-flex align-items-center ">
-												<input type="text" class="form-control form-control-sm" id="CodigoServico" name="CodigoServico" placeholder="Código de serviço para emissão da Nota Fiscal" value="">
-											</div>
-										</div>
-										
-										<div class="row mb-1">
-											<div class="col-3 d-flex align-items-start">
-												<label class="col-form-label">Observação na Emissao NFS</label>
-											</div>
-											<div class="col-9 d-flex align-items-center">
-												  <textarea class="form-control form-control-sm" placeholder="Observação para emissão de NFS" rows="7" id="ObservacaoNFS"></textarea>
-											</div>
-										</div>
-										<div class="row mb-1">
-											<div class="col-3 d-flex align-items-start">
-												<label class="col-form-label">Observação Financeira na NFS</label>
-											</div>
-											<div class="col-9 d-flex align-items-center">
-												  <textarea class="form-control form-control-sm" placeholder="Observação financeira na NFS" rows="5" id="ObservacaoFinanceira"></textarea>
-											</div>
-										</div>
-										
-									</div>
-									<!-- Dominio Sistema -->
-									<div class="tab-pane fade" id="pills-dominio" role="tabpanel" aria-labelledby="pills-dominio-tab">
-										<div class="row">
-											<div class="col-2 d-flex align-items-center">
-												<label class="col-form-label">Login</label>
-											</div>
-											<div class="col-10 d-flex align-items-center ">
-												<input type="text" class="form-control form-control-sm" id="DominioLogin" name="DominioLogin" placeholder="Usuário do Domínio" value="">
-											</div>
-											
-										</div>
-										<div class="row">
-											<div class="col-2 d-flex align-items-center">
-												<label class="col-form-label">Password</label>
-											</div>
-											<div class="col-10 d-flex align-items-center ">
-												<input type="password" class="form-control form-control-sm" id="DominioPassword" name="DominioPassword" placeholder="Senha do Domínio" value="">
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-2 d-flex align-items-center">
-												<label class="col-form-label">Domínio Web</label>
-											</div>
-											<div class="col-10 d-flex align-items-center ">
-												<div class="form-check form-switch form-check-inline">
-													<input class="form-check-input" type="checkbox" role="switch" id="DominioWeb" name="DominioWeb">
-													<label class="form-check-label" for="DominioWeb">Não</label>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-		
-					</div>
 				</div>
 				<hr class="my-3">
-				<div class="d-grid">
-					<button id="SubmitButton" type="submit" class="btn btn-primary" onclick="startClicked()">Iniciar Automação</button>
+				<div class="container-fluid d-flex justify-content-center"><h5>Automação</h5></div>
+				<div>
+					<div class="row">
+						<div class="col-3 d-flex align-items-center">
+							<label class="col-form-label">Download NFs Saída</label>
+						</div>
+						<div class="col-2 d-flex align-items-center ">
+							<div class="form-check form-switch form-check-inline">
+								<input class="form-check-input" type="checkbox" role="switch" id="DownloadNFSaida" name="DownloadNFSaida" checked>
+								<label class="form-check-label" for="DownloadNFSaida">Sim</label>
+							</div>
+						</div>
+						<div class="col-1 d-flex align-items-center "></div>
+						<div class="col-2 d-flex align-items-center">
+							<label class="col-form-label">Protocolar Saídas</label>
+						</div>
+						<div class="col-4 d-flex align-items-center ">
+							<div class="form-check form-switch form-check-inline">
+								<input class="form-check-input" type="checkbox" role="switch" id="ProtocolarNFSaida" name="ProtocolarNFSaida" checked>
+								<label class="form-check-label" for="ProtocolarNFSaida">Sim</label>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-3 d-flex align-items-center">
+							<label class="col-form-label">Download NFs Entrada</label>
+						</div>
+						<div class="col-2 d-flex align-items-center ">
+							<div class="form-check form-switch form-check-inline">
+								<input class="form-check-input" type="checkbox" role="switch" id="DownloadNFEntrada" name="DownloadNFEntrada"checked>
+								<label class="form-check-label" for="DownloadNFEntrada">Sim</label>
+							</div>
+						</div>
+						<div class="col-1 d-flex align-items-center "></div>
+						<div class="col-2 d-flex align-items-center">
+							<label for="periodo" class="col-form-label">Protocolar Entradas</label>
+						</div>
+						<div class="col-4 d-flex align-items-center ">
+							<div class="form-check form-switch form-check-inline">
+								<input class="form-check-input" type="checkbox" role="switch" id="ProtocolarNFEntrada" name="ProtocolarNFEntrada"checked>
+								<label class="form-check-label" for="ProtocolarNFEntrada">Sim</label>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-3 d-flex align-items-center">
+							<label class="col-form-label">Informar Simples Nacional</label>
+						</div>
+						<div class="col-2 d-flex align-items-center ">
+							<div class="form-check form-switch form-check-inline">
+								<input class="form-check-input" type="checkbox" role="switch" id="SimplesNacional" name="SimplesNacional">
+								<label class="form-check-label" for="SimplesNacional">Sim</label>
+							</div>
+						</div>
+						<div class="col-1 d-flex align-items-center "></div>
+						<div class="col-2 d-flex align-items-center">
+							<label class="col-form-label">Emitir NFS</label>
+						</div>
+						<div class="col-4 d-flex align-items-center ">
+							<div class="form-check form-switch form-check-inline">
+								<input class="form-check-input" type="checkbox" role="switch" id="EmitirNFS" name="EmitirNFS">
+								<label class="form-check-label" for="EmitirNFS">Sim</label>
+							</div>
+						</div>
+					</div>
 				</div>
-			</form>
+			</div>
+			<div class="tab-pane fade" id="pills-automacao" role="tabpanel" aria-labelledby="pills-automacao-tab" tabindex="0">
+				<div class="container-fluid d-flex justify-content-center"><h5>Configurações IPM</h5></div>
+				<div>
+					<div class="row">
+						<div class="col-3 d-flex align-items-center">
+							<label class="col-form-label">IPM Login</label>
+						</div>
+						<div class="col-9 d-flex align-items-center ">
+							<input type="text" class="form-control form-control-sm" id="IPMLogin" name="IPMLogin" placeholder="Usuário de acesso do contado no IPM" value="">
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-3 d-flex align-items-center">
+							<label class="col-form-label">IPM Password</label>
+						</div>
+						<div class="col-9 d-flex align-items-center ">
+							<input type="password" class="form-control form-control-sm" id="IPMPassword" name="IPMPassword" placeholder="Senha de acesso do contador no IPM" value="">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-3 d-flex align-items-center">
+							<label class="col-form-label">IPM Código Empresa</label>
+						</div>
+						<div class="col-9 d-flex align-items-center ">
+							<input type="text" class="form-control form-control-sm" id="IPMCodigoLogin" name="IPMCodigoLogin" placeholder="Código de acesso IPM" value="">
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-3 d-flex align-items-center">
+							<label class="col-form-label">Tipo Download Saidas</label>
+						</div>
+						<div class="col-3 d-flex align-items-center ">
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" name="ArquivoSaida" id="ArquivoSaidaXML" value="XML" checked>
+								<label class="form-check-label" for="ArquivoSaidaXML">.xml</label>
+							</div>
+							<div class="form-check form-check-inline">
+							  <input class="form-check-input" type="radio" name="ArquivoSaida" id="ArquivoSaidaTXT" value="TXT">
+							  <label class="form-check-label" for="ArquivoSaidaTXT">.txt</label>
+							</div>
+						</div>
+						<div class="col-1 d-flex align-items-center"></div>
+						<div class="col-3 d-flex align-items-center">
+							<label class="col-form-label">Protocolar Saidas</label>
+						</div>
+						<div class="col-2 d-flex align-items-center ">
+							<select class="form-select form-select-sm" id="ProtocoloSaida" required>
+								<option value="Todos">Todos</option>
+								<option value="ISS">Com Recolhimento</option>
+								<option value="Nenhum">Nenhum</option>
+							</select>
+						</div>
+
+					</div>
+					<div class="row">
+						<div class="col-3 d-flex align-items-center">
+							<label class="col-form-label">Tipo Download Entradas</label>
+						</div>
+						<div class="col-3 d-flex align-items-center ">
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" name="ArquivoEntrada" id="ArquivoEntradaXML" value="XML" checked>
+								<label class="form-check-label" for="ArquivoEntradaXML">.xml</label>
+							</div>
+							<div class="form-check form-check-inline">
+							  <input class="form-check-input form-sm" type="radio" name="ArquivoEntrada" id="ArquivoEntradaTXT" value="TXT">
+							  <label class="form-check-label form-sm" for="ArquivoEntradaTXT">.txt</label>
+							</div>
+						</div>
+						<div class="col-1 d-flex align-items-center"></div>
+						<div class="col-3 d-flex align-items-center">
+							<label class="col-form-label">Protocolar Entradas</label>
+						</div>
+						<div class="col-2 d-flex align-items-center ">
+							<select class="form-select form-select-sm" id="ProtocoloEntrada" required>
+								<option value="Todos">Todos</option>
+								<option value="ISS">Com Recolhimento</option>
+								<option value="Nenhum">Nenhum</option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="row mb-1">
+						<div class="col-3 d-flex align-items-center">
+							<label class="col-form-label">Código Serviço Emissão NFS</label>
+						</div>
+						<div class="col-9 d-flex align-items-center ">
+							<input type="text" class="form-control form-control-sm" id="CodigoServico" name="CodigoServico" placeholder="Código de serviço para emissão da Nota Fiscal" value="">
+						</div>
+					</div>
+					
+					<div class="row mb-1">
+						<div class="col-3 d-flex align-items-start">
+							<label class="col-form-label">Observação na Emissao NFS</label>
+						</div>
+						<div class="col-9 d-flex align-items-center">
+							  <textarea class="form-control form-control-sm" placeholder="Observação para emissão de NFS" rows="7" id="ObservacaoNFS"></textarea>
+						</div>
+					</div>
+					<div class="row mb-1">
+						<div class="col-3 d-flex align-items-start">
+							<label class="col-form-label">Observação Financeira na NFS</label>
+						</div>
+						<div class="col-9 d-flex align-items-center">
+							  <textarea class="form-control form-control-sm" placeholder="Observação financeira na NFS" rows="5" id="ObservacaoFinanceira"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="tab-pane fade" id="pills-dominio" role="tabpanel" aria-labelledby="pills-dominio-tab" tabindex="0">
+				<div class="container-fluid d-flex justify-content-center"><h5>Configurações Dominio</h5></div>
+				<div>
+					<div class="row">
+						<div class="col-2 d-flex align-items-center">
+							<label class="col-form-label">Login</label>
+						</div>
+						<div class="col-10 d-flex align-items-center ">
+							<input type="text" class="form-control form-control-sm" id="DominioLogin" name="DominioLogin" placeholder="Usuário do Domínio" value="">
+						</div>
+						
+					</div>
+					<div class="row">
+						<div class="col-2 d-flex align-items-center">
+							<label class="col-form-label">Password</label>
+						</div>
+						<div class="col-10 d-flex align-items-center ">
+							<input type="password" class="form-control form-control-sm" id="DominioPassword" name="DominioPassword" placeholder="Senha do Domínio" value="">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-2 d-flex align-items-center">
+							<label class="col-form-label">Domínio Web</label>
+						</div>
+						<div class="col-10 d-flex align-items-center ">
+							<div class="form-check form-switch form-check-inline">
+								<input class="form-check-input" type="checkbox" role="switch" id="DominioWeb" name="DominioWeb">
+								<label class="form-check-label" for="DominioWeb">Não</label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="pills-disabled" role="tabpanel" aria-labelledby="pills-disabled-tab" tabindex="0">D</div>
 		</div>
-	</div>	
-		
-		  
-	<script>
-		
-	</script>
-	<script>
+	</div>
 	
-		
+	
+	
+	
+	<div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h1 class="modal-title fs-5" id="perfilModalTitle">Cadastro de Perfil</h1>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		  </div>
+		  <div class="modal-body">
+			<div class="row">
+				<form class="d-flex" id="myFormModalPerfil">
+					<input class="form-control form-control-sm me-2" type="text" id="novoPerfil" placeholder="Nome do novo perfil">
+					<button class="btn btn-primary btn-sm" type="button" id="addPerfillLista" onclick="addNovoPerfilClicked()">adicionar</button>
+				</form>
+			</div>
+			<hr>
+			<div class="row">
+				<table class="table table-sm table-striped">
+				  <thead>
+					  <tr>
+						<th scope="col-2">#</th>
+						<th scope="col-8">Perfil</th>
+						<th scope="col-2"><div class="d-flex justify-content-center">Ação</div></th>
+					  </tr>
+				  </thead>
+				  <tbody id="myTablePerfil" class="table-group-divider">
+					  <tr>
+						<th class="col-2" scope="row">1</th>
+						<td class="col-8">Perfil A</td>
+						<td class="col-2"><div class="d-flex justify-content-center"><button type="button" class="btn btn-danger btn-sm "><i class="bi bi-trash"></i></button></div></td>
+					  </tr>
+					  <tr>
+						<th class="col-2" scope="row">5</th>
+						<td class="col-8">Perfil B</td>
+						<td class="col-2"><div class="d-flex justify-content-center"><button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button></div></td>
+					  </tr>
+				  </tbody>
+				</table>
+			<div>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+			<button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="atualizaPerfil()">Salvar</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Javascrit da pagina -->
+    <script>
+	
 	  var ckDominioWeb = document.getElementById('DominioWeb');
 	  var labelDominioWeb = document.querySelector('label[for="DominioWeb"]');
 
@@ -704,29 +850,38 @@
 		  var cpf = formatarInput('Periodo','00/0000');
 		});
 		
-	var triggerTabList = [].slice.call(document.querySelectorAll('#pills-tab a'))
-	triggerTabList.forEach(function (triggerEl) {
-	  var tabTrigger = new bootstrap.Tab(triggerEl)
-
-	  triggerEl.addEventListener('click', function (event) {
-		event.preventDefault()
-		tabTrigger.show()
-	  })
-	})
-	
-	var triggerTabList = [].slice.call(document.querySelectorAll('#v-pills-tab a'))
-	triggerTabList.forEach(function (triggerEl) {
-	  var tabTrigger = new bootstrap.Tab(triggerEl)
-
-	  triggerEl.addEventListener('click', function (event) {
-		event.preventDefault()
-		tabTrigger.show()
-	  })
-	})
 		
 	</script>
-	<script src="https://roboluze.com.br/_roboluze/www/js/jquery-3.6.0.min.js"></script>
-	<script src="https://roboluze.com.br/_roboluze/www/js/bootpag.js"></script>
 	
+	<!-- Contrata o Menu do cabeçalho -->
+	<script>
+		document.querySelectorAll('.dropdown-item').forEach(function(item) {
+		item.addEventListener('click', function(event) {
+			event.preventDefault();
+			var target = document.querySelector(this.getAttribute('data-bs-target'));
+			var dropdown = document.querySelector('.dropdown');
+			var dropdownMenu = document.querySelector('.dropdown-menu');
+			if (target) {
+				var tabTrigger = new bootstrap.Tab(target);
+				tabTrigger.show();
+			}
+
+			  dropdown.classList.remove('show');
+			  dropdownMenu.classList.remove('show');
+			});
+		});
+	
+		var triggerTabList = [].slice.call(document.querySelectorAll('#pills-tab a'))
+		triggerTabList.forEach(function (triggerEl) {
+		  var tabTrigger = new bootstrap.Tab(triggerEl)
+
+		  triggerEl.addEventListener('click', function (event) {
+			event.preventDefault()
+			tabTrigger.show()
+		  })
+		})
+	
+	</script>
+    
 </body>
 </html>
