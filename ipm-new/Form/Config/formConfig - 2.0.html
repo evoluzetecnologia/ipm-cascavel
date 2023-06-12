@@ -1,12 +1,4 @@
-﻿<!-- form
-{
-  "Metadata": {
-    "Id": "a499eabf-3567-4b70-86a1-a909b832fdd8",
-    "Kind": "Html"
-  }
-}
--->
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR" data-bs-theme="auto">
   <head>
 	<meta charset="utf-8">
@@ -15,12 +7,6 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 	<script src="https://roboluze.com.br/_roboluze/www/js/ajax.jquery.3.2.0.min.js"></script>
-	
-	<style>
-		body {
-			padding-top: 4.5rem;
-		}
-	</style>
 	
 	<script type="text/javascript">
 		var uiPathApi = {
@@ -372,72 +358,65 @@
 	</div-->
 	
 	<!--Botão Fixo Iniciar -->
-	
+	<div class="position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+      <button class="btn btn-primary py-50 d-flex align-items-center" type="button" onclick="startClicked()"> Iniciar a Automação </button>
+    </div>
 	
 	<!--Menu automação -->
-	<nav class="navbar navbar-dark fixed-top bg-primary ">
-    	<div class="container-fluid">
-			<div class="col-7">
-				<div class="d-flex justify-content-strat align-items-center">
-					<img src="https://roboluze.com.br/img/evoluze_logo_light.png" width="40" height="40" class="me-2" alt="Roboluze">
-					 <a class="navbar-brand" href="#pills-iniciar"><h5 class="mb-0"  id="title">Roboluze</h5></a>
-				</div>
+	<nav class="navbar navbar-expand-lg border-bottom">
+		<div class="col-4">
+			<div class="d-flex justify-content-strat align-items-center">
+				<img src="https://roboluze.com.br/img/evoluze_logo.png" width="40" height="40" class="me-2" alt="Roboluze">
+				<h5 class="mb-0"  id="title">Roboluze</h5>
 			</div>
-			<div class="col-4 d-flex me-0">
-				<select class="form-select me-2" id="Perfil"></select>
-				<div class="d-flex align-items-center justify-content-end">
-					<div class="d-grid">
-						<button id="addPerfil" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#perfilModal">
-							<i class="bi bi-person-plus-fill"></i>
-						</button>
+		</div>
+		
+		
+		<!--div class="container-fluid d-flex justify-content-end" style="background-color: #b0b0b0;"-->
+		<div class="col-8 justify-content-end">
+			<div class="d-flex justify-content-end">
+				<div class="col-6 d-flex me-3">
+					<select class="form-select me-1" id="Perfil"></select>
+					<div class="d-flex align-items-center justify-content-end">
+						<div class="d-grid">
+							<button id="addPerfil" type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#perfilModal">
+								<i class="bi bi-person-plus-fill"></i>
+							</button>
+						</div>
 					</div>
 				</div>
-			</div>
-			<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuButton" aria-controls="menuButton" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>		
-		 
-			<!-- Item do Menu -->
-			<div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="menuButton" aria-labelledby="menuButtonLabel">
-				<div class="offcanvas-header">
-				  <h5 class="offcanvas-title" id="menuButtonLabel">Configurações</h5>
-				  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-				</div>
-				<div class="offcanvas-body" id="pills-iniciar-tab">
-					<ul class="navbar-nav justify-content-end flex-grow-1 pe-3" id="pills-tab" role="tablist">
-						<li class="nav-item">
-						  <button class="nav-link active" id="pills-iniciar-tab" data-bs-toggle="pill" data-bs-target="#pills-iniciar" type="button" role="tab" aria-controls="pills-iniciar" aria-selected="true">Home</button>
-						</li>
-						<li class="nav-item">
-						  <button class="nav-link" id="pills-automacao-tab" data-bs-toggle="pill" data-bs-target="#pills-automacao" type="button" role="tab" aria-controls="pills-automacao" aria-selected="true">IPM</button>
-						</li>
-						
-						<li class="nav-item dropdown" role="presentation">
-							<button class="nav-link dropdown-toggle" type="button" role="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-								Domínio Sistema
-							</button>
-						  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" data-bs-theme="dark">
-							
-							<li><a class="dropdown-item" id="pills-dominio-tab" data-bs-target="#pills-dominio" role="tab" aria-controls="pills-dominio" aria-selected="false">Geral</a></li>
+				<div class="d-flex justify-content-end">
+					<div class="collapse navbar-collapse" id="pills-iniciar-tab">
+					  <ul class="nav nav-pills" id="pills-tab" role="tablist">
+						<li class="nav-item" role="presentation">
+								<button class="nav-link active" id="pills-iniciar-tab" data-bs-toggle="pill" data-bs-target="#pills-iniciar" type="button" role="tab" aria-controls="pills-iniciar" aria-selected="true">Home</button>
+							</li>
+						<div class="dropdown nav-item" role="presentation">
+						  <button class="nav-link dropdown-toggle" type="button" role="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+							Configurações
+						  </button>
+						  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<li><a class="dropdown-item" id="pills-automacao-tab" data-bs-target="#pills-automacao" role="tab" aria-controls="pills-automacao">IPM</a></li>
 							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item" id="pills-dominio-tab" data-bs-target="#pills-dominio" role="tab" aria-controls="pills-dominio" aria-selected="false">Dominio</a></li>
 						  </ul>
-						</li>
-						<li class="nav-item">
-						  <a class="nav-link" href="#pills-automacao"></a>
-						   <hr class="dropdown-divider">
-						</li>
-					</ul>
-					<button class="btn btn-outline-danger w-100" type="botton" onclick="closedClicked()">Sair da Automação</button>
+						</div>
+					  </ul>
+					  <hr class="dropdown-divider">
+					  <button id="fechar-automacao" type="button" class="btn btn-close" aria-label="Close" onclick="closedClicked()" data-bs-toggle="tooltip" data-bs-placement="right" title="Fechar Automação"></button>
+					</div>
 				</div>
+			
+				
 			</div>
 		</div>
 	</nav>
 	
 	
 	<!--Corpo Automação-->
-	<div class="container overflow-auto" style="max-height: 600px;">
-        <div class="card tab-content" id="pills-tabContent" >
-			<div class="card-body tab-pane show active" id="pills-iniciar" role="tabpanel" aria-labelledby="pills-iniciar-tab" tabindex="0">
+	<div class="container-fluid overflow-auto" style="max-height: 600px;">
+		<div class="tab-content" id="pills-tabContent">
+			<div class="tab-pane fade show active" id="pills-iniciar" role="tabpanel" aria-labelledby="pills-iniciar-tab" tabindex="0">
 				<div class="container-fluid d-flex justify-content-center"><h5>Filtros</h5></div>
 				<div class="row align-items-center">
 					<div class="col-6">
@@ -544,8 +523,7 @@
 					</div>
 				</div>
 			</div>
-			
-			<div class="card-body tab-pane" id="pills-automacao" role="tabpanel" aria-labelledby="pills-automacao-tab" tabindex="0">
+			<div class="tab-pane fade" id="pills-automacao" role="tabpanel" aria-labelledby="pills-automacao-tab" tabindex="0">
 				<div class="container-fluid d-flex justify-content-center"><h5>Configurações IPM</h5></div>
 				<div>
 					<div class="row">
@@ -656,7 +634,7 @@
 				</div>
 			</div>
 			
-			<div class="card-body tab-pane" id="pills-dominio" role="tabpanel" aria-labelledby="pills-dominio-tab" tabindex="0">
+			<div class="tab-pane fade" id="pills-dominio" role="tabpanel" aria-labelledby="pills-dominio-tab" tabindex="0">
 				<div class="container-fluid d-flex justify-content-center"><h5>Configurações Dominio</h5></div>
 				<div>
 					<div class="row">
@@ -689,65 +667,58 @@
 					</div>
 				</div>
 			</div>
-			
-			
-		</div>
-		<div class="position-fixed d-flex align-items-center bottom-0 end-0 mb-1 me-1 bd-mode-toggle">
-		  <button class="btn btn-primary  py-4 rounded-0 " type="button" onclick="startClicked()">
-			Iniciar  <i class="bi bi-play-fill"></i>
-		  </button>
+			<div class="tab-pane fade" id="pills-disabled" role="tabpanel" aria-labelledby="pills-disabled-tab" tabindex="0">D</div>
 		</div>
 	</div>
 	
 	
 	
 	
-	<div class="modal" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalTitle" aria-hidden="true">
-		<!--div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable"-->
-		<div class="modal-dialog modal-dialog-scrollable">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="perfilModalTitle">Cadastro de Perfil</h1>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<div class="row">
-						<form class="d-flex" id="myFormModalPerfil">
-							<input class="form-control form-control-sm me-2" type="text" id="novoPerfil" placeholder="Nome do novo perfil">
-							<button class="btn btn-primary btn-sm" type="button" id="addPerfillLista" onclick="addNovoPerfilClicked()">adicionar</button>
-						</form>
-					</div>
-					<hr>
-					<div class="row">
-						<table class="table table-sm table-striped">
-							<thead>
-								<tr>
-									<th scope="col-2">#</th>
-									<th scope="col-8">Perfil</th>
-									<th scope="col-2"><div class="d-flex justify-content-center">Ação</div></th>
-								</tr>
-							</thead>
-							<tbody id="myTablePerfil" class="table-group-divider">
-								<tr>
-									<th class="col-2" scope="row">1</th>
-									<td class="col-8">Perfil A</td>
-									<td class="col-2"><div class="d-flex justify-content-center"><button type="button" class="btn btn-danger btn-sm "><i class="bi bi-trash"></i></button></div></td>
-								</tr>
-								<tr>
-									<th class="col-2" scope="row">5</th>
-									<td class="col-8">Perfil B</td>
-									<td class="col-2"><div class="d-flex justify-content-center"><button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button></div></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
-					<button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal" onclick="atualizaPerfil()">Salvar</button>
-				</div>
+	<div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h1 class="modal-title fs-5" id="perfilModalTitle">Cadastro de Perfil</h1>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		  </div>
+		  <div class="modal-body">
+			<div class="row">
+				<form class="d-flex" id="myFormModalPerfil">
+					<input class="form-control form-control-sm me-2" type="text" id="novoPerfil" placeholder="Nome do novo perfil">
+					<button class="btn btn-primary btn-sm" type="button" id="addPerfillLista" onclick="addNovoPerfilClicked()">adicionar</button>
+				</form>
 			</div>
+			<hr>
+			<div class="row">
+				<table class="table table-sm table-striped">
+				  <thead>
+					  <tr>
+						<th scope="col-2">#</th>
+						<th scope="col-8">Perfil</th>
+						<th scope="col-2"><div class="d-flex justify-content-center">Ação</div></th>
+					  </tr>
+				  </thead>
+				  <tbody id="myTablePerfil" class="table-group-divider">
+					  <tr>
+						<th class="col-2" scope="row">1</th>
+						<td class="col-8">Perfil A</td>
+						<td class="col-2"><div class="d-flex justify-content-center"><button type="button" class="btn btn-danger btn-sm "><i class="bi bi-trash"></i></button></div></td>
+					  </tr>
+					  <tr>
+						<th class="col-2" scope="row">5</th>
+						<td class="col-8">Perfil B</td>
+						<td class="col-2"><div class="d-flex justify-content-center"><button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button></div></td>
+					  </tr>
+				  </tbody>
+				</table>
+			<div>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+			<button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="atualizaPerfil()">Salvar</button>
+		  </div>
 		</div>
+	  </div>
 	</div>
 	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
