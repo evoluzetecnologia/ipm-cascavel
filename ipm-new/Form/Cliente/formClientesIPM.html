@@ -11,21 +11,42 @@
 <head lang="pt-BR">
 	<meta charset="utf-8">
 	<title>Roboluze</title>
+	
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+	<script src="https://roboluze.com.br/_roboluze/www/js/ajax.jquery.3.2.0.min.js"></script>
+	
+	<style>
+		body {
+			padding-top: 3.5rem;
+		}
+		.small-text {
+		  font-size: 14px; /* ajuste o tamanho da fonte conforme necessário */
+		}
+		.table {
+		  line-height: 1.2; /* Ajuste o valor conforme necessário */
+		}
+		.custom-btn-extra-small {
+		  font-size: 12px;
+		  padding: 2px 5px;
+		  line-height: 1.2;
+		}
+	</style>
 	<!--
 	<link rel="stylesheet" href="https://roboluze.com.br/_roboluze/www/css/bootstrap.5.2.3.min.css">
 	
 	<link rel="stylesheet" href="../../Files/www/css/roboluze.css">
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-	-->
+	>
 	
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://roboluze.com.br/_roboluze/www/css/roboluze.css">
-	<script src="https://roboluze.com.br/_roboluze/www/js/bootstrap.5.2.3.js"></script>
-	<script src="https://roboluze.com.br/_roboluze/www/js/ajax.jquery.3.2.0.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.min.js"></script>
+	
 	<script src="https://roboluze.com.br/_roboluze/www/js/roboluze.js"></script>
-	<script src="https://roboluze.com.br/_roboluze/www/js/imask.js"></script>
+	<script src="https://roboluze.com.br/_roboluze/www/js/imask.js"></script-->
 	<!--script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script-->
 
 		
@@ -49,9 +70,48 @@
 				
 					var el = document.getElementById(elementId);
 					if (el == null) {
-						el = document.getElementById(value);
+						el = document.getElementsByName(value);
 					} 
-					if (elementId === 'FitroCheckbox'){
+					if (elementId === 'dataCliente') {
+						var jsonData = value;
+						var data = JSON.parse(jsonData);
+						
+						for (var key in data) {
+							if (data.hasOwnProperty(key)) {
+								var el = document.getElementById(key);
+								if (el == null) {
+									var elements = document.querySelectorAll('[name="' + key + '"]');
+									el = elements[0];
+								}
+								if (el) {
+									if (el.tagName === 'INPUT' && el.type === 'radio') {
+										var value = key+'_'+data[key];
+										var radioButton = document.getElementById(value);
+										
+										if (radioButton) {
+											radioButton.checked = true;
+										}
+										
+										
+									} else if (typeof data[key] === 'boolean') {
+										//alert(key);
+										var label = document.querySelector('label[for="' + key + '"]');
+										el.checked = data[key];
+										if (key === 'SITUACAO'){
+											label.textContent = data[key] ? 'Ativo' : 'Inativo';
+										} else {
+											label.textContent = data[key] ? 'Sim' : 'Não';
+										}
+									}  else {
+										el.value = data[key];
+									}
+								}
+							}
+						}
+					
+					
+						
+					} else if (elementId === 'FitroCheckbox'){
 						if (value == 'Todos') {
 							el.checked = true;
 						} else if (value =='Nenhum'){
@@ -72,97 +132,55 @@
 						var data = JSON.parse(jsonData);
 						var tableBody = $("#myTable");
 						var nItem = 0;
+						var altura = window.innerHeight;
+						var nPag = 25;
+						if (window.innerHeight > 900){
+							nPag = 30;
+						}
 						data.forEach(function(item) {
 							var row = $('<tr>');
 							nItem++;
-							if(nItem > 20){
+							if(nItem > nPag){
 								row.css('display', 'none');
 							}
-							var codigoInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm').prop('id', 'CODIGO').prop('name', 'CODIGO').prop("value",item.CODIGO).prop('readonly', false);
-							var codigoCell = $("<td>").prop('class', 'col-1 fw-normal').append(codigoInput);
-							row.append(codigoCell);
-							var cnpjInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm input-mask-cnpj').prop('id', 'CNPJ').prop('name', 'CNPJ').prop("value",item.CNPJ).prop('readonly', false);
-							var cnpjCell = $("<td>").prop('class', 'col-2 fw-normal').append(cnpjInput);
-							row.append(cnpjCell);
-							var empresaInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm').prop('id', 'EMPRESA').prop('name', 'EMPRESA').prop("value",item.EMPRESA).prop('readonly', false);
-							var empresaCell = $("<td>").prop('class', 'col-3 fw-normal').append(empresaInput);
-							row.append(empresaCell);
 							
-							//Emite NFS
-							var td = $('<td>').prop('class', 'col-1 fw-normal');
-							var div = $('<div>').prop('class', 'd-flex justify-content-center');
-							var formCheck = $('<div>').prop('class', 'form-check form-switch form-check-inline');
-							var input = $('<input>').prop('class', 'form-check-input EMITE_NFS').attr('type', 'checkbox').attr('role', 'switch').attr('id', 'EMITE_NFS_'+ nItem).attr('name', 'EMITE_NFS'+ nItem);
-							if (item.EMITE_NFS) {
-							  input.prop('checked', true);
-							}
-							label = $('<label>').prop('class', 'form-check-label').attr('for', 'EMITE_NFS_'+ nItem).text(item.EMITE_NFS ? 'Sim' : 'Não');
-							formCheck.append(input, label);
-							div.append(formCheck);
-							td.append(div);
+							
+							var td = $('<td>').prop('class', 'col-1 fw-normal small-text').text(item.CODIGO);
 							row.append(td);
 							
-							//Declara Prestados
-							td = $('<td>').prop('class', 'col-1 fw-normal');
-							div = $('<div>').prop('class', 'd-flex justify-content-center');
-							formCheck = $('<div>').prop('class', 'form-check form-switch form-check-inline');
-							input = $('<input>').prop('class', 'form-check-input DECLARA_ENTRADA').attr('type', 'checkbox').attr('role', 'switch').attr('id', 'DECLARA_ENTRADA_'+ nItem).attr('name', 'DECLARA_ENTRADA'+ nItem);
-							if (item.DECLARA_ENTRADA) {
-							  input.prop('checked', true);
-							}
-							label = $('<label>').prop('class', 'form-check-label').attr('for', 'DECLARA_ENTRADA_'+ nItem).text(item.DECLARA_ENTRADA ? 'Sim' : 'Não');
-							formCheck.append(input, label);
-							div.append(formCheck);
-							td.append(div);
+							
+							var div = $('<div>').prop('class', 'd-flex justify-content-center align-items-center me-5').text(item.CNPJ);
+							td = $('<td>').prop('class', 'col-1 fw-normal small-text').append(div);
 							row.append(td);
 							
-							// Lanca Entradas
-							td = $('<td>').prop('class', 'col-1 fw-normal');
-							div = $('<div>').prop('class', 'd-flex justify-content-center');
-							formCheck = $('<div>').prop('class', 'form-check form-switch form-check-inline');
-							input = $('<input>').prop('class', 'form-check-input LANCA_NOTA_ENTRADA').attr('type', 'checkbox').attr('role', 'switch').attr('id', 'LANCA_NOTA_ENTRADA_'+ nItem).attr('name', 'LANCA_NOTA_ENTRADA'+ nItem);
-							if (item.DECLARA_ENTRADA) {
-							  input.prop('checked', true);
-							}
-							label = $('<label>').prop('class', 'form-check-label').attr('for', 'LANCA_NOTA_ENTRADA_'+ nItem).text(item.DECLARA_ENTRADA ? 'Sim' : 'Não');
-							formCheck.append(input, label);
-							div.append(formCheck);
-							td.append(div);
-							row.append(td);;
-							
-							var regimeSelect = $('<select>').prop('class', 'form-select form-select-sm fw-normal').prop('id', 'REGIME_TRIBUTARIO');
-							regimeSelect.append(new Option("", ""));
-							regimeSelect.append(new Option("Lucro Real", "LUCRO_REAL"));
-							regimeSelect.append(new Option("Lucro Presumido", "LUCRO_PRESUMIDO"));
-							regimeSelect.append(new Option("Simples Nacional", "SIMPLES_NACIONAL"));
-							regimeSelect.append(new Option("MEI", "MEI"));
-							regimeSelect.val(item.REGIME_TRIBUTARIO);
-							var regimeCell = $("<td>").prop('class', 'col-flex').append(regimeSelect);
-							row.append(regimeCell);
-							
-							td = $('<td>').prop('class', 'col-1 fw-normal');
-							formCheck = $('<div>').prop('class', 'form-check form-switch form-check-inline');
-							input = $('<input>').prop('class', 'form-check-input SITUACAO').attr('type', 'checkbox').attr('role', 'switch').attr('id', 'SITUACAO_'+ nItem).attr('name', 'SITUACAO'+ nItem);
-							if (item.SITUACAO) {
-							  input.prop('checked', true);
-							}
-							label = $('<label>').prop('class', 'form-check-label').attr('for', 'SITUACAO_'+ nItem).text(item.SITUACAO ? 'Ativo' : 'Inativo');
-							formCheck.append(input, label);
-							td.append(formCheck);
+							td = $('<td>').prop('class', 'col-3 fw-normal small-text').text(item.EMPRESA);
 							row.append(td);
+							
+							td = $('<td>').prop('class', 'col-4 fw-normal small-text').text(item.OBSERVACAO);
+							row.append(td);
+							
+							td = $('<td>').prop('class', 'col-1');
+							var ico = $('<i>').prop('class', 'bi bi-pencil-square');
+							var btn = $('<button>').attr('type', 'button').prop('class', 'btn btn-light custom-btn-extra-small me-3').attr('onclick', 'editarCliente('+item.ID_CLIENTE+')').prop('name', item.ID_CLIENTE).prop("value",item.ID_CLIENTE).append(ico);
+							div = $('<div>').prop('class', 'd-flex justify-content-end align-items-center').append(btn);
+							td.append(div)
 							
 							
 							var checkbox = $('<input>').attr('type', 'checkbox').prop('class','ProcessCheckbox form-check-input');
 							if (item.EXECUTAR) {
 							  checkbox.prop('checked', true);
 							}
-							var checkboxCell = $("<td>").prop('class', 'col-0').append($('<div>').prop('class', 'd-flex justify-content-end').append(checkbox));
 							
-							row.append(checkboxCell);
+							var divF = $('<div>').prop('class', 'd-flex justify-content-end align-items-center').append(checkbox);
+							form = $('<div>').prop('class', 'form-check').append(divF);
+							div.append(divF);
+							
+							row.append(td);
+						
 							tableBody.append(row);
 						});
 						
-						initializePagination(data);
+						initializePagination(data, nPag);
 						
 						var processCheckboxAll = document.querySelector('.ProcessCheckboxAll');
 						var processCheckboxes = document.querySelectorAll('.ProcessCheckbox');
@@ -181,7 +199,7 @@
 						  });
 						}
 						});
-						
+						/*
 						var ckEmiteNFS = document.querySelectorAll('input[id^="EMITE_NFS_"]');
 						ckEmiteNFS.forEach(function(checkbox) {
 						  var labelNFS = document.querySelector('label[for="' + checkbox.id + '"]');
@@ -194,47 +212,7 @@
 							}
 						  });
 						});
-						
-						var ckDeclaraEntrada = document.querySelectorAll('input[id^="DECLARA_ENTRADA_"]');
-						ckDeclaraEntrada.forEach(function(checkbox) {
-						  var labelDeclara = document.querySelector('label[for="' + checkbox.id + '"]');
-
-						  checkbox.addEventListener('change', function() {
-							if (this.checked) {
-							  labelDeclara.textContent = 'Sim';
-							} else {
-							  labelDeclara.textContent = 'Não';
-							}
-						  });
-						});
-						
-						var ckLancaEntrada = document.querySelectorAll('input[id^="LANCA_NOTA_ENTRADA_"]');
-						ckLancaEntrada.forEach(function(checkbox) {
-						  var labelLancaEntrada= document.querySelector('label[for="' + checkbox.id + '"]');
-
-						  checkbox.addEventListener('change', function() {
-							if (this.checked) {
-							  labelLancaEntrada.textContent = 'Sim';
-							} else {
-							  labelLancaEntrada.textContent = 'Não';
-							}
-						  });
-						});
-						
-						var ckSituacao = document.querySelectorAll('input[id^="SITUACAO_"]');
-						ckSituacao.forEach(function(checkbox) {
-						  var labelSituacao= document.querySelector('label[for="' + checkbox.id + '"]');
-
-						  checkbox.addEventListener('change', function() {
-							if (this.checked) {
-							  labelSituacao.textContent = 'Ativo';
-							} else {
-							  labelSituacao.textContent = 'Inativo';
-							}
-						  });
-						});
-
-						
+						*/
 
 					} else if (el.tagName === 'INPUT' && el.type === 'radio') {
 						if (value === el.id) {
@@ -252,6 +230,16 @@
 			};
 	</script>
 	<script>
+		function findCliente(valor){
+			
+			if (valor !== null && valor !== '') {
+				var jsonData = {
+					"CODIGO": valor
+				}
+				var jsonString = JSON.stringify(jsonData);
+				uiPathApi.sendMessage("findClient", jsonString );
+			}
+		}
 		
 		function closedClicked() {
 			uiPathApi.sendMessage("close");
@@ -303,112 +291,709 @@
 	</script>
 </head>
 <body>
-	<div class="container-fluid mt-2">
-		<div class="row">
-			<div class="col-sm-11">
-				<div class="d-flex align-items-center mb-3">
-					<img src="https://roboluze.com.br/img/evoluze_logo.png" alt="Logo" class="logo">
-					<h4 class="m-0" id="title"></h4>
-			   </div>
+	
+	
+	<!--Menu automação -->
+	<nav class="navbar navbar-dark fixed-top bg-light">
+    	<div class="container-fluid">
+			<div class="col-4-sm">
+				<div class="d-flex justify-content-strat align-items-center">
+					<img src="https://roboluze.com.br/img/evoluze_logo_blue_ligth.png" width="35" height="35" class="me-2" alt="Roboluze">
+					 <h5 class="mb-0"  id="title">Roboluze</h5>
+				</div>
 			</div>
-			<div class="col-sm-1">
-				<button type="button" class="btn-close float-end" aria-label="Close" onclick="closedClicked()"></button>
+			<div class="col-sm-4">
+				<div class="d-flex justify-content-center align-items-center">
+					<div class="pagination pagination-sm" id="pagination"></div>
+				</div>
+			</div>
+			<div class="col-sm-4 d-flex align-items-center me-0">
+				<button type="button" class="btn btn-outline-primary btn-sm me-1" onclick="startClicked()">
+					Iniciar
+				</button>
+				<input type="text" class="form-control form-control-sm me-1" id="myInput" placeholder="Filtro">
+				<button class="btn btn-outline-success btn-sm me-1" type="botton" data-bs-toggle="modal" data-bs-target="#clienteModal" onclick="limparValoresModal()">
+					<i class="bi bi-person-plus-fill"></i>
+				</button>
+				<button class="btn btn-outline-danger btn-sm" type="botton" onclick="closedClicked()">
+					<i class="bi bi-x-lg"></i>
+				</button>
+			
 			</div>
 		</div>
-		
-		<div class="row">
-		  <div class="col-sm-4">
-			<input type="text" class="form-control form-control-sm" id="myInput" placeholder="Filtro">
-		  </div>
-		  <div class="col-sm-4 d-flex justify-content-center">
-			<div class="pagination pagination-sm" id="pagination"></div>
-		  </div>
-		  <div class="col-sm-2">
-			<button id="AddButton" type="submit" class="btn btn-success btn-sm w-100" onclick="addClicked()">Novo</button>
-		  </div>
-		  <div class="col-sm-2">
-			<button id="SubmitButton" type="submit" class="btn btn-primary btn-sm w-100" onclick="saveClicked()">Salvar</button>
-		  </div>
-		</div>
+	</nav>
+	
+	<div class="container-fluid">
 		<!--hr class="my-4"-->
 		<div class="table-responsive-sm">
-			<table class="table table-sm table-striped ">
-				 <thead>
-					<tr>
-						<th class="col-0 fw-normal" scope="col">Cód</th>
-						<th class="col-2 fw-normal" scope="col"><div class="d-flex justify-content-center">CNPJ/CPF</div></th>
-						<th class="col-3 fw-normal" scope="col">Empresa</th>
-						<th class="col-1 fw-normal" scope="col"><div class="d-flex justify-content-center">Emite NFS</div></th>
-						<th class="col-1 fw-normal" scope="col"><div class="d-flex justify-content-center">Protola Entrada</div></th>
-						<th class="col-1 fw-normal" scope="col"><div class="d-flex justify-content-center">Lancar Entrada</div></th>
-						<th class="col-flex fw-normal" scope="col">Regime Trib.</th>
-						<th class="col-1 fw-normal" scope="col">Situacao</th>
-						<th class="col-0">
-							<div class="form-check">
-								<div class="d-flex justify-content-end"><input type="checkbox" class="ProcessCheckboxAll form-check-input" value="" id="FitroCheckbox"></div>
+			<table class="table table-sm caption-top table-group-divider">
+				<thead class="table-light">
+					<tr class="align-items-center">
+						<th class="col-1 fw-normal small-text">Código</th>
+						<th class="col-1 fw-normal small-text"><div class="d-flex justify-content-center me-5">CNPJ/CPF</div></th>
+						<th class="col-3 fw-normal small-text">Empresa</th>
+						<th class="col-4 fw-normal small-text">Observação</th>
+						<th class="col-1">
+							<div class="d-flex justify-content-end align-items-center">
+								<button type="button" class="btn btn-light custom-btn-extra-small me-3" disabled><i class="bi bi-pencil-square"></i></button>
+								
+									<div class="d-flex justify-content-end align-items-center"><input type="checkbox" class="ProcessCheckboxAll form-check-input" value="" id="FitroCheckbox"></div>
+								
 							</div>
+							
 						</th>
 						
 					</tr>
-				  </thead>
-				  <tbody id="myTable" class="table-group-divider">
-				  </tbody>
+				</thead>
+				<tbody id="myTable" class="table-group-divider">
+					<tr class="align-items-center">
+						<td class="col-1 fw-normal small-text">Código</td>
+						<td class="col-1 fw-normal small-text"><div class="d-flex justify-content-center me-5">00.795.877/0001-16</div></td>
+						<td class="col-3 fw-normal small-text">Empresa</td>
+						<td class="col-4 fw-normal small-text">Observação</td>
+						<td class="col-1">
+							<div class="d-flex justify-content-end align-items-center">
+								<button type="button" class="btn btn-light custom-btn-extra-small me-3"><i class="bi bi-pencil-square"></i></button>
+								
+									<div class="d-flex justify-content-end align-items-center"><input type="checkbox" class="ProcessCheckbox form-check-input"></div>
+								
+							</div>
+						</td>
+					</tr>
+				</tbody>
 			</table>
 		</div>
 	</div>
+	
+	<!-- Modal de Cadastro de Cliente -->
+	<div class="modal" id="clienteModal" tabindex="-1" aria-labelledby="clienteModalTitle" aria-hidden="true">
+		<!--div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable"-->
+		<div class="modal-dialog modal-xl modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="clienteModalTitle">Cadastro de Cliente</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-2 d-flex justify-content-start align-items-center">
+							<label class="col-form-label">Código Domínio</label>
+						</div>
+						<div class="col-2 d-flex align-items-center ">
+							<input type="text" class="form-control form-control-sm" id="CODIGO" name="CODIGO" placeholder="Código Cliente" value="">
+						</div>
+						<div class="col-1 d-flex justify-content-end align-items-end ">
+							<label class="col-form-label">CNPJ/CPF</label>
+						</div>
+						<div class="col-2 d-flex align-items-center ">
+							<input type="text" class="form-control form-control-sm" id="CNPJ" name="CNPJ" placeholder="CNPJ ou CPF" value="">
+						</div>
+						<div class="col-2 d-flex justify-content-end align-items-end">
+							<label class="col-form-label">Situação</label>
+						</div>
+						<div class="col-1 d-flex justify-content-start align-items-center">
+							<div class="form-check form-switch form-check-inline">
+								<input class="form-check-input" type="checkbox" role="switch" id="SITUACAO" name="SITUACAO" checked>
+								<label class="form-check-label" for="SITUACAO">Ativa</label>
+							</div>
+						</div>
+						<div class="col-2 d-flex justify-content-end align-items-center">
+							<label class="col-form-label me-2">#ID:</label>
+							<input type="text" class="form-control form-control-sm" id="ID_CLIENTE" name="ID_CLIENTE" placeholder="" value="" disabled>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-2 d-flex justify-content-start align-items-center">
+							<label class="col-form-label">Nome Emprea</label>
+						</div>
+						<div class="col-5 d-flex align-items-center ">
+							<input type="text" class="form-control form-control-sm" id="EMPRESA" name="EMPRESA" placeholder="Nome da Empresa" value="">
+						</div>
+						<div class="col-2 d-flex justify-content-end align-items-end">
+							<label class="col-form-label">Regime Tributário</label>
+						</div>
+						<div class="col-3 d-flex align-items-center ">
+							<select class="form-select form-select-sm" id="REGIME_TRIBUTARIO">
+								<option value=""></option>
+								<option value="Lucro Real">Lucro Real</option>
+								<option value="Lucro Presumido">Lucro Presumido</option>
+								<option value="Lucro Arbitrado">Lucro Arbitrado</option>
+								<option value="Imune do IRPJ">Imune do IRPJ</option>
+								<option value="Isenta do IRPJ">Isenta do IRPJ</option>
+								<option value="Microempresa">Microempresa (Simples Nacional)</option>
+								<option value="Empresa de Pequeno Porte">Empresa de Pequeno Porte (Simples Nacional)</option>
+								<option value="RET - Regime Especial Trib.">RET - Regime Especial Trib.</option>
+							</select>
+						</div>
+					</div>
+					<hr class="md-5">
+				
+					<nav>
+					  <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+						<button class="nav-link active" id="nav-config-tab" data-bs-toggle="tab" data-bs-target="#nav-config" type="button" role="tab" aria-controls="nav-config" aria-selected="true">Configurações IPM</button>
+						<button class="nav-link" id="nav-codigo-tab" data-bs-toggle="tab" data-bs-target="#nav-codigo" type="button" role="tab" aria-controls="nav-codigo" aria-selected="false">Códigos IPM</button>
+						<button class="nav-link" id="nav-nota-tab" data-bs-toggle="tab" data-bs-target="#nav-nota" type="button" role="tab" aria-controls="nav-nota" aria-selected="false">Emissão de Nota</button>
+					  </div>
+					</nav>
+					<div class="tab-content" id="nav-tabContent">
+						<div class="tab-pane fade show active" id="nav-config" role="tabpanel" aria-labelledby="nav-config-tab">
+							<div id="Configurações do IPM">
+								<div class="row">
+									<div class="col-2 d-flex align-items-center">
+										<label class="col-form-label">Login</label>
+									</div>
+									<div class="col-10 d-flex align-items-center ">
+										<input type="text" class="form-control form-control-sm" id="LOGIN" name="LOGIN" placeholder="Usuário de acesso do cliente no IPM" value="">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-2 d-flex justify-content-strat align-items-end">
+										<label class="col-form-label">Password</label>
+									</div>
+									<div class="col-10 d-flex align-items-center">
+										<input type="password" class="form-control form-control-sm" id="PASSWORD" name="PASSWORD" placeholder="Senha de acesso do cliente no IPM" value="">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-2 d-flex align-items-center">
+										<label class="col-form-label">Download Saídas</label>
+									</div>
+									<div class="col-10 d-flex justify-content-start align-items-center">
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="radio" name="DOWNLOAD_SAIDA" id="DOWNLOAD_SAIDA_XML" value="XML">
+											<label class="form-check-label" for="DOWNLOAD_SAIDA_XML">.xml</label>
+										</div>
+										<div class="form-check form-check-inline">
+										  <input class="form-check-input" type="radio" name="DOWNLOAD_SAIDA" id="DOWNLOAD_SAIDA_TXT" value="TXT">
+										  <label class="form-check-label" for="DOWNLOAD_SAIDA_TXT">.txt</label>
+										</div>
+										<div class="form-check form-check-inline">
+										  <input class="form-check-input" type="radio" name="DOWNLOAD_SAIDA" id="DOWNLOAD_SAIDA_Nenhum" value="Nenhum">
+										  <label class="form-check-label" for="DOWNLOAD_SAIDA_Nenhum">Não baixar arquivos de saída</label>
+										</div>
+										<div class="form-check form-check-inline">
+										  <input class="form-check-input" type="radio" name="DOWNLOAD_SAIDA" id="DOWNLOAD_SAIDA_Default" value="Default" checked>
+										  <label class="form-check-label" for="DOWNLOAD_SAIDA_Default">Padrão Geral</label>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-2 d-flex align-items-center">
+										<label class="col-form-label">Download Entradas</label>
+									</div>
+									<div class="col-10 d-flex justify-content-start align-items-center">
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="radio" name="DOWNLOAD_ENTRADA" id="DOWNLOAD_ENTRADA_XML" value="XML">
+											<label class="form-check-label" for="DOWNLOAD_ENTRADA_XML">.xml</label>
+										</div>
+										<div class="form-check form-check-inline">
+										  <input class="form-check-input" type="radio" name="DOWNLOAD_ENTRADA" id="DOWNLOAD_ENTRADA_TXT" value="TXT">
+										  <label class="form-check-label" for="DOWNLOAD_SAIDA_TXT">.txt</label>
+										</div>
+										<div class="form-check form-check-inline">
+										  <input class="form-check-input" type="radio" name="DOWNLOAD_ENTRADA" id="DOWNLOAD_ENTRADA_Nenhum" value="Nenhum">
+										  <label class="form-check-label" for="DOWNLOAD_ENTRADA_Nenhum">Não baixar arquivos de saída</label>
+										</div>
+										<div class="form-check form-check-inline">
+										  <input class="form-check-input" type="radio" name="DOWNLOAD_ENTRADA" id="DOWNLOAD_ENTRADA_Default" value="Default" checked>
+										  <label class="form-check-label" for="DOWNLOAD_ENTRADA_Default">Padrão Geral</label>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-2 d-flex justify-content-start align-items-center">
+										<label class="col-form-label">Protocolar Saídas</label>
+									</div>
+									<div class="col-3 d-flex align-items-center">
+										<select class="form-select form-select-sm" id="PROTOCOLAR_SAIDA">
+											<option value=""></option>
+											<option value="Todos">Todos</option>
+											<option value="ISS">Com Recolhimento</option>
+											<option value="Nenhum">Nenhum</option>
+										</select>
+									</div>
+									<div class="col-4 d-flex justify-content-end align-items-center">
+										<label class="col-form-label">Declarar Simples Nacional</label>
+									</div>
+									<div class="col-2 d-flex align-items-center ">
+										<div class="form-check form-switch form-check-inline">
+											<input class="form-check-input" type="checkbox" role="switch" id="DECLARAR_SIMPLES_NACIONAL" name="DECLARAR_SIMPLES_NACIONAL">
+											<label class="form-check-label" for="DECLARAR_SIMPLES_NACIONAL">Sim</label>
+										</div>
+									</div>
+								</div>
+								
+								<div class="row">
+									<div class="col-2 d-flex justify-content-start align-items-center">
+										<label class="col-form-label">Protocolar Entradas</label>
+									</div>
+									<div class="col-3 d-flex align-items-center">
+										<select class="form-select form-select-sm" id="PROTOCOLAR_ENTRADA">
+											<option value=""></option>
+											<option value="Todos">Todos</option>
+											<option value="ISS">Com Recolhimento</option>
+											<option value="Nenhum">Nenhum</option>
+										</select>
+									</div>
+									<div class="col-4 d-flex justify-content-end align-items-center">
+										<label class="col-form-label">Lançar Notas de Entrada</label>
+									</div>
+									<div class="col-2 d-flex align-items-center ">
+										<div class="form-check form-switch form-check-inline">
+											<input class="form-check-input" type="checkbox" role="switch" id="LANCAR_NOTA_ENTRADA" name="LANCAR_NOTA_ENTRADA">
+											<label class="form-check-label" for="LANCAR_NOTA_ENTRADA">Sim</label>
+										</div>
+									</div>
+								</div>
+							</div>
+				
+						</div>
+						<div class="tab-pane fade" id="nav-codigo" role="tabpanel" aria-labelledby="nav-codigo-tab">
+							<div id="Codigos do IPM">
+								<div class="row">
+									<div class="col-2 d-flex justify-content-start align-items-center">
+										<label class="col-form-label">Código Login</label>
+									</div>
+									<div class="col-10 d-flex align-items-center">
+										<input type="text" class="form-control form-control-sm" id="CODIGO_LOGIN" name="CODIGO_LOGIN" placeholder="Cadastro Automatico" value="">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-2 d-flex justify-content-start align-items-center">
+										<label class="col-form-label">Cadastro Ecônomico</label>
+									</div>
+									<div class="col-10 d-flex align-items-center">
+										<input type="text" class="form-control form-control-sm" id="CADASTRO_ECONOMICO" name="CADASTRO_ECONOMICO" placeholder="Cadastro Automatico" value="">
+									</div>
+								</div>
+								<div class="row">
+									<p><strong>Obaservação: </strong></p>
+									<p>Esses códigos são atualizados <strong>automaticamente</strong> na primeira vez que a automação é executeda para esse cliente!</p>
+								</div>
+							</div>
+						</div>
+						
+						<div class="tab-pane fade" id="nav-nota" role="tabpanel" aria-labelledby="nav-nota-tab">
+							<div class="row">
+								<form id="myFormModalPerfil">
+									<div class="row">
+										<div class="col-1 d-flex justify-content-start align-items-start">
+											<label class="col-form-label">Observação</label>
+										</div>
+										<div class="col-8 d-flex align-items-center">
+											<textarea class="form-control form-control-sm" placeholder="Observação para emissão de NFS" rows="3" id="ObservacaoNota"></textarea>
+										</div>
+										<div class="col-3">
+											<div class="row">
+												<div class="col-3 d-flex justify-content-start align-items-center">
+													<label class="col-form-label">Valor</label>
+												</div>
+												<div class="col-9 d-flex justify-content-center align-items-center">
+													<input class="form-control form-control-sm me-2" type="text" id="ValorNota" placeholder="Valor Nota" style="text-align: right;">
+												</div>
+											</div>
+											<div class="row">
+												<div class="d-flex justify-content-center">
+													<button class="btn btn-primary btn-sm w-100" type="button" id="addNotaBtn" onclick="addNotaBtn()">adicionar</button>
+												</div>
+											</div>
+											
+										</div>
+									</div>
+								</form>
+							</div>
+							<br>
+							<div class="row">
+								<div class="card">
+									<table class="card-body table table-sm">
+										<thead>
+											<tr>
+												<th class="col-1" scope="row" id="IdNota">#</th>
+												<th class="col-7">Observacao</th>
+												<th class="col-2"><div class="d-flex justify-content-end">Valor</div></th>
+												<th class="col-2"><div class="d-flex justify-content-center">Ação</div></th>
+											</tr>
+										</thead>
+										<tbody id="myTableNotas">
+											<!--tr>
+												<td class="col-1" scope="row">1</th>
+												<td class="col-7">Perfil A</td>
+												<td class="col-2"><div class="d-flex justify-content-end">512,00</div></th>
+												<td class="col-2">
+													<div class="d-flex justify-content-center">
+														<button type="button" class="btn btn-success btn-sm me-1"><i class="bi bi-pencil-square"></i>
+														</button><button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="col-1" scope="row">2</th>
+												<td class="col-7">Perfil B</td>
+												<td class="col-2"><div class="d-flex justify-content-end">12.512,00</div></th>
+												<td class="col-2">
+													<div class="d-flex justify-content-center">
+														<button type="button" class="btn btn-success btn-sm me-1"><i class="bi bi-pencil-square"></i>
+														</button><button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+													</div>
+												</td>
+											</tr-->
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="col-sm-12 d-flex me-0">
+						<button type="button" class="btn btn-danger btn-sm w-25 me-2" data-bs-dismiss="modal" onclick="excluirCliente()">Excluir</button>
+						<button type="button" class="btn btn-secondary btn-sm w-25 me-2" data-bs-dismiss="modal">Cancelar</button>
+						<button type="button" class="btn btn-primary btn-sm w-50" data-bs-dismiss="modal" onclick="salvarCliente()">Salvar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- CNPJ Ou CPF no modal formatacao e validacao -->
+	<script>
+		var cnpjCpfInput = document.getElementById('CNPJ');
+
+		cnpjCpfInput.addEventListener('input', function() {
+		  var valor = this.value;
+
+		  if (valor.length === 11) {
+			// CPF
+			if (validarCpf(valor)) {
+			  this.value = aplicarMascaraCpf(valor);
+			}
+		  } else if (valor.length === 14) {
+			// CNPJ
+			if (validarCnpj(valor)) {
+			  this.value = aplicarMascaraCnpj(valor);
+			}
+		  }
+		});
+
+		function validarCpf(cpf) {
+		  cpf = cpf.replace(/\D/g, ''); // Remove caracteres não numéricos
+		  if (cpf.length !== 11 || /^(.)\1+$/.test(cpf)) {
+			return false;
+		  }
+		  
+		  var sum = 0;
+		  var mod;
+		  
+		  for (var i = 1; i <= 9; i++) {
+			sum += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+		  }
+		  
+		  mod = (sum * 10) % 11;
+		  
+		  if (mod === 10 || mod === 11) {
+			mod = 0;
+		  }
+		  
+		  if (mod !== parseInt(cpf.substring(9, 10))) {
+			return false;
+		  }
+		  
+		  sum = 0;
+		  
+		  for (var j = 1; j <= 10; j++) {
+			sum += parseInt(cpf.substring(j - 1, j)) * (12 - j);
+		  }
+		  
+		  mod = (sum * 10) % 11;
+		  
+		  if (mod === 10 || mod === 11) {
+			mod = 0;
+		  }
+		  
+		  if (mod !== parseInt(cpf.substring(10, 11))) {
+			return false;
+		  }
+		  
+		  return true;
+		}
+
+		function aplicarMascaraCpf(cpf) {
+		  cpf = cpf.replace(/\D/g, ''); // Remove caracteres não numéricos
+		  cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+		  cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+		  cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+		  return cpf;
+		}
+
+
+		function validarCnpj(cnpj) {
+		  cnpj = cnpj.replace(/[^\d]+/g, ''); // Remove caracteres não numéricos
+
+		  if (cnpj.length !== 14) {
+			return false;
+		  }
+
+		  // Verifica se todos os dígitos são iguais (caso de CNPJs inválidos)
+		  if (/^(\d)\1+$/.test(cnpj)) {
+			return false;
+		  }
+
+		  // Validação do primeiro dígito verificador
+		  var tamanho = cnpj.length - 2;
+		  var numeros = cnpj.substring(0, tamanho);
+		  var digitos = cnpj.substring(tamanho);
+		  var soma = 0;
+		  var pos = tamanho - 7;
+
+		  for (var i = tamanho; i >= 1; i--) {
+			soma += parseInt(numeros.charAt(tamanho - i), 10) * pos--;
+			if (pos < 2) {
+			  pos = 9;
+			}
+		  }
+
+		  var resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+		  if (resultado !== parseInt(digitos.charAt(0), 10)) {
+			return false;
+		  }
+
+		  // Validação do segundo dígito verificador
+		  tamanho += 1;
+		  numeros = cnpj.substring(0, tamanho);
+		  digitos = cnpj.substring(tamanho);
+		  soma = 0;
+		  pos = tamanho - 7;
+
+		  for (i = tamanho; i >= 1; i--) {
+			soma += parseInt(numeros.charAt(tamanho - i), 10) * pos--;
+			if (pos < 2) {
+			  pos = 9;
+			}
+		  }
+
+		  resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+		  if (resultado !== parseInt(digitos.charAt(0), 10)) {
+			return false;
+		  }
+
+		  return true;
+		}
+
+		function aplicarMascaraCnpj(cnpj) {
+		  cnpj = cnpj.replace(/\D/g, ''); // Remove caracteres não numéricos
+		  return cnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+		}
+
+	</script>
+	
+	<!-- Envia consulta do código do cliente para consulta -->
+	<script>
+		var codigoInput = document.getElementById('CODIGO');
+		var cnpjInput = document.getElementById('CNPJ');
+
+		codigoInput.addEventListener('blur', capturarInformacoes);
+		cnpjInput.addEventListener('blur', capturarInformacoes);
+
+		function capturarInformacoes() {
+		  var codigo = codigoInput.value;
+		  var cnpj = cnpjInput.value;
+		  
+		  if (codigo === '' || cnpj === '') {
+			
+			if (codigo !== ''){
+				limparValoresModal();
+				findCliente(codigo);
+			} else {
+				valor = cnpj.replace(/\D/g, ''); 
+				if (valor.length === 11) {
+					if (validarCpf(valor)) {
+						limparValoresModal();
+						findCliente(cnpj);
+					}
+				} else if (valor.length === 14) {
+					if (validarCnpj(valor)) {
+						limparValoresModal();
+						findCliente(cnpj);
+					}
+				}
+				
+			}
+			return;
+		  } 
+		  
+		}
+		
+		function limparValoresModal() {
+			
+			document.getElementById("DOWNLOAD_SAIDA_Default").checked = true;
+			document.getElementById("DOWNLOAD_ENTRADA_Default").checked = true;
+			document.getElementById("DECLARAR_SIMPLES_NACIONAL").checked = false;
+			document.querySelector('label[for="DECLARAR_SIMPLES_NACIONAL"]').textContent = "Não";
+			document.getElementById("LANCAR_NOTA_ENTRADA").checked = false;
+			document.querySelector('label[for="LANCAR_NOTA_ENTRADA"]').textContent = "Não";
+			
+			var table = document.getElementById("myTableNotas");
+			table.innerHTML = "";
+			
+			count = 1; // Contador para IDs das linhas
+			availableIDs = []; // IDs disponíveis
+		
+			document.querySelectorAll('input').forEach(function(input) {
+				input.value = '';
+			});
+			document.querySelectorAll('select').forEach(function(select) {
+				select.value = '';
+			});
+			document.querySelectorAll('textarea').forEach(function(textarea) {
+				textarea.value = '';
+			});
+			document.querySelectorAll('[data-value]').forEach(function(element) {
+				element.setAttribute('data-value', '0');
+			});
+		}
+		
+	</script>
+	<script> 
+	
+		var valorInput = document.getElementById('ValorNota');
+		valorInput.addEventListener('input', function() {
+		  var valor = valorInput.value;
+		  var valorFormatado = aplicarMascaraValor(valor);
+		  valorInput.value = valorFormatado;
+		});
+
+		function aplicarMascaraValor(valor) {
+		  valor = valor.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+		  valor = valor.replace(/^0+/g, ''); // Remove zeros à esquerda
+
+		  if (valor.length > 2) {
+			var decimal = valor.slice(-2); // Obtém os últimos dois dígitos como parte decimal
+			var inteiro = valor.slice(0, -2); // Obtém a parte inteira sem os dígitos decimais
+
+			valor = inteiro.replace(/\B(?=(\d{3})+(?!\d))/g, '.'); // Adiciona o ponto como separador de centenas
+			valor = (valor.length > 0 ? valor + ',' : '') + decimal; // Adiciona a parte decimal
+		  } else if (valor.length === 2) {
+			valor = '0,' + valor;
+		  } else if (valor.length === 1) {
+			valor = '0,0' + valor;
+		  }
+
+		  return valor;
+		}
+		
+		var count = 1; // Contador para IDs das linhas
+		var availableIDs = []; // IDs disponíveis
+		
+		function addNotaBtn() {
+			var observacao = document.getElementById("ObservacaoNota").value;
+			var valor = document.getElementById("ValorNota").value;
+			if (valor !== ''){
+				addNota(observacao, valor);
+			}
+		}
+		
+		function addNota(observacao, valor) {
+			
+		
+		  var table = document.getElementById("myTableNotas");
+
+		  // Verifica se há IDs disponíveis
+		  var id;
+		  if (availableIDs.length > 0) {
+			id = availableIDs.shift(); // Utiliza o primeiro ID disponível
+		  } else {
+			id = count; // Utiliza o próximo ID do contador
+			count++; // Incrementa o contador de IDs
+		  }
+
+		  // Cria uma nova linha com o ID
+		  var newRow = table.insertRow();
+		  newRow.id = "linha-" + id;
+
+		  var indexCell = newRow.insertCell();
+		  indexCell.classList.add("col-1");
+		  indexCell.scope = "row";
+		  indexCell.textContent = id;
+
+		  var observacaoCell = newRow.insertCell();
+		  observacaoCell.classList.add("col-7");
+		  observacaoCell.textContent = observacao;
+
+		  var valorCell = newRow.insertCell();
+		  valorCell.classList.add("col-2");
+		  valorCell.innerHTML = "<div class='d-flex justify-content-end'>" + valor + "</div>";
+
+		  var actionCell = newRow.insertCell();
+		  actionCell.classList.add("col-2");
+		  actionCell.innerHTML = "<div class='d-flex justify-content-center'>" +
+			"<button type='button' class='btn btn-success btn-sm me-1' onclick='editarNota(" + id + ")'><i class='bi bi-pencil-square'></i></button>" +
+			"<button type='button' class='btn btn-danger btn-sm' onclick='excluirNota(" + id + ")'><i class='bi bi-trash'></i></button>" +
+			"</div>";
+
+		  document.getElementById("ObservacaoNota").value = "";
+		  document.getElementById("ValorNota").value = "";
+		}
+
+		function excluirNota(id) {
+		  var row = document.getElementById("linha-" + id);
+		  row.remove();
+
+		  availableIDs.push(id); // Adiciona o ID disponível ao array
+		}
+
+		function editarNota(id) {
+		  var row = document.getElementById("linha-" + id);
+		  var observacao = row.cells[1].textContent;
+		  var valor = row.cells[2].textContent.trim();
+
+		  document.getElementById("ObservacaoNota").value = observacao;
+		  document.getElementById("ValorNota").value = valor;
+
+		  row.remove();
+		  availableIDs.push(id); // Adiciona o ID disponível ao array
+		}
+
+		var addButton = document.getElementById("addNotaBtn");
+		addButton.addEventListener("click", addNotaBtn);
+
+	</script>
 
 	<script>
-		function initializePagination(data) {
-		  var itemsPerPage = 20; // Number of items to display per page
+		var ckSituacao = document.getElementById('SITUACAO');
+		var labelSituacao = document.querySelector('label[for="SITUACAO"]');
+
+		ckSituacao.addEventListener('change', function() {
+			if (this.checked) {
+			  labelSituacao.textContent = 'Ativo';
+			} else {
+			  labelSituacao.textContent = 'Inativo';
+			}
+		});
+		var ckSimplesNacional = document.getElementById('DECLARAR_SIMPLES_NACIONAL');
+		var labelSimplesNacional = document.querySelector('label[for="DECLARAR_SIMPLES_NACIONAL"]');
+
+		ckSimplesNacional.addEventListener('change', function() {
+			if (this.checked) {
+			  labelSimplesNacional.textContent = 'Sim';
+			} else {
+			  labelSimplesNacional.textContent = 'Não';
+			}
+		});
+		var ckLancaNotaEntrada = document.getElementById('LANCAR_NOTA_ENTRADA');
+		var labelLancaNotaEntrada = document.querySelector('label[for="LANCAR_NOTA_ENTRADA"]');
+
+		ckLancaNotaEntrada.addEventListener('change', function() {
+			if (this.checked) {
+			  labelLancaNotaEntrada.textContent = 'Sim';
+			} else {
+			  labelLancaNotaEntrada.textContent = 'Não';
+			}
+		});
+		function initializePagination(data, nItems) {
+		  var itemsPerPage = nItems; // Number of items to display per page
 		  var totalPages = Math.ceil(data.length / itemsPerPage);
 		  var container = $('#myTable');
-		  /*
-		  container.empty();
-		  var nItem = 0;
-
-		  $.each(data, function(index, item) {
-			var row = $('<tr>');
-			nItem++;
-			if(nItem > itemsPerPage){
-				row.css('display', 'none');
-			}
-			var codigoInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm').prop('id', 'CODIGO').prop('name', 'CODIGO').prop("value",item.CODIGO);
-			var codigoCell = $("<td>").prop('class', 'col-1').append(codigoInput);
-			row.append(codigoCell);
-			var cnpjInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm').prop('id', 'CNPJ').prop('name', 'CNPJ').prop("value",item.CNPJ);
-			var cnpjCell = $("<td>").prop('class', 'col-2').append(cnpjInput);
-			row.append(cnpjCell);
-			var empresaInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm').prop('id', 'EMPRESA').prop('name', 'EMPRESA').prop("value",item.EMPRESA);
-			var empresaCell = $("<td>").prop('class', 'col-5').append(empresaInput);
-			row.append(empresaCell);
-			
-			var regimeSelect = $('<select>').prop('class', 'form-select form-select-sm').prop('id', 'REGIME_TRIBUTARIO').prop('required');
-			
-			var regimeCell = $("<td>").prop('class', 'col-3').append(regimeSelect);
-			row.append(regimeCell);
-			
-			
-			
-			var regimeSelect = $('<select>').prop('class', 'form-select form-select-sm').prop('id', 'REGIME_TRIBUTARIO');
-			regimeSelect.append($('<option>').prop('value', '').text(''));
-			regimeSelect.append($('<option>').prop('value', 'LUCRO_REAL').text('Lucro Real'));
-			regimeSelect.append($('<option>').prop('value', 'LUCRO_PRESUMIDO').text('Lucro Presumido'));
-			regimeSelect.append($('<option>').prop('value', 'SIMPLES_NACIONAL').text('Simples Nacional'));
-			regimeSelect.append($('<option>').prop('value', 'MEI').text('MEI'));
-			regimeSelect.append($('<option>').prop('value', 'OUTRO').text('Outro'));
-			var regimeCell = $("<td>").prop('class', 'col-3').append(regimeSelect);
-			row.append(regimeCell);
-
-			
-			
-			var checkbox = $('<input>').attr('type', 'checkbox').prop('checked', item.SITUACAO).prop('class', 'form-check-input').prop('id', 'ProcessCheckbox').prop('name', 'ProcessCheckbox');
-			var checkboxCell = $("<td>").prop('class', 'col-1').append($('<div>').prop('class', 'd-flex justify-content-end').append(checkbox));
-			row.append(checkboxCell);
-			container.append(row);
-
-		  });
 		  
-		  */
 		  // Initialize the bootpag plugin
 		  var pagination = $('#pagination').bootpag({
 			total: totalPages,
@@ -435,9 +1020,19 @@
 		}
 		
     </script>
+	
 	<script>
 		
 		$(document).ready(function(){
+		  $("#myInput").on("keyup", function() {
+			var value = $(this).val().toLowerCase();
+			$("#myTable tr").filter(function() {
+			  $(this).toggle( $(this).text().toLowerCase().indexOf(value) > -1 );
+			});
+		  });
+		});
+		
+		/*$(document).ready(function(){
 		  $("#myInput").on("keyup", function() {
 			var value = $(this).val().toLowerCase();
 			$("#myTable tr").filter(function() {
@@ -453,9 +1048,13 @@
 			});
 		  });
 		});
+		*/
 	</script>
+	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 	<!--script src="https://code.jquery.com/jquery-3.6.0.min.js"></script-->
 	<script src="https://roboluze.com.br/_roboluze/www/js/bootpag.js"></script>
+	
 	
 
 </body>

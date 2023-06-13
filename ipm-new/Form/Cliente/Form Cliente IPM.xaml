@@ -1,11 +1,13 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Form" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.ComponentModel;assembly=System.ComponentModel.TypeConverter" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ufa="clr-namespace:UiPath.Forms.Activities;assembly=UiPath.Forms.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Form" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:r="clr-namespace:Roboluze_Libre_Config;assembly=Roboluze.Libre.Config" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.ComponentModel;assembly=System.ComponentModel.TypeConverter" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ufa="clr-namespace:UiPath.Forms.Activities;assembly=UiPath.Forms.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="io_TransactionData" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="BreakTriggerScopeInArgument" Type="InArgument(x:String)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1105,5460</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>792,4812</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Form_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -53,6 +55,8 @@
       <x:String>GlobalVariablesNamespace</x:String>
       <x:String>GlobalConstantsNamespace</x:String>
       <x:String>Roboluze_Libre_Config.Tools</x:String>
+      <x:String>Roboluze_Libre_Config</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -119,9 +123,11 @@
       <AssemblyReference>Roboluze.UiPath</AssemblyReference>
       <AssemblyReference>NPOI</AssemblyReference>
       <AssemblyReference>Roboluze.Libre.Config</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.ViewModels</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Form" sap:VirtualizedContainerService.HintSize="1056,5395" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Form" sap:VirtualizedContainerService.HintSize="802,4747" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataRow" Name="row" />
       <Variable x:TypeArguments="x:Int32" Name="width" />
@@ -137,7 +143,8 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="994,256" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
+    <r:Config sap:VirtualizedContainerService.HintSize="740,192" sap2010:WorkflowViewState.IdRef="Config_1" in_ApplicationName="Teste" in_Version="23.0.1" io_Config="[in_Config]" />
+    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="740,256" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_15">
@@ -197,10 +204,10 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:MultipleAssign>
-    <ui:BuildDataTable DataTable="[io_TransactionData]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="994,60" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;ID_CLIENTE&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;CODIGO&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;CNPJ&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;EMPRESA&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;SITUACAO&quot; msdata:Caption=&quot;&quot; type=&quot;xs:boolean&quot; default=&quot;true&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;EMITE_NFS&quot; msdata:Caption=&quot;&quot; type=&quot;xs:boolean&quot; default=&quot;true&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;DECLARA_ENTRADA&quot; msdata:Caption=&quot;&quot; type=&quot;xs:boolean&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;LANCA_NOTA_ENTRADA&quot; msdata:Caption=&quot;&quot; type=&quot;xs:boolean&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;EXECUTAR&quot; msdata:Caption=&quot;&quot; type=&quot;xs:boolean&quot; default=&quot;true&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
-    <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" Condition="[i &gt; 0]" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="994,52" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
+    <ui:BuildDataTable DataTable="[io_TransactionData]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="740,60" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xD;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xD;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xD;&#xA;      &lt;xs:complexType&gt;&#xD;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xD;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xD;&#xA;            &lt;xs:complexType&gt;&#xD;&#xA;              &lt;xs:sequence&gt;&#xD;&#xA;                &lt;xs:element name=&quot;ID_CLIENTE&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;CODIGO&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;CNPJ&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;EMPRESA&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;OBSERVACAO&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;EXECUTAR&quot; msdata:Caption=&quot;&quot; type=&quot;xs:boolean&quot; default=&quot;true&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;              &lt;/xs:sequence&gt;&#xD;&#xA;            &lt;/xs:complexType&gt;&#xD;&#xA;          &lt;/xs:element&gt;&#xD;&#xA;        &lt;/xs:choice&gt;&#xD;&#xA;      &lt;/xs:complexType&gt;&#xD;&#xA;    &lt;/xs:element&gt;&#xD;&#xA;  &lt;/xs:schema&gt;&#xD;&#xA;&lt;/NewDataSet&gt;" />
+    <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" Condition="[i &gt; 0]" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="740,52" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
       <ui:InterruptibleDoWhile.Body>
-        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="496,511" sap2010:WorkflowViewState.IdRef="Sequence_10">
+        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="496,491" sap2010:WorkflowViewState.IdRef="Sequence_10">
           <Sequence.Variables>
             <Variable x:TypeArguments="x:Boolean" Name="situacao" />
             <Variable x:TypeArguments="x:Boolean" Name="emiteNF" />
@@ -331,7 +338,14 @@
               </Sequence>
             </If.Else>
           </If>
-          <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{i.ToString(),i.ToString(),&quot;00.795.877/0001-16&quot;,&quot;EVOLUZE SOFTWARES DE GESTAO LTDA &quot;+i.ToString(), situacao.ToString, emiteNF.ToString,declara.ToString, lanca.ToString,processar.ToString}]" DataTable="[io_TransactionData]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="434,186" sap2010:WorkflowViewState.IdRef="AddDataRow_2" />
+          <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{i.ToString(),i.ToString(),&quot;00.795.877/0001-16&quot;,&quot;EVOLUZE SOFTWARES DE GESTAO LTDA &quot;+i.ToString(), &quot;OBSERVACAO BLA BAL BAL ABAL BA &quot;+i.ToString(),processar.ToString}]" DataTable="[io_TransactionData]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="434,52" sap2010:WorkflowViewState.IdRef="AddDataRow_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:AddDataRow>
           <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_3">
             <Assign.To>
               <OutArgument x:TypeArguments="x:Int32">[i]</OutArgument>
@@ -349,7 +363,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:InterruptibleDoWhile>
-    <If Condition="[Not io_TransactionData Is Nothing]" DisplayName="Exit TransactionData" sap:VirtualizedContainerService.HintSize="994,4796" sap2010:WorkflowViewState.IdRef="If_1">
+    <If Condition="[Not io_TransactionData Is Nothing]" DisplayName="Exit TransactionData" sap:VirtualizedContainerService.HintSize="740,2462" sap2010:WorkflowViewState.IdRef="If_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -357,7 +371,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <Sequence sap:VirtualizedContainerService.HintSize="960,4614" sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <Sequence sap:VirtualizedContainerService.HintSize="706,2280" sap2010:WorkflowViewState.IdRef="Sequence_3">
           <Sequence.Variables>
             <Variable x:TypeArguments="x:String" Name="result" />
           </Sequence.Variables>
@@ -366,7 +380,7 @@
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Assign sap:VirtualizedContainerService.HintSize="918,82" sap2010:WorkflowViewState.IdRef="Assign_2">
+          <Assign sap:VirtualizedContainerService.HintSize="664,82" sap2010:WorkflowViewState.IdRef="Assign_2">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[result]</OutArgument>
             </Assign.To>
@@ -374,11 +388,11 @@
               <InArgument x:TypeArguments="x:String">[Newtonsoft.Json.JsonConvert.SerializeObject(io_TransactionData)]</InArgument>
             </Assign.Value>
           </Assign>
-          <ufa:ShowFormActivity Title="{x:Null}" DisplayName="Show Form" FormId="1071c246-f0e4-4c16-808c-c8d9f05c5e39" Height="[heigth]" sap:VirtualizedContainerService.HintSize="918,186" sap2010:WorkflowViewState.IdRef="ShowFormActivity_1" InstanceName="[formName]" IsAsync="True" Left="[posX]" Top="[posY]" Width="[width]" WindowState="[UiPath.Studio.Forms.Runtime.WindowState.Normal]">
+          <ufa:ShowFormActivity Title="{x:Null}" DisplayName="Show Form" FormId="1071c246-f0e4-4c16-808c-c8d9f05c5e39" Height="[heigth]" sap:VirtualizedContainerService.HintSize="664,52" sap2010:WorkflowViewState.IdRef="ShowFormActivity_1" InstanceName="[formName]" IsAsync="True" Left="[posX]" Top="[posY]" Width="[width]" WindowState="[UiPath.Studio.Forms.Runtime.WindowState.Normal]">
             <ufa:ShowFormActivity.Arguments>
               <InArgument x:TypeArguments="x:String" x:Key="myTable">[result]</InArgument>
               <InArgument x:TypeArguments="x:String" x:Key="title">Roboluze - Cadastro de Clientes</InArgument>
-              <InArgument x:TypeArguments="x:String" x:Key="FitroCheckbox">Nenhum</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="FitroCheckbox">Nenhums</InArgument>
             </ufa:ShowFormActivity.Arguments>
             <ufa:ShowFormActivity.ShowInTaskbar>
               <InArgument x:TypeArguments="s:Nullable(x:Boolean)">
@@ -391,7 +405,7 @@
             </ufa:ShowFormActivity.ShowInTaskbar>
             <ufa:ShowFormActivity.ShowMargin>
               <InArgument x:TypeArguments="s:Nullable(x:Boolean)">
-                <Literal x:TypeArguments="s:Nullable(x:Boolean)" Value="True" />
+                <Literal x:TypeArguments="s:Nullable(x:Boolean)" Value="False" />
               </InArgument>
             </ufa:ShowFormActivity.ShowMargin>
             <ufa:ShowFormActivity.TopMost>
@@ -405,350 +419,235 @@
             </ufa:ShowFormActivity.TopMost>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ufa:ShowFormActivity>
-          <ui:TriggerScope DisplayName="Trigger Scope" sap:VirtualizedContainerService.HintSize="918,4178" sap2010:WorkflowViewState.IdRef="TriggerScope_1" SchedulingMode="Sequential">
+          <ui:TriggerScope DisplayName="Trigger Scope" sap:VirtualizedContainerService.HintSize="664,1978" sap2010:WorkflowViewState.IdRef="TriggerScope_1" SchedulingMode="Sequential">
             <ui:TriggerScope.Action>
               <ActivityAction x:TypeArguments="ufa:MessageTriggerEventArgs">
                 <ActivityAction.Argument>
                   <DelegateInArgument x:TypeArguments="ufa:MessageTriggerEventArgs" Name="args" />
                 </ActivityAction.Argument>
-                <ui:IfElseIf DisplayName="Else If" sap:VirtualizedContainerService.HintSize="866,3688" sap2010:WorkflowViewState.IdRef="IfElseIf_1">
-                  <ui:IfElseIf.ConditionBlocks>
-                    <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
-                      <ui:IfElseIfBlock BlockType="If" Condition="[args.Id.Equals(&quot;save&quot;)]">
-                        <ui:IfElseIfBlock.Then>
-                          <Sequence DisplayName="Salvar" sap:VirtualizedContainerService.HintSize="637,1924" sap2010:WorkflowViewState.IdRef="Sequence_2">
-                            <Sequence.Variables>
-                              <Variable x:TypeArguments="njl:JArray" Name="JsonArray" />
-                              <Variable x:TypeArguments="sd:DataRow[]" Name="rowArray" />
-                            </Sequence.Variables>
+                <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[args.Id]" sap:VirtualizedContainerService.HintSize="612,1393" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+                  <Sequence x:Key="save" DisplayName="Salvar" sap:VirtualizedContainerService.HintSize="637,81" sap2010:WorkflowViewState.IdRef="Sequence_23">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="sd:DataRow[]" Name="rowArray" />
+                    </Sequence.Variables>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:ClearDataTable DataTable="[io_TransactionData]" DisplayName="Clear Data Table" sap:VirtualizedContainerService.HintSize="575,80" sap2010:WorkflowViewState.IdRef="ClearDataTable_6" />
+                    <ui:DeserializeJson x:TypeArguments="njl:JArray" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="575,60" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_3" JsonObject="[JsonArray]" JsonString="[args.Data]" />
+                    <ufa:CloseFormActivity DisplayName="Close Form" FormId="1071c246-f0e4-4c16-808c-c8d9f05c5e39" sap:VirtualizedContainerService.HintSize="575,89" sap2010:WorkflowViewState.IdRef="CloseFormActivity_4" InstanceName="[formName]" />
+                    <ui:ForEach x:TypeArguments="njl:JToken" CurrentIndex="{x:Null}" DisplayName="For Each JsonArray" sap:VirtualizedContainerService.HintSize="575,1399" sap2010:WorkflowViewState.IdRef="ForEach`1_5" Values="[JsonArray]">
+                      <ui:ForEach.Body>
+                        <ActivityAction x:TypeArguments="njl:JToken">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="njl:JToken" Name="jToken" />
+                          </ActivityAction.Argument>
+                          <Sequence sap:VirtualizedContainerService.HintSize="541,1213" sap2010:WorkflowViewState.IdRef="Sequence_27">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                            <ui:ClearDataTable DataTable="[io_TransactionData]" DisplayName="Clear Data Table" sap:VirtualizedContainerService.HintSize="575,80" sap2010:WorkflowViewState.IdRef="ClearDataTable_2" />
-                            <ui:DeserializeJson x:TypeArguments="njl:JArray" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="575,60" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_1" JsonObject="[JsonArray]" JsonString="[args.Data]" />
-                            <ufa:CloseFormActivity DisplayName="Close Form" FormId="1071c246-f0e4-4c16-808c-c8d9f05c5e39" sap:VirtualizedContainerService.HintSize="575,89" sap2010:WorkflowViewState.IdRef="CloseFormActivity_1" InstanceName="[formName]" />
-                            <ui:ForEach x:TypeArguments="njl:JToken" CurrentIndex="{x:Null}" DisplayName="For Each JsonArray" sap:VirtualizedContainerService.HintSize="575,1399" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[JsonArray]">
-                              <ui:ForEach.Body>
-                                <ActivityAction x:TypeArguments="njl:JToken">
-                                  <ActivityAction.Argument>
-                                    <DelegateInArgument x:TypeArguments="njl:JToken" Name="jToken" />
-                                  </ActivityAction.Argument>
-                                  <Sequence sap:VirtualizedContainerService.HintSize="541,1213" sap2010:WorkflowViewState.IdRef="Sequence_4">
-                                    <sap:WorkflowViewStateService.ViewState>
-                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                      </scg:Dictionary>
-                                    </sap:WorkflowViewStateService.ViewState>
-                                    <If Condition="[Not jToken.SelectToken(&quot;CODIGO&quot;).ToString().Trim().Equals(&quot;&quot;)]" sap:VirtualizedContainerService.HintSize="499,1125" sap2010:WorkflowViewState.IdRef="If_2">
-                                      <sap:WorkflowViewStateService.ViewState>
-                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                        </scg:Dictionary>
-                                      </sap:WorkflowViewStateService.ViewState>
-                                      <If.Then>
-                                        <Sequence sap:VirtualizedContainerService.HintSize="465,943" sap2010:WorkflowViewState.IdRef="Sequence_5">
-                                          <sap:WorkflowViewStateService.ViewState>
-                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                            </scg:Dictionary>
-                                          </sap:WorkflowViewStateService.ViewState>
-                                          <ui:ForEach x:TypeArguments="njl:JToken" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="423,364" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[jToken.SelectTokens(&quot;*&quot;)]">
-                                            <ui:ForEach.Body>
-                                              <ActivityAction x:TypeArguments="njl:JToken">
-                                                <ActivityAction.Argument>
-                                                  <DelegateInArgument x:TypeArguments="njl:JToken" Name="item" />
-                                                </ActivityAction.Argument>
-                                                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,178" sap2010:WorkflowViewState.IdRef="Sequence_21">
-                                                  <sap:WorkflowViewStateService.ViewState>
-                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                                    </scg:Dictionary>
-                                                  </sap:WorkflowViewStateService.ViewState>
-                                                  <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="334,90" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[item.Path.ToString().Replace(jToken.Path+&quot;.&quot;, &quot;&quot;)+&quot; - &quot;+item.ToString()]" />
-                                                </Sequence>
-                                              </ActivityAction>
-                                            </ui:ForEach.Body>
-                                            <sap:WorkflowViewStateService.ViewState>
-                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                              </scg:Dictionary>
-                                            </sap:WorkflowViewStateService.ViewState>
-                                          </ui:ForEach>
-                                          <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="423,225" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
-                                            <ui:MultipleAssign.AssignOperations>
-                                              <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
-                                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
-                                                  <ui:AssignOperation.To>
-                                                    <OutArgument x:TypeArguments="sd:DataRow">[row]</OutArgument>
-                                                  </ui:AssignOperation.To>
-                                                  <ui:AssignOperation.Value>
-                                                    <InArgument x:TypeArguments="sd:DataRow">[io_TransactionData.NewRow()]</InArgument>
-                                                  </ui:AssignOperation.Value>
-                                                </ui:AssignOperation>
-                                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_12">
-                                                  <ui:AssignOperation.To>
-                                                    <OutArgument x:TypeArguments="x:Object">[row("CODIGO")]</OutArgument>
-                                                  </ui:AssignOperation.To>
-                                                  <ui:AssignOperation.Value>
-                                                    <InArgument x:TypeArguments="x:Object">[jToken.SelectToken("CODIGO").ToString().Trim().ToUpper()]</InArgument>
-                                                  </ui:AssignOperation.Value>
-                                                </ui:AssignOperation>
-                                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_14">
-                                                  <ui:AssignOperation.To>
-                                                    <OutArgument x:TypeArguments="x:Object">[row("CNPJ")]</OutArgument>
-                                                  </ui:AssignOperation.To>
-                                                  <ui:AssignOperation.Value>
-                                                    <InArgument x:TypeArguments="x:Object">[Roboluze.Valida.isCnpjOrCpf(jToken.SelectToken("CNPJ").ToString())]</InArgument>
-                                                  </ui:AssignOperation.Value>
-                                                </ui:AssignOperation>
-                                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
-                                                  <ui:AssignOperation.To>
-                                                    <OutArgument x:TypeArguments="x:Object">[row("EMPRESA")]</OutArgument>
-                                                  </ui:AssignOperation.To>
-                                                  <ui:AssignOperation.Value>
-                                                    <InArgument x:TypeArguments="x:Object">[jToken.SelectToken("EMPRESA").ToString().Trim().ToUpper()]</InArgument>
-                                                  </ui:AssignOperation.Value>
-                                                </ui:AssignOperation>
-                                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_13">
-                                                  <ui:AssignOperation.To>
-                                                    <OutArgument x:TypeArguments="x:Object">[row("SITUACAO")]</OutArgument>
-                                                  </ui:AssignOperation.To>
-                                                  <ui:AssignOperation.Value>
-                                                    <InArgument x:TypeArguments="x:Object">[Convert.ToBoolean(jToken.SelectToken("SITUACAO"))]</InArgument>
-                                                  </ui:AssignOperation.Value>
-                                                </ui:AssignOperation>
-                                              </scg:List>
-                                            </ui:MultipleAssign.AssignOperations>
-                                            <sap:WorkflowViewStateService.ViewState>
-                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                              </scg:Dictionary>
-                                            </sap:WorkflowViewStateService.ViewState>
-                                          </ui:MultipleAssign>
-                                          <ui:AddDataRow ArrayRow="{x:Null}" DataRow="[row]" DataTable="[io_TransactionData]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="423,186" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
-                                        </Sequence>
-                                      </If.Then>
-                                      <If.Else>
-                                        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_6" />
-                                      </If.Else>
-                                    </If>
-                                  </Sequence>
-                                </ActivityAction>
-                              </ui:ForEach.Body>
+                            <If Condition="[Not jToken.SelectToken(&quot;CODIGO&quot;).ToString().Trim().Equals(&quot;&quot;)]" sap:VirtualizedContainerService.HintSize="499,1125" sap2010:WorkflowViewState.IdRef="If_4">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
-                            </ui:ForEach>
-                            <ui:Break sap:VirtualizedContainerService.HintSize="575,25" sap2010:WorkflowViewState.IdRef="Break_1" />
-                          </Sequence>
-                        </ui:IfElseIfBlock.Then>
-                      </ui:IfElseIfBlock>
-                      <ui:IfElseIfBlock BlockType="ElseIf" Condition="[args.Id.Equals(&quot;add&quot;)]">
-                        <ui:IfElseIfBlock.Then>
-                          <Sequence DisplayName="Add" sap:VirtualizedContainerService.HintSize="496,931" sap2010:WorkflowViewState.IdRef="Sequence_14">
-                            <Sequence.Variables>
-                              <Variable x:TypeArguments="njl:JArray" Name="JsonArray" />
-                              <Variable x:TypeArguments="sd:DataRow[]" Name="rowArray" />
-                            </Sequence.Variables>
-                            <sap:WorkflowViewStateService.ViewState>
-                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                              </scg:Dictionary>
-                            </sap:WorkflowViewStateService.ViewState>
-                            <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="434,52" sap2010:WorkflowViewState.IdRef="CommentOut_2">
-                              <ui:CommentOut.Body>
-                                <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,383" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                              <If.Then>
+                                <Sequence sap:VirtualizedContainerService.HintSize="465,943" sap2010:WorkflowViewState.IdRef="Sequence_25">
                                   <sap:WorkflowViewStateService.ViewState>
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
-                                  <ui:ClearDataTable DataTable="[io_TransactionData]" DisplayName="Clear Data Table" sap:VirtualizedContainerService.HintSize="388,80" sap2010:WorkflowViewState.IdRef="ClearDataTable_5" />
-                                  <ui:DeserializeJson x:TypeArguments="njl:JArray" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="388,60" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_2" JsonObject="[JsonArray]" JsonString="[args.Data]" />
-                                  <ui:ForEach x:TypeArguments="njl:JToken" CurrentIndex="{x:Null}" DisplayName="For Each JsonArray" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[JsonArray]">
+                                  <ui:ForEach x:TypeArguments="njl:JToken" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="423,364" sap2010:WorkflowViewState.IdRef="ForEach`1_4" Values="[jToken.SelectTokens(&quot;*&quot;)]">
                                     <ui:ForEach.Body>
                                       <ActivityAction x:TypeArguments="njl:JToken">
                                         <ActivityAction.Argument>
-                                          <DelegateInArgument x:TypeArguments="njl:JToken" Name="jToken" />
+                                          <DelegateInArgument x:TypeArguments="njl:JToken" Name="item" />
                                         </ActivityAction.Argument>
-                                        <Sequence sap:VirtualizedContainerService.HintSize="300,232" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,178" sap2010:WorkflowViewState.IdRef="Sequence_24">
                                           <sap:WorkflowViewStateService.ViewState>
                                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                             </scg:Dictionary>
                                           </sap:WorkflowViewStateService.ViewState>
-                                          <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="258,52" sap2010:WorkflowViewState.IdRef="MultipleAssign_4">
-                                            <ui:MultipleAssign.AssignOperations>
-                                              <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
-                                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_22">
-                                                  <ui:AssignOperation.To>
-                                                    <OutArgument x:TypeArguments="sd:DataRow">[row]</OutArgument>
-                                                  </ui:AssignOperation.To>
-                                                  <ui:AssignOperation.Value>
-                                                    <InArgument x:TypeArguments="sd:DataRow">[io_TransactionData.NewRow()]</InArgument>
-                                                  </ui:AssignOperation.Value>
-                                                </ui:AssignOperation>
-                                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_23">
-                                                  <ui:AssignOperation.To>
-                                                    <OutArgument x:TypeArguments="x:Object">[row("CODIGO")]</OutArgument>
-                                                  </ui:AssignOperation.To>
-                                                  <ui:AssignOperation.Value>
-                                                    <InArgument x:TypeArguments="x:Object">[jToken.SelectToken("CODIGO").ToString().Trim().ToUpper()]</InArgument>
-                                                  </ui:AssignOperation.Value>
-                                                </ui:AssignOperation>
-                                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_24">
-                                                  <ui:AssignOperation.To>
-                                                    <OutArgument x:TypeArguments="x:Object">[row("CNPJ")]</OutArgument>
-                                                  </ui:AssignOperation.To>
-                                                  <ui:AssignOperation.Value>
-                                                    <InArgument x:TypeArguments="x:Object">[Roboluze.Valida.isCnpjOrCpf(jToken.SelectToken("CNPJ").ToString())]</InArgument>
-                                                  </ui:AssignOperation.Value>
-                                                </ui:AssignOperation>
-                                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_25">
-                                                  <ui:AssignOperation.To>
-                                                    <OutArgument x:TypeArguments="x:Object">[row("EMPRESA")]</OutArgument>
-                                                  </ui:AssignOperation.To>
-                                                  <ui:AssignOperation.Value>
-                                                    <InArgument x:TypeArguments="x:Object">[jToken.SelectToken("EMPRESA").ToString().Trim().ToUpper()]</InArgument>
-                                                  </ui:AssignOperation.Value>
-                                                </ui:AssignOperation>
-                                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_26">
-                                                  <ui:AssignOperation.To>
-                                                    <OutArgument x:TypeArguments="x:Object">[row("EMAIL")]</OutArgument>
-                                                  </ui:AssignOperation.To>
-                                                  <ui:AssignOperation.Value>
-                                                    <InArgument x:TypeArguments="x:Object">[jToken.SelectToken("EMAIL").ToString().Trim().ToLower()]</InArgument>
-                                                  </ui:AssignOperation.Value>
-                                                </ui:AssignOperation>
-                                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_27">
-                                                  <ui:AssignOperation.To>
-                                                    <OutArgument x:TypeArguments="x:Object">[row("REGIME_TRIBUTARIO")]</OutArgument>
-                                                  </ui:AssignOperation.To>
-                                                  <ui:AssignOperation.Value>
-                                                    <InArgument x:TypeArguments="x:Object">[jToken.SelectToken("REGIME_TRIBUTARIO").ToString().Trim()]</InArgument>
-                                                  </ui:AssignOperation.Value>
-                                                </ui:AssignOperation>
-                                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_28">
-                                                  <ui:AssignOperation.To>
-                                                    <OutArgument x:TypeArguments="x:Object">[row("SITUACAO")]</OutArgument>
-                                                  </ui:AssignOperation.To>
-                                                  <ui:AssignOperation.Value>
-                                                    <InArgument x:TypeArguments="x:Object">[Convert.ToBoolean(jToken.SelectToken("SITUACAO"))]</InArgument>
-                                                  </ui:AssignOperation.Value>
-                                                </ui:AssignOperation>
-                                              </scg:List>
-                                            </ui:MultipleAssign.AssignOperations>
-                                            <sap:WorkflowViewStateService.ViewState>
-                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                              </scg:Dictionary>
-                                            </sap:WorkflowViewStateService.ViewState>
-                                          </ui:MultipleAssign>
-                                          <ui:AddDataRow ArrayRow="{x:Null}" DataRow="[row]" DataTable="[io_TransactionData]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="258,52" sap2010:WorkflowViewState.IdRef="AddDataRow_4">
-                                            <sap:WorkflowViewStateService.ViewState>
-                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                              </scg:Dictionary>
-                                            </sap:WorkflowViewStateService.ViewState>
-                                          </ui:AddDataRow>
+                                          <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="334,90" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="[item.Path.ToString().Replace(jToken.Path+&quot;.&quot;, &quot;&quot;)+&quot; - &quot;+item.ToString()]" />
                                         </Sequence>
                                       </ActivityAction>
                                     </ui:ForEach.Body>
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                         <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                       </scg:Dictionary>
                                     </sap:WorkflowViewStateService.ViewState>
                                   </ui:ForEach>
+                                  <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="423,225" sap2010:WorkflowViewState.IdRef="MultipleAssign_8">
+                                    <ui:MultipleAssign.AssignOperations>
+                                      <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+                                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_41">
+                                          <ui:AssignOperation.To>
+                                            <OutArgument x:TypeArguments="sd:DataRow">[row]</OutArgument>
+                                          </ui:AssignOperation.To>
+                                          <ui:AssignOperation.Value>
+                                            <InArgument x:TypeArguments="sd:DataRow">[io_TransactionData.NewRow()]</InArgument>
+                                          </ui:AssignOperation.Value>
+                                        </ui:AssignOperation>
+                                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_42">
+                                          <ui:AssignOperation.To>
+                                            <OutArgument x:TypeArguments="x:Object">[row("CODIGO")]</OutArgument>
+                                          </ui:AssignOperation.To>
+                                          <ui:AssignOperation.Value>
+                                            <InArgument x:TypeArguments="x:Object">[jToken.SelectToken("CODIGO").ToString().Trim().ToUpper()]</InArgument>
+                                          </ui:AssignOperation.Value>
+                                        </ui:AssignOperation>
+                                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_43">
+                                          <ui:AssignOperation.To>
+                                            <OutArgument x:TypeArguments="x:Object">[row("CNPJ")]</OutArgument>
+                                          </ui:AssignOperation.To>
+                                          <ui:AssignOperation.Value>
+                                            <InArgument x:TypeArguments="x:Object">[Roboluze.Valida.isCnpjOrCpf(jToken.SelectToken("CNPJ").ToString())]</InArgument>
+                                          </ui:AssignOperation.Value>
+                                        </ui:AssignOperation>
+                                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_44">
+                                          <ui:AssignOperation.To>
+                                            <OutArgument x:TypeArguments="x:Object">[row("EMPRESA")]</OutArgument>
+                                          </ui:AssignOperation.To>
+                                          <ui:AssignOperation.Value>
+                                            <InArgument x:TypeArguments="x:Object">[jToken.SelectToken("EMPRESA").ToString().Trim().ToUpper()]</InArgument>
+                                          </ui:AssignOperation.Value>
+                                        </ui:AssignOperation>
+                                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_45">
+                                          <ui:AssignOperation.To>
+                                            <OutArgument x:TypeArguments="x:Object">[row("SITUACAO")]</OutArgument>
+                                          </ui:AssignOperation.To>
+                                          <ui:AssignOperation.Value>
+                                            <InArgument x:TypeArguments="x:Object">[Convert.ToBoolean(jToken.SelectToken("SITUACAO"))]</InArgument>
+                                          </ui:AssignOperation.Value>
+                                        </ui:AssignOperation>
+                                      </scg:List>
+                                    </ui:MultipleAssign.AssignOperations>
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </ui:MultipleAssign>
+                                  <ui:AddDataRow ArrayRow="{x:Null}" DataRow="[row]" DataTable="[io_TransactionData]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="423,186" sap2010:WorkflowViewState.IdRef="AddDataRow_5" />
                                 </Sequence>
-                              </ui:CommentOut.Body>
-                              <sap:WorkflowViewStateService.ViewState>
-                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                </scg:Dictionary>
-                              </sap:WorkflowViewStateService.ViewState>
-                            </ui:CommentOut>
-                            <Assign sap:VirtualizedContainerService.HintSize="434,81" sap2010:WorkflowViewState.IdRef="Assign_4">
-                              <Assign.To>
-                                <OutArgument x:TypeArguments="sd:DataRow">[row]</OutArgument>
-                              </Assign.To>
-                              <Assign.Value>
-                                <InArgument x:TypeArguments="sd:DataRow">[io_TransactionData.NewRow()]</InArgument>
-                              </Assign.Value>
-                            </Assign>
-                            <ui:AddDataRow ArrayRow="{x:Null}" DataRow="[row]" DataTable="[io_TransactionData]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="434,186" sap2010:WorkflowViewState.IdRef="AddDataRow_3">
-                              <sap:WorkflowViewStateService.ViewState>
-                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                </scg:Dictionary>
-                              </sap:WorkflowViewStateService.ViewState>
-                            </ui:AddDataRow>
-                            <ui:SortDataTable ColumnIndex="{x:Null}" DataColumn="{x:Null}" ColumnName="EMPRESA" DataTable="[io_TransactionData]" DisplayName="Sort Data Table" sap:VirtualizedContainerService.HintSize="434,80" sap2010:WorkflowViewState.IdRef="SortDataTable_1" Order="Ascending" OutputDataTable="[io_TransactionData]" SortOrder="Ascending" />
-                            <Assign sap:VirtualizedContainerService.HintSize="434,81" sap2010:WorkflowViewState.IdRef="Assign_5">
-                              <Assign.To>
-                                <OutArgument x:TypeArguments="x:String">[result]</OutArgument>
-                              </Assign.To>
-                              <Assign.Value>
-                                <InArgument x:TypeArguments="x:String">[Newtonsoft.Json.JsonConvert.SerializeObject(io_TransactionData)]</InArgument>
-                              </Assign.Value>
-                            </Assign>
-                            <ufa:SetFormFieldsActivity InstanceName="{x:Null}" DisplayName="Set Form Values" FormId="1071c246-f0e4-4c16-808c-c8d9f05c5e39" sap:VirtualizedContainerService.HintSize="434,140" sap2010:WorkflowViewState.IdRef="SetFormFieldsActivity_1">
-                              <ufa:SetFormFieldsActivity.Arguments>
-                                <InArgument x:TypeArguments="x:String" x:Key="myTable">[result]</InArgument>
-                              </ufa:SetFormFieldsActivity.Arguments>
-                            </ufa:SetFormFieldsActivity>
+                              </If.Then>
+                              <If.Else>
+                                <Sequence sap2010:WorkflowViewState.IdRef="Sequence_26" />
+                              </If.Else>
+                            </If>
                           </Sequence>
-                        </ui:IfElseIfBlock.Then>
-                      </ui:IfElseIfBlock>
-                      <ui:IfElseIfBlock BlockType="ElseIf" Condition="[args.Id.Equals(&quot;close&quot;)]">
-                        <ui:IfElseIfBlock.Then>
-                          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="450,385" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                        </ActivityAction>
+                      </ui:ForEach.Body>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ui:ForEach>
+                    <ui:Break sap:VirtualizedContainerService.HintSize="575,25" sap2010:WorkflowViewState.IdRef="Break_4" />
+                  </Sequence>
+                  <Sequence x:Key="findClient" sap:VirtualizedContainerService.HintSize="572,1143" sap2010:WorkflowViewState.IdRef="Sequence_30">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:DeserializeJson x:TypeArguments="njl:JObject" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="510,60" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_4" JsonObject="[JsonObject]" JsonString="[args.Data]" />
+                    <Assign sap:VirtualizedContainerService.HintSize="510,82" sap2010:WorkflowViewState.IdRef="Assign_6">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[var]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">[JsonObject.SelectToken("CODIGO").ToString]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Data\Input\Get Cliente.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="510,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Data\Input\Get Cliente.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
+                          <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="in_Config" />
+                        </InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_Filtro">
+                          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="var" />
+                        </InArgument>
+                        <OutArgument x:TypeArguments="sd:DataRow" x:Key="out_Row">
+                          <VisualBasicReference x:TypeArguments="sd:DataRow" ExpressionText="row" />
+                        </OutArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                    </ui:InvokeWorkflowFile>
+                    <Assign sap:VirtualizedContainerService.HintSize="510,82" sap2010:WorkflowViewState.IdRef="Assign_7">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)">[clienteDictionary]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)">[New Dictionary(Of String, Object)]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <ui:ForEach x:TypeArguments="sd:DataColumn" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="510,356" sap2010:WorkflowViewState.IdRef="ForEach`1_6" Values="[row.Table.Columns]">
+                      <ui:ForEach.Body>
+                        <ActivityAction x:TypeArguments="sd:DataColumn">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="sd:DataColumn" Name="column" />
+                          </ActivityAction.Argument>
+                          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="476,170" sap2010:WorkflowViewState.IdRef="Sequence_31">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                            <ufa:CloseFormActivity InstanceName="{x:Null}" DisplayName="Close Form" FormId="1071c246-f0e4-4c16-808c-c8d9f05c5e39" sap:VirtualizedContainerService.HintSize="388,89" sap2010:WorkflowViewState.IdRef="CloseFormActivity_3" />
-                            <ui:ClearDataTable DataTable="[io_TransactionData]" DisplayName="Clear Data Table" sap:VirtualizedContainerService.HintSize="388,80" sap2010:WorkflowViewState.IdRef="ClearDataTable_3" />
-                            <ui:Break sap:VirtualizedContainerService.HintSize="388,25" sap2010:WorkflowViewState.IdRef="Break_3" />
+                            <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_8">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:Object">[clienteDictionary(column.ToString())]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:Object">[row(column)]</InArgument>
+                              </Assign.Value>
+                            </Assign>
                           </Sequence>
-                        </ui:IfElseIfBlock.Then>
-                      </ui:IfElseIfBlock>
-                    </sc:BindingList>
-                  </ui:IfElseIf.ConditionBlocks>
-                  <sap:WorkflowViewStateService.ViewState>
-                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                    </scg:Dictionary>
-                  </sap:WorkflowViewStateService.ViewState>
-                </ui:IfElseIf>
+                        </ActivityAction>
+                      </ui:ForEach.Body>
+                    </ui:ForEach>
+                    <ufa:SetFormFieldsActivity FormId="{x:Null}" InstanceName="{x:Null}" DisplayName="Set Form Values" sap:VirtualizedContainerService.HintSize="510,139" sap2010:WorkflowViewState.IdRef="SetFormFieldsActivity_5">
+                      <ufa:SetFormFieldsActivity.Arguments>
+                        <InArgument x:TypeArguments="x:String" x:Key="dataCliente">[Newtonsoft.Json.JsonConvert.SerializeObject(clienteDictionary)]</InArgument>
+                      </ufa:SetFormFieldsActivity.Arguments>
+                    </ufa:SetFormFieldsActivity>
+                  </Sequence>
+                  <x:Null x:Key="addClient" />
+                  <Sequence x:Key="close" DisplayName="Body" sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ufa:CloseFormActivity InstanceName="{x:Null}" DisplayName="Close Form" FormId="1071c246-f0e4-4c16-808c-c8d9f05c5e39" sap:VirtualizedContainerService.HintSize="388,89" sap2010:WorkflowViewState.IdRef="CloseFormActivity_5" />
+                    <ui:ClearDataTable DataTable="[io_TransactionData]" DisplayName="Clear Data Table" sap:VirtualizedContainerService.HintSize="388,80" sap2010:WorkflowViewState.IdRef="ClearDataTable_7" />
+                    <ui:Break sap:VirtualizedContainerService.HintSize="388,25" sap2010:WorkflowViewState.IdRef="Break_5" />
+                  </Sequence>
+                </Switch>
               </ActivityAction>
             </ui:TriggerScope.Action>
             <ui:TriggerScope.Triggers>
               <scg:List x:TypeArguments="Activity" Capacity="4">
-                <ufa:FormTriggerActivity x:TypeArguments="ufa:MessageTriggerEventArgs" Tag="{x:Null}" DisplayName="Form trigger activity" Enabled="True" Event="form.message" FormId="1071c246-f0e4-4c16-808c-c8d9f05c5e39" sap:VirtualizedContainerService.HintSize="882,72" sap2010:WorkflowViewState.IdRef="FormTriggerActivity`1_1" MessageId="save" SchedulingMode="Sequential" TriggerId="67dd61ff-b497-4df5-b26e-f7a462dea793">
+                <ufa:FormTriggerActivity x:TypeArguments="ufa:MessageTriggerEventArgs" Tag="{x:Null}" DisplayName="Form trigger activity" Enabled="True" Event="form.message" FormId="1071c246-f0e4-4c16-808c-c8d9f05c5e39" sap:VirtualizedContainerService.HintSize="628,72" sap2010:WorkflowViewState.IdRef="FormTriggerActivity`1_1" MessageId="save" SchedulingMode="Sequential" TriggerId="67dd61ff-b497-4df5-b26e-f7a462dea793">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -756,7 +655,7 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </ufa:FormTriggerActivity>
-                <ufa:FormTriggerActivity x:TypeArguments="ufa:MessageTriggerEventArgs" Tag="{x:Null}" DisplayName="Form trigger activity" Enabled="True" Event="form.message" FormId="1071c246-f0e4-4c16-808c-c8d9f05c5e39" sap:VirtualizedContainerService.HintSize="882,72" sap2010:WorkflowViewState.IdRef="FormTriggerActivity`1_2" MessageId="close" SchedulingMode="Sequential" TriggerId="d9f4df64-515c-4986-8571-86083dbff3b2">
+                <ufa:FormTriggerActivity x:TypeArguments="ufa:MessageTriggerEventArgs" Tag="{x:Null}" DisplayName="Form trigger activity" Enabled="True" Event="form.message" FormId="1071c246-f0e4-4c16-808c-c8d9f05c5e39" sap:VirtualizedContainerService.HintSize="628,72" sap2010:WorkflowViewState.IdRef="FormTriggerActivity`1_2" MessageId="close" SchedulingMode="Sequential" TriggerId="d9f4df64-515c-4986-8571-86083dbff3b2">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -764,7 +663,15 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </ufa:FormTriggerActivity>
-                <ufa:FormTriggerActivity x:TypeArguments="ufa:MessageTriggerEventArgs" Tag="{x:Null}" DisplayName="Form trigger activity" Enabled="True" Event="form.message" FormId="1071c246-f0e4-4c16-808c-c8d9f05c5e39" sap:VirtualizedContainerService.HintSize="882,72" sap2010:WorkflowViewState.IdRef="FormTriggerActivity`1_3" MessageId="add" SchedulingMode="Sequential" TriggerId="6ef5c1de-8f41-4a56-8d4e-bc03987ce39a">
+                <ufa:FormTriggerActivity x:TypeArguments="ufa:MessageTriggerEventArgs" Tag="{x:Null}" DisplayName="Form trigger activity" Enabled="True" Event="form.message" FormId="1071c246-f0e4-4c16-808c-c8d9f05c5e39" sap:VirtualizedContainerService.HintSize="628,72" sap2010:WorkflowViewState.IdRef="FormTriggerActivity`1_3" MessageId="add" SchedulingMode="Sequential" TriggerId="6ef5c1de-8f41-4a56-8d4e-bc03987ce39a">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ufa:FormTriggerActivity>
+                <ufa:FormTriggerActivity x:TypeArguments="ufa:MessageTriggerEventArgs" Tag="{x:Null}" DisplayName="Form trigger activity" Enabled="True" Event="form.message" FormId="1071c246-f0e4-4c16-808c-c8d9f05c5e39" sap:VirtualizedContainerService.HintSize="628,72" sap2010:WorkflowViewState.IdRef="FormTriggerActivity`1_4" MessageId="findClient" SchedulingMode="Sequential" TriggerId="51bf95a7-5980-4738-ab23-c0adcffc6318">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -774,6 +681,12 @@
                 </ufa:FormTriggerActivity>
               </scg:List>
             </ui:TriggerScope.Triggers>
+            <ui:TriggerScope.Variables>
+              <Variable x:TypeArguments="njl:JArray" Name="JsonArray" />
+              <Variable x:TypeArguments="njl:JObject" Name="JsonObject" />
+              <Variable x:TypeArguments="x:String" Name="var" />
+              <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="clienteDictionary" />
+            </ui:TriggerScope.Variables>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -787,5 +700,366 @@
         <Sequence sap2010:WorkflowViewState.IdRef="Sequence_9" />
       </If.Else>
     </If>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="740,1414" sap2010:WorkflowViewState.IdRef="CommentOut_3">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="661,1335" sap2010:WorkflowViewState.IdRef="Sequence_29">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:IfElseIf DisplayName="Else If" sap:VirtualizedContainerService.HintSize="599,1224" sap2010:WorkflowViewState.IdRef="IfElseIf_1">
+            <ui:IfElseIf.ConditionBlocks>
+              <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
+                <ui:IfElseIfBlock BlockType="If" Condition="[args.Id.Equals(&quot;save&quot;)]">
+                  <ui:IfElseIfBlock.Then>
+                    <Sequence DisplayName="Salvar" sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                      <Sequence.Variables>
+                        <Variable x:TypeArguments="njl:JArray" Name="JsonArray" />
+                        <Variable x:TypeArguments="sd:DataRow[]" Name="rowArray" />
+                      </Sequence.Variables>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:ClearDataTable DataTable="[io_TransactionData]" DisplayName="Clear Data Table" sap:VirtualizedContainerService.HintSize="388,80" sap2010:WorkflowViewState.IdRef="ClearDataTable_2" />
+                      <ui:DeserializeJson x:TypeArguments="njl:JArray" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="388,60" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_1" JsonObject="[JsonArray]" JsonString="[args.Data]" />
+                      <ufa:CloseFormActivity DisplayName="Close Form" FormId="1071c246-f0e4-4c16-808c-c8d9f05c5e39" sap:VirtualizedContainerService.HintSize="388,89" sap2010:WorkflowViewState.IdRef="CloseFormActivity_1" InstanceName="[formName]" />
+                      <ui:ForEach x:TypeArguments="njl:JToken" CurrentIndex="{x:Null}" DisplayName="For Each JsonArray" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[JsonArray]">
+                        <ui:ForEach.Body>
+                          <ActivityAction x:TypeArguments="njl:JToken">
+                            <ActivityAction.Argument>
+                              <DelegateInArgument x:TypeArguments="njl:JToken" Name="jToken" />
+                            </ActivityAction.Argument>
+                            <Sequence sap:VirtualizedContainerService.HintSize="541,1213" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <If Condition="[Not jToken.SelectToken(&quot;CODIGO&quot;).ToString().Trim().Equals(&quot;&quot;)]" sap:VirtualizedContainerService.HintSize="499,1125" sap2010:WorkflowViewState.IdRef="If_2">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <If.Then>
+                                  <Sequence sap:VirtualizedContainerService.HintSize="465,943" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:ForEach x:TypeArguments="njl:JToken" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="423,364" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[jToken.SelectTokens(&quot;*&quot;)]">
+                                      <ui:ForEach.Body>
+                                        <ActivityAction x:TypeArguments="njl:JToken">
+                                          <ActivityAction.Argument>
+                                            <DelegateInArgument x:TypeArguments="njl:JToken" Name="item" />
+                                          </ActivityAction.Argument>
+                                          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,178" sap2010:WorkflowViewState.IdRef="Sequence_21">
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                            <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="334,90" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[item.Path.ToString().Replace(jToken.Path+&quot;.&quot;, &quot;&quot;)+&quot; - &quot;+item.ToString()]" />
+                                          </Sequence>
+                                        </ActivityAction>
+                                      </ui:ForEach.Body>
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                    </ui:ForEach>
+                                    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="423,225" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+                                      <ui:MultipleAssign.AssignOperations>
+                                        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+                                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
+                                            <ui:AssignOperation.To>
+                                              <OutArgument x:TypeArguments="sd:DataRow">[row]</OutArgument>
+                                            </ui:AssignOperation.To>
+                                            <ui:AssignOperation.Value>
+                                              <InArgument x:TypeArguments="sd:DataRow">[io_TransactionData.NewRow()]</InArgument>
+                                            </ui:AssignOperation.Value>
+                                          </ui:AssignOperation>
+                                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_12">
+                                            <ui:AssignOperation.To>
+                                              <OutArgument x:TypeArguments="x:Object">[row("CODIGO")]</OutArgument>
+                                            </ui:AssignOperation.To>
+                                            <ui:AssignOperation.Value>
+                                              <InArgument x:TypeArguments="x:Object">[jToken.SelectToken("CODIGO").ToString().Trim().ToUpper()]</InArgument>
+                                            </ui:AssignOperation.Value>
+                                          </ui:AssignOperation>
+                                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_14">
+                                            <ui:AssignOperation.To>
+                                              <OutArgument x:TypeArguments="x:Object">[row("CNPJ")]</OutArgument>
+                                            </ui:AssignOperation.To>
+                                            <ui:AssignOperation.Value>
+                                              <InArgument x:TypeArguments="x:Object">[Roboluze.Valida.isCnpjOrCpf(jToken.SelectToken("CNPJ").ToString())]</InArgument>
+                                            </ui:AssignOperation.Value>
+                                          </ui:AssignOperation>
+                                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
+                                            <ui:AssignOperation.To>
+                                              <OutArgument x:TypeArguments="x:Object">[row("EMPRESA")]</OutArgument>
+                                            </ui:AssignOperation.To>
+                                            <ui:AssignOperation.Value>
+                                              <InArgument x:TypeArguments="x:Object">[jToken.SelectToken("EMPRESA").ToString().Trim().ToUpper()]</InArgument>
+                                            </ui:AssignOperation.Value>
+                                          </ui:AssignOperation>
+                                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_13">
+                                            <ui:AssignOperation.To>
+                                              <OutArgument x:TypeArguments="x:Object">[row("SITUACAO")]</OutArgument>
+                                            </ui:AssignOperation.To>
+                                            <ui:AssignOperation.Value>
+                                              <InArgument x:TypeArguments="x:Object">[Convert.ToBoolean(jToken.SelectToken("SITUACAO"))]</InArgument>
+                                            </ui:AssignOperation.Value>
+                                          </ui:AssignOperation>
+                                        </scg:List>
+                                      </ui:MultipleAssign.AssignOperations>
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                    </ui:MultipleAssign>
+                                    <ui:AddDataRow ArrayRow="{x:Null}" DataRow="[row]" DataTable="[io_TransactionData]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="423,186" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+                                  </Sequence>
+                                </If.Then>
+                                <If.Else>
+                                  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_6" />
+                                </If.Else>
+                              </If>
+                            </Sequence>
+                          </ActivityAction>
+                        </ui:ForEach.Body>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:ForEach>
+                      <ui:Break sap:VirtualizedContainerService.HintSize="388,25" sap2010:WorkflowViewState.IdRef="Break_1" />
+                    </Sequence>
+                  </ui:IfElseIfBlock.Then>
+                </ui:IfElseIfBlock>
+                <ui:IfElseIfBlock BlockType="ElseIf" Condition="[args.Id.Equals(&quot;add&quot;)]">
+                  <ui:IfElseIfBlock.Then>
+                    <Sequence DisplayName="Add" sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                      <Sequence.Variables>
+                        <Variable x:TypeArguments="njl:JArray" Name="JsonArray" />
+                        <Variable x:TypeArguments="sd:DataRow[]" Name="rowArray" />
+                      </Sequence.Variables>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="434,52" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+                        <ui:CommentOut.Body>
+                          <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,383" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:ClearDataTable DataTable="[io_TransactionData]" DisplayName="Clear Data Table" sap:VirtualizedContainerService.HintSize="388,80" sap2010:WorkflowViewState.IdRef="ClearDataTable_5" />
+                            <ui:DeserializeJson x:TypeArguments="njl:JArray" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="388,60" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_2" JsonObject="[JsonArray]" JsonString="[args.Data]" />
+                            <ui:ForEach x:TypeArguments="njl:JToken" CurrentIndex="{x:Null}" DisplayName="For Each JsonArray" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[JsonArray]">
+                              <ui:ForEach.Body>
+                                <ActivityAction x:TypeArguments="njl:JToken">
+                                  <ActivityAction.Argument>
+                                    <DelegateInArgument x:TypeArguments="njl:JToken" Name="jToken" />
+                                  </ActivityAction.Argument>
+                                  <Sequence sap:VirtualizedContainerService.HintSize="300,232" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="258,52" sap2010:WorkflowViewState.IdRef="MultipleAssign_4">
+                                      <ui:MultipleAssign.AssignOperations>
+                                        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+                                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_22">
+                                            <ui:AssignOperation.To>
+                                              <OutArgument x:TypeArguments="sd:DataRow">[row]</OutArgument>
+                                            </ui:AssignOperation.To>
+                                            <ui:AssignOperation.Value>
+                                              <InArgument x:TypeArguments="sd:DataRow">[io_TransactionData.NewRow()]</InArgument>
+                                            </ui:AssignOperation.Value>
+                                          </ui:AssignOperation>
+                                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_23">
+                                            <ui:AssignOperation.To>
+                                              <OutArgument x:TypeArguments="x:Object">[row("CODIGO")]</OutArgument>
+                                            </ui:AssignOperation.To>
+                                            <ui:AssignOperation.Value>
+                                              <InArgument x:TypeArguments="x:Object">[jToken.SelectToken("CODIGO").ToString().Trim().ToUpper()]</InArgument>
+                                            </ui:AssignOperation.Value>
+                                          </ui:AssignOperation>
+                                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_24">
+                                            <ui:AssignOperation.To>
+                                              <OutArgument x:TypeArguments="x:Object">[row("CNPJ")]</OutArgument>
+                                            </ui:AssignOperation.To>
+                                            <ui:AssignOperation.Value>
+                                              <InArgument x:TypeArguments="x:Object">[Roboluze.Valida.isCnpjOrCpf(jToken.SelectToken("CNPJ").ToString())]</InArgument>
+                                            </ui:AssignOperation.Value>
+                                          </ui:AssignOperation>
+                                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_25">
+                                            <ui:AssignOperation.To>
+                                              <OutArgument x:TypeArguments="x:Object">[row("EMPRESA")]</OutArgument>
+                                            </ui:AssignOperation.To>
+                                            <ui:AssignOperation.Value>
+                                              <InArgument x:TypeArguments="x:Object">[jToken.SelectToken("EMPRESA").ToString().Trim().ToUpper()]</InArgument>
+                                            </ui:AssignOperation.Value>
+                                          </ui:AssignOperation>
+                                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_26">
+                                            <ui:AssignOperation.To>
+                                              <OutArgument x:TypeArguments="x:Object">[row("EMAIL")]</OutArgument>
+                                            </ui:AssignOperation.To>
+                                            <ui:AssignOperation.Value>
+                                              <InArgument x:TypeArguments="x:Object">[jToken.SelectToken("EMAIL").ToString().Trim().ToLower()]</InArgument>
+                                            </ui:AssignOperation.Value>
+                                          </ui:AssignOperation>
+                                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_27">
+                                            <ui:AssignOperation.To>
+                                              <OutArgument x:TypeArguments="x:Object">[row("REGIME_TRIBUTARIO")]</OutArgument>
+                                            </ui:AssignOperation.To>
+                                            <ui:AssignOperation.Value>
+                                              <InArgument x:TypeArguments="x:Object">[jToken.SelectToken("REGIME_TRIBUTARIO").ToString().Trim()]</InArgument>
+                                            </ui:AssignOperation.Value>
+                                          </ui:AssignOperation>
+                                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_28">
+                                            <ui:AssignOperation.To>
+                                              <OutArgument x:TypeArguments="x:Object">[row("SITUACAO")]</OutArgument>
+                                            </ui:AssignOperation.To>
+                                            <ui:AssignOperation.Value>
+                                              <InArgument x:TypeArguments="x:Object">[Convert.ToBoolean(jToken.SelectToken("SITUACAO"))]</InArgument>
+                                            </ui:AssignOperation.Value>
+                                          </ui:AssignOperation>
+                                        </scg:List>
+                                      </ui:MultipleAssign.AssignOperations>
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                    </ui:MultipleAssign>
+                                    <ui:AddDataRow ArrayRow="{x:Null}" DataRow="[row]" DataTable="[io_TransactionData]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="258,52" sap2010:WorkflowViewState.IdRef="AddDataRow_4">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                    </ui:AddDataRow>
+                                  </Sequence>
+                                </ActivityAction>
+                              </ui:ForEach.Body>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </ui:ForEach>
+                          </Sequence>
+                        </ui:CommentOut.Body>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:CommentOut>
+                      <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_4">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="sd:DataRow">[row]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="sd:DataRow">[io_TransactionData.NewRow()]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <ui:AddDataRow ArrayRow="{x:Null}" DataRow="[row]" DataTable="[io_TransactionData]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="434,186" sap2010:WorkflowViewState.IdRef="AddDataRow_3">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:AddDataRow>
+                      <ui:SortDataTable ColumnIndex="{x:Null}" DataColumn="{x:Null}" ColumnName="EMPRESA" DataTable="[io_TransactionData]" DisplayName="Sort Data Table" sap:VirtualizedContainerService.HintSize="434,80" sap2010:WorkflowViewState.IdRef="SortDataTable_1" Order="Ascending" OutputDataTable="[io_TransactionData]" SortOrder="Ascending" />
+                      <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_5">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[result]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[Newtonsoft.Json.JsonConvert.SerializeObject(io_TransactionData)]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <ufa:SetFormFieldsActivity InstanceName="{x:Null}" DisplayName="Set Form Values" FormId="1071c246-f0e4-4c16-808c-c8d9f05c5e39" sap:VirtualizedContainerService.HintSize="434,140" sap2010:WorkflowViewState.IdRef="SetFormFieldsActivity_1">
+                        <ufa:SetFormFieldsActivity.Arguments>
+                          <InArgument x:TypeArguments="x:String" x:Key="myTable">[result]</InArgument>
+                        </ufa:SetFormFieldsActivity.Arguments>
+                      </ufa:SetFormFieldsActivity>
+                      <ufa:SetFormFieldsActivity InstanceName="{x:Null}" DisplayName="Set Form Values" FormId="1071c246-f0e4-4c16-808c-c8d9f05c5e39" sap:VirtualizedContainerService.HintSize="434,140" sap2010:WorkflowViewState.IdRef="SetFormFieldsActivity_2">
+                        <ufa:SetFormFieldsActivity.Arguments>
+                          <InArgument x:TypeArguments="x:String" x:Key="myTable">[result]</InArgument>
+                        </ufa:SetFormFieldsActivity.Arguments>
+                      </ufa:SetFormFieldsActivity>
+                    </Sequence>
+                  </ui:IfElseIfBlock.Then>
+                </ui:IfElseIfBlock>
+                <ui:IfElseIfBlock BlockType="ElseIf" Condition="[args.Id.Equals(&quot;close&quot;)]">
+                  <ui:IfElseIfBlock.Then>
+                    <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="450,385" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ufa:CloseFormActivity InstanceName="{x:Null}" DisplayName="Close Form" FormId="1071c246-f0e4-4c16-808c-c8d9f05c5e39" sap:VirtualizedContainerService.HintSize="388,89" sap2010:WorkflowViewState.IdRef="CloseFormActivity_3" />
+                      <ui:ClearDataTable DataTable="[io_TransactionData]" DisplayName="Clear Data Table" sap:VirtualizedContainerService.HintSize="388,80" sap2010:WorkflowViewState.IdRef="ClearDataTable_3" />
+                      <ui:Break sap:VirtualizedContainerService.HintSize="388,25" sap2010:WorkflowViewState.IdRef="Break_3" />
+                    </Sequence>
+                  </ui:IfElseIfBlock.Then>
+                </ui:IfElseIfBlock>
+                <ui:IfElseIfBlock BlockType="ElseIf" Condition="[args.Id.Equals(&quot;findClient&quot;)]">
+                  <ui:IfElseIfBlock.Then>
+                    <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="450,103" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </Sequence>
+                  </ui:IfElseIfBlock.Then>
+                </ui:IfElseIfBlock>
+              </sc:BindingList>
+            </ui:IfElseIf.ConditionBlocks>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:IfElseIf>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
   </Sequence>
 </Activity>
