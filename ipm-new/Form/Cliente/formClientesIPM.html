@@ -24,8 +24,9 @@
 			padding-top: 3.5rem;
 		}
 		.small-text {
-		  font-size: 14px; /* ajuste o tamanho da fonte conforme necessário */
+		  font-size: 12px; /* ajuste o tamanho da fonte conforme necessário */
 		}
+		
 		.table {
 		  line-height: 1.2; /* Ajuste o valor conforme necessário */
 		}
@@ -73,6 +74,7 @@
 						el = document.getElementsByName(value);
 					} 
 					if (elementId === 'dataCliente') {
+						limparValoresModal();
 						var jsonData = value;
 						var data = JSON.parse(jsonData);
 						
@@ -101,8 +103,21 @@
 										} else {
 											label.textContent = data[key] ? 'Sim' : 'Não';
 										}
-									}  else {
+									} else if (el.tagName === 'SELECT') {
 										el.value = data[key];
+										if(el.value === '' || el.value === null){
+											el.value = 'Default';
+										}
+									} else {
+										el.value = data[key];
+										if (key === 'ID_CLIENTE'){
+											el = document.getElementById('ExcluirCliente');
+											if (data[key] === 0){
+												el.disabled = true;
+											} else {
+												el.disabled = false;
+											}
+										}
 									}
 								}
 							}
@@ -142,28 +157,67 @@
 							if(nItem > nPag){
 								row.css('display', 'none');
 							}
+							// TD 1
+							var td = $('<td>').prop('class', 'col-5 fw-normal small-text');
+							var div = $('<div>').prop('class', 'd-flex justify-content-start align-items-center me-2');
+							var col = $('<div>').prop('class', 'col-1').prop('id','ID_EXECUTAR').prop('value', item.ID_CLIENTE).text(item.CODIGO);
+							div.append(col);
+							col = $('<div>').prop('class', 'col-3 me-3').text(item.CNPJ);
+							div.append(col);
+							col = $('<div>').prop('class', 'col-8').text(item.EMPRESA);
+							div.append(col);
 							
+							td.append(div);
+							row.append(td);
+							
+							// TD 2
+							var td = $('<td>').prop('class', 'col-7 fw-normal small-text');
+							var div = $('<div>').prop('class', 'd-flex justify-content-start align-items-center');
+							var col = $('<div>').prop('class', 'col-11').text(item.OBSERVACAO);
+							div.append(col);
+							
+							
+							col = $('<div>').prop('class', 'col-1');
+							var divF = $('<div>').prop('class', 'd-flex justify-content-end align-items-center');
+							var ico = $('<i>').prop('class', 'bi bi-pencil-square');
+							var btn = $('<button>').attr('type', 'button').prop('class', 'btn btn-light custom-btn-extra-small me-2').attr('data-bs-toggle', 'modal' ).attr('data-bs-target', '#clienteModal').attr('onclick', 'buscarCliente('+item.CODIGO+')').prop('name', item.ID_CLIENTE).prop("value",item.ID_CLIENTE).append(ico);
+							divF.append(btn)
+							
+							
+							var checkbox = $('<input>').attr('type', 'checkbox').prop('class','ProcessCheckbox form-check-input');
+							if (item.EXECUTAR) {
+							  checkbox.prop('checked', true);
+							}
+							divF.append(checkbox);
+							
+							col.append(divF);
+							div.append(col);
+							td.append(div);
+							row.append(td);
+							
+							
+						
+							/*
 							
 							var td = $('<td>').prop('class', 'col-1 fw-normal small-text').text(item.CODIGO);
 							row.append(td);
 							
 							
-							var div = $('<div>').prop('class', 'd-flex justify-content-center align-items-center me-5').text(item.CNPJ);
+							var div = $('<div>').prop('class', 'd-flex justify-content-center align-items-center me-3').text(item.CNPJ);
 							td = $('<td>').prop('class', 'col-1 fw-normal small-text').append(div);
 							row.append(td);
 							
-							td = $('<td>').prop('class', 'col-3 fw-normal small-text').text(item.EMPRESA);
+							td = $('<td>').prop('class', 'col-2 fw-normal small-text').text(item.EMPRESA);
 							row.append(td);
 							
-							td = $('<td>').prop('class', 'col-4 fw-normal small-text').text(item.OBSERVACAO);
+							td = $('<td>').prop('class', 'col-5 fw-normal small-text-observacao').text(item.OBSERVACAO);
 							row.append(td);
 							
 							td = $('<td>').prop('class', 'col-1');
 							var ico = $('<i>').prop('class', 'bi bi-pencil-square');
-							var btn = $('<button>').attr('type', 'button').prop('class', 'btn btn-light custom-btn-extra-small me-3').attr('onclick', 'editarCliente('+item.ID_CLIENTE+')').prop('name', item.ID_CLIENTE).prop("value",item.ID_CLIENTE).append(ico);
+							var btn = $('<button>').attr('type', 'button').prop('class', 'btn btn-light custom-btn-extra-small me-3').attr('data-bs-toggle', 'modal' ).attr('data-bs-target', '#clienteModal').attr('onclick', 'buscarCliente('+item.CODIGO+')').prop('name', item.ID_CLIENTE).prop("value",item.ID_CLIENTE).append(ico);
 							div = $('<div>').prop('class', 'd-flex justify-content-end align-items-center').append(btn);
 							td.append(div)
-							
 							
 							var checkbox = $('<input>').attr('type', 'checkbox').prop('class','ProcessCheckbox form-check-input');
 							if (item.EXECUTAR) {
@@ -175,7 +229,8 @@
 							div.append(divF);
 							
 							row.append(td);
-						
+							
+							*/
 							tableBody.append(row);
 						});
 						
@@ -229,28 +284,7 @@
 			};
 	</script>
 	<script>
-		function buscarCliente(valor){
-			
-			if (valor !== null && valor !== '') {
-				var jsonData = {
-					"CODIGO": valor
-				}
-				var jsonString = JSON.stringify(jsonData);
-				uiPathApi.sendMessage("buscarCliente", jsonString );
-			}
-		}
-		
-		function closedClicked() {
-			uiPathApi.sendMessage("close");
-		}
-		
-		function addClicked() {
-			sendRoboluze("add");
-		}
-		
-		
-		function salvarCliente() {
-		
+		function jsonCliente(){
 			var ID_CLIENTE = document.getElementById("ID_CLIENTE").value;
 			var CNPJ = document.getElementById("CNPJ").value;
 			var CODIGO = document.getElementById("CODIGO").value;
@@ -270,17 +304,20 @@
 			var radios = document.getElementsByName('DOWNLOAD_SAIDA');
 			var DOWNLOAD_SAIDA;
 			for (var i = 0; i < radios.length; i++) {
-			  if (radios[i].checked) {
-				DOWNLOAD_SAIDA = radios[i].value;
-				break;
-			  }
+				if (radios[i].checked) {
+					DOWNLOAD_SAIDA = radios[i].id.replace('DOWNLOAD_SAIDA_', '');
+					//console.log(DOWNLOAD_SAIDA);
+					break;
+				}
 			}
 			
 			radios = document.getElementsByName('DOWNLOAD_ENTRADA');
 			var DOWNLOAD_ENTRADA;
 			for (var i = 0; i < radios.length; i++) {
+			
 			  if (radios[i].checked) {
-				DOWNLOAD_ENTRADA = radios[i].value;
+				DOWNLOAD_ENTRADA = radios[i].id.replace('DOWNLOAD_ENTRADA_', '');
+				//console.log(DOWNLOAD_ENTRADA);
 				break;
 			  }
 			}
@@ -304,45 +341,51 @@
 				"LANCAR_NOTA_ENTRADA": LANCAR_NOTA_ENTRADA,
 				"DECLARAR_SIMPLES_NACIONAL": DECLARAR_SIMPLES_NACIONAL
 			};
-
 			jsonString = JSON.stringify(jsonData);
-			alert(jsonString);
-			uiPathApi.sendMessage("salvarCliente", jsonString);
+			return jsonString;
+		}
+	
+		function buscarCliente(valor){
+			
+			if (valor !== null && valor !== '') {
+				var jsonData = {
+					"CODIGO": valor
+				}
+				var jsonString = JSON.stringify(jsonData);
+				//alert(jsonString);
+				uiPathApi.sendMessage("buscarCliente", jsonString );
+			}
+		} 
+		function excluirCliente(){
+			alert(jsonCliente());
+			uiPathApi.sendMessage("excluirCliente", jsonCliente() );
 		}
 		
-		function sendRoboluze(id){
+		function closedClicked() {
+			uiPathApi.sendMessage("close");
+		}
+		
+		function salvarCliente() {
+			uiPathApi.sendMessage("salvarCliente", jsonCliente());
+		}
+		
+		function iniciarAutomacao(){
 			var jsonData = []; // Array para armazenar os objetos JSON de cada linha
-			$('table tr').each(function() {
+			$('table td').each(function() {
 				var row = $(this);
-				var codigo = row.find("#CODIGO").val(); // Captura o valor do campo com ID "CODIGO"
-				var cnpj = row.find("#CNPJ").val(); // Captura o valor do campo com ID "CNPJ"
-				var empresa = row.find("#EMPRESA").val(); // Captura o valor do campo com ID "EMPRESA"
-				var email = row.find("#EMAIL").val(); // Captura o valor do campo com EMAIL"
-				var regimeTributario = row.find("#REGIME_TRIBUTARIO").val(); // Captura o valor do campo com ID "REGIME_TRIBUTARIO"
-				
-				var emiteNFS = row.find(".EMITE_NFS").is(":checked");
-				var declaraEntrada = row.find(".DECLARA_ENTRADA").is(":checked");
-				var lancaEntrada = row.find(".LANCA_NOTA_ENTRADA").is(":checked");
-				var situacao = row.find(".SITUACAO").is(":checked");
-				
-				var processCheckbox = row.find(".ProcessCheckbox").is(":checked"); // Captura o estado do checkbox
+				var ID_EXECUTAR = row.find("#ID_EXECUTAR").val();
+				var EXECUTAR = row.find(".ProcessCheckbox").is(":checked"); // Captura o estado do checkbox
 				var rowValues = {
-				  CODIGO: codigo,
-				  CNPJ: cnpj,
-				  EMPRESA: empresa,
-				  REGIME_TRIBUTARIO: regimeTributario,
-				  EMITE_NFS: emiteNFS,
-				  LANCA_NOTA_ENTRADA: lancaEntrada,
-				  SITUACAO: situacao,
-				  EXECUTAR: processCheckbox
+					'ID_EXECUTAR': ID_EXECUTAR,
+					'EXECUTAR': EXECUTAR
 				};
-				if(codigo){
+				if(ID_EXECUTAR){
 					jsonData.push(rowValues);
 				}
 			});
 			var jsonResult = JSON.stringify(jsonData);
 			alert(jsonResult);
-			uiPathApi.sendMessage(id, jsonResult);
+			uiPathApi.sendMessage('iniciar', jsonResult);
 		}
 	</script>
 </head>
@@ -364,7 +407,7 @@
 				</div>
 			</div>
 			<div class="col-sm-4 d-flex align-items-center me-0">
-				<button type="button" class="btn btn-outline-primary btn-sm me-1" onclick="startClicked()">
+				<button type="button" class="btn btn-outline-primary btn-sm me-1" onclick="iniciarAutomacao()">
 					Iniciar
 				</button>
 				<input type="text" class="form-control form-control-sm me-1" id="myInput" placeholder="Filtro">
@@ -385,36 +428,54 @@
 			<table class="table table-sm caption-top table-group-divider">
 				<thead class="table-light">
 					<tr class="align-items-center">
-						<th class="col-1 fw-normal small-text">Código</th>
-						<th class="col-1 fw-normal small-text"><div class="d-flex justify-content-center me-5">CNPJ/CPF</div></th>
-						<th class="col-3 fw-normal small-text">Empresa</th>
-						<th class="col-4 fw-normal small-text">Observação</th>
-						<th class="col-1">
-							<div class="d-flex justify-content-end align-items-center">
-								<button type="button" class="btn btn-light custom-btn-extra-small me-3" disabled><i class="bi bi-pencil-square"></i></button>
-								
-									<div class="d-flex justify-content-end align-items-center"><input type="checkbox" class="ProcessCheckboxAll form-check-input" value="" id="FitroCheckbox"></div>
+						<th class="col-5 fw-normal small-text">
+							<div class="d-flex justify-content-start align-items-center me-2">
+								<div class="col-1" >Cód</div>
+								<div class="col-3 me-3" ><div class="d-flex justify-content-center">CNPJ/CPF</div></div>
+								<div class="col-8" >Empresa</div>
+							</div>
+						</th>
+						<!--th class="col-1 fw-normal small-text"><div class="d-flex justify-content-center me-3">CNPJ/CPF</div></th>
+						<th class="col-3 fw-normal small-text">Empresa</th-->
+						<th class="col-7 fw-normal small-text">
+							<div class="d-flex justify-content-start">
+								<div class="col-11" >Observação</div>
+								<div class="col-1" >
+									<div class="d-flex justify-content-end align-items-center">
+										<button type="button" class="btn btn-light custom-btn-extra-small me-2" disabled><i class="bi bi-pencil-square"></i></button>
+										<input type="checkbox" class="ProcessCheckboxAll form-check-input" value="" id="FitroCheckbox">
+									</div>
+								</div>
 								
 							</div>
-							
 						</th>
+						
 						
 					</tr>
 				</thead>
 				<tbody id="myTable" class="table-group-divider">
 					<tr class="align-items-center">
-						<td class="col-1 fw-normal small-text">Código</td>
-						<td class="col-1 fw-normal small-text"><div class="d-flex justify-content-center me-5">00.795.877/0001-16</div></td>
-						<td class="col-3 fw-normal small-text">Empresa</td>
-						<td class="col-4 fw-normal small-text">Observação</td>
-						<td class="col-1">
-							<div class="d-flex justify-content-end align-items-center">
-								<button type="button" class="btn btn-light custom-btn-extra-small me-3"><i class="bi bi-pencil-square"></i></button>
-								
-									<div class="d-flex justify-content-end align-items-center"><input type="checkbox" class="ProcessCheckbox form-check-input"></div>
-								
+						<td class="col-5 fw-normal small-text">
+							<div class="d-flex justify-content-start me-2">
+								<div class="col-1" >9999</div>
+								<div class="col-3 me-3" ><div class="d-flex justify-content-center">00.795.877/0001-16</div></div>
+								<div class="col-8" >Evoluze softwares de gestao ltda 123</div>
 							</div>
 						</td>
+						<!--td class="col-1 fw-normal small-text"><div class="d-flex justify-content-center me-2">00.795.877/0001-16</div></td>
+						<td class="col-3 fw-normal small-text">Empresa</td-->
+						<td class="col-7 fw-normal small-text">
+							<div class="d-flex justify-content-start">
+								<div class="col-11" >Observação</div>
+								<div class="col-1" >
+									<div class="d-flex justify-content-end align-items-center">
+										<button type="button" class="btn btn-light custom-btn-extra-small me-2"><i class="bi bi-pencil-square"></i></button>
+										<input type="checkbox" class="ProcessCheckbox form-check-input" id="TODO">
+									</div>
+								</div>
+							</div>
+						</td>
+						
 					</tr>
 				</tbody>
 			</table>
@@ -562,7 +623,7 @@
 									</div>
 									<div class="col-3 d-flex align-items-center">
 										<select class="form-select form-select-sm" id="PROTOCOLAR_SAIDA">
-											<option value=""></option>
+											<option value="Default">Padrão Geral</option>
 											<option value="Todos">Todos</option>
 											<option value="ISS">Com Recolhimento</option>
 											<option value="Nenhum">Nenhum</option>
@@ -585,7 +646,7 @@
 									</div>
 									<div class="col-3 d-flex align-items-center">
 										<select class="form-select form-select-sm" id="PROTOCOLAR_ENTRADA">
-											<option value=""></option>
+											<option value="Default">Padrão Geral</option>
 											<option value="Todos">Todos</option>
 											<option value="ISS">Com Recolhimento</option>
 											<option value="Nenhum">Nenhum</option>
@@ -702,9 +763,9 @@
 				</div>
 				<div class="modal-footer">
 					<div class="col-sm-12 d-flex me-0">
-						<button type="button" class="btn btn-danger btn-sm w-25 me-2" data-bs-dismiss="modal" onclick="excluirCliente()">Excluir</button>
-						<button type="button" class="btn btn-secondary btn-sm w-25 me-2" data-bs-dismiss="modal">Cancelar</button>
-						<button type="button" class="btn btn-primary btn-sm w-50" data-bs-dismiss="modal" onclick="salvarCliente()">Salvar</button>
+						<button type="button" class="btn btn-danger btn-sm w-25 me-2" id="ExcluirCliente" onclick="excluirCliente()">Excluir</button>
+						<button type="button" class="btn btn-secondary btn-sm w-25 me-2" onclick="limparValoresModal()">Limpar</button>
+						<button type="button" class="btn btn-primary btn-sm w-50" onclick="salvarCliente()">Salvar</button>
 					</div>
 				</div>
 			</div>
@@ -851,34 +912,34 @@
 		cnpjInput.addEventListener('blur', capturarInformacoes);
 
 		function capturarInformacoes() {
-		  var codigo = codigoInput.value;
-		  var cnpj = cnpjInput.value;
-		  
-		  if (codigo === '' || cnpj === '') {
+			var codigo = codigoInput.value;
+			var cnpj = cnpjInput.value;		  
+			var inputElement = event.target;
+			var inputValue = inputElement.value;
+			var cnpjCpf = inputValue.replace(/\D/g, '');
 			
-			if (codigo !== ''){
-				limparValoresModal();
-				buscarCliente(codigo);
-			} else {
-				valor = cnpj.replace(/\D/g, ''); 
-				if (valor.length === 11) {
-					if (validarCpf(valor)) {
-						limparValoresModal();
-						buscarCliente(cnpj);
-					}
-				} else if (valor.length === 14) {
-					if (validarCnpj(valor)) {
-						limparValoresModal();
-						buscarCliente(cnpj);
+			if (inputValue !== ''){
+				//console.log(inputValue);
+				if (inputValue === codigo){
+					buscarCliente(codigo);
+				} else if (inputValue === cnpj){
+					inputValue = cnpj.replace(/\D/g, ''); 
+					if (inputValue.length === 11) {
+						if (validarCpf(inputValue)) {
+							//console.log(cnpj);
+							buscarCliente(cnpj);
+						}
+					} else if (inputValue.length === 14) {
+						if (validarCnpj(inputValue)) {
+							//console.log(cnpj);
+							buscarCliente(cnpj);
+						}
 					}
 				}
-				
 			}
 			return;
-		  } 
-		  
 		}
-		
+		// Limpar Cliente
 		function limparValoresModal() {
 			
 			document.getElementById("DOWNLOAD_SAIDA_Default").checked = true;
@@ -886,6 +947,7 @@
 			document.getElementById("DECLARAR_SIMPLES_NACIONAL").checked = false;
 			document.querySelector('label[for="DECLARAR_SIMPLES_NACIONAL"]').textContent = "Não";
 			document.getElementById("LANCAR_NOTA_ENTRADA").checked = false;
+			document.getElementById("ExcluirCliente").disabled = true;
 			document.querySelector('label[for="LANCAR_NOTA_ENTRADA"]').textContent = "Não";
 			
 			var table = document.getElementById("myTableNotas");
@@ -909,32 +971,31 @@
 		}
 		
 	</script>
+		
 	<script> 
-	
 		var valorInput = document.getElementById('ValorNota');
 		valorInput.addEventListener('input', function() {
-		  var valor = valorInput.value;
-		  var valorFormatado = aplicarMascaraValor(valor);
-		  valorInput.value = valorFormatado;
+			var valor = valorInput.value;
+			var valorFormatado = aplicarMascaraValor(valor);
+			valorInput.value = valorFormatado;
 		});
 
 		function aplicarMascaraValor(valor) {
-		  valor = valor.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
-		  valor = valor.replace(/^0+/g, ''); // Remove zeros à esquerda
+			valor = valor.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+			valor = valor.replace(/^0+/g, ''); // Remove zeros à esquerda
 
-		  if (valor.length > 2) {
-			var decimal = valor.slice(-2); // Obtém os últimos dois dígitos como parte decimal
-			var inteiro = valor.slice(0, -2); // Obtém a parte inteira sem os dígitos decimais
+			if (valor.length > 2) {
+				var decimal = valor.slice(-2); // Obtém os últimos dois dígitos como parte decimal
+				var inteiro = valor.slice(0, -2); // Obtém a parte inteira sem os dígitos decimais
 
-			valor = inteiro.replace(/\B(?=(\d{3})+(?!\d))/g, '.'); // Adiciona o ponto como separador de centenas
-			valor = (valor.length > 0 ? valor + ',' : '') + decimal; // Adiciona a parte decimal
-		  } else if (valor.length === 2) {
-			valor = '0,' + valor;
-		  } else if (valor.length === 1) {
-			valor = '0,0' + valor;
-		  }
-
-		  return valor;
+				valor = inteiro.replace(/\B(?=(\d{3})+(?!\d))/g, '.'); // Adiciona o ponto como separador de centenas
+				valor = (valor.length > 0 ? valor + ',' : '') + decimal; // Adiciona a parte decimal
+			} else if (valor.length === 2) {
+				valor = '0,' + valor;
+			} else if (valor.length === 1) {
+				valor = '0,0' + valor;
+			}
+			return valor;
 		}
 		
 		var count = 1; // Contador para IDs das linhas

@@ -7,7 +7,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>727,2155</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>742,1665</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Get_Transaction_Data_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -108,7 +108,7 @@
       <AssemblyReference>Roboluze.UiPath</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Get_Transaction_Data" sap:VirtualizedContainerService.HintSize="737,2090" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Get_Transaction_Data" sap:VirtualizedContainerService.HintSize="672,1600" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="querySql" />
       <Variable x:TypeArguments="sd:DataTable" Name="TransactionData" />
@@ -118,7 +118,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="675,132" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="610,132" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -141,15 +141,19 @@
         DOWNLOAD_ENTRADA,
         PROTOCOLAR_SAIDA,
         PROTOCOLAR_ENTRADA,
-        LANCAR_NOTA_ENTRADA,
-        DECLARAR_SIMPLES_NACIONAL
-        
+        DECLARAR_SIMPLES_NACIONAL,
+		LANCAR_NOTA_ENTRADA,
+		PERIODO_DOWNLOAD_SAIDA,
+		PERIODO_DOWNLOAD_ENTRADA,
+		PERIODO_DECLARACAO_SAIDA,
+		PERIODO_DECLARACAO_ENTRADA,
+		PERIODO_SIMPLES_NACIONAL
 		
-FROM ipm faz
-LEFT JOIN ipm_cliente ipm on ipm.ID_CLIENTE = faz.ID_CLIENTE
-LEFT JOIN cliente cli on cli.ID_CLIENTE = ipm.ID_CLIENTE
+        
+FROM cliente cli
+LEFT JOIN ipm on ipm.ID_CLIENTE = cli.ID_CLIENTE
 
-WHERE  cli.CODIGO = '{0}' OR cli.CNPJ = '{0}'</InArgument>
+WHERE ID_PERFIL = {1} AND (cli.CODIGO = '{0}' OR cli.CNPJ = '{0}')</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
@@ -157,13 +161,19 @@ WHERE  cli.CODIGO = '{0}' OR cli.CNPJ = '{0}'</InArgument>
               <OutArgument x:TypeArguments="x:String">[querySql]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String">[String.Format(querySql, in_Filtro)]</InArgument>
+              <InArgument x:TypeArguments="x:String">[String.Format(querySql, in_Filtro, in_Config("Perfil").ToString())]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
         </scg:List>
       </ui:MultipleAssign.AssignOperations>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </ui:MultipleAssign>
-    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="675,1807" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="610,1317" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -171,13 +181,13 @@ WHERE  cli.CODIGO = '{0}' OR cli.CNPJ = '{0}'</InArgument>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <TryCatch.Try>
-        <Sequence sap:VirtualizedContainerService.HintSize="637,1579" sap2010:WorkflowViewState.IdRef="Sequence_6">
+        <Sequence sap:VirtualizedContainerService.HintSize="572,1089" sap2010:WorkflowViewState.IdRef="Sequence_6">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <rd:Get_Transaction_Data DisplayName="Get Transaction Data" sap:VirtualizedContainerService.HintSize="575,52" sap2010:WorkflowViewState.IdRef="Get_Transaction_Data_3" in_Config="[in_Config]" in_EnvironmentCurrentDirectory="[Environment.CurrentDirectory]" in_NameFile="Get Transaction Data IPM" in_QuerySql="[querySql]" out_TransactionData="[TransactionData]">
+          <rd:Get_Transaction_Data DisplayName="Get Transaction Data" sap:VirtualizedContainerService.HintSize="510,52" sap2010:WorkflowViewState.IdRef="Get_Transaction_Data_3" in_Config="[in_Config]" in_EnvironmentCurrentDirectory="[Environment.CurrentDirectory]" in_NameFile="Get Transaction Data IPM" in_QuerySql="[querySql]" out_TransactionData="[TransactionData]">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -185,7 +195,84 @@ WHERE  cli.CODIGO = '{0}' OR cli.CNPJ = '{0}'</InArgument>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </rd:Get_Transaction_Data>
-          <If Condition="[TransactionData.RowCount = 0]" DisplayName="Novo cliente" sap:VirtualizedContainerService.HintSize="575,1376" sap2010:WorkflowViewState.IdRef="If_2">
+          <If Condition="[TransactionData.RowCount = 0]" DisplayName="Nao tem cliente" sap:VirtualizedContainerService.HintSize="510,494" sap2010:WorkflowViewState.IdRef="If_4">
+            <If.Then>
+              <Sequence sap:VirtualizedContainerService.HintSize="465,312" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="423,132" sap2010:WorkflowViewState.IdRef="MultipleAssign_8">
+                  <ui:MultipleAssign.AssignOperations>
+                    <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_11">
+                        <ui:AssignOperation.To>
+                          <OutArgument x:TypeArguments="x:String">[querySql]</OutArgument>
+                        </ui:AssignOperation.To>
+                        <ui:AssignOperation.Value>
+                          <InArgument x:TypeArguments="x:String" xml:space="preserve">SELECT  cli.ID_CLIENTE,
+        CNPJ,
+        CODIGO,
+        EMPRESA,
+        REGIME_TRIBUTARIO,
+        SITUACAO,
+
+		LOGIN,
+        PASSWORD,
+        CODIGO_LOGIN,
+        CADASTRO_ECONOMICO,
+        DOWNLOAD_SAIDA,
+        DOWNLOAD_ENTRADA,
+        PROTOCOLAR_SAIDA,
+        PROTOCOLAR_ENTRADA,
+        DECLARAR_SIMPLES_NACIONAL,
+		LANCAR_NOTA_ENTRADA,
+		PERIODO_DOWNLOAD_SAIDA,
+		PERIODO_DOWNLOAD_ENTRADA,
+		PERIODO_DECLARACAO_SAIDA,
+		PERIODO_DECLARACAO_ENTRADA,
+		PERIODO_SIMPLES_NACIONAL
+		
+        
+FROM cliente cli
+LEFT JOIN ipm on ipm.ID_CLIENTE = cli.ID_CLIENTE
+
+WHERE cli.CODIGO = '{0}' OR cli.CNPJ = '{0}'</InArgument>
+                        </ui:AssignOperation.Value>
+                      </ui:AssignOperation>
+                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_12">
+                        <ui:AssignOperation.To>
+                          <OutArgument x:TypeArguments="x:String">[querySql]</OutArgument>
+                        </ui:AssignOperation.To>
+                        <ui:AssignOperation.Value>
+                          <InArgument x:TypeArguments="x:String">[String.Format(querySql, in_Filtro)]</InArgument>
+                        </ui:AssignOperation.Value>
+                      </ui:AssignOperation>
+                    </scg:List>
+                  </ui:MultipleAssign.AssignOperations>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:MultipleAssign>
+                <rd:Get_Transaction_Data DisplayName="Get Transaction Data" sap:VirtualizedContainerService.HintSize="423,52" sap2010:WorkflowViewState.IdRef="Get_Transaction_Data_4" in_Config="[in_Config]" in_EnvironmentCurrentDirectory="[Environment.CurrentDirectory]" in_NameFile="Get Transaction Data IPM" in_QuerySql="[querySql]" out_TransactionData="[TransactionData]">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </rd:Get_Transaction_Data>
+              </Sequence>
+            </If.Then>
+            <If.Else>
+              <Sequence sap2010:WorkflowViewState.IdRef="Sequence_10" />
+            </If.Else>
+          </If>
+          <If Condition="[TransactionData.RowCount = 0]" DisplayName="Novo cliente" sap:VirtualizedContainerService.HintSize="510,352" sap2010:WorkflowViewState.IdRef="If_2">
             <If.Then>
               <Sequence sap:VirtualizedContainerService.HintSize="541,1024" sap2010:WorkflowViewState.IdRef="Sequence_4">
                 <sap:WorkflowViewStateService.ViewState>
@@ -224,6 +311,12 @@ WHERE  cli.CODIGO = '{0}' OR cli.CNPJ = '{0}'</InArgument>
                   </ui:MultipleAssign.AssignOperations>
                 </ui:MultipleAssign>
                 <If Condition="[Roboluze.Valida.isCnpjOrCpf(in_Filtro).Equals(&quot;&quot;)]" DisplayName="CNPJ ou Codigo" sap:VirtualizedContainerService.HintSize="499,733" sap2010:WorkflowViewState.IdRef="If_3">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
                   <If.Then>
                     <Sequence sap:VirtualizedContainerService.HintSize="465,189" sap2010:WorkflowViewState.IdRef="Sequence_7">
                       <sap:WorkflowViewStateService.ViewState>
@@ -295,7 +388,7 @@ WHERE  cli.CODIGO = '{0}' OR cli.CNPJ = '{0}'</InArgument>
         </Sequence>
       </TryCatch.Try>
       <TryCatch.Catches>
-        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="641,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="565,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">False</x:Boolean>
