@@ -6,7 +6,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1105,1297</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1105,1027</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Get_Transaction_Data_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -102,7 +102,7 @@
       <AssemblyReference>System.Data.SqlClient</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Get_Transaction_Data" sap:VirtualizedContainerService.HintSize="561,1232" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Get_Transaction_Data" sap:VirtualizedContainerService.HintSize="496,962" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="querySql" />
     </Sequence.Variables>
@@ -111,7 +111,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="499,101" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="434,101" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -123,27 +123,35 @@
         CNPJ,
         CODIGO,
         EMPRESA,
-
-        EMITE_NFS,
-        DECLARA_ENTRADA,
-        LANCA_NOTA_ENTRADA,
-        LOGIN,
-        PASSWORD,
-        CODIGO_LOGIN,
-        CADASTRO_ECONOMICO,
+        DOWNLOAD_SAIDA,
+        DOWNLOAD_ENTRADA,
+        PROTOCOLAR_SAIDA,
+        PROTOCOLAR_ENTRADA,
+        DECLARAR_SIMPLES_NACIONAL,
+        LANCAR_NOTA_ENTRADA, 
 		
-        (CASE WHEN (PERIODO_DOWNLOAD_SAIDA &lt;&gt; '{PERIODO}' AND EMITE_NFS) THEN 'True' ELSE 'False' END) AS FAZ_DOWNLOAD_SAIDA,
-        (CASE WHEN (PERIODO_DOWNLOAD_ENTRADA &lt;&gt; '{PERIODO}' AND DECLARA_ENTRADA) THEN 'True' ELSE 'False' END) AS FAZ_DOWNLOAD_ENTRADA,
-        (CASE WHEN (PERIODO_DECLARACAO_SAIDA &lt;&gt; '{PERIODO}' AND EMITE_NFS) THEN 'True' ELSE 'False' END) AS FAZ_DECLARACAO_SAIDA,
-        (CASE WHEN (PERIODO_DECLARACAO_ENTRADA &lt;&gt; '{PERIODO}' AND DECLARA_ENTRADA) THEN 'True' ELSE 'False' END) AS FAZ_DECLARACAO_ENTRADA,
-        (CASE WHEN (PERIODO_SIMPLES_NACIONAL &lt;&gt; '{PERIODO}' AND (REGIME_TRIBUTARIO = 'A' OR REGIME_TRIBUTARIO = 'B') ) THEN 'True' ELSE 'False' END) AS FAZ_SIMPLES,
-        
+        (CASE WHEN (PERIODO_DOWNLOAD_SAIDA &lt;&gt; '{PERIODO}' AND DOWNLOAD_SAIDA &lt;&gt; 'Nenhum') THEN 'True' ELSE 'False' END) AS FAZ_DOWNLOAD_SAIDA,
+        (CASE WHEN (PERIODO_DOWNLOAD_ENTRADA &lt;&gt; '{PERIODO}' AND DOWNLOAD_ENTRADA  &lt;&gt; 'Nenhum') THEN 'True' ELSE 'False' END) AS FAZ_DOWNLOAD_ENTRADA,
+        (CASE WHEN (PERIODO_DECLARACAO_SAIDA &lt;&gt; '{PERIODO}' AND PROTOCOLAR_SAIDA  &lt;&gt; 'Nenhum') THEN 'True' ELSE 'False' END) AS FAZ_DECLARACAO_SAIDA,
+        (CASE WHEN (PERIODO_DECLARACAO_ENTRADA &lt;&gt; '{PERIODO}' AND PROTOCOLAR_ENTRADA) THEN 'True' ELSE 'False' END) AS FAZ_DECLARACAO_ENTRADA,
+        (CASE WHEN (PERIODO_SIMPLES_NACIONAL &lt;&gt; '{PERIODO}' AND (REGIME_TRIBUTARIO = 'Microempresa' OR REGIME_TRIBUTARIO = 'Empresa de Pequeno Porte') AND DECLARAR_SIMPLES_NACIONAL) THEN 'True' ELSE 'False' END) AS FAZ_SIMPLES_NACIONAL,
         
         PERIODO_DOWNLOAD_SAIDA,
         PERIODO_DOWNLOAD_ENTRADA,
         PERIODO_DECLARACAO_SAIDA,
         PERIODO_DECLARACAO_ENTRADA,
-        PERIODO_SIMPLES_NACIONAL
+        PERIODO_SIMPLES_NACIONAL,
+        
+       'Download Entradas: ' || 
+       (CASE WHEN (PERIODO_DOWNLOAD_SAIDA &lt;&gt; '{PERIODO}' AND DOWNLOAD_SAIDA &lt;&gt; 'Nenhum') THEN 'Sim' ELSE 'Não' END) || 
+       ' | Download Saidas: ' ||
+       (CASE WHEN (PERIODO_DOWNLOAD_ENTRADA &lt;&gt; '{PERIODO}' AND DOWNLOAD_ENTRADA  &lt;&gt; 'Nenhum') THEN 'Sim' ELSE 'Não' END) ||
+       ' | Protocolar Saidas: ' ||
+       (CASE WHEN (PERIODO_DECLARACAO_SAIDA &lt;&gt; '{PERIODO}' AND PROTOCOLAR_SAIDA  &lt;&gt; 'Nenhum') THEN 'Sim' ELSE 'Não' END) ||
+       ' | Protocolar Entradas: ' ||
+       (CASE WHEN (PERIODO_DECLARACAO_ENTRADA &lt;&gt; '{PERIODO}' AND PROTOCOLAR_ENTRADA) THEN 'Sim' ELSE 'Não' END) ||
+       ' | Declarar Simples Nacional: ' ||
+       (CASE WHEN (PERIODO_SIMPLES_NACIONAL &lt;&gt; '{PERIODO}' AND (REGIME_TRIBUTARIO = 'Microempresa' OR REGIME_TRIBUTARIO = 'Empresa de Pequeno Porte') AND DECLARAR_SIMPLES_NACIONAL) THEN 'Sim' ELSE 'Não' END) AS OBSERVACAO
         
 		
 FROM ipm faz
@@ -157,37 +165,63 @@ WHERE  (per.ID_PERFIL = 1 AND cli.SITUACAO = True AND per.SITUACAO = True) {Quer
         </scg:List>
       </ui:MultipleAssign.AssignOperations>
     </ui:MultipleAssign>
-    <ui:IfElseIf DisplayName="Filtrar Pendentes" sap:VirtualizedContainerService.HintSize="499,52" sap2010:WorkflowViewState.IdRef="IfElseIf_1">
-      <ui:IfElseIf.ConditionBlocks>
-        <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
-          <ui:IfElseIfBlock BlockType="If" Condition="[Convert.ToBoolean(in_Config(&quot;FiltrarClientesPendentes&quot;))]">
-            <ui:IfElseIfBlock.Then>
-              <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="423,101" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
-                <ui:MultipleAssign.AssignOperations>
-                  <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
-                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
-                      <ui:AssignOperation.To>
-                        <OutArgument x:TypeArguments="x:String">[querySql]</OutArgument>
-                      </ui:AssignOperation.To>
-                      <ui:AssignOperation.Value>
-                        <InArgument x:TypeArguments="x:String">[querySql.Replace("{PERIODO}", in_Config("PERIODO").ToString)]</InArgument>
-                      </ui:AssignOperation.Value>
-                    </ui:AssignOperation>
-                  </scg:List>
-                </ui:MultipleAssign.AssignOperations>
-              </ui:MultipleAssign>
-            </ui:IfElseIfBlock.Then>
-          </ui:IfElseIfBlock>
-        </sc:BindingList>
-      </ui:IfElseIf.ConditionBlocks>
+    <If Condition="[in_Config.ContainsKey(&quot;FiltrarClientesPendentes&quot;)]" DisplayName="Contem Filtro Pendentes" sap:VirtualizedContainerService.HintSize="434,52" sap2010:WorkflowViewState.IdRef="If_2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-    </ui:IfElseIf>
-    <If Condition="[in_Config.ContainsKey(&quot;QueryTransactionData&quot;)]" sap:VirtualizedContainerService.HintSize="499,560" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <Sequence sap:VirtualizedContainerService.HintSize="516,385" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:IfElseIf DisplayName="Filtrar Pendentes" sap:VirtualizedContainerService.HintSize="474,297" sap2010:WorkflowViewState.IdRef="IfElseIf_1">
+            <ui:IfElseIf.ConditionBlocks>
+              <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
+                <ui:IfElseIfBlock BlockType="If" Condition="[Convert.ToBoolean(in_Config(&quot;FiltrarClientesPendentes&quot;))]">
+                  <ui:IfElseIfBlock.Then>
+                    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="423,101" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+                      <ui:MultipleAssign.AssignOperations>
+                        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+                            <ui:AssignOperation.To>
+                              <OutArgument x:TypeArguments="x:String">[querySql]</OutArgument>
+                            </ui:AssignOperation.To>
+                            <ui:AssignOperation.Value>
+                              <InArgument x:TypeArguments="x:String">[querySql.Replace("{PERIODO}", in_Config("PERIODO").ToString)]</InArgument>
+                            </ui:AssignOperation.Value>
+                          </ui:AssignOperation>
+                        </scg:List>
+                      </ui:MultipleAssign.AssignOperations>
+                    </ui:MultipleAssign>
+                  </ui:IfElseIfBlock.Then>
+                </ui:IfElseIfBlock>
+              </sc:BindingList>
+            </ui:IfElseIf.ConditionBlocks>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:IfElseIf>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_5" />
+      </If.Else>
+    </If>
+    <If Condition="[in_Config.ContainsKey(&quot;QueryTransactionData&quot;)]" sap:VirtualizedContainerService.HintSize="434,52" sap2010:WorkflowViewState.IdRef="If_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
       <If.Then>
         <Sequence sap:VirtualizedContainerService.HintSize="465,189" sap2010:WorkflowViewState.IdRef="Sequence_2">
           <sap:WorkflowViewStateService.ViewState>
@@ -235,7 +269,7 @@ WHERE  (per.ID_PERFIL = 1 AND cli.SITUACAO = True AND per.SITUACAO = True) {Quer
         </Sequence>
       </If.Else>
     </If>
-    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="499,288" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="434,526" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -253,10 +287,10 @@ WHERE  (per.ID_PERFIL = 1 AND cli.SITUACAO = True AND per.SITUACAO = True) {Quer
         </rd:Get_Transaction_Data>
       </TryCatch.Try>
       <TryCatch.Catches>
-        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,363" sap2010:WorkflowViewState.IdRef="Catch`1_1">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>

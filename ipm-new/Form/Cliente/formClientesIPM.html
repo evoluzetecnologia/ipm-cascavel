@@ -92,7 +92,6 @@
 											radioButton.checked = true;
 										}
 										
-										
 									} else if (typeof data[key] === 'boolean') {
 										//alert(key);
 										var label = document.querySelector('label[for="' + key + '"]');
@@ -230,14 +229,14 @@
 			};
 	</script>
 	<script>
-		function findCliente(valor){
+		function buscarCliente(valor){
 			
 			if (valor !== null && valor !== '') {
 				var jsonData = {
 					"CODIGO": valor
 				}
 				var jsonString = JSON.stringify(jsonData);
-				uiPathApi.sendMessage("findClient", jsonString );
+				uiPathApi.sendMessage("buscarCliente", jsonString );
 			}
 		}
 		
@@ -250,8 +249,65 @@
 		}
 		
 		
-		function saveClicked() {
-			sendRoboluze("save");
+		function salvarCliente() {
+		
+			var ID_CLIENTE = document.getElementById("ID_CLIENTE").value;
+			var CNPJ = document.getElementById("CNPJ").value;
+			var CODIGO = document.getElementById("CODIGO").value;
+			var EMPRESA = document.getElementById("EMPRESA").value;
+			var REGIME_TRIBUTARIO = document.getElementById("REGIME_TRIBUTARIO").value;
+			var SITUACAO = document.getElementById("SITUACAO").checked;
+			
+			var LOGIN = document.getElementById("LOGIN").value;
+			var PASSWORD = document.getElementById("PASSWORD").value;
+			var CODIGO_LOGIN = document.getElementById("CODIGO_LOGIN").value;
+			var CADASTRO_ECONOMICO = document.getElementById("CADASTRO_ECONOMICO").value;
+			var PROTOCOLAR_SAIDA = document.getElementById("PROTOCOLAR_SAIDA").value;
+			var PROTOCOLAR_ENTRADA = document.getElementById("PROTOCOLAR_ENTRADA").value;
+			var LANCAR_NOTA_ENTRADA = document.getElementById("LANCAR_NOTA_ENTRADA").checked;
+			var DECLARAR_SIMPLES_NACIONAL = document.getElementById("DECLARAR_SIMPLES_NACIONAL").checked;
+			
+			var radios = document.getElementsByName('DOWNLOAD_SAIDA');
+			var DOWNLOAD_SAIDA;
+			for (var i = 0; i < radios.length; i++) {
+			  if (radios[i].checked) {
+				DOWNLOAD_SAIDA = radios[i].value;
+				break;
+			  }
+			}
+			
+			radios = document.getElementsByName('DOWNLOAD_ENTRADA');
+			var DOWNLOAD_ENTRADA;
+			for (var i = 0; i < radios.length; i++) {
+			  if (radios[i].checked) {
+				DOWNLOAD_ENTRADA = radios[i].value;
+				break;
+			  }
+			}
+			
+			var jsonData = {
+				"ID_CLIENTE": ID_CLIENTE,
+				"CNPJ": CNPJ,
+				"CODIGO": CODIGO,
+				"EMPRESA": EMPRESA,
+				"REGIME_TRIBUTARIO": REGIME_TRIBUTARIO,
+				"SITUACAO": SITUACAO,
+				
+				"LOGIN": LOGIN,
+				"PASSWORD": PASSWORD,
+				"CODIGO_LOGIN": CODIGO_LOGIN,
+				"CADASTRO_ECONOMICO": CADASTRO_ECONOMICO,
+				"DOWNLOAD_SAIDA": DOWNLOAD_SAIDA,
+				"DOWNLOAD_ENTRADA": DOWNLOAD_ENTRADA,
+				"PROTOCOLAR_SAIDA": PROTOCOLAR_SAIDA,
+				"PROTOCOLAR_ENTRADA": PROTOCOLAR_ENTRADA,
+				"LANCAR_NOTA_ENTRADA": LANCAR_NOTA_ENTRADA,
+				"DECLARAR_SIMPLES_NACIONAL": DECLARAR_SIMPLES_NACIONAL
+			};
+
+			jsonString = JSON.stringify(jsonData);
+			alert(jsonString);
+			uiPathApi.sendMessage("salvarCliente", jsonString);
 		}
 		
 		function sendRoboluze(id){
@@ -802,18 +858,18 @@
 			
 			if (codigo !== ''){
 				limparValoresModal();
-				findCliente(codigo);
+				buscarCliente(codigo);
 			} else {
 				valor = cnpj.replace(/\D/g, ''); 
 				if (valor.length === 11) {
 					if (validarCpf(valor)) {
 						limparValoresModal();
-						findCliente(cnpj);
+						buscarCliente(cnpj);
 					}
 				} else if (valor.length === 14) {
 					if (validarCnpj(valor)) {
 						limparValoresModal();
-						findCliente(cnpj);
+						buscarCliente(cnpj);
 					}
 				}
 				
