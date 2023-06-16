@@ -184,7 +184,7 @@
 							divF.append(btn)
 							
 							
-							var checkbox = $('<input>').attr('type', 'checkbox').prop('class','ProcessCheckbox form-check-input');
+							var checkbox = $('<input>').attr('type', 'checkbox').prop('class','ProcessCheckbox form-check-input').prop('id','EXECUTAR');
 							if (item.EXECUTAR) {
 							  checkbox.prop('checked', true);
 							}
@@ -371,15 +371,15 @@
 		
 		function iniciarAutomacao(){
 			var jsonData = []; // Array para armazenar os objetos JSON de cada linha
-			$('table td').each(function() {
+			$('table tr').each(function() {
 				var row = $(this);
-				var ID_EXECUTAR = row.find("#ID_EXECUTAR").val();
+				var ID_CLIENTE = row.find("#ID_EXECUTAR").val();
 				var EXECUTAR = row.find(".ProcessCheckbox").is(":checked"); // Captura o estado do checkbox
 				var rowValues = {
-					'ID_EXECUTAR': ID_EXECUTAR,
+					'ID_CLIENTE': ID_CLIENTE,
 					'EXECUTAR': EXECUTAR
 				};
-				if(ID_EXECUTAR){
+				if(ID_CLIENTE){
 					jsonData.push(rowValues);
 				}
 			});
@@ -470,12 +470,11 @@
 								<div class="col-1" >
 									<div class="d-flex justify-content-end align-items-center">
 										<button type="button" class="btn btn-light custom-btn-extra-small me-2"><i class="bi bi-pencil-square"></i></button>
-										<input type="checkbox" class="ProcessCheckbox form-check-input" id="TODO">
+										<input type="checkbox" class="ProcessCheckbox form-check-input" id='EXECUTAR'>
 									</div>
 								</div>
 							</div>
 						</td>
-						
 					</tr>
 				</tbody>
 			</table>
