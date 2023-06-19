@@ -279,6 +279,10 @@
 			uiPathApi.sendMessage("perfil", jsonString );
 		}
 		
+		function excelClicked(){
+			uiPathApi.sendMessage("clientesExcel");
+		}
+		
 		function jsonData(){
 			var perfil = document.getElementById("Perfil").value;
 			var periodo = document.getElementById("Periodo").value;
@@ -290,6 +294,10 @@
 			var protocolarNFEntrada = document.getElementById("ProtocolarNFEntrada").checked;
 			var simplesNacional = document.getElementById("SimplesNacional").checked;
 			var emitirNFS = document.getElementById("EmitirNFS").checked;
+			
+			var FinalidadeCertidao = document.getElementById("FinalidadeCertidao").value;
+			var certidaoExcel = document.getElementById("CertidaoExcel").value;
+			
 			
 			var codigoServico = document.getElementById("CodigoServico").value;
 			var observacaoNFS = document.getElementById("ObservacaoNFS").value;
@@ -353,6 +361,9 @@
 				"ProtocolarNFEntrada": protocolarNFEntrada,
 				"SimplesNacional": simplesNacional,
 				"EmitirNFS": emitirNFS,
+				"FinalidadeCertidao": FinalidadeCertidao,
+				"CertidaoExcel": certidaoExcel,
+				
 				"CodigoServico": codigoServico,
 				"ObservacaoNFS": observacaoNFS,
 				"ObservacaoFinanceira": observacaoFinanceira,
@@ -500,7 +511,7 @@
 					
 				</div>
 				<hr class="my-3">
-				<div class="container-fluid d-flex justify-content-center"><h5>Tarefas da Automação</h5></div>
+				<div class="container-fluid d-flex justify-content-center"><h6>Tarefas da Automação</h6></div>
 				<div>
 					<div class="row">
 						<div class="col-3 d-flex align-items-center">
@@ -565,6 +576,33 @@
 							</div>
 						</div>
 					</div>
+				</div>
+				
+				<hr class="my-3">
+				<div class="container-fluid d-flex justify-content-center"><h6>Emissão da Certidão Negativa de Débitos - CND</h6></div>
+				<div>
+					<div class="row">
+						<div class="col-3 d-flex align-items-center">
+							<label class="col-form-label">Finalidade</label>
+						</div>
+						<div class="col-9 d-flex align-items-center ">
+							<select class="form-select form-select-sm" id="FinalidadeCertidao">
+								<option value=""></option>
+								<option value="Financiamento - Contribuinte">Financiamento - Contribuinte</option>
+								<option value="Jurídico - Contribuinte">Jurídico - Contribuinte</option>
+								<option value="Licitação - Contribuinte">Licitação - Contribuinte</option>
+								<option value="Transmissão - Contribuinte">Transmissão - Contribuinte</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-3 d-flex align-items-center">
+							<label class="col-form-label">Arquivo Excel com CNPJs</label>
+						</div>
+						<div class="col-9 d-flex align-items-center ">
+							<input class="form-control form-control-sm" id="CertidaoExcel" type="file" accept=".xlsx, .xls">
+						</div>
+					</div>	
 				</div>
 			</div>
 			
@@ -716,6 +754,15 @@
 								<input class="form-check-input" type="checkbox" role="switch" id="DominioWeb" name="DominioWeb">
 								<label class="form-check-label" for="DominioWeb">Não</label>
 							</div>
+						</div>
+					</div>
+					<hr class="my-3">
+					<div class="row">
+						<div class="col-2 d-flex align-items-center">
+							<label class="col-form-label">Arquivo clientes</label>
+						</div>
+						<div class="col-10 d-flex align-items-center ">
+							<button class="btn btn-outline-success w-100" type="botton" onclick="excelClicked()">Gerar arquivo Excel dos Clientes Ativos</button>
 						</div>
 					</div>
 				</div>
