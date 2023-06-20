@@ -216,6 +216,8 @@
 					} 
 					if ((el.tagName === 'INPUT' && el.type === 'text') || el.type === 'email') {
 						el.value = value;
+					} else if (el.tagName === 'INPUT' && el.type === 'file') {
+						el.value = value;
 					} else if (el.tagName === 'SELECT') {
 						el.value = value;
 					}  else {
@@ -229,6 +231,12 @@
 		};
 	</script>
 	<script>
+		
+		function certidaoExcelClicked() {
+			var jsonString = JSON.stringify(jsonData());
+			uiPathApi.sendMessage("certidao", jsonString);
+		}
+	
 		function addNovoPerfilClicked(){
 			var perfilNome = document.getElementById("novoPerfil").value;
 			if (perfilNome !== null && perfilNome !== '') {
@@ -258,15 +266,15 @@
 				}
 			});
 			var jsonResult = JSON.stringify(jsonData);
-			uiPathApi.sendMessage('atualizarPerfil', jsonResult);
-			
-		
+			uiPathApi.sendMessage("atualizarPerfil", jsonResult);
+			/*
 			var jsonData = {
 				"idPerfil": value
 			}
 			var jsonString = JSON.stringify(jsonData);
 			alert(perfil);
 			uiPathApi.sendMessage("excluirPerfil", jsonString );
+			*/
 		}
 		function closedClicked() {
 			uiPathApi.sendMessage("close");
@@ -283,7 +291,13 @@
 			uiPathApi.sendMessage("clientesExcel");
 		}
 		
+		function startClicked() {
+			var jsonString = JSON.stringify(jsonData());
+			uiPathApi.sendMessage("start", jsonString);
+		}
+		
 		function jsonData(){
+
 			var perfil = document.getElementById("Perfil").value;
 			var periodo = document.getElementById("Periodo").value;
 			var exibirClientes = document.getElementById("ExibirClientes").checked;
@@ -296,8 +310,9 @@
 			var emitirNFS = document.getElementById("EmitirNFS").checked;
 			
 			var FinalidadeCertidao = document.getElementById("FinalidadeCertidao").value;
-			var certidaoExcel = document.getElementById("CertidaoExcel").value;
-			
+			//var certidaoExcel = document.getElementById("CertidaoExcel").value;
+			var input = document.getElementById("CertidaoExcel");
+			var certidaoExcel = input.files[0].name;
 			
 			var codigoServico = document.getElementById("CodigoServico").value;
 			var observacaoNFS = document.getElementById("ObservacaoNFS").value;
@@ -384,11 +399,7 @@
 			return jsonData;
 		}
 		
-		function startClicked() {
-			var jsonString = JSON.stringify(jsonData());
-			alert(jsonString);
-			uiPathApi.sendMessage("start", jsonString);
-		}
+		
 		
 	</script>
 </head>
@@ -600,7 +611,7 @@
 							<label class="col-form-label">Arquivo Excel com CNPJs</label>
 						</div>
 						<div class="col-9 d-flex align-items-center ">
-							<input class="form-control form-control-sm" id="CertidaoExcel" type="file" accept=".xlsx, .xls">
+							<input class="form-control form-control-sm" id="CertidaoExcel" type="file" accept=".xlsx, .xls" onclick="certidaoExcelClicked()">
 						</div>
 					</div>	
 				</div>

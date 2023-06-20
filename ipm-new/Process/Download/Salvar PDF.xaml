@@ -1,11 +1,11 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="Salvar_Como" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.ComponentModel;assembly=System.ComponentModel.TypeConverter" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:si="clr-namespace:System.IO;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="io_Arquivo" Type="InOutArgument(si:FileInfo)" />
+    <x:Property Name="in_Path" Type="InArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1067,1243</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1067,1384</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Salvar_PDF_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -50,80 +50,98 @@
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
     <sco:Collection x:TypeArguments="AssemblyReference">
-      <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
-      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>Microsoft.Win32.Primitives</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
       <AssemblyReference>System.Data</AssemblyReference>
       <AssemblyReference>System.Data.Common</AssemblyReference>
       <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
-      <AssemblyReference>System</AssemblyReference>
-      <AssemblyReference>System.Linq</AssemblyReference>
       <AssemblyReference>System.Drawing</AssemblyReference>
-      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
       <AssemblyReference>System.Drawing.Common</AssemblyReference>
-      <AssemblyReference>System.Core</AssemblyReference>
-      <AssemblyReference>System.Xml</AssemblyReference>
-      <AssemblyReference>System.Xml.Linq</AssemblyReference>
-      <AssemblyReference>System.Xaml</AssemblyReference>
-      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
-      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
-      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
-      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
-      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
-      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
-      <AssemblyReference>UiPath.Platform</AssemblyReference>
-      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
-      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
-      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
-      <AssemblyReference>UiPath.Cryptography.Activities</AssemblyReference>
-      <AssemblyReference>UiPath.Database.Activities</AssemblyReference>
-      <AssemblyReference>UiPath.PDF.Activities</AssemblyReference>
-      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
-      <AssemblyReference>System.Security.Permissions</AssemblyReference>
-      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
-      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
-      <AssemblyReference>PresentationFramework</AssemblyReference>
-      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
-      <AssemblyReference>WindowsBase</AssemblyReference>
-      <AssemblyReference>Microsoft.Win32.Primitives</AssemblyReference>
-      <AssemblyReference>System.ComponentModel</AssemblyReference>
-      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
-      <AssemblyReference>System.ObjectModel</AssemblyReference>
-      <AssemblyReference>NPOI</AssemblyReference>
-      <AssemblyReference>UiPath.Cryptography</AssemblyReference>
-      <AssemblyReference>System.Console</AssemblyReference>
-      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
-      <AssemblyReference>System.Memory</AssemblyReference>
-      <AssemblyReference>System.Private.Uri</AssemblyReference>
-      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
-      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
-      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
-      <AssemblyReference>System.IO.FileSystem.Watcher</AssemblyReference>
-      <AssemblyReference>System.IO.Packaging</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
       <AssemblyReference>System.IO.FileSystem.AccessControl</AssemblyReference>
       <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
-      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
-      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.Watcher</AssemblyReference>
+      <AssemblyReference>System.IO.Packaging</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
       <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Cryptography</AssemblyReference>
+      <AssemblyReference>UiPath.Cryptography.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Database.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.PDF.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Salvar_Como" sap:VirtualizedContainerService.HintSize="563,1178" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Salvar_Como" sap:VirtualizedContainerService.HintSize="563,1319" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="si:FileInfo" Name="fileInfo" />
+    </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
+    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="501,101" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+      <ui:MultipleAssign.AssignOperations>
+        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="si:FileInfo">[fileInfo]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="si:FileInfo">[New FileInfo(in_Path)]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+        </scg:List>
+      </ui:MultipleAssign.AssignOperations>
+    </ui:MultipleAssign>
     <ui:IfElseIf DisplayName="Excluir arquivo" sap:VirtualizedContainerService.HintSize="501,710" sap2010:WorkflowViewState.IdRef="IfElseIf_1">
       <ui:IfElseIf.ConditionBlocks>
         <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
-          <ui:IfElseIfBlock BlockType="If" Condition="[io_Arquivo.Exists]">
+          <ui:IfElseIfBlock BlockType="If" Condition="[fileInfo.Exists]">
             <ui:IfElseIfBlock.Then>
               <TryCatch sap:VirtualizedContainerService.HintSize="438,308" sap2010:WorkflowViewState.IdRef="TryCatch_1">
                 <TryCatch.Try>
-                  <ui:DeleteFileX DisplayName="Delete File" sap:VirtualizedContainerService.HintSize="334,80" sap2010:WorkflowViewState.IdRef="DeleteFileX_1" Path="[io_Arquivo.FullName]" />
+                  <ui:DeleteFileX DisplayName="Delete File" sap:VirtualizedContainerService.HintSize="334,80" sap2010:WorkflowViewState.IdRef="DeleteFileX_1" Path="[fileInfo.FullName]" />
                 </TryCatch.Try>
                 <TryCatch.Catches>
                   <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
@@ -143,9 +161,9 @@
               </TryCatch>
             </ui:IfElseIfBlock.Then>
           </ui:IfElseIfBlock>
-          <ui:IfElseIfBlock BlockType="ElseIf" Condition="[Not Directory.Exists(io_Arquivo.Directory.FullName)]">
+          <ui:IfElseIfBlock BlockType="ElseIf" Condition="[Not Directory.Exists(fileInfo.Directory.FullName)]">
             <ui:IfElseIfBlock.Then>
-              <ui:CreateDirectory ContinueOnError="{x:Null}" Output="{x:Null}" sap:VirtualizedContainerService.HintSize="334,80" sap2010:WorkflowViewState.IdRef="CreateDirectory_1" Path="[io_Arquivo.Directory.FullName]" />
+              <ui:CreateDirectory ContinueOnError="{x:Null}" Output="{x:Null}" sap:VirtualizedContainerService.HintSize="334,80" sap2010:WorkflowViewState.IdRef="CreateDirectory_1" Path="[fileInfo.Directory.FullName]" />
             </ui:IfElseIfBlock.Then>
           </ui:IfElseIfBlock>
         </sc:BindingList>
@@ -163,7 +181,7 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="None" DisplayName="Salvar como" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="NTypeInto_1" InteractionMode="Simulate" ScopeIdentifier="eb579aa8-35a6-439a-9ee6-05076738be32" Text="[io_Arquivo.FullName]" Version="V3">
+            <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="None" DisplayName="Salvar como" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="NTypeInto_1" InteractionMode="Simulate" ScopeIdentifier="eb579aa8-35a6-439a-9ee6-05076738be32" Text="[fileInfo.FullName]" Version="V3">
               <uix:NTypeInto.Target>
                 <uix:TargetAnchorable CvElementArea="131, 365, 577, 24" CvTextArea="137, 370, 236, 13" CvTextArgument="dffa8cc2-bb07-44e2-af60-abd47091731d.pdf" CvType="InputBox" DesignTimeRectangle="136, 369, 551, 17" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'dffa8cc2-bb07-44e2-af60…'" FullSelectorArgument="&lt;wnd aaname='Painel do Explorer' /&gt;&lt;wnd aaname='Nome:' cls='ComboBox' /&gt;&lt;wnd ctrlid='1001' /&gt;" FuzzySelectorArgument="&lt;wnd aaname='Painel do Explorer' cls='DirectUIHWND' /&gt;&lt;wnd aaname='Nome:' cls='ComboBox' /&gt;&lt;wnd ctrlid='1001' /&gt;" Guid="25137ad1-f559-4a90-91be-7bf3a211d7c0" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAisAAAAVCAYAAACHQa7cAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAUDSURBVHhe7ZpLbhsxDIZ9nJ4hB8oZeoNufQyfwMvseoHAQBcBsgsCBFl5k+ymoh4jiiIlzSQNJp3/A37UowclUo5I1z7cP79NAAAAAABb5RD/BQAAAADYJGqxcvj5B4KgDWv69SP+tQIAwP8PihUI+oZCsQIA2BMoViDoGwrFCgBgTwwWK0/TeXqfjsf4fLqGgS+v0432bCmNczzcPepjBnR7iUYcbTti38N9Tspeb+7eYwvnOt3KuUJ+nhIbq11q3N+GlDPKdpWzdaxbqxPXQvpYHpdmzK29tnzwffnMbPuP0/ElPjrOJ2ZDsVNrSRwsCRvJLxeb3yhWAAA7YkWxQq/55S2fLUkbKy/y4+t0LNZu2Wn19/pSIrLHUaLrJ3Sa76iKEqtdaJG/lsJa/IyoUKn3TuP6fre1ZJ42NuzVikuOubFXF68H1YdYfFyubF4tbv82xauwOWanXHutuA16nc8Q/7MCANgTK4sVfgkPXsp04bMERMmyX+D0RImjtXZrb40++gR7eZqf9aKE5reSVRDNPd+Vvrfa2+r5a0k5M23dIb97asVcqh7bjguLubFXuefaB2ajktWntbfskKh/zVlxcRulPRQrAIA9YRcr/tNk4MElj3BR0oWZCe2ZlBT41xY5ofBEKy/6+Gk1kosYqz1J2pGKF/yJ+5ISl91XJTiRGFNbmQQVUQxpnijUmu1xL/pXDD1/tdjTnIzfs/eH/mcgEvcw5DeTfs6tmDsxH/P7ivVpcUliMbf2+qFixTpTNQ6KnZZvs9bEpz5DFCsAgD1hFCvhckzFAV34+XcN8bKdL2H5zCX62EUsC5I6SVjtWfpXGVzxkk+Jz6/P/dD7+kmbF16W2BiyPSdfq13ESkmcfX+5uL3aNv+dSrLb99uSXKsdc/19ZcUlqYy5uVfvWyoiaI6MGe1BK1ZK+6SwP4caA2mn5RvX2vhQX7aHYgUAsCf0YqVKFvyiLC/N+tnJJ4xE7BM2KUH6S9lf1krysNq9lCTkxyfSvHpv87qNPjMRpmdaSz7HldPahQ3qj75b7aWNyLzGqL9OWuylr9Kf+Gz6/ZG1nIqzNt5XZlySqI3tuXVG1Jf2dL6IcX5N5X0l7BfyfpY+VXYavuU5evtIfOQ8FCsAgD3x+cUKzZ0v8fxptZ0IjeShtSufgG3JvYakrxcrrI8lPpLcOz0HG5bItoLbd1WQEBTrz/DXiH3lq/Bvfu74XWh0LR5XmqO+r6x45bFVzAf3movTJFqrjnPvTLt2TN/Ss9U+Eh/5GsUKAGBffP7XQJRE0oXrE1rs4+1OdPmH5BIu6zrRGO0iSbUV/JhtFAm20VeN4/7yxDyoKglp7WI/SUv8tWJf+cCfRbI0/RZqrtWOuf6+YiriQlJiPrJX8Z4LorFpXpJi//TExmj2pZ2Wb3x+GLc8PtwGihUAwL6wf2BLF32k/LFgeWnWzyH5eV6u05klgXD5RooEHC7pRLqstfbCRqRK8LPC3uirgERp2+pzYv4X7X6eTHYdVcnXaPeJi+FitMxfK/bB13xGTnwtfham31LttUbiav4ItYqXEXN1rzQ2oZ2TZktpE2dRx0KZM/Q3E14vjw+3gWIFALAv7GIFgqB/oLLoWCsUKwCAPYFiBYK+VChWAABgKShWIOhLhWIFAACWohYrAAAAAABbAcUKAAAAADYNihUAAAAAbJrD/fNbfAkAAAAAsDWm6S95vKlxNRlpjwAAAABJRU5ErkJggg==" InformativeScreenshot="be5863269b155875749f93e81c83f326.png" ScopeSelectorArgument="&lt;wnd app='chrome.exe' title='Salvar como' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
               </uix:NTypeInto.Target>
@@ -257,6 +275,6 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </uix:NCheckState>
-    <ui:GetFileInfoX DisplayName="Get File Info" FilePath="[io_Arquivo.FullName]" sap:VirtualizedContainerService.HintSize="501,133" sap2010:WorkflowViewState.IdRef="GetFileInfoX_1" Output="[io_Arquivo]" />
+    <ui:GetFileInfoX DisplayName="Get File Info" FilePath="[fileInfo.FullName]" sap:VirtualizedContainerService.HintSize="501,133" sap2010:WorkflowViewState.IdRef="GetFileInfoX_1" Output="[fileInfo]" />
   </Sequence>
 </Activity>
