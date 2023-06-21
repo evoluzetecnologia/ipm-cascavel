@@ -16,11 +16,15 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.6/inputmask.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="https://roboluze.com.br/_roboluze/www/js/ajax.jquery.3.2.0.min.js"></script>
+	<script src="https://roboluze.com.br/_roboluze/www/js/ajax.jquery.3.2.0.min.js"></script>	
+	
 	
 	<style>
 		body {
 			padding-top: 4.5rem;
+		}
+		#fileInfoCertidaoExcel {
+			display: none;
 		}
 	</style>
 	
@@ -297,7 +301,24 @@
 		}
 		
 		function jsonData(){
-
+		
+			var fileInput = document.getElementById('fileInput');
+			var file = fileInput.files[0];
+			var certidaoExcel = '';
+			if(file){
+				var fileName = file.name;
+				var fileExtension = fileName.split('.').pop(); // Obtém a extensão do arquivo
+				var currentDate = new Date();
+				var formattedDate = currentDate.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+				certidaoExcel = formattedDate.replace(/[^\d]/g, '') + '.' + fileExtension; // Novo nome do arquivo
+				
+				var downloadLink = document.createElement('a');
+				downloadLink.href = URL.createObjectURL(file);
+				downloadLink.download = certidaoExcel;
+				downloadLink.click();
+			}
+			
+			
 			var perfil = document.getElementById("Perfil").value;
 			var periodo = document.getElementById("Periodo").value;
 			var exibirClientes = document.getElementById("ExibirClientes").checked;
@@ -311,8 +332,11 @@
 			
 			var FinalidadeCertidao = document.getElementById("FinalidadeCertidao").value;
 			//var certidaoExcel = document.getElementById("CertidaoExcel").value;
-			var input = document.getElementById("CertidaoExcel");
-			var certidaoExcel = input.files[0].name;
+			//var input = document.getElementById("CertidaoExcel");
+			//var certidaoExcel = input.files[0].name;
+			//var fileInfoCertidaoExcelDiv = document.getElementById('fileInfoCertidaoExcel');
+			//var certidaoExcel = fileInfoCertidaoExcelDiv.value;
+			
 			
 			var codigoServico = document.getElementById("CodigoServico").value;
 			var observacaoNFS = document.getElementById("ObservacaoNFS").value;
@@ -600,7 +624,7 @@
 							<select class="form-select form-select-sm" id="FinalidadeCertidao">
 								<option value=""></option>
 								<option value="Financiamento - Contribuinte">Financiamento - Contribuinte</option>
-								<option value="Jurídico - Contribuinte">Jurídico - Contribuinte</option>
+								<option value="Juridico - Contribuinte">Juridico - Contribuinte</option>
 								<option value="Licitação - Contribuinte">Licitação - Contribuinte</option>
 								<option value="Transmissão - Contribuinte">Transmissão - Contribuinte</option>
 							</select>
@@ -611,7 +635,7 @@
 							<label class="col-form-label">Arquivo Excel com CNPJs</label>
 						</div>
 						<div class="col-9 d-flex align-items-center ">
-							<input class="form-control form-control-sm" id="CertidaoExcel" type="file" accept=".xlsx, .xls" onclick="certidaoExcelClicked()">
+							<input class="form-control form-control-sm" id="fileInput" type="file" accept=".xlsx, .xls">
 						</div>
 					</div>	
 				</div>
@@ -840,9 +864,32 @@
 	</div>
 	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	
+	<!--script>
+		function downloadFile() {
+		  var fileInput = document.getElementById('fileInput');
+		  var file = fileInput.files[0];
+		  var fileName = file.name;
+		  var fileExtension = fileName.split('.').pop(); // Obtém a extensão do arquivo
+		  var currentDate = new Date();
+		  var formattedDate = currentDate.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+		  var newFileName = formattedDate.replace(/[^\d]/g, '') + '.' + fileExtension; // Novo nome do arquivo
+		  
+		  var downloadLink = document.createElement('a');
+		  downloadLink.href = URL.createObjectURL(file);
+		  downloadLink.download = newFileName;
+		  downloadLink.click();
 
+		  var fileInfoCertidaoExcelDiv = document.getElementById('fileInfoCertidaoExcel');
+		  fileInfoCertidaoExcelDiv.value = newFileName; // Define o valor sem exibir para o usuário
+		  fileInfoCertidaoExcelDiv.style.display = 'block'; // Torna a div visível ao concluir o download
+		}
+	</script-->
+	
+	
 	<!-- Javascrit da pagina -->
     <script>
+		
 	
 	  var ckDominioWeb = document.getElementById('DominioWeb');
 	  var labelDominioWeb = document.querySelector('label[for="DominioWeb"]');
