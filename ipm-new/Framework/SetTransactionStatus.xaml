@@ -13,7 +13,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1246,943</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1222,943</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>SetTransactionStatus_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="52">
@@ -140,46 +140,18 @@
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <If Condition="[in_TransactionItem isNot Nothing]" DisplayName="If TransactionItem is a QueueItem (Success)" sap:VirtualizedContainerService.HintSize="514,675" sap2010:WorkflowViewState.IdRef="If_4">
+            <If Condition="[in_TransactionItem isNot Nothing]" DisplayName="TransactionItem is (Success)" sap:VirtualizedContainerService.HintSize="388,295" sap2010:WorkflowViewState.IdRef="If_4">
               <If.Then>
-                <ui:RetryScope DisplayName="Retry Set Transaction Status (Success)" sap:VirtualizedContainerService.HintSize="480,493" sap2010:WorkflowViewState.IdRef="RetryScope_2" NumberOfRetries="[Cint(in_Config(&quot;RetryNumberSetTransactionStatus&quot;))]">
-                  <ui:RetryScope.ActivityBody>
-                    <ActivityAction>
-                      <TryCatch DisplayName="Try Catch Set Transaction Status (Success)" sap:VirtualizedContainerService.HintSize="438,318" sap2010:WorkflowViewState.IdRef="TryCatch_11">
-                        <TryCatch.Try>
-                          <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="334,90" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="Sucesso Log" />
-                        </TryCatch.Try>
-                        <TryCatch.Catches>
-                          <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_11">
-                            <sap:WorkflowViewStateService.ViewState>
-                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                              </scg:Dictionary>
-                            </sap:WorkflowViewStateService.ViewState>
-                            <ActivityAction x:TypeArguments="s:Exception">
-                              <ActivityAction.Argument>
-                                <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
-                              </ActivityAction.Argument>
-                              <Sequence DisplayName="Catch Set Transaction Status (Success)" sap:VirtualizedContainerService.HintSize="450,268" sap2010:WorkflowViewState.IdRef="Sequence_23">
-                                <sap:WorkflowViewStateService.ViewState>
-                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                  </scg:Dictionary>
-                                </sap:WorkflowViewStateService.ViewState>
-                                <ui:LogMessage DisplayName="Log Message Could not set status (Success)" sap:VirtualizedContainerService.HintSize="388,92" sap2010:WorkflowViewState.IdRef="LogMessage_15" Level="Warn" Message="[&quot;Could not set the transaction status. &quot;+exception.Message+&quot; At Source: &quot;+exception.Source]" />
-                                <Rethrow DisplayName="Rethrow Could not set status (Success)" sap:VirtualizedContainerService.HintSize="388,25" sap2010:WorkflowViewState.IdRef="Rethrow_2" />
-                              </Sequence>
-                            </ActivityAction>
-                          </Catch>
-                        </TryCatch.Catches>
-                      </TryCatch>
-                    </ActivityAction>
-                  </ui:RetryScope.ActivityBody>
-                  <ui:RetryScope.Condition>
-                    <ActivityFunc x:TypeArguments="x:Boolean" />
-                  </ui:RetryScope.Condition>
-                </ui:RetryScope>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Data\Output\Set Transaction Data.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="Data\Output\Set Transaction Data.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
+                      <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="in_Config" />
+                    </InArgument>
+                    <InArgument x:TypeArguments="sd:DataRow" x:Key="in_TransactionItem">
+                      <VisualBasicValue x:TypeArguments="sd:DataRow" ExpressionText="in_TransactionItem" />
+                    </InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
               </If.Then>
               <If.Else>
                 <Sequence DisplayName="" sap2010:WorkflowViewState.IdRef="Sequence_25" />
@@ -264,7 +236,7 @@
                   <av:PointCollection x:Key="ConnectorLocation">330,652.333333333333 330,682.333333333333 210,682.333333333333 210,725.6</av:PointCollection>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <Sequence sap2010:Annotation.AnnotationText="If a BussinessRuleException is thrown during the process, the transaction item's status is updated as Failed (Exception Type: Business).&#xA;" DisplayName="Business Exception" sap:VirtualizedContainerService.HintSize="576,1047" sap2010:WorkflowViewState.IdRef="Sequence_14">
+              <Sequence sap2010:Annotation.AnnotationText="If a BussinessRuleException is thrown during the process, the transaction item's status is updated as Failed (Exception Type: Business).&#xA;" DisplayName="Business Exception" sap:VirtualizedContainerService.HintSize="534,872" sap2010:WorkflowViewState.IdRef="Sequence_14">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -272,52 +244,43 @@
                     <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <If Condition="[in_TransactionItem isNot Nothing]" DisplayName="If TransactionItem is a QueueItem (Business Exception)" sap:VirtualizedContainerService.HintSize="514,879" sap2010:WorkflowViewState.IdRef="If_5">
+                <If Condition="[in_TransactionItem isNot Nothing]" DisplayName="If TransactionItem is a QueueItem (Business Exception)" sap:VirtualizedContainerService.HintSize="472,704" sap2010:WorkflowViewState.IdRef="If_5">
                   <If.Then>
-                    <ui:RetryScope DisplayName="Retry Set Transaction Status (Business Exception)" sap:VirtualizedContainerService.HintSize="480,697" sap2010:WorkflowViewState.IdRef="RetryScope_3" NumberOfRetries="[Cint(in_Config(&quot;RetryNumberSetTransactionStatus&quot;))]">
-                      <ui:RetryScope.ActivityBody>
-                        <ActivityAction>
-                          <TryCatch DisplayName="Try Catch Set Transaction Status (Business Exception)" sap:VirtualizedContainerService.HintSize="438,522" sap2010:WorkflowViewState.IdRef="TryCatch_12">
-                            <sap:WorkflowViewStateService.ViewState>
-                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                              </scg:Dictionary>
-                            </sap:WorkflowViewStateService.ViewState>
-                            <TryCatch.Try>
-                              <rs:Log sap:VirtualizedContainerService.HintSize="334,294" sap2010:WorkflowViewState.IdRef="Log_8" in_AutomationName="[in_Config(&quot;logF_BusinessProcessName&quot;).ToString]" in_EnvironmentCurrentDirectory="[Environment.CurrentDirectory]" in_FileXaml="SetTransactionStatus.xaml" in_Log="[in_BusinessException.Message]" in_Tipo="Business Exception" />
-                            </TryCatch.Try>
-                            <TryCatch.Catches>
-                              <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_12">
-                                <sap:WorkflowViewStateService.ViewState>
-                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                  </scg:Dictionary>
-                                </sap:WorkflowViewStateService.ViewState>
-                                <ActivityAction x:TypeArguments="s:Exception">
-                                  <ActivityAction.Argument>
-                                    <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
-                                  </ActivityAction.Argument>
-                                  <Sequence DisplayName="Catch Set Transaction Status (Business Exception)" sap:VirtualizedContainerService.HintSize="450,255" sap2010:WorkflowViewState.IdRef="Sequence_24">
-                                    <sap:WorkflowViewStateService.ViewState>
-                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                      </scg:Dictionary>
-                                    </sap:WorkflowViewStateService.ViewState>
-                                    <rs:Log sap:VirtualizedContainerService.HintSize="388,294" sap2010:WorkflowViewState.IdRef="Log_9" in_AutomationName="[in_Config(&quot;logF_BusinessProcessName&quot;).ToString]" in_EnvironmentCurrentDirectory="[Environment.CurrentDirectory]" in_FileXaml="SetTransactionStatus.xaml" in_Log="[exception.Message]" in_Tipo="Erro Bussiness Exception" />
-                                    <Rethrow DisplayName="Rethrow  Could not set status (Business Exception)" sap:VirtualizedContainerService.HintSize="388,25" sap2010:WorkflowViewState.IdRef="Rethrow_3" />
-                                  </Sequence>
-                                </ActivityAction>
-                              </Catch>
-                            </TryCatch.Catches>
-                          </TryCatch>
-                        </ActivityAction>
-                      </ui:RetryScope.ActivityBody>
-                      <ui:RetryScope.Condition>
-                        <ActivityFunc x:TypeArguments="x:Boolean" />
-                      </ui:RetryScope.Condition>
-                    </ui:RetryScope>
+                    <TryCatch DisplayName="Try Catch Set Transaction Status (Business Exception)" sap:VirtualizedContainerService.HintSize="438,522" sap2010:WorkflowViewState.IdRef="TryCatch_12">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <TryCatch.Try>
+                        <rs:Log sap:VirtualizedContainerService.HintSize="334,294" sap2010:WorkflowViewState.IdRef="Log_8" in_AutomationName="[in_Config(&quot;logF_BusinessProcessName&quot;).ToString]" in_EnvironmentCurrentDirectory="[Environment.CurrentDirectory]" in_FileXaml="SetTransactionStatus.xaml" in_Log="[in_TransactionNome+Environment.NewLine+in_BusinessException.Message]" in_Tipo="Business Exception" />
+                      </TryCatch.Try>
+                      <TryCatch.Catches>
+                        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_12">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ActivityAction x:TypeArguments="s:Exception">
+                            <ActivityAction.Argument>
+                              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                            </ActivityAction.Argument>
+                            <Sequence DisplayName="Catch Set Transaction Status (Business Exception)" sap:VirtualizedContainerService.HintSize="450,255" sap2010:WorkflowViewState.IdRef="Sequence_24">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <rs:Log sap:VirtualizedContainerService.HintSize="388,294" sap2010:WorkflowViewState.IdRef="Log_9" in_AutomationName="[in_Config(&quot;logF_BusinessProcessName&quot;).ToString]" in_EnvironmentCurrentDirectory="[Environment.CurrentDirectory]" in_FileXaml="SetTransactionStatus.xaml" in_Log="[exception.Message]" in_Tipo="Erro Bussiness Exception" />
+                              <Rethrow DisplayName="Rethrow  Could not set status (Business Exception)" sap:VirtualizedContainerService.HintSize="388,25" sap2010:WorkflowViewState.IdRef="Rethrow_3" />
+                            </Sequence>
+                          </ActivityAction>
+                        </Catch>
+                      </TryCatch.Catches>
+                    </TryCatch>
                   </If.Then>
                   <If.Else>
                     <Sequence DisplayName="" sap:VirtualizedContainerService.HintSize="300,80" sap2010:WorkflowViewState.IdRef="Sequence_26">

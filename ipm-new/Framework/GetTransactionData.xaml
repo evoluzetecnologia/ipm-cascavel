@@ -11,7 +11,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1222,4072</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1317,1715</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GetTransactionData_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -146,39 +146,43 @@
       <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Get Transaction Data" sap:VirtualizedContainerService.HintSize="925,4007" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Get Transaction Data" sap:VirtualizedContainerService.HintSize="1327,1650" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:RetryScope DisplayName="Retry Get transaction item" sap:VirtualizedContainerService.HintSize="863,2616" sap2010:WorkflowViewState.IdRef="RetryScope_2" NumberOfRetries="[Cint(io_Config(&quot;RetryNumberGetTransactionItem&quot;))]">
+    <ui:RetryScope DisplayName="Retry Get transaction item" sap:VirtualizedContainerService.HintSize="1265,1177" sap2010:WorkflowViewState.IdRef="RetryScope_2" NumberOfRetries="[Cint(io_Config(&quot;RetryNumberGetTransactionItem&quot;))]">
       <ui:RetryScope.ActivityBody>
         <ActivityAction>
-          <TryCatch DisplayName="Try Catch Get transaction item" sap:VirtualizedContainerService.HintSize="821,2441" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+          <TryCatch DisplayName="Try Catch Get transaction item" sap:VirtualizedContainerService.HintSize="1223,1002" sap2010:WorkflowViewState.IdRef="TryCatch_2">
             <TryCatch.Try>
-              <ui:IfElseIf DisplayName="TransactionItem 1" sap:VirtualizedContainerService.HintSize="783,2213" sap2010:WorkflowViewState.IdRef="IfElseIf_7">
+              <ui:IfElseIf DisplayName="TransactionItem 1" sap:VirtualizedContainerService.HintSize="1185,774" sap2010:WorkflowViewState.IdRef="IfElseIf_7">
                 <ui:IfElseIf.ConditionBlocks>
                   <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
                     <ui:IfElseIfBlock BlockType="If" Condition="[in_TransactionNumber = 1]">
                       <ui:IfElseIfBlock.Then>
-                        <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[io_Config(&quot;ToDo&quot;).ToString]" sap:VirtualizedContainerService.HintSize="732,2017" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+                        <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[io_Config(&quot;ToDo&quot;).ToString]" sap:VirtualizedContainerService.HintSize="497,578" sap2010:WorkflowViewState.IdRef="Switch`1_1">
                           <Switch.Default>
-                            <Sequence sap:VirtualizedContainerService.HintSize="694,1769" sap2010:WorkflowViewState.IdRef="Sequence_41">
+                            <Sequence sap:VirtualizedContainerService.HintSize="849,2767" sap2010:WorkflowViewState.IdRef="Sequence_41">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
-                              <ui:IfElseIf DisplayName="Get Data" sap:VirtualizedContainerService.HintSize="632,1187" sap2010:WorkflowViewState.IdRef="IfElseIf_11">
+                              <ui:IfElseIf DisplayName="Get Data" sap:VirtualizedContainerService.HintSize="787,2294" sap2010:WorkflowViewState.IdRef="IfElseIf_11">
                                 <ui:IfElseIf.ConditionBlocks>
                                   <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
                                     <ui:IfElseIfBlock BlockType="If" Condition="[in_TransactionNumber = 1 And Not io_Config.ContainsKey(&quot;QueryTransactionData&quot;)]">
                                       <ui:IfElseIfBlock.Then>
-                                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="485,549" sap2010:WorkflowViewState.IdRef="Sequence_30">
+                                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="660,1653" sap2010:WorkflowViewState.IdRef="Sequence_30">
                                           <Sequence.Variables>
-                                            <Variable x:TypeArguments="x:String" Name="Query" />
+                                            <Variable x:TypeArguments="x:String" Name="Query">
+                                              <Variable.Default>
+                                                <Literal x:TypeArguments="x:String" Value="" />
+                                              </Variable.Default>
+                                            </Variable>
                                           </Sequence.Variables>
                                           <sap:WorkflowViewStateService.ViewState>
                                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -186,29 +190,29 @@
                                               <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                             </scg:Dictionary>
                                           </sap:WorkflowViewStateService.ViewState>
-                                          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Data\Input\Get Transaction Data.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="423,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Data\Input\Get Transaction Data.xaml">
+                                          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Data\Input\Get Transaction Data.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="598,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Data\Input\Get Transaction Data.xaml">
                                             <ui:InvokeWorkflowFile.Arguments>
                                               <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[io_Config]</InArgument>
                                               <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_TransactionData">[io_TransactionData]</OutArgument>
                                             </ui:InvokeWorkflowFile.Arguments>
                                           </ui:InvokeWorkflowFile>
-                                          <ui:IfElseIf DisplayName="Exibir clientes" sap:VirtualizedContainerService.HintSize="423,52" sap2010:WorkflowViewState.IdRef="IfElseIf_9">
+                                          <ui:IfElseIf DisplayName="Exibir clientes" sap:VirtualizedContainerService.HintSize="598,1156" sap2010:WorkflowViewState.IdRef="IfElseIf_9">
                                             <ui:IfElseIf.ConditionBlocks>
                                               <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
                                                 <ui:IfElseIfBlock BlockType="If" Condition="[Convert.ToInt32(io_Config(&quot;TotalClientes&quot;)) = 0 Or Convert.ToBoolean(io_Config(&quot;ExibirClientes&quot;))]">
                                                   <ui:IfElseIfBlock.Then>
-                                                    <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                                                    <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="547,960" sap2010:WorkflowViewState.IdRef="Sequence_28">
                                                       <Sequence.Variables>
                                                         <Variable x:TypeArguments="x:String" Name="ckFiltro" />
                                                         <Variable x:TypeArguments="sd:DataTable" Name="dt_Tmp" />
                                                       </Sequence.Variables>
                                                       <sap:WorkflowViewStateService.ViewState>
                                                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                                           <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                                         </scg:Dictionary>
                                                       </sap:WorkflowViewStateService.ViewState>
-                                                      <ui:FilterDataTable DataTable="[io_TransactionData]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="FilterDataTable_4" OutputDataTable="[dt_Tmp]" SelectColumnsMode="Remove">
+                                                      <ui:FilterDataTable DataTable="[io_TransactionData]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="485,52" sap2010:WorkflowViewState.IdRef="FilterDataTable_4" OutputDataTable="[dt_Tmp]" SelectColumnsMode="Remove">
                                                         <ui:FilterDataTable.Filters>
                                                           <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
                                                             <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
@@ -233,7 +237,7 @@
                                                           </scg:Dictionary>
                                                         </sap:WorkflowViewStateService.ViewState>
                                                       </ui:FilterDataTable>
-                                                      <ui:IfElseIf DisplayName="Else If" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="IfElseIf_8">
+                                                      <ui:IfElseIf DisplayName="Else If" sap:VirtualizedContainerService.HintSize="485,604" sap2010:WorkflowViewState.IdRef="IfElseIf_8">
                                                         <ui:IfElseIf.ConditionBlocks>
                                                           <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
                                                             <ui:IfElseIfBlock BlockType="If" Condition="[dt_Tmp.RowCount = 0]">
@@ -276,12 +280,12 @@
                                                         </ui:IfElseIf.ConditionBlocks>
                                                         <sap:WorkflowViewStateService.ViewState>
                                                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                                             <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                                           </scg:Dictionary>
                                                         </sap:WorkflowViewStateService.ViewState>
                                                       </ui:IfElseIf>
-                                                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Form\Cliente\Form Cliente IPM.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Form\Cliente\Form Cliente Lista.xaml">
+                                                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Form\Cliente\Form Cliente IPM.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="485,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Form\Cliente\Form Cliente Lista.xaml">
                                                         <ui:InvokeWorkflowFile.Arguments>
                                                           <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_TransactionData">[io_TransactionData]</InOutArgument>
                                                           <InArgument x:TypeArguments="x:String" x:Key="BreakTriggerScopeInArgument" />
@@ -295,12 +299,12 @@
                                             </ui:IfElseIf.ConditionBlocks>
                                             <sap:WorkflowViewStateService.ViewState>
                                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                               </scg:Dictionary>
                                             </sap:WorkflowViewStateService.ViewState>
                                           </ui:IfElseIf>
-                                          <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[io_TransactionData]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="423,52" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
+                                          <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[io_TransactionData]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="598,52" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
                                             <ui:ForEachRow.Body>
                                               <ActivityAction x:TypeArguments="sd:DataRow">
                                                 <ActivityAction.Argument>
@@ -375,7 +379,7 @@
                                               </scg:Dictionary>
                                             </sap:WorkflowViewStateService.ViewState>
                                           </ui:ForEachRow>
-                                          <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="423,101" sap2010:WorkflowViewState.IdRef="MultipleAssign_4">
+                                          <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="598,101" sap2010:WorkflowViewState.IdRef="MultipleAssign_4">
                                             <ui:MultipleAssign.AssignOperations>
                                               <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
                                                 <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_10">
@@ -422,302 +426,316 @@
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
                               </ui:IfElseIf>
-                              <Switch x:TypeArguments="x:String" DisplayName="Switch Filtro" Expression="[io_Config(&quot;ToDo&quot;).ToString]" sap:VirtualizedContainerService.HintSize="632,431" sap2010:WorkflowViewState.IdRef="Switch`1_3">
-                                <Switch.Default>
-                                  <ui:FilterDataTable DataTable="[io_TransactionData]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="334,161" sap2010:WorkflowViewState.IdRef="FilterDataTable_17" OutputDataTable="[io_TransactionData]" SelectColumnsMode="Remove">
-                                    <ui:FilterDataTable.Filters>
-                                      <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
-                                        <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
-                                          <ui:FilterOperationArgument.Column>
-                                            <InArgument x:TypeArguments="x:String">["EXECUTAR"]</InArgument>
-                                          </ui:FilterOperationArgument.Column>
-                                          <ui:FilterOperationArgument.Operand>
-                                            <InArgument x:TypeArguments="x:String">["True"]</InArgument>
-                                          </ui:FilterOperationArgument.Operand>
-                                        </ui:FilterOperationArgument>
-                                        <ui:FilterOperationArgument BooleanOperator="And" Operator="NOTEQ">
-                                          <ui:FilterOperationArgument.Column>
-                                            <InArgument x:TypeArguments="x:String">["LOGIN"]</InArgument>
-                                          </ui:FilterOperationArgument.Column>
-                                          <ui:FilterOperationArgument.Operand>
-                                            <InArgument x:TypeArguments="x:String">[""]</InArgument>
-                                          </ui:FilterOperationArgument.Operand>
-                                        </ui:FilterOperationArgument>
-                                        <ui:FilterOperationArgument BooleanOperator="And" Operator="NOTEQ">
-                                          <ui:FilterOperationArgument.Column>
-                                            <InArgument x:TypeArguments="x:String">["PASSWORD"]</InArgument>
-                                          </ui:FilterOperationArgument.Column>
-                                          <ui:FilterOperationArgument.Operand>
-                                            <InArgument x:TypeArguments="x:String">[""]</InArgument>
-                                          </ui:FilterOperationArgument.Operand>
-                                        </ui:FilterOperationArgument>
-                                      </scg:List>
-                                    </ui:FilterDataTable.Filters>
-                                    <ui:FilterDataTable.SelectColumns>
-                                      <scg:List x:TypeArguments="InArgument" Capacity="4">
-                                        <x:Null />
-                                      </scg:List>
-                                    </ui:FilterDataTable.SelectColumns>
+                              <If Condition="[io_TransactionData IsNot Nothing]" DisplayName="io_TransactionItem existe" sap:VirtualizedContainerService.HintSize="787,322" sap2010:WorkflowViewState.IdRef="If_23">
+                                <If.Then>
+                                  <Sequence sap:VirtualizedContainerService.HintSize="300,140" sap2010:WorkflowViewState.IdRef="Sequence_52">
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                       </scg:Dictionary>
                                     </sap:WorkflowViewStateService.ViewState>
-                                  </ui:FilterDataTable>
-                                </Switch.Default>
-                                <sap:WorkflowViewStateService.ViewState>
-                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                  </scg:Dictionary>
-                                </sap:WorkflowViewStateService.ViewState>
-                                <ui:FilterDataTable x:Key="DownloadNFSaida" DataTable="[io_TransactionData]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="334,161" sap2010:WorkflowViewState.IdRef="FilterDataTable_7" OutputDataTable="[io_TransactionData]" SelectColumnsMode="Remove">
-                                  <ui:FilterDataTable.Filters>
-                                    <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
-                                      <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
-                                        <ui:FilterOperationArgument.Column>
-                                          <InArgument x:TypeArguments="x:String">["EXECUTAR"]</InArgument>
-                                        </ui:FilterOperationArgument.Column>
-                                        <ui:FilterOperationArgument.Operand>
-                                          <InArgument x:TypeArguments="x:String">["True"]</InArgument>
-                                        </ui:FilterOperationArgument.Operand>
-                                      </ui:FilterOperationArgument>
-                                      <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
-                                        <ui:FilterOperationArgument.Column>
-                                          <InArgument x:TypeArguments="x:String">["FAZ_DOWNLOAD_SAIDA"]</InArgument>
-                                        </ui:FilterOperationArgument.Column>
-                                        <ui:FilterOperationArgument.Operand>
-                                          <InArgument x:TypeArguments="x:String">["True"]</InArgument>
-                                        </ui:FilterOperationArgument.Operand>
-                                      </ui:FilterOperationArgument>
-                                      <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
-                                        <ui:FilterOperationArgument.Column>
-                                          <InArgument x:TypeArguments="x:String">["LOGIN"]</InArgument>
-                                        </ui:FilterOperationArgument.Column>
-                                        <ui:FilterOperationArgument.Operand>
-                                          <InArgument x:TypeArguments="x:String">[""]</InArgument>
-                                        </ui:FilterOperationArgument.Operand>
-                                      </ui:FilterOperationArgument>
-                                      <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
-                                        <ui:FilterOperationArgument.Column>
-                                          <InArgument x:TypeArguments="x:String">["PASSWORD"]</InArgument>
-                                        </ui:FilterOperationArgument.Column>
-                                        <ui:FilterOperationArgument.Operand>
-                                          <InArgument x:TypeArguments="x:String">[""]</InArgument>
-                                        </ui:FilterOperationArgument.Operand>
-                                      </ui:FilterOperationArgument>
-                                    </scg:List>
-                                  </ui:FilterDataTable.Filters>
-                                  <ui:FilterDataTable.SelectColumns>
-                                    <scg:List x:TypeArguments="InArgument" Capacity="4">
-                                      <x:Null />
-                                    </scg:List>
-                                  </ui:FilterDataTable.SelectColumns>
-                                  <sap:WorkflowViewStateService.ViewState>
-                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                    </scg:Dictionary>
-                                  </sap:WorkflowViewStateService.ViewState>
-                                </ui:FilterDataTable>
-                                <ui:FilterDataTable x:Key="DownloadNFEntrada" DataTable="[io_TransactionData]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="334,161" sap2010:WorkflowViewState.IdRef="FilterDataTable_13" OutputDataTable="[io_TransactionData]" SelectColumnsMode="Remove">
-                                  <ui:FilterDataTable.Filters>
-                                    <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
-                                      <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
-                                        <ui:FilterOperationArgument.Column>
-                                          <InArgument x:TypeArguments="x:String">["EXECUTAR"]</InArgument>
-                                        </ui:FilterOperationArgument.Column>
-                                        <ui:FilterOperationArgument.Operand>
-                                          <InArgument x:TypeArguments="x:String">["True"]</InArgument>
-                                        </ui:FilterOperationArgument.Operand>
-                                      </ui:FilterOperationArgument>
-                                      <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
-                                        <ui:FilterOperationArgument.Column>
-                                          <InArgument x:TypeArguments="x:String">["FAZ_DOWNLOAD_ENTRADA"]</InArgument>
-                                        </ui:FilterOperationArgument.Column>
-                                        <ui:FilterOperationArgument.Operand>
-                                          <InArgument x:TypeArguments="x:String">["True"]</InArgument>
-                                        </ui:FilterOperationArgument.Operand>
-                                      </ui:FilterOperationArgument>
-                                      <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
-                                        <ui:FilterOperationArgument.Column>
-                                          <InArgument x:TypeArguments="x:String">["LOGIN"]</InArgument>
-                                        </ui:FilterOperationArgument.Column>
-                                        <ui:FilterOperationArgument.Operand>
-                                          <InArgument x:TypeArguments="x:String">[""]</InArgument>
-                                        </ui:FilterOperationArgument.Operand>
-                                      </ui:FilterOperationArgument>
-                                      <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
-                                        <ui:FilterOperationArgument.Column>
-                                          <InArgument x:TypeArguments="x:String">["PASSWORD"]</InArgument>
-                                        </ui:FilterOperationArgument.Column>
-                                        <ui:FilterOperationArgument.Operand>
-                                          <InArgument x:TypeArguments="x:String">[""]</InArgument>
-                                        </ui:FilterOperationArgument.Operand>
-                                      </ui:FilterOperationArgument>
-                                    </scg:List>
-                                  </ui:FilterDataTable.Filters>
-                                  <ui:FilterDataTable.SelectColumns>
-                                    <scg:List x:TypeArguments="InArgument" Capacity="4">
-                                      <x:Null />
-                                    </scg:List>
-                                  </ui:FilterDataTable.SelectColumns>
-                                  <sap:WorkflowViewStateService.ViewState>
-                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                    </scg:Dictionary>
-                                  </sap:WorkflowViewStateService.ViewState>
-                                </ui:FilterDataTable>
-                                <ui:FilterDataTable x:Key="ProtocolarNFSaida" DataTable="[io_TransactionData]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="334,161" sap2010:WorkflowViewState.IdRef="FilterDataTable_14" OutputDataTable="[io_TransactionData]" SelectColumnsMode="Remove">
-                                  <ui:FilterDataTable.Filters>
-                                    <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
-                                      <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
-                                        <ui:FilterOperationArgument.Column>
-                                          <InArgument x:TypeArguments="x:String">["EXECUTAR"]</InArgument>
-                                        </ui:FilterOperationArgument.Column>
-                                        <ui:FilterOperationArgument.Operand>
-                                          <InArgument x:TypeArguments="x:String">["True"]</InArgument>
-                                        </ui:FilterOperationArgument.Operand>
-                                      </ui:FilterOperationArgument>
-                                      <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
-                                        <ui:FilterOperationArgument.Column>
-                                          <InArgument x:TypeArguments="x:String">["FAZ_DECLARACAO_SAIDA"]</InArgument>
-                                        </ui:FilterOperationArgument.Column>
-                                        <ui:FilterOperationArgument.Operand>
-                                          <InArgument x:TypeArguments="x:String">["True"]</InArgument>
-                                        </ui:FilterOperationArgument.Operand>
-                                      </ui:FilterOperationArgument>
-                                      <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
-                                        <ui:FilterOperationArgument.Column>
-                                          <InArgument x:TypeArguments="x:String">["LOGIN"]</InArgument>
-                                        </ui:FilterOperationArgument.Column>
-                                        <ui:FilterOperationArgument.Operand>
-                                          <InArgument x:TypeArguments="x:String">[""]</InArgument>
-                                        </ui:FilterOperationArgument.Operand>
-                                      </ui:FilterOperationArgument>
-                                      <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
-                                        <ui:FilterOperationArgument.Column>
-                                          <InArgument x:TypeArguments="x:String">["PASSWORD"]</InArgument>
-                                        </ui:FilterOperationArgument.Column>
-                                        <ui:FilterOperationArgument.Operand>
-                                          <InArgument x:TypeArguments="x:String">[""]</InArgument>
-                                        </ui:FilterOperationArgument.Operand>
-                                      </ui:FilterOperationArgument>
-                                    </scg:List>
-                                  </ui:FilterDataTable.Filters>
-                                  <ui:FilterDataTable.SelectColumns>
-                                    <scg:List x:TypeArguments="InArgument" Capacity="4">
-                                      <x:Null />
-                                    </scg:List>
-                                  </ui:FilterDataTable.SelectColumns>
-                                  <sap:WorkflowViewStateService.ViewState>
-                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                    </scg:Dictionary>
-                                  </sap:WorkflowViewStateService.ViewState>
-                                </ui:FilterDataTable>
-                                <ui:FilterDataTable x:Key="ProtocolarNFEntrada" DataTable="[io_TransactionData]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="334,161" sap2010:WorkflowViewState.IdRef="FilterDataTable_15" OutputDataTable="[io_TransactionData]" SelectColumnsMode="Remove">
-                                  <ui:FilterDataTable.Filters>
-                                    <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
-                                      <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
-                                        <ui:FilterOperationArgument.Column>
-                                          <InArgument x:TypeArguments="x:String">["EXECUTAR"]</InArgument>
-                                        </ui:FilterOperationArgument.Column>
-                                        <ui:FilterOperationArgument.Operand>
-                                          <InArgument x:TypeArguments="x:String">["True"]</InArgument>
-                                        </ui:FilterOperationArgument.Operand>
-                                      </ui:FilterOperationArgument>
-                                      <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
-                                        <ui:FilterOperationArgument.Column>
-                                          <InArgument x:TypeArguments="x:String">["FAZ_DECLARACAO_ENTRADA"]</InArgument>
-                                        </ui:FilterOperationArgument.Column>
-                                        <ui:FilterOperationArgument.Operand>
-                                          <InArgument x:TypeArguments="x:String">["True"]</InArgument>
-                                        </ui:FilterOperationArgument.Operand>
-                                      </ui:FilterOperationArgument>
-                                      <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
-                                        <ui:FilterOperationArgument.Column>
-                                          <InArgument x:TypeArguments="x:String">["LOGIN"]</InArgument>
-                                        </ui:FilterOperationArgument.Column>
-                                        <ui:FilterOperationArgument.Operand>
-                                          <InArgument x:TypeArguments="x:String">[""]</InArgument>
-                                        </ui:FilterOperationArgument.Operand>
-                                      </ui:FilterOperationArgument>
-                                      <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
-                                        <ui:FilterOperationArgument.Column>
-                                          <InArgument x:TypeArguments="x:String">["PASSWORD"]</InArgument>
-                                        </ui:FilterOperationArgument.Column>
-                                        <ui:FilterOperationArgument.Operand>
-                                          <InArgument x:TypeArguments="x:String">[""]</InArgument>
-                                        </ui:FilterOperationArgument.Operand>
-                                      </ui:FilterOperationArgument>
-                                    </scg:List>
-                                  </ui:FilterDataTable.Filters>
-                                  <ui:FilterDataTable.SelectColumns>
-                                    <scg:List x:TypeArguments="InArgument" Capacity="4">
-                                      <x:Null />
-                                    </scg:List>
-                                  </ui:FilterDataTable.SelectColumns>
-                                  <sap:WorkflowViewStateService.ViewState>
-                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                    </scg:Dictionary>
-                                  </sap:WorkflowViewStateService.ViewState>
-                                </ui:FilterDataTable>
-                                <ui:FilterDataTable x:Key="SimplesNacional" DataTable="[io_TransactionData]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="334,161" sap2010:WorkflowViewState.IdRef="FilterDataTable_16" OutputDataTable="[io_TransactionData]" SelectColumnsMode="Remove">
-                                  <ui:FilterDataTable.Filters>
-                                    <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
-                                      <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
-                                        <ui:FilterOperationArgument.Column>
-                                          <InArgument x:TypeArguments="x:String">["EXECUTAR"]</InArgument>
-                                        </ui:FilterOperationArgument.Column>
-                                        <ui:FilterOperationArgument.Operand>
-                                          <InArgument x:TypeArguments="x:String">["True"]</InArgument>
-                                        </ui:FilterOperationArgument.Operand>
-                                      </ui:FilterOperationArgument>
-                                      <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
-                                        <ui:FilterOperationArgument.Column>
-                                          <InArgument x:TypeArguments="x:String">["FAZ_SIMPLES_NACIONAL"]</InArgument>
-                                        </ui:FilterOperationArgument.Column>
-                                        <ui:FilterOperationArgument.Operand>
-                                          <InArgument x:TypeArguments="x:String">["True"]</InArgument>
-                                        </ui:FilterOperationArgument.Operand>
-                                      </ui:FilterOperationArgument>
-                                      <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
-                                        <ui:FilterOperationArgument.Column>
-                                          <InArgument x:TypeArguments="x:String">["LOGIN"]</InArgument>
-                                        </ui:FilterOperationArgument.Column>
-                                        <ui:FilterOperationArgument.Operand>
-                                          <InArgument x:TypeArguments="x:String">[""]</InArgument>
-                                        </ui:FilterOperationArgument.Operand>
-                                      </ui:FilterOperationArgument>
-                                      <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
-                                        <ui:FilterOperationArgument.Column>
-                                          <InArgument x:TypeArguments="x:String">["PASSWORD"]</InArgument>
-                                        </ui:FilterOperationArgument.Column>
-                                        <ui:FilterOperationArgument.Operand>
-                                          <InArgument x:TypeArguments="x:String">[""]</InArgument>
-                                        </ui:FilterOperationArgument.Operand>
-                                      </ui:FilterOperationArgument>
-                                    </scg:List>
-                                  </ui:FilterDataTable.Filters>
-                                  <ui:FilterDataTable.SelectColumns>
-                                    <scg:List x:TypeArguments="InArgument" Capacity="4">
-                                      <x:Null />
-                                    </scg:List>
-                                  </ui:FilterDataTable.SelectColumns>
-                                  <sap:WorkflowViewStateService.ViewState>
-                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                    </scg:Dictionary>
-                                  </sap:WorkflowViewStateService.ViewState>
-                                </ui:FilterDataTable>
-                              </Switch>
+                                    <Switch x:TypeArguments="x:String" DisplayName="Switch Filtro" Expression="[io_Config(&quot;ToDo&quot;).ToString]" sap:VirtualizedContainerService.HintSize="258,52" sap2010:WorkflowViewState.IdRef="Switch`1_3">
+                                      <Switch.Default>
+                                        <ui:FilterDataTable DataTable="[io_TransactionData]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="334,161" sap2010:WorkflowViewState.IdRef="FilterDataTable_17" OutputDataTable="[io_TransactionData]" SelectColumnsMode="Remove">
+                                          <ui:FilterDataTable.Filters>
+                                            <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                                              <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                                                <ui:FilterOperationArgument.Column>
+                                                  <InArgument x:TypeArguments="x:String">["EXECUTAR"]</InArgument>
+                                                </ui:FilterOperationArgument.Column>
+                                                <ui:FilterOperationArgument.Operand>
+                                                  <InArgument x:TypeArguments="x:String">["True"]</InArgument>
+                                                </ui:FilterOperationArgument.Operand>
+                                              </ui:FilterOperationArgument>
+                                              <ui:FilterOperationArgument BooleanOperator="And" Operator="NOTEQ">
+                                                <ui:FilterOperationArgument.Column>
+                                                  <InArgument x:TypeArguments="x:String">["LOGIN"]</InArgument>
+                                                </ui:FilterOperationArgument.Column>
+                                                <ui:FilterOperationArgument.Operand>
+                                                  <InArgument x:TypeArguments="x:String">[""]</InArgument>
+                                                </ui:FilterOperationArgument.Operand>
+                                              </ui:FilterOperationArgument>
+                                              <ui:FilterOperationArgument BooleanOperator="And" Operator="NOTEQ">
+                                                <ui:FilterOperationArgument.Column>
+                                                  <InArgument x:TypeArguments="x:String">["PASSWORD"]</InArgument>
+                                                </ui:FilterOperationArgument.Column>
+                                                <ui:FilterOperationArgument.Operand>
+                                                  <InArgument x:TypeArguments="x:String">[""]</InArgument>
+                                                </ui:FilterOperationArgument.Operand>
+                                              </ui:FilterOperationArgument>
+                                            </scg:List>
+                                          </ui:FilterDataTable.Filters>
+                                          <ui:FilterDataTable.SelectColumns>
+                                            <scg:List x:TypeArguments="InArgument" Capacity="4">
+                                              <x:Null />
+                                            </scg:List>
+                                          </ui:FilterDataTable.SelectColumns>
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                        </ui:FilterDataTable>
+                                      </Switch.Default>
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <ui:FilterDataTable x:Key="DownloadNFSaida" DataTable="[io_TransactionData]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="334,161" sap2010:WorkflowViewState.IdRef="FilterDataTable_7" OutputDataTable="[io_TransactionData]" SelectColumnsMode="Remove">
+                                        <ui:FilterDataTable.Filters>
+                                          <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                                            <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                                              <ui:FilterOperationArgument.Column>
+                                                <InArgument x:TypeArguments="x:String">["EXECUTAR"]</InArgument>
+                                              </ui:FilterOperationArgument.Column>
+                                              <ui:FilterOperationArgument.Operand>
+                                                <InArgument x:TypeArguments="x:String">["True"]</InArgument>
+                                              </ui:FilterOperationArgument.Operand>
+                                            </ui:FilterOperationArgument>
+                                            <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                                              <ui:FilterOperationArgument.Column>
+                                                <InArgument x:TypeArguments="x:String">["FAZ_DOWNLOAD_SAIDA"]</InArgument>
+                                              </ui:FilterOperationArgument.Column>
+                                              <ui:FilterOperationArgument.Operand>
+                                                <InArgument x:TypeArguments="x:String">["True"]</InArgument>
+                                              </ui:FilterOperationArgument.Operand>
+                                            </ui:FilterOperationArgument>
+                                            <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                                              <ui:FilterOperationArgument.Column>
+                                                <InArgument x:TypeArguments="x:String">["LOGIN"]</InArgument>
+                                              </ui:FilterOperationArgument.Column>
+                                              <ui:FilterOperationArgument.Operand>
+                                                <InArgument x:TypeArguments="x:String">[""]</InArgument>
+                                              </ui:FilterOperationArgument.Operand>
+                                            </ui:FilterOperationArgument>
+                                            <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                                              <ui:FilterOperationArgument.Column>
+                                                <InArgument x:TypeArguments="x:String">["PASSWORD"]</InArgument>
+                                              </ui:FilterOperationArgument.Column>
+                                              <ui:FilterOperationArgument.Operand>
+                                                <InArgument x:TypeArguments="x:String">[""]</InArgument>
+                                              </ui:FilterOperationArgument.Operand>
+                                            </ui:FilterOperationArgument>
+                                          </scg:List>
+                                        </ui:FilterDataTable.Filters>
+                                        <ui:FilterDataTable.SelectColumns>
+                                          <scg:List x:TypeArguments="InArgument" Capacity="4">
+                                            <x:Null />
+                                          </scg:List>
+                                        </ui:FilterDataTable.SelectColumns>
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </ui:FilterDataTable>
+                                      <ui:FilterDataTable x:Key="DownloadNFEntrada" DataTable="[io_TransactionData]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="334,161" sap2010:WorkflowViewState.IdRef="FilterDataTable_13" OutputDataTable="[io_TransactionData]" SelectColumnsMode="Remove">
+                                        <ui:FilterDataTable.Filters>
+                                          <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                                            <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                                              <ui:FilterOperationArgument.Column>
+                                                <InArgument x:TypeArguments="x:String">["EXECUTAR"]</InArgument>
+                                              </ui:FilterOperationArgument.Column>
+                                              <ui:FilterOperationArgument.Operand>
+                                                <InArgument x:TypeArguments="x:String">["True"]</InArgument>
+                                              </ui:FilterOperationArgument.Operand>
+                                            </ui:FilterOperationArgument>
+                                            <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                                              <ui:FilterOperationArgument.Column>
+                                                <InArgument x:TypeArguments="x:String">["FAZ_DOWNLOAD_ENTRADA"]</InArgument>
+                                              </ui:FilterOperationArgument.Column>
+                                              <ui:FilterOperationArgument.Operand>
+                                                <InArgument x:TypeArguments="x:String">["True"]</InArgument>
+                                              </ui:FilterOperationArgument.Operand>
+                                            </ui:FilterOperationArgument>
+                                            <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                                              <ui:FilterOperationArgument.Column>
+                                                <InArgument x:TypeArguments="x:String">["LOGIN"]</InArgument>
+                                              </ui:FilterOperationArgument.Column>
+                                              <ui:FilterOperationArgument.Operand>
+                                                <InArgument x:TypeArguments="x:String">[""]</InArgument>
+                                              </ui:FilterOperationArgument.Operand>
+                                            </ui:FilterOperationArgument>
+                                            <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                                              <ui:FilterOperationArgument.Column>
+                                                <InArgument x:TypeArguments="x:String">["PASSWORD"]</InArgument>
+                                              </ui:FilterOperationArgument.Column>
+                                              <ui:FilterOperationArgument.Operand>
+                                                <InArgument x:TypeArguments="x:String">[""]</InArgument>
+                                              </ui:FilterOperationArgument.Operand>
+                                            </ui:FilterOperationArgument>
+                                          </scg:List>
+                                        </ui:FilterDataTable.Filters>
+                                        <ui:FilterDataTable.SelectColumns>
+                                          <scg:List x:TypeArguments="InArgument" Capacity="4">
+                                            <x:Null />
+                                          </scg:List>
+                                        </ui:FilterDataTable.SelectColumns>
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </ui:FilterDataTable>
+                                      <ui:FilterDataTable x:Key="ProtocolarNFSaida" DataTable="[io_TransactionData]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="334,161" sap2010:WorkflowViewState.IdRef="FilterDataTable_14" OutputDataTable="[io_TransactionData]" SelectColumnsMode="Remove">
+                                        <ui:FilterDataTable.Filters>
+                                          <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                                            <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                                              <ui:FilterOperationArgument.Column>
+                                                <InArgument x:TypeArguments="x:String">["EXECUTAR"]</InArgument>
+                                              </ui:FilterOperationArgument.Column>
+                                              <ui:FilterOperationArgument.Operand>
+                                                <InArgument x:TypeArguments="x:String">["True"]</InArgument>
+                                              </ui:FilterOperationArgument.Operand>
+                                            </ui:FilterOperationArgument>
+                                            <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                                              <ui:FilterOperationArgument.Column>
+                                                <InArgument x:TypeArguments="x:String">["FAZ_DECLARACAO_SAIDA"]</InArgument>
+                                              </ui:FilterOperationArgument.Column>
+                                              <ui:FilterOperationArgument.Operand>
+                                                <InArgument x:TypeArguments="x:String">["True"]</InArgument>
+                                              </ui:FilterOperationArgument.Operand>
+                                            </ui:FilterOperationArgument>
+                                            <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                                              <ui:FilterOperationArgument.Column>
+                                                <InArgument x:TypeArguments="x:String">["LOGIN"]</InArgument>
+                                              </ui:FilterOperationArgument.Column>
+                                              <ui:FilterOperationArgument.Operand>
+                                                <InArgument x:TypeArguments="x:String">[""]</InArgument>
+                                              </ui:FilterOperationArgument.Operand>
+                                            </ui:FilterOperationArgument>
+                                            <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                                              <ui:FilterOperationArgument.Column>
+                                                <InArgument x:TypeArguments="x:String">["PASSWORD"]</InArgument>
+                                              </ui:FilterOperationArgument.Column>
+                                              <ui:FilterOperationArgument.Operand>
+                                                <InArgument x:TypeArguments="x:String">[""]</InArgument>
+                                              </ui:FilterOperationArgument.Operand>
+                                            </ui:FilterOperationArgument>
+                                          </scg:List>
+                                        </ui:FilterDataTable.Filters>
+                                        <ui:FilterDataTable.SelectColumns>
+                                          <scg:List x:TypeArguments="InArgument" Capacity="4">
+                                            <x:Null />
+                                          </scg:List>
+                                        </ui:FilterDataTable.SelectColumns>
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </ui:FilterDataTable>
+                                      <ui:FilterDataTable x:Key="ProtocolarNFEntrada" DataTable="[io_TransactionData]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="334,161" sap2010:WorkflowViewState.IdRef="FilterDataTable_15" OutputDataTable="[io_TransactionData]" SelectColumnsMode="Remove">
+                                        <ui:FilterDataTable.Filters>
+                                          <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                                            <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                                              <ui:FilterOperationArgument.Column>
+                                                <InArgument x:TypeArguments="x:String">["EXECUTAR"]</InArgument>
+                                              </ui:FilterOperationArgument.Column>
+                                              <ui:FilterOperationArgument.Operand>
+                                                <InArgument x:TypeArguments="x:String">["True"]</InArgument>
+                                              </ui:FilterOperationArgument.Operand>
+                                            </ui:FilterOperationArgument>
+                                            <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                                              <ui:FilterOperationArgument.Column>
+                                                <InArgument x:TypeArguments="x:String">["FAZ_DECLARACAO_ENTRADA"]</InArgument>
+                                              </ui:FilterOperationArgument.Column>
+                                              <ui:FilterOperationArgument.Operand>
+                                                <InArgument x:TypeArguments="x:String">["True"]</InArgument>
+                                              </ui:FilterOperationArgument.Operand>
+                                            </ui:FilterOperationArgument>
+                                            <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                                              <ui:FilterOperationArgument.Column>
+                                                <InArgument x:TypeArguments="x:String">["LOGIN"]</InArgument>
+                                              </ui:FilterOperationArgument.Column>
+                                              <ui:FilterOperationArgument.Operand>
+                                                <InArgument x:TypeArguments="x:String">[""]</InArgument>
+                                              </ui:FilterOperationArgument.Operand>
+                                            </ui:FilterOperationArgument>
+                                            <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                                              <ui:FilterOperationArgument.Column>
+                                                <InArgument x:TypeArguments="x:String">["PASSWORD"]</InArgument>
+                                              </ui:FilterOperationArgument.Column>
+                                              <ui:FilterOperationArgument.Operand>
+                                                <InArgument x:TypeArguments="x:String">[""]</InArgument>
+                                              </ui:FilterOperationArgument.Operand>
+                                            </ui:FilterOperationArgument>
+                                          </scg:List>
+                                        </ui:FilterDataTable.Filters>
+                                        <ui:FilterDataTable.SelectColumns>
+                                          <scg:List x:TypeArguments="InArgument" Capacity="4">
+                                            <x:Null />
+                                          </scg:List>
+                                        </ui:FilterDataTable.SelectColumns>
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </ui:FilterDataTable>
+                                      <ui:FilterDataTable x:Key="SimplesNacional" DataTable="[io_TransactionData]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="334,161" sap2010:WorkflowViewState.IdRef="FilterDataTable_16" OutputDataTable="[io_TransactionData]" SelectColumnsMode="Remove">
+                                        <ui:FilterDataTable.Filters>
+                                          <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                                            <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                                              <ui:FilterOperationArgument.Column>
+                                                <InArgument x:TypeArguments="x:String">["EXECUTAR"]</InArgument>
+                                              </ui:FilterOperationArgument.Column>
+                                              <ui:FilterOperationArgument.Operand>
+                                                <InArgument x:TypeArguments="x:String">["True"]</InArgument>
+                                              </ui:FilterOperationArgument.Operand>
+                                            </ui:FilterOperationArgument>
+                                            <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                                              <ui:FilterOperationArgument.Column>
+                                                <InArgument x:TypeArguments="x:String">["FAZ_SIMPLES_NACIONAL"]</InArgument>
+                                              </ui:FilterOperationArgument.Column>
+                                              <ui:FilterOperationArgument.Operand>
+                                                <InArgument x:TypeArguments="x:String">["True"]</InArgument>
+                                              </ui:FilterOperationArgument.Operand>
+                                            </ui:FilterOperationArgument>
+                                            <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                                              <ui:FilterOperationArgument.Column>
+                                                <InArgument x:TypeArguments="x:String">["LOGIN"]</InArgument>
+                                              </ui:FilterOperationArgument.Column>
+                                              <ui:FilterOperationArgument.Operand>
+                                                <InArgument x:TypeArguments="x:String">[""]</InArgument>
+                                              </ui:FilterOperationArgument.Operand>
+                                            </ui:FilterOperationArgument>
+                                            <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                                              <ui:FilterOperationArgument.Column>
+                                                <InArgument x:TypeArguments="x:String">["PASSWORD"]</InArgument>
+                                              </ui:FilterOperationArgument.Column>
+                                              <ui:FilterOperationArgument.Operand>
+                                                <InArgument x:TypeArguments="x:String">[""]</InArgument>
+                                              </ui:FilterOperationArgument.Operand>
+                                            </ui:FilterOperationArgument>
+                                          </scg:List>
+                                        </ui:FilterDataTable.Filters>
+                                        <ui:FilterDataTable.SelectColumns>
+                                          <scg:List x:TypeArguments="InArgument" Capacity="4">
+                                            <x:Null />
+                                          </scg:List>
+                                        </ui:FilterDataTable.SelectColumns>
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </ui:FilterDataTable>
+                                    </Switch>
+                                  </Sequence>
+                                </If.Then>
+                                <If.Else>
+                                  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_53" />
+                                </If.Else>
+                              </If>
                             </Sequence>
                           </Switch.Default>
                           <sap:WorkflowViewStateService.ViewState>
@@ -726,7 +744,27 @@
                               <x:Boolean x:Key="IsPinned">False</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <ui:ClearDataTable x:Key="" DataTable="[io_TransactionData]" DisplayName="Clear Data Table" sap:VirtualizedContainerService.HintSize="334,80" sap2010:WorkflowViewState.IdRef="ClearDataTable_4" />
+                          <If x:Key="" Condition="[io_TransactionData IsNot Nothing]" DisplayName="io_TransactionItem existe" sap:VirtualizedContainerService.HintSize="410,350" sap2010:WorkflowViewState.IdRef="If_27">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <If.Then>
+                              <Sequence sap:VirtualizedContainerService.HintSize="376,168" sap2010:WorkflowViewState.IdRef="Sequence_56">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <ui:ClearDataTable DataTable="[io_TransactionData]" DisplayName="Clear Data Table" sap:VirtualizedContainerService.HintSize="334,80" sap2010:WorkflowViewState.IdRef="ClearDataTable_7" />
+                              </Sequence>
+                            </If.Then>
+                            <If.Else>
+                              <Sequence sap2010:WorkflowViewState.IdRef="Sequence_57" />
+                            </If.Else>
+                          </If>
                           <x:Null x:Key="EmitirNFS" />
                           <Sequence x:Key="CertidaoNegativa" DisplayName="Certidão negativa" sap:VirtualizedContainerService.HintSize="612,174" sap2010:WorkflowViewState.IdRef="Sequence_39">
                             <Sequence.Variables>
@@ -860,7 +898,6 @@
                               </If.Else>
                             </If>
                           </Sequence>
-                          <ui:ClearDataTable x:Key="{x:Null}" DataTable="[io_TransactionData]" DisplayName="Clear Data Table" sap:VirtualizedContainerService.HintSize="334,80" sap2010:WorkflowViewState.IdRef="ClearDataTable_3" />
                         </Switch>
                       </ui:IfElseIfBlock.Then>
                     </ui:IfElseIfBlock>
@@ -869,7 +906,7 @@
               </ui:IfElseIf>
             </TryCatch.Try>
             <TryCatch.Catches>
-              <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="787,21" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+              <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="1189,21" sap2010:WorkflowViewState.IdRef="Catch`1_2">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -899,51 +936,15 @@
         <ActivityFunc x:TypeArguments="x:Boolean" />
       </ui:RetryScope.Condition>
     </ui:RetryScope>
-    <If sap2010:Annotation.AnnotationText="This optional step can be used to include more information about a transaction item and it is used mainly for logging and visualization purposes.&#xA;For example, if transaction items are invoices, then out_TransactionID can be the invoice number, out_TransactionField1 can be the invoice date and out_TransactionField2 can be the invoice amount." Condition="[io_TransactionData.RowCount &gt;= in_TransactionNumber]" DisplayName="If a new transaction item is retrieved, get additional information about it" sap:VirtualizedContainerService.HintSize="863,1240" sap2010:WorkflowViewState.IdRef="If_1">
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
+    <If Condition="[io_TransactionData IsNot Nothing]" DisplayName="io_TransactionItem existe" sap:VirtualizedContainerService.HintSize="1265,322" sap2010:WorkflowViewState.IdRef="If_24">
       <If.Then>
-        <Sequence sap2010:Annotation.AnnotationText="Write data to the added log fields that identify the transaction." DisplayName="Add transaction information to log fields" sap:VirtualizedContainerService.HintSize="552,986" sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <Sequence sap:VirtualizedContainerService.HintSize="300,140" sap2010:WorkflowViewState.IdRef="Sequence_54">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="510,132" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
-            <ui:MultipleAssign.AssignOperations>
-              <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
-                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
-                  <ui:AssignOperation.To>
-                    <OutArgument x:TypeArguments="sd:DataRow">[out_TransactionItem]</OutArgument>
-                  </ui:AssignOperation.To>
-                  <ui:AssignOperation.Value>
-                    <InArgument x:TypeArguments="sd:DataRow">[io_TransactionData(in_TransactionNumber-1)]</InArgument>
-                  </ui:AssignOperation.Value>
-                </ui:AssignOperation>
-                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
-                  <ui:AssignOperation.To>
-                    <OutArgument x:TypeArguments="x:Object">[io_Config("Finalizado")]</OutArgument>
-                  </ui:AssignOperation.To>
-                  <ui:AssignOperation.Value>
-                    <InArgument x:TypeArguments="x:Object">[False]</InArgument>
-                  </ui:AssignOperation.Value>
-                </ui:AssignOperation>
-              </scg:List>
-            </ui:MultipleAssign.AssignOperations>
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                <x:Boolean x:Key="IsPinned">False</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-          </ui:MultipleAssign>
-          <If Condition="[out_TransactionItem.Table.Columns.Contains(&quot;ID_CLIENTE&quot;)]" DisplayName="Get Dados Cliente" sap:VirtualizedContainerService.HintSize="510,52" sap2010:WorkflowViewState.IdRef="If_21">
+          <If Condition="[io_TransactionData.RowCount &gt;= in_TransactionNumber]" DisplayName="If a new transaction item is retrieved, get additional information about it" sap:VirtualizedContainerService.HintSize="258,52" sap2010:WorkflowViewState.IdRef="If_1">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -951,29 +952,30 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <If.Then>
-              <Sequence sap:VirtualizedContainerService.HintSize="465,220" sap2010:WorkflowViewState.IdRef="Sequence_48">
+              <Sequence sap2010:Annotation.AnnotationText="Write data to the added log fields that identify the transaction." DisplayName="Add transaction information to log fields" sap:VirtualizedContainerService.HintSize="552,986" sap2010:WorkflowViewState.IdRef="Sequence_3">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="423,132" sap2010:WorkflowViewState.IdRef="MultipleAssign_8">
+                <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="510,132" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
                   <ui:MultipleAssign.AssignOperations>
                     <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
-                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_17">
+                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
                         <ui:AssignOperation.To>
-                          <OutArgument x:TypeArguments="x:String">[out_TransactionID]</OutArgument>
+                          <OutArgument x:TypeArguments="sd:DataRow">[out_TransactionItem]</OutArgument>
                         </ui:AssignOperation.To>
                         <ui:AssignOperation.Value>
-                          <InArgument x:TypeArguments="x:String">[out_TransactionItem("ID_CLIENTE").ToString]</InArgument>
+                          <InArgument x:TypeArguments="sd:DataRow">[io_TransactionData(in_TransactionNumber-1)]</InArgument>
                         </ui:AssignOperation.Value>
                       </ui:AssignOperation>
-                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_18">
+                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
                         <ui:AssignOperation.To>
-                          <OutArgument x:TypeArguments="x:String">[out_TransactionName]</OutArgument>
+                          <OutArgument x:TypeArguments="x:Object">[io_Config("Finalizado")]</OutArgument>
                         </ui:AssignOperation.To>
                         <ui:AssignOperation.Value>
-                          <InArgument x:TypeArguments="x:String">[out_TransactionItem("CNPJ").ToString+" - "+out_TransactionItem("EMPRESA").ToString+" ("+out_TransactionItem("CODIGO").ToString+")"]</InArgument>
+                          <InArgument x:TypeArguments="x:Object">[False]</InArgument>
                         </ui:AssignOperation.Value>
                       </ui:AssignOperation>
                     </scg:List>
@@ -985,133 +987,132 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </ui:MultipleAssign>
-              </Sequence>
-            </If.Then>
-            <If.Else>
-              <Sequence sap:VirtualizedContainerService.HintSize="465,220" sap2010:WorkflowViewState.IdRef="Sequence_49">
-                <sap:WorkflowViewStateService.ViewState>
-                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                  </scg:Dictionary>
-                </sap:WorkflowViewStateService.ViewState>
-                <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="423,132" sap2010:WorkflowViewState.IdRef="MultipleAssign_9">
-                  <ui:MultipleAssign.AssignOperations>
-                    <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
-                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_19">
-                        <ui:AssignOperation.To>
-                          <OutArgument x:TypeArguments="x:String">[out_TransactionID]</OutArgument>
-                        </ui:AssignOperation.To>
-                        <ui:AssignOperation.Value>
-                          <InArgument x:TypeArguments="x:String">
-                            <Literal x:TypeArguments="x:String" Value="" />
-                          </InArgument>
-                        </ui:AssignOperation.Value>
-                      </ui:AssignOperation>
-                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_20">
-                        <ui:AssignOperation.To>
-                          <OutArgument x:TypeArguments="x:String">[out_TransactionName]</OutArgument>
-                        </ui:AssignOperation.To>
-                        <ui:AssignOperation.Value>
-                          <InArgument x:TypeArguments="x:String">
-                            <Literal x:TypeArguments="x:String" Value="" />
-                          </InArgument>
-                        </ui:AssignOperation.Value>
-                      </ui:AssignOperation>
-                    </scg:List>
-                  </ui:MultipleAssign.AssignOperations>
+                <If Condition="[out_TransactionItem.Table.Columns.Contains(&quot;ID_CLIENTE&quot;)]" DisplayName="Get Dados Cliente" sap:VirtualizedContainerService.HintSize="510,52" sap2010:WorkflowViewState.IdRef="If_21">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                </ui:MultipleAssign>
-              </Sequence>
-            </If.Else>
-          </If>
-          <If Condition="[io_TransactionData.RowCount &gt; 1]" DisplayName="Exibir Progress Bar" sap:VirtualizedContainerService.HintSize="510,634" sap2010:WorkflowViewState.IdRef="If_7">
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                <x:Boolean x:Key="IsPinned">False</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-            <If.Then>
-              <Sequence sap:VirtualizedContainerService.HintSize="476,452" sap2010:WorkflowViewState.IdRef="Sequence_19">
-                <sap:WorkflowViewStateService.ViewState>
-                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                  </scg:Dictionary>
-                </sap:WorkflowViewStateService.ViewState>
-                <Assign sap:VirtualizedContainerService.HintSize="434,81" sap2010:WorkflowViewState.IdRef="Assign_9">
-                  <Assign.To>
-                    <OutArgument x:TypeArguments="x:Object">[io_Config("ProgressBarShow")]</OutArgument>
-                  </Assign.To>
-                  <Assign.Value>
-                    <InArgument x:TypeArguments="x:Object">[True]</InArgument>
-                  </Assign.Value>
-                </Assign>
-                <rn:ShowProgress sap:VirtualizedContainerService.HintSize="434,243" sap2010:WorkflowViewState.IdRef="ShowProgress_3" in_Length="[io_TransactionData.RowCount]" in_Message="[&quot;Trabalhando no &quot;+out_TransactionName]" in_Progress="[in_TransactionNumber]" in_Title="[io_Config(&quot;ToDo&quot;).ToString]">
-                  <sap:WorkflowViewStateService.ViewState>
-                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                    </scg:Dictionary>
-                  </sap:WorkflowViewStateService.ViewState>
-                </rn:ShowProgress>
-              </Sequence>
-            </If.Then>
-            <If.Else>
-              <Sequence sap:VirtualizedContainerService.HintSize="476,170" sap2010:WorkflowViewState.IdRef="Sequence_20">
-                <sap:WorkflowViewStateService.ViewState>
-                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                  </scg:Dictionary>
-                </sap:WorkflowViewStateService.ViewState>
-                <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_10">
-                  <Assign.To>
-                    <OutArgument x:TypeArguments="x:Object">[io_Config("ProgressBarShow")]</OutArgument>
-                  </Assign.To>
-                  <Assign.Value>
-                    <InArgument x:TypeArguments="x:Object">[False]</InArgument>
-                  </Assign.Value>
-                </Assign>
-              </Sequence>
-            </If.Else>
-          </If>
-        </Sequence>
-      </If.Then>
-      <If.Else>
-        <Sequence DisplayName="" sap:VirtualizedContainerService.HintSize="628,867" sap2010:WorkflowViewState.IdRef="Sequence_8">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-          <If Condition="[io_Config.ContainsKey(&quot;ProgressBarShow&quot;)]" DisplayName="Progress Bar Aberto" sap:VirtualizedContainerService.HintSize="586,687" sap2010:WorkflowViewState.IdRef="If_5">
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                <x:Boolean x:Key="IsPinned">False</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-            <If.Then>
-              <Sequence sap:VirtualizedContainerService.HintSize="552,505" sap2010:WorkflowViewState.IdRef="Sequence_17">
-                <sap:WorkflowViewStateService.ViewState>
-                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                  </scg:Dictionary>
-                </sap:WorkflowViewStateService.ViewState>
-                <If Condition="[Convert.ToBoolean(io_Config(&quot;ProgressBarShow&quot;))]" DisplayName="Fechar " sap:VirtualizedContainerService.HintSize="510,417" sap2010:WorkflowViewState.IdRef="If_6">
                   <If.Then>
-                    <Sequence sap:VirtualizedContainerService.HintSize="476,235" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                    <Sequence sap:VirtualizedContainerService.HintSize="465,220" sap2010:WorkflowViewState.IdRef="Sequence_48">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <rn:CloseNotification sap:VirtualizedContainerService.HintSize="434,25" sap2010:WorkflowViewState.IdRef="CloseNotification_3" />
-                      <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_11">
+                      <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="423,132" sap2010:WorkflowViewState.IdRef="MultipleAssign_8">
+                        <ui:MultipleAssign.AssignOperations>
+                          <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_17">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:String">[out_TransactionID]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:String">[out_TransactionItem("ID_CLIENTE").ToString]</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_18">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:String">[out_TransactionName]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:String">[out_TransactionItem("CNPJ").ToString+" - "+out_TransactionItem("EMPRESA").ToString+" ("+out_TransactionItem("CODIGO").ToString+")"]</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                          </scg:List>
+                        </ui:MultipleAssign.AssignOperations>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:MultipleAssign>
+                    </Sequence>
+                  </If.Then>
+                  <If.Else>
+                    <Sequence sap:VirtualizedContainerService.HintSize="465,220" sap2010:WorkflowViewState.IdRef="Sequence_49">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="423,132" sap2010:WorkflowViewState.IdRef="MultipleAssign_9">
+                        <ui:MultipleAssign.AssignOperations>
+                          <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_19">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:String">[out_TransactionID]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:String">
+                                  <Literal x:TypeArguments="x:String" Value="" />
+                                </InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_20">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:String">[out_TransactionName]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:String">
+                                  <Literal x:TypeArguments="x:String" Value="" />
+                                </InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                          </scg:List>
+                        </ui:MultipleAssign.AssignOperations>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:MultipleAssign>
+                    </Sequence>
+                  </If.Else>
+                </If>
+                <If Condition="[io_TransactionData.RowCount &gt; 1]" DisplayName="Exibir Progress Bar" sap:VirtualizedContainerService.HintSize="510,634" sap2010:WorkflowViewState.IdRef="If_7">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <If.Then>
+                    <Sequence sap:VirtualizedContainerService.HintSize="476,452" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <Assign sap:VirtualizedContainerService.HintSize="434,81" sap2010:WorkflowViewState.IdRef="Assign_9">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Object">[io_Config("ProgressBarShow")]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Object">[True]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <rn:ShowProgress sap:VirtualizedContainerService.HintSize="434,243" sap2010:WorkflowViewState.IdRef="ShowProgress_3" in_Length="[io_TransactionData.RowCount]" in_Message="[&quot;Trabalhando no &quot;+out_TransactionName]" in_Progress="[in_TransactionNumber]" in_Title="[io_Config(&quot;ToDo&quot;).ToString]">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </rn:ShowProgress>
+                    </Sequence>
+                  </If.Then>
+                  <If.Else>
+                    <Sequence sap:VirtualizedContainerService.HintSize="476,170" sap2010:WorkflowViewState.IdRef="Sequence_20">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_10">
                         <Assign.To>
                           <OutArgument x:TypeArguments="x:Object">[io_Config("ProgressBarShow")]</OutArgument>
                         </Assign.To>
@@ -1120,64 +1121,113 @@
                         </Assign.Value>
                       </Assign>
                     </Sequence>
-                  </If.Then>
-                  <If.Else>
-                    <Sequence sap2010:WorkflowViewState.IdRef="Sequence_16" />
                   </If.Else>
                 </If>
               </Sequence>
             </If.Then>
             <If.Else>
-              <Sequence sap2010:WorkflowViewState.IdRef="Sequence_18" />
+              <Sequence DisplayName="" sap:VirtualizedContainerService.HintSize="628,867" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <If Condition="[io_Config.ContainsKey(&quot;ProgressBarShow&quot;)]" DisplayName="Progress Bar Aberto" sap:VirtualizedContainerService.HintSize="586,687" sap2010:WorkflowViewState.IdRef="If_5">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <If.Then>
+                    <Sequence sap:VirtualizedContainerService.HintSize="552,505" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <If Condition="[Convert.ToBoolean(io_Config(&quot;ProgressBarShow&quot;))]" DisplayName="Fechar " sap:VirtualizedContainerService.HintSize="510,417" sap2010:WorkflowViewState.IdRef="If_6">
+                        <If.Then>
+                          <Sequence sap:VirtualizedContainerService.HintSize="476,235" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <rn:CloseNotification sap:VirtualizedContainerService.HintSize="434,25" sap2010:WorkflowViewState.IdRef="CloseNotification_3" />
+                            <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_11">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:Object">[io_Config("ProgressBarShow")]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:Object">[False]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                          </Sequence>
+                        </If.Then>
+                        <If.Else>
+                          <Sequence sap2010:WorkflowViewState.IdRef="Sequence_16" />
+                        </If.Else>
+                      </If>
+                    </Sequence>
+                  </If.Then>
+                  <If.Else>
+                    <Sequence sap2010:WorkflowViewState.IdRef="Sequence_18" />
+                  </If.Else>
+                </If>
+                <ui:MultipleAssign DisplayName="Dados" sap:VirtualizedContainerService.HintSize="586,52" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+                  <ui:MultipleAssign.AssignOperations>
+                    <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
+                        <ui:AssignOperation.To>
+                          <OutArgument x:TypeArguments="sd:DataRow">[out_TransactionItem]</OutArgument>
+                        </ui:AssignOperation.To>
+                        <ui:AssignOperation.Value>
+                          <InArgument x:TypeArguments="sd:DataRow">[Nothing]</InArgument>
+                        </ui:AssignOperation.Value>
+                      </ui:AssignOperation>
+                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
+                        <ui:AssignOperation.To>
+                          <OutArgument x:TypeArguments="x:Object">[io_Config("Finalizado")]</OutArgument>
+                        </ui:AssignOperation.To>
+                        <ui:AssignOperation.Value>
+                          <InArgument x:TypeArguments="x:Object">[True]</InArgument>
+                        </ui:AssignOperation.Value>
+                      </ui:AssignOperation>
+                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
+                        <ui:AssignOperation.To>
+                          <OutArgument x:TypeArguments="x:Int32">[in_TransactionNumber]</OutArgument>
+                        </ui:AssignOperation.To>
+                        <ui:AssignOperation.Value>
+                          <InArgument x:TypeArguments="x:Int32">1</InArgument>
+                        </ui:AssignOperation.Value>
+                      </ui:AssignOperation>
+                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
+                        <ui:AssignOperation.To>
+                          <OutArgument x:TypeArguments="x:String">[out_TransactionName]</OutArgument>
+                        </ui:AssignOperation.To>
+                        <ui:AssignOperation.Value>
+                          <InArgument x:TypeArguments="x:String">
+                            <Literal x:TypeArguments="x:String" Value="" />
+                          </InArgument>
+                        </ui:AssignOperation.Value>
+                      </ui:AssignOperation>
+                    </scg:List>
+                  </ui:MultipleAssign.AssignOperations>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:MultipleAssign>
+              </Sequence>
             </If.Else>
           </If>
-          <ui:MultipleAssign DisplayName="Dados" sap:VirtualizedContainerService.HintSize="586,52" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
-            <ui:MultipleAssign.AssignOperations>
-              <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
-                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
-                  <ui:AssignOperation.To>
-                    <OutArgument x:TypeArguments="sd:DataRow">[out_TransactionItem]</OutArgument>
-                  </ui:AssignOperation.To>
-                  <ui:AssignOperation.Value>
-                    <InArgument x:TypeArguments="sd:DataRow">[Nothing]</InArgument>
-                  </ui:AssignOperation.Value>
-                </ui:AssignOperation>
-                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
-                  <ui:AssignOperation.To>
-                    <OutArgument x:TypeArguments="x:Object">[io_Config("Finalizado")]</OutArgument>
-                  </ui:AssignOperation.To>
-                  <ui:AssignOperation.Value>
-                    <InArgument x:TypeArguments="x:Object">[True]</InArgument>
-                  </ui:AssignOperation.Value>
-                </ui:AssignOperation>
-                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
-                  <ui:AssignOperation.To>
-                    <OutArgument x:TypeArguments="x:Int32">[in_TransactionNumber]</OutArgument>
-                  </ui:AssignOperation.To>
-                  <ui:AssignOperation.Value>
-                    <InArgument x:TypeArguments="x:Int32">1</InArgument>
-                  </ui:AssignOperation.Value>
-                </ui:AssignOperation>
-                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
-                  <ui:AssignOperation.To>
-                    <OutArgument x:TypeArguments="x:String">[out_TransactionName]</OutArgument>
-                  </ui:AssignOperation.To>
-                  <ui:AssignOperation.Value>
-                    <InArgument x:TypeArguments="x:String">
-                      <Literal x:TypeArguments="x:String" Value="" />
-                    </InArgument>
-                  </ui:AssignOperation.Value>
-                </ui:AssignOperation>
-              </scg:List>
-            </ui:MultipleAssign.AssignOperations>
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                <x:Boolean x:Key="IsPinned">False</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-          </ui:MultipleAssign>
         </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_55" />
       </If.Else>
     </If>
   </Sequence>
