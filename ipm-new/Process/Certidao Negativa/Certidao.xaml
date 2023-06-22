@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Certidao" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:rt="clr-namespace:Roboluze_Libre_Config.Tools;assembly=Roboluze.Libre.Config" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:si="clr-namespace:System.IO;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:v="clr-namespace:Validar;assembly=Roboluze.UiPath" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Certidao" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:rt="clr-namespace:Roboluze_Libre_Config.Tools;assembly=Roboluze.Libre.Config" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:si="clr-namespace:System.IO;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:v="clr-namespace:Validar;assembly=Roboluze.UiPath" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="io_TransactionItem" Type="InOutArgument(sd:DataRow)" />
     <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
@@ -7,7 +7,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1154,5430</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1222,5729</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Certidao_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -55,6 +55,7 @@
       <x:String>UiPath.UIAutomationNext.Activities.Models</x:String>
       <x:String>Validar</x:String>
       <x:String>Roboluze</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -131,11 +132,15 @@
       <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Certidao" sap:VirtualizedContainerService.HintSize="728,5365" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Certidao" sap:VirtualizedContainerService.HintSize="728,5664" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="var" />
       <Variable x:TypeArguments="x:Boolean" Name="reCapthca" />
-      <Variable x:TypeArguments="x:Boolean" Name="cliqueRecaptha" />
+      <Variable x:TypeArguments="x:Boolean" Name="cliqueRecaptha">
+        <Variable.Default>
+          <Literal x:TypeArguments="x:Boolean" Value="True" />
+        </Variable.Default>
+      </Variable>
       <Variable x:TypeArguments="x:String" Default="Autoatendimento - MUNICÍPIO DE CASCAVEL" Name="title" />
       <Variable x:TypeArguments="si:FileInfo" Name="certidao" />
       <Variable x:TypeArguments="x:Int32" Default="5" Name="i" />
@@ -145,19 +150,19 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:ForEach x:TypeArguments="sd:DataColumn" CurrentIndex="{x:Null}" DisplayName="For Each to get CNPJ" sap:VirtualizedContainerService.HintSize="666,2756" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[io_TransactionItem.Table.Columns]">
+    <ui:ForEach x:TypeArguments="sd:DataColumn" CurrentIndex="{x:Null}" DisplayName="For Each to get CNPJ" sap:VirtualizedContainerService.HintSize="666,2740" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[io_TransactionItem.Table.Columns]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="sd:DataColumn">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="sd:DataColumn" Name="currentDataColumn" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="628,2568" sap2010:WorkflowViewState.IdRef="Sequence_30">
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="628,2554" sap2010:WorkflowViewState.IdRef="Sequence_30">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <If Condition="[Not Roboluze.Valida.isCnpjOrCpf(io_TransactionItem(currentDataColumn).ToString).Equals(&quot;&quot;)]" DisplayName="CNPJ" sap:VirtualizedContainerService.HintSize="586,1703" sap2010:WorkflowViewState.IdRef="If_6">
+            <If Condition="[Not Roboluze.Valida.isCnpjOrCpf(io_TransactionItem(currentDataColumn).ToString).Equals(&quot;&quot;)]" DisplayName="CNPJ" sap:VirtualizedContainerService.HintSize="586,1691" sap2010:WorkflowViewState.IdRef="If_6">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -165,17 +170,17 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
               <If.Then>
-                <Sequence sap:VirtualizedContainerService.HintSize="376,223" sap2010:WorkflowViewState.IdRef="Sequence_24">
+                <Sequence sap:VirtualizedContainerService.HintSize="376,221" sap2010:WorkflowViewState.IdRef="Sequence_24">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <v:CNPJOuCPF DisplayName="CNPJ ou CPF" Entrada="[io_TransactionItem(currentDataColumn).ToString()]" sap:VirtualizedContainerService.HintSize="334,135" sap2010:WorkflowViewState.IdRef="CNPJOuCPF_1" Saida="[var]" />
+                  <v:CNPJOuCPF DisplayName="CNPJ ou CPF" Entrada="[io_TransactionItem(currentDataColumn).ToString()]" sap:VirtualizedContainerService.HintSize="334,133" sap2010:WorkflowViewState.IdRef="CNPJOuCPF_1" Saida="[var]" />
                 </Sequence>
               </If.Then>
               <If.Else>
-                <Sequence sap:VirtualizedContainerService.HintSize="552,1297" sap2010:WorkflowViewState.IdRef="Sequence_27">
+                <Sequence sap:VirtualizedContainerService.HintSize="552,1288" sap2010:WorkflowViewState.IdRef="Sequence_27">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -189,7 +194,7 @@
                       <InArgument x:TypeArguments="x:String">[System.Text.RegularExpressions.Regex.Replace(io_TransactionItem(currentDataColumn).ToString(),"[^0-9]+", "")]</InArgument>
                     </Assign.Value>
                   </Assign>
-                  <ui:InterruptibleWhile CurrentIndex="{x:Null}" DisplayName="While" sap:VirtualizedContainerService.HintSize="510,250" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_1">
+                  <ui:InterruptibleWhile CurrentIndex="{x:Null}" Condition="[var.Length &lt; 11]" DisplayName="While" sap:VirtualizedContainerService.HintSize="510,248" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_1">
                     <ui:InterruptibleWhile.Body>
                       <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_6">
                         <Assign.To>
@@ -200,9 +205,6 @@
                         </Assign.Value>
                       </Assign>
                     </ui:InterruptibleWhile.Body>
-                    <ui:InterruptibleWhile.Condition>
-                      <VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="var.Length &lt; 11" />
-                    </ui:InterruptibleWhile.Condition>
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -210,7 +212,7 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:InterruptibleWhile>
-                  <v:CNPJOuCPF DisplayName="CNPJ ou CPF" Entrada="[var]" sap:VirtualizedContainerService.HintSize="510,135" sap2010:WorkflowViewState.IdRef="CNPJOuCPF_2" Saida="[var]">
+                  <v:CNPJOuCPF DisplayName="CNPJ ou CPF" Entrada="[var]" sap:VirtualizedContainerService.HintSize="510,133" sap2010:WorkflowViewState.IdRef="CNPJOuCPF_2" Saida="[var]">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -218,7 +220,7 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </v:CNPJOuCPF>
-                  <If Condition="[var.Equals(&quot;&quot;)]" DisplayName="CPF" sap:VirtualizedContainerService.HintSize="510,622" sap2010:WorkflowViewState.IdRef="If_8">
+                  <If Condition="[var.Equals(&quot;&quot;)]" DisplayName="CPF" sap:VirtualizedContainerService.HintSize="510,617" sap2010:WorkflowViewState.IdRef="If_8">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -226,13 +228,13 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                     <If.Then>
-                      <Sequence sap:VirtualizedContainerService.HintSize="476,439" sap2010:WorkflowViewState.IdRef="Sequence_25">
+                      <Sequence sap:VirtualizedContainerService.HintSize="476,435" sap2010:WorkflowViewState.IdRef="Sequence_25">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <Assign sap:VirtualizedContainerService.HintSize="434,83" sap2010:WorkflowViewState.IdRef="Assign_7">
+                        <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_7">
                           <Assign.To>
                             <OutArgument x:TypeArguments="x:String">[var]</OutArgument>
                           </Assign.To>
@@ -240,9 +242,9 @@
                             <InArgument x:TypeArguments="x:String">[System.Text.RegularExpressions.Regex.Replace(io_TransactionItem(currentDataColumn).ToString(),"[^0-9]+", "")]</InArgument>
                           </Assign.Value>
                         </Assign>
-                        <ui:InterruptibleWhile CurrentIndex="{x:Null}" DisplayName="While" sap:VirtualizedContainerService.HintSize="434,53" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_2">
+                        <ui:InterruptibleWhile CurrentIndex="{x:Null}" Condition="[var.Length &lt; 14]" DisplayName="While" sap:VirtualizedContainerService.HintSize="434,52" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_2">
                           <ui:InterruptibleWhile.Body>
-                            <Assign sap:VirtualizedContainerService.HintSize="434,83" sap2010:WorkflowViewState.IdRef="Assign_8">
+                            <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_8">
                               <Assign.To>
                                 <OutArgument x:TypeArguments="x:String">[var]</OutArgument>
                               </Assign.To>
@@ -251,9 +253,6 @@
                               </Assign.Value>
                             </Assign>
                           </ui:InterruptibleWhile.Body>
-                          <ui:InterruptibleWhile.Condition>
-                            <VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="var.Length &lt; 14" />
-                          </ui:InterruptibleWhile.Condition>
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -261,7 +260,7 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                         </ui:InterruptibleWhile>
-                        <v:CNPJOuCPF DisplayName="CNPJ ou CPF" Entrada="[var]" sap:VirtualizedContainerService.HintSize="434,135" sap2010:WorkflowViewState.IdRef="CNPJOuCPF_3" Saida="[var]">
+                        <v:CNPJOuCPF DisplayName="CNPJ ou CPF" Entrada="[var]" sap:VirtualizedContainerService.HintSize="434,133" sap2010:WorkflowViewState.IdRef="CNPJOuCPF_3" Saida="[var]">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -284,7 +283,7 @@
                 </Sequence>
               </If.Else>
             </If>
-            <If Condition="[Not Roboluze.Valida.isCnpjOrCpf(var).Equals(&quot;&quot;)]" DisplayName="CNPJ Localizado" sap:VirtualizedContainerService.HintSize="586,737" sap2010:WorkflowViewState.IdRef="If_7">
+            <If Condition="[Not Roboluze.Valida.isCnpjOrCpf(var).Equals(&quot;&quot;)]" DisplayName="CNPJ Localizado" sap:VirtualizedContainerService.HintSize="586,735" sap2010:WorkflowViewState.IdRef="If_7">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -292,13 +291,13 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
               <If.Then>
-                <Sequence sap:VirtualizedContainerService.HintSize="552,554" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                <Sequence sap:VirtualizedContainerService.HintSize="552,553" sap2010:WorkflowViewState.IdRef="Sequence_28">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <If Condition="[Convert.ToInt64(System.Text.RegularExpressions.Regex.Replace(var,&quot;[^0-9]+&quot;, &quot;&quot;).Trim()) &gt; 0]" DisplayName="CNPJ Localizado" sap:VirtualizedContainerService.HintSize="510,466" sap2010:WorkflowViewState.IdRef="If_9">
+                  <If Condition="[Convert.ToInt64(System.Text.RegularExpressions.Regex.Replace(var,&quot;[^0-9]+&quot;, &quot;&quot;).Trim()) &gt; 0]" DisplayName="CNPJ Localizado" sap:VirtualizedContainerService.HintSize="510,465" sap2010:WorkflowViewState.IdRef="If_9">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -351,7 +350,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ForEach>
-    <If Condition="[Not var.Equals(&quot;&quot;)]" DisplayName="Gerar Certidão Negativa" sap:VirtualizedContainerService.HintSize="666,2458" sap2010:WorkflowViewState.IdRef="If_12">
+    <If Condition="[Not var.Equals(&quot;&quot;)]" DisplayName="Gerar Certidão Negativa" sap:VirtualizedContainerService.HintSize="666,2773" sap2010:WorkflowViewState.IdRef="If_12">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -359,13 +358,13 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <Sequence sap:VirtualizedContainerService.HintSize="632,2275" sap2010:WorkflowViewState.IdRef="Sequence_2">
+        <Sequence sap:VirtualizedContainerService.HintSize="632,2591" sap2010:WorkflowViewState.IdRef="Sequence_2">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <If Condition="[Not io_TransactionItem.Table.Columns.Contains(&quot;CNPJ&quot;)]" DisplayName="Not Contem CNPJ" sap:VirtualizedContainerService.HintSize="590,53" sap2010:WorkflowViewState.IdRef="If_3">
+          <If Condition="[Not io_TransactionItem.Table.Columns.Contains(&quot;CNPJ&quot;)]" DisplayName="Not Contem CNPJ" sap:VirtualizedContainerService.HintSize="590,52" sap2010:WorkflowViewState.IdRef="If_3">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -373,13 +372,13 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <If.Then>
-              <Sequence sap:VirtualizedContainerService.HintSize="376,277" sap2010:WorkflowViewState.IdRef="Sequence_15">
+              <Sequence sap:VirtualizedContainerService.HintSize="376,274" sap2010:WorkflowViewState.IdRef="Sequence_15">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:AddDataColumn x:TypeArguments="x:Object" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="CNPJ" DataTable="[io_TransactionItem.Table]" DisplayName="Add Data Column" sap:VirtualizedContainerService.HintSize="334,189" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_1">
+                <ui:AddDataColumn x:TypeArguments="x:Object" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="CNPJ" DataTable="[io_TransactionItem.Table]" DisplayName="Add Data Column" sap:VirtualizedContainerService.HintSize="334,186" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_1">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -415,42 +414,38 @@
               </scg:List>
             </ui:MultipleAssign.AssignOperations>
           </ui:MultipleAssign>
-          <rt:Arquivo BreakTriggerScopeInArgument="{x:Null}" sap:VirtualizedContainerService.HintSize="590,53" sap2010:WorkflowViewState.IdRef="Arquivo_1" in_Config="[in_Config]" io_FilePath="[var]" io_TransactionItem="[io_TransactionItem]">
+          <rt:Arquivo BreakTriggerScopeInArgument="{x:Null}" sap:VirtualizedContainerService.HintSize="590,52" sap2010:WorkflowViewState.IdRef="Arquivo_1" in_Config="[in_Config]" in_Tipo="IPM Certidao Negativa" io_FilePath="[var]" io_TransactionItem="[io_TransactionItem]">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <rt:Arquivo.in_Tipo>
-              <InArgument x:TypeArguments="x:String">
-                <Literal x:TypeArguments="x:String" DisplayName="Literal&lt;String&gt;" Value="" />
-              </InArgument>
-            </rt:Arquivo.in_Tipo>
           </rt:Arquivo>
-          <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Browser Chrome: Autoatendimento - MUNICÍPIO DE CASCAVEL" sap:VirtualizedContainerService.HintSize="590,1154" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" OpenMode="IfNotOpen" ScopeGuid="ff5fd2a1-a9e6-4881-992e-70b4555919b4" Version="V2" WindowResize="Maximize">
+          <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Browser Chrome: Autoatendimento - MUNICÍPIO DE CASCAVEL" sap:VirtualizedContainerService.HintSize="590,857" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" OpenMode="IfNotOpen" ScopeGuid="ff5fd2a1-a9e6-4881-992e-70b4555919b4" Version="V2" WindowResize="Maximize">
             <uix:NApplicationCard.Body>
               <ActivityAction x:TypeArguments="x:Object">
                 <ActivityAction.Argument>
                   <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
                 </ActivityAction.Argument>
-                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="450,936" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="450,640" sap2010:WorkflowViewState.IdRef="Sequence_6">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" Condition="[reCapthca]" DisplayName="Do While reCaptha" sap:VirtualizedContainerService.HintSize="388,53" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
+                  <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" Condition="[reCapthca]" DisplayName="Do While reCaptha" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
                     <ui:InterruptibleDoWhile.Body>
-                      <uix:NCheckState DisplayName="Bloquado" EnableIfNotExists="False" Exists="[reCapthca]" sap:VirtualizedContainerService.HintSize="494,517" sap2010:WorkflowViewState.IdRef="NCheckState_3" ScopeIdentifier="ff5fd2a1-a9e6-4881-992e-70b4555919b4" Timeout="0" Version="V3">
+                      <uix:NCheckState DisplayName="Bloquado" EnableIfNotExists="False" Exists="[reCapthca]" sap:VirtualizedContainerService.HintSize="722,1213" sap2010:WorkflowViewState.IdRef="NCheckState_3" ScopeIdentifier="ff5fd2a1-a9e6-4881-992e-70b4555919b4" Timeout="1" Version="V3">
                         <uix:NCheckState.IfExists>
-                          <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="450,298" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                          <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="678,996" sap2010:WorkflowViewState.IdRef="Sequence_10">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                            <If Condition="[cliqueRecaptha]" DisplayName="if" sap:VirtualizedContainerService.HintSize="388,183" sap2010:WorkflowViewState.IdRef="If_2">
+                            <If Condition="[cliqueRecaptha]" DisplayName="if" sap:VirtualizedContainerService.HintSize="616,881" sap2010:WorkflowViewState.IdRef="If_2">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -472,7 +467,7 @@
                                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                           </scg:Dictionary>
                                         </sap:WorkflowViewStateService.ViewState>
-                                        <uix:NClick ActivateBefore="True" ClickType="Single" DelayBefore="1" DisplayName="Click 'DIV'" sap:VirtualizedContainerService.HintSize="434,157" sap2010:WorkflowViewState.IdRef="NClick_2" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ff5fd2a1-a9e6-4881-992e-70b4555919b4" Version="V3">
+                                        <uix:NClick ActivateBefore="True" ClickType="Single" DelayBefore="1" DisplayName="Click 'DIV'" sap:VirtualizedContainerService.HintSize="434,157" sap2010:WorkflowViewState.IdRef="NClick_2" InteractionMode="HardwareEvents" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ff5fd2a1-a9e6-4881-992e-70b4555919b4" Version="V3">
                                           <uix:NClick.Target>
                                             <uix:TargetAnchorable BrowserURL="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LeYM64UAAAAAM7xGmct9fOwsJ73fVUx8y0j4wfH&amp;co=aHR0cHM6Ly9jYXNjYXZlbC5hdGVuZGUubmV0OjQ0Mw..&amp;hl=en&amp;v=SglpK98hSCn2CroR0bKRSJl5&amp;size=normal&amp;cb=2zl6pqqknn4k" CvType="CheckBox" DesignTimeRectangle="521, 454, 28, 28" DesignTimeScaleFactor="1" FriendlyName="'DIV'" FullSelectorArgument="&lt;webctrl parentid='conteudo_*' tag='TABLE' /&gt;&lt;webctrl tableRow='1' tag='IFRAME' /&gt;&lt;webctrl aria-role='presentation' tag='DIV' /&gt;" FuzzySelectorArgument="&lt;webctrl parentid='conteudo_*' tag='TABLE' /&gt;&lt;webctrl tag='IFRAME' /&gt;&lt;webctrl aria-role='presentation' tag='DIV' type='' class='recaptcha-checkbox-border' aaname='' /&gt;" Guid="88146dc5-ecaf-4cec-aadc-a37575d0ebc9" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABlSURBVFhH7dexDcAwCETR7L8VnWERz0BFROHKTheEi2/pKgvda+9x9+jMPYA5Z6hqiEhpsiO7NoCZHQ8qkl0bYH1Wv9UDAAAAAAAAAAAAAACA+wDtwyTn0hjjePBnPqdZV5oBHi87+0tzaNbINAAAAABJRU5ErkJggg==" InformativeScreenshot="d2b234c81c68c2ac74a5577188dea64a.png" ScopeSelectorArgument="[string.Format(&quot;&lt;html app='chrome.exe' title='{0}' /&gt;&quot;, title)]" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
                                           </uix:NClick.Target>
@@ -497,7 +492,7 @@
                                       </Sequence>
                                     </uix:NCheckState.IfNotExists>
                                     <uix:NCheckState.Target>
-                                      <uix:TargetAnchorable BrowserURL="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LeYM64UAAAAAM7xGmct9fOwsJ73fVUx8y0j4wfH&amp;co=aHR0cHM6Ly9jYXNjYXZlbC5hdGVuZGUubmV0OjQ0Mw..&amp;hl=en&amp;v=SglpK98hSCn2CroR0bKRSJl5&amp;size=normal&amp;cb=2zl6pqqknn4k" CvType="CheckBox" DesignTimeRectangle="521, 454, 28, 28" DesignTimeScaleFactor="1" FriendlyName="'DIV'" FullSelectorArgument="&lt;webctrl parentid='conteudo_*' tag='TABLE' /&gt;&lt;webctrl tableRow='1' tag='IFRAME' /&gt;&lt;webctrl aria-role='presentation' tag='DIV' /&gt;" Guid="e6a7d8fe-d716-4b59-8e20-b4bd0c64301e" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABlSURBVFhH7dexDcAwCETR7L8VnWERz0BFROHKTheEi2/pKgvda+9x9+jMPYA5Z6hqiEhpsiO7NoCZHQ8qkl0bYH1Wv9UDAAAAAAAAAAAAAACA+wDtwyTn0hjjePBnPqdZV5oBHi87+0tzaNbINAAAAABJRU5ErkJggg==" InformativeScreenshot="7ab94c9416a0469ab7205cd200fd578e.png" ScopeSelectorArgument="[string.Format(&quot;&lt;html app='chrome.exe' title='{0}' /&gt;&quot;, title)]" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
+                                      <uix:TargetAnchorable BrowserURL="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LeYM64UAAAAAM7xGmct9fOwsJ73fVUx8y0j4wfH&amp;co=aHR0cHM6Ly9jYXNjYXZlbC5hdGVuZGUubmV0OjQ0Mw..&amp;hl=en&amp;v=SglpK98hSCn2CroR0bKRSJl5&amp;size=normal&amp;cb=2zl6pqqknn4k" CvType="CheckBox" DesignTimeRectangle="521, 454, 28, 28" DesignTimeScaleFactor="1" FriendlyName="'DIV'" FullSelectorArgument="&lt;webctrl parentid='conteudo_*' tag='TABLE' /&gt;&lt;webctrl tableRow='1' tag='IFRAME' /&gt;&lt;webctrl aria-role='presentation' tag='DIV' /&gt;" Guid="e6a7d8fe-d716-4b59-8e20-b4bd0c64301e" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABlSURBVFhH7dexDcAwCETR7L8VnWERz0BFROHKTheEi2/pKgvda+9x9+jMPYA5Z6hqiEhpsiO7NoCZHQ8qkl0bYH1Wv9UDAAAAAAAAAAAAAACA+wDtwyTn0hjjePBnPqdZV5oBHi87+0tzaNbINAAAAABJRU5ErkJggg==" InformativeScreenshot="7ab94c9416a0469ab7205cd200fd578e.png" ScopeSelectorArgument="[string.Format(&quot;&lt;html app='chrome.exe' title='{0}' /&gt;&quot;, title)]" SearchSteps="Selector" Version="V2" Visibility="Interactive" WaitForReadyArgument="Complete" />
                                     </uix:NCheckState.Target>
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -541,7 +536,7 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:InterruptibleDoWhile>
-                  <uix:NSelectItem DelayAfter="0" DisplayName="Select Item 'Por CPF/CNPJ'" sap:VirtualizedContainerService.HintSize="388,53" sap2010:WorkflowViewState.IdRef="NSelectItem_1" Item="Por CPF/CNPJ" ScopeIdentifier="ff5fd2a1-a9e6-4881-992e-70b4555919b4" Version="V3">
+                  <uix:NSelectItem DelayAfter="0" DisplayName="Select Item 'Por CPF/CNPJ'" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="NSelectItem_1" Item="Por CPF/CNPJ" ScopeIdentifier="ff5fd2a1-a9e6-4881-992e-70b4555919b4" Version="V3">
                     <uix:NSelectItem.Items>
                       <scg:List x:TypeArguments="x:String" Capacity="5">
                         <x:String>Selecione a Forma de Emissão</x:String>
@@ -561,7 +556,7 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </uix:NSelectItem>
-                  <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DelayBetweenKeys="0.01" DisplayName="Type Into 'INPUT'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="388,53" sap2010:WorkflowViewState.IdRef="NTypeInto_1" InteractionMode="HardwareEvents" ScopeIdentifier="ff5fd2a1-a9e6-4881-992e-70b4555919b4" Text="[System.Text.RegularExpressions.Regex.Replace(io_TransactionItem(&quot;CNPJ&quot;).ToString(),&quot;[^0-9]+&quot;, &quot;&quot;)]" Version="V3">
+                  <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DelayBetweenKeys="0.01" DisplayName="Type Into 'INPUT'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="NTypeInto_1" InteractionMode="HardwareEvents" ScopeIdentifier="ff5fd2a1-a9e6-4881-992e-70b4555919b4" Text="[System.Text.RegularExpressions.Regex.Replace(io_TransactionItem(&quot;CNPJ&quot;).ToString(),&quot;[^0-9]+&quot;, &quot;&quot;)]" Version="V3">
                     <uix:NTypeInto.Target>
                       <uix:TargetAnchorable BrowserURL="https://cascavel.atende.net/autoatendimento/servicos/certidao-negativa-de-debitos/detalhar/1" CvType="InputBox" DesignTimeRectangle="577, 359, 135, 24" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'INPUT'" FullSelectorArgument="&lt;webctrl tag='TABLE' /&gt;&lt;webctrl tag='INPUT' name='cpfCnpj' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='TABLE' /&gt;&lt;webctrl tag='INPUT' name='cpfCnpj' type='text' class='campo campo_invalido' aaname='' /&gt;" Guid="eb23e376-7ef2-40e0-8d98-b0345b5c879d" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAIsAAAAcCAYAAABRekwEAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABwSURBVGhD7dLBCYAwAMBA95+qm9RN6suCoJgBLnAb5FhSzCzK7VnOMeDV3WOWNSc8mIXMLGRmITMLmVnIzEJmFjKzkJmFzCxkZiEzC5lZyMxCZhYys5CZhcwsZGYhMwuZWcg+Z4E3d3sW6S+zKLbWBSHq+mdgBcRMAAAAAElFTkSuQmCC" InformativeScreenshot="5095ffb1cbfd9002d63c62720319c32d.png" ScopeSelectorArgument="[string.Format(&quot;&lt;html app='chrome.exe' title='{0}' /&gt;&quot;, title)]" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
                     </uix:NTypeInto.Target>
@@ -572,7 +567,7 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </uix:NTypeInto>
-                  <uix:NSelectItem DisplayName="Select Item 'Selecione uma'" sap:VirtualizedContainerService.HintSize="334,158" sap2010:WorkflowViewState.IdRef="NSelectItem_2" Item="Transmissão - Contribuinte" ScopeIdentifier="ff5fd2a1-a9e6-4881-992e-70b4555919b4" Version="V3">
+                  <uix:NSelectItem DisplayName="Select Item 'Selecione uma'" sap:VirtualizedContainerService.HintSize="388,157" sap2010:WorkflowViewState.IdRef="NSelectItem_2" Item="Transmissão - Contribuinte" ScopeIdentifier="ff5fd2a1-a9e6-4881-992e-70b4555919b4" Version="V3">
                     <uix:NSelectItem.Items>
                       <scg:List x:TypeArguments="x:String" Capacity="5">
                         <x:String>Selecione uma Finalidade...</x:String>
@@ -592,213 +587,36 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </uix:NSelectItem>
-                  <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" Condition="[reCapthca]" DisplayName="Do While reCaptha" sap:VirtualizedContainerService.HintSize="388,53" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_3">
-                    <ui:InterruptibleDoWhile.Body>
-                      <uix:NCheckState DisplayName="Bloquado" EnableIfNotExists="False" Exists="[reCapthca]" sap:VirtualizedContainerService.HintSize="494,517" sap2010:WorkflowViewState.IdRef="NCheckState_6" ScopeIdentifier="ff5fd2a1-a9e6-4881-992e-70b4555919b4" Timeout="0" Version="V3">
-                        <uix:NCheckState.IfExists>
-                          <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="450,298" sap2010:WorkflowViewState.IdRef="Sequence_37">
-                            <sap:WorkflowViewStateService.ViewState>
-                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                              </scg:Dictionary>
-                            </sap:WorkflowViewStateService.ViewState>
-                            <If Condition="[cliqueRecaptha]" DisplayName="if" sap:VirtualizedContainerService.HintSize="388,183" sap2010:WorkflowViewState.IdRef="If_10">
-                              <sap:WorkflowViewStateService.ViewState>
-                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                </scg:Dictionary>
-                              </sap:WorkflowViewStateService.ViewState>
-                              <If.Then>
-                                <Sequence sap:VirtualizedContainerService.HintSize="582,699" sap2010:WorkflowViewState.IdRef="Sequence_35">
-                                  <sap:WorkflowViewStateService.ViewState>
-                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                    </scg:Dictionary>
-                                  </sap:WorkflowViewStateService.ViewState>
-                                  <uix:NCheckState DisplayName="reCAPTCHA" EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="540,611" sap2010:WorkflowViewState.IdRef="NCheckState_5" ScopeIdentifier="ff5fd2a1-a9e6-4881-992e-70b4555919b4" Timeout="0" Version="V3">
-                                    <uix:NCheckState.IfExists>
-                                      <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="496,394" sap2010:WorkflowViewState.IdRef="Sequence_33">
-                                        <sap:WorkflowViewStateService.ViewState>
-                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                          </scg:Dictionary>
-                                        </sap:WorkflowViewStateService.ViewState>
-                                        <uix:NClick ActivateBefore="True" ClickType="Single" DelayBefore="1" DisplayName="Click 'DIV'" sap:VirtualizedContainerService.HintSize="434,157" sap2010:WorkflowViewState.IdRef="NClick_6" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ff5fd2a1-a9e6-4881-992e-70b4555919b4" Version="V3">
-                                          <uix:NClick.Target>
-                                            <uix:TargetAnchorable BrowserURL="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LeYM64UAAAAAM7xGmct9fOwsJ73fVUx8y0j4wfH&amp;co=aHR0cHM6Ly9jYXNjYXZlbC5hdGVuZGUubmV0OjQ0Mw..&amp;hl=en&amp;v=SglpK98hSCn2CroR0bKRSJl5&amp;size=normal&amp;cb=2zl6pqqknn4k" CvType="CheckBox" DesignTimeRectangle="521, 454, 28, 28" DesignTimeScaleFactor="1" FriendlyName="'DIV'" FullSelectorArgument="&lt;webctrl parentid='conteudo_*' tag='TABLE' /&gt;&lt;webctrl tableRow='1' tag='IFRAME' /&gt;&lt;webctrl aria-role='presentation' tag='DIV' /&gt;" FuzzySelectorArgument="&lt;webctrl parentid='conteudo_*' tag='TABLE' /&gt;&lt;webctrl tag='IFRAME' /&gt;&lt;webctrl aria-role='presentation' tag='DIV' type='' class='recaptcha-checkbox-border' aaname='' /&gt;" Guid="88146dc5-ecaf-4cec-aadc-a37575d0ebc9" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABlSURBVFhH7dexDcAwCETR7L8VnWERz0BFROHKTheEi2/pKgvda+9x9+jMPYA5Z6hqiEhpsiO7NoCZHQ8qkl0bYH1Wv9UDAAAAAAAAAAAAAACA+wDtwyTn0hjjePBnPqdZV5oBHi87+0tzaNbINAAAAABJRU5ErkJggg==" InformativeScreenshot="d2b234c81c68c2ac74a5577188dea64a.png" ScopeSelectorArgument="[string.Format(&quot;&lt;html app='chrome.exe' title='{0}' /&gt;&quot;, title)]" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
-                                          </uix:NClick.Target>
-                                        </uix:NClick>
-                                        <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_10">
-                                          <Assign.To>
-                                            <OutArgument x:TypeArguments="x:Boolean">[cliqueRecaptha]</OutArgument>
-                                          </Assign.To>
-                                          <Assign.Value>
-                                            <InArgument x:TypeArguments="x:Boolean">False</InArgument>
-                                          </Assign.Value>
-                                        </Assign>
-                                      </Sequence>
-                                    </uix:NCheckState.IfExists>
-                                    <uix:NCheckState.IfNotExists>
-                                      <Sequence DisplayName="Target does not appear" sap:VirtualizedContainerService.HintSize="450,105" sap2010:WorkflowViewState.IdRef="Sequence_34">
-                                        <sap:WorkflowViewStateService.ViewState>
-                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                          </scg:Dictionary>
-                                        </sap:WorkflowViewStateService.ViewState>
-                                      </Sequence>
-                                    </uix:NCheckState.IfNotExists>
-                                    <uix:NCheckState.Target>
-                                      <uix:TargetAnchorable BrowserURL="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LeYM64UAAAAAM7xGmct9fOwsJ73fVUx8y0j4wfH&amp;co=aHR0cHM6Ly9jYXNjYXZlbC5hdGVuZGUubmV0OjQ0Mw..&amp;hl=en&amp;v=SglpK98hSCn2CroR0bKRSJl5&amp;size=normal&amp;cb=2zl6pqqknn4k" CvType="CheckBox" DesignTimeRectangle="521, 454, 28, 28" DesignTimeScaleFactor="1" FriendlyName="'DIV'" FullSelectorArgument="&lt;webctrl parentid='conteudo_*' tag='TABLE' /&gt;&lt;webctrl tableRow='1' tag='IFRAME' /&gt;&lt;webctrl aria-role='presentation' tag='DIV' /&gt;" Guid="e6a7d8fe-d716-4b59-8e20-b4bd0c64301e" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABlSURBVFhH7dexDcAwCETR7L8VnWERz0BFROHKTheEi2/pKgvda+9x9+jMPYA5Z6hqiEhpsiO7NoCZHQ8qkl0bYH1Wv9UDAAAAAAAAAAAAAACA+wDtwyTn0hjjePBnPqdZV5oBHi87+0tzaNbINAAAAABJRU5ErkJggg==" InformativeScreenshot="7ab94c9416a0469ab7205cd200fd578e.png" ScopeSelectorArgument="[string.Format(&quot;&lt;html app='chrome.exe' title='{0}' /&gt;&quot;, title)]" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
-                                    </uix:NCheckState.Target>
-                                    <sap:WorkflowViewStateService.ViewState>
-                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                      </scg:Dictionary>
-                                    </sap:WorkflowViewStateService.ViewState>
-                                  </uix:NCheckState>
-                                </Sequence>
-                              </If.Then>
-                              <If.Else>
-                                <Sequence sap2010:WorkflowViewState.IdRef="Sequence_36" />
-                              </If.Else>
-                            </If>
-                          </Sequence>
-                        </uix:NCheckState.IfExists>
-                        <uix:NCheckState.IfNotExists>
-                          <Sequence DisplayName="Target does not appear" sap:VirtualizedContainerService.HintSize="450,105" sap2010:WorkflowViewState.IdRef="Sequence_38">
-                            <sap:WorkflowViewStateService.ViewState>
-                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                              </scg:Dictionary>
-                            </sap:WorkflowViewStateService.ViewState>
-                          </Sequence>
-                        </uix:NCheckState.IfNotExists>
-                        <uix:NCheckState.Target>
-                          <uix:TargetAnchorable BrowserURL="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LeYM64UAAAAAM7xGmct9fOwsJ73fVUx8y0j4wfH&amp;co=aHR0cHM6Ly9jYXNjYXZlbC5hdGVuZGUubmV0OjQ0Mw..&amp;hl=en&amp;v=SglpK98hSCn2CroR0bKRSJl5&amp;size=normal&amp;cb=2zl6pqqknn4k" CvType="CheckBox" DesignTimeRectangle="521, 454, 28, 28" DesignTimeScaleFactor="1" FriendlyName="'DIV'" FullSelectorArgument="&lt;webctrl tag='DIV' class='area_bloqueio_janela div_trans disabled_user_select' /&gt;" Guid="e6a7d8fe-d716-4b59-8e20-b4bd0c64301e" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABlSURBVFhH7dexDcAwCETR7L8VnWERz0BFROHKTheEi2/pKgvda+9x9+jMPYA5Z6hqiEhpsiO7NoCZHQ8qkl0bYH1Wv9UDAAAAAAAAAAAAAACA+wDtwyTn0hjjePBnPqdZV5oBHi87+0tzaNbINAAAAABJRU5ErkJggg==" InformativeScreenshot="7ab94c9416a0469ab7205cd200fd578e.png" ScopeSelectorArgument="[string.Format(&quot;&lt;html app='chrome.exe' title='{0}' /&gt;&quot;, title)]" SearchSteps="Selector" Version="V2" Visibility="Interactive" WaitForReadyArgument="Complete" />
-                        </uix:NCheckState.Target>
-                        <sap:WorkflowViewStateService.ViewState>
-                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                          </scg:Dictionary>
-                        </sap:WorkflowViewStateService.ViewState>
-                      </uix:NCheckState>
-                    </ui:InterruptibleDoWhile.Body>
+                  <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="TryCatch_1">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                         <x:Boolean x:Key="IsPinned">False</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                  </ui:InterruptibleDoWhile>
-                  <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'Confirmar'" sap:VirtualizedContainerService.HintSize="388,158" sap2010:WorkflowViewState.IdRef="NClick_3" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ff5fd2a1-a9e6-4881-992e-70b4555919b4" Version="V3">
-                    <uix:NClick.Target>
-                      <uix:TargetAnchorable BrowserURL="https://cascavel.atende.net/autoatendimento/servicos/certidao-negativa-de-debitos/detalhar/1" CvElementArea="472, 445, 81, 28" CvTextArea="488, 453, 50, 11" CvTextArgument="Confirmar" CvType="Button" DesignTimeRectangle="473, 446, 80, 26" DesignTimeScaleFactor="1" ElementType="Button" FriendlyName="'Confirmar'" FullSelectorArgument="&lt;webctrl name='confirmar' tag='BUTTON' /&gt;" FuzzySelectorArgument="&lt;webctrl name='confirmar' tag='BUTTON' type='' class='botao estrutura_botao disabled_user_select' aaname='Confirmar' check:innerText='Confirmar' /&gt;" Guid="2b348076-c335-4d43-bf11-984477008c07" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAFQAAAAeCAYAAACyqDnLAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJhSURBVGhD7ZrPbtpAEMb7SrwGp97yAjn1BbjlBXLKC/TUG6ccUGkPqCqqItlNURJFOAQSqQ1JZKKAbZCxjPV11vY4EC0tgemftPtJnwSzw9j786wXyX4BI1EZoMIqgL4bfMPLz29RalaNn2DFTLFjFUANzPWt2LEKoLpE49XNMkCFzDJAhcwyQIXMMkCFzDJAhcwyQIXMkgVqHaAaRJhSvWkyI0c4utLkreBy7wb9hAqpOkFXm/M3mSUKdM+L4HsdVKw8RoArJ4s5q3p3FKHv1rRjymVr+dhTLVGLJQi0AyfxsM8w520dojGhzk27dgafOu6Vivdc+NEQTqzidBLJGPUzil8P0y5Pu1MZEezeQ74dUi3Vtbce/HCIvvo9pQ+8q2wsrUXnkl7MAzTCvI7m2EWt+fNdwyw5oO0bDGIXu5qxbXeM6aSLrfT7R9Rpgn33Qzap+A57X7K8nfsQ/qiVflYdenGbxffpYhRAKf/1cd5RBBTh12xFWF04CNFoZ2NZrcMsr3CNjk21zunz41obmiUH9FydoB7omwAFnNQEYuq1s0lNLhfiPwW6JL/UbMGOqSsfj1ktfKIL+KAltTY0S3DJX+IiGaKqWfJ/Euj2Ha2OoINyHl9aa0OzBIHWCBzdo+Y3peZ7bNFy/uGS/8VAK3O3kdIJ3efjZwOUTJtPnSbPf5uAGZzrLL6wKdFEdlT+bwBaOm7DjnhTGsMJx88I6H9slhjQ0+A+r7Qoe+Rq8/81s0yHCpllgAqZZYAKmWWACpllgAqZVQA1j5HXt/YxsnnRYT0rZtoXHYxkZICKCvgOp8TmfyXnpF0AAAAASUVORK5CYII=" InformativeScreenshot="605e50bd95cfd994493162e4683f8851.png" ScopeSelectorArgument="[string.Format(&quot;&lt;html app='chrome.exe' title='{0}' /&gt;&quot;, title)]" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
-                    </uix:NClick.Target>
-                  </uix:NClick>
-                  <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" Condition="[reCapthca]" DisplayName="Do While reCaptha" sap:VirtualizedContainerService.HintSize="388,53" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_4">
-                    <ui:InterruptibleDoWhile.Body>
-                      <uix:NCheckState DisplayName="Bloquado" EnableIfNotExists="False" Exists="[reCapthca]" sap:VirtualizedContainerService.HintSize="494,517" sap2010:WorkflowViewState.IdRef="NCheckState_8" ScopeIdentifier="ff5fd2a1-a9e6-4881-992e-70b4555919b4" Timeout="0" Version="V3">
-                        <uix:NCheckState.IfExists>
-                          <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="450,298" sap2010:WorkflowViewState.IdRef="Sequence_43">
-                            <sap:WorkflowViewStateService.ViewState>
-                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                              </scg:Dictionary>
-                            </sap:WorkflowViewStateService.ViewState>
-                            <If Condition="[cliqueRecaptha]" DisplayName="if" sap:VirtualizedContainerService.HintSize="388,183" sap2010:WorkflowViewState.IdRef="If_11">
-                              <sap:WorkflowViewStateService.ViewState>
-                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                </scg:Dictionary>
-                              </sap:WorkflowViewStateService.ViewState>
-                              <If.Then>
-                                <Sequence sap:VirtualizedContainerService.HintSize="582,699" sap2010:WorkflowViewState.IdRef="Sequence_41">
-                                  <sap:WorkflowViewStateService.ViewState>
-                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                    </scg:Dictionary>
-                                  </sap:WorkflowViewStateService.ViewState>
-                                  <uix:NCheckState DisplayName="reCAPTCHA" EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="540,611" sap2010:WorkflowViewState.IdRef="NCheckState_7" ScopeIdentifier="ff5fd2a1-a9e6-4881-992e-70b4555919b4" Timeout="0" Version="V3">
-                                    <uix:NCheckState.IfExists>
-                                      <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="496,394" sap2010:WorkflowViewState.IdRef="Sequence_39">
-                                        <sap:WorkflowViewStateService.ViewState>
-                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                          </scg:Dictionary>
-                                        </sap:WorkflowViewStateService.ViewState>
-                                        <uix:NClick ActivateBefore="True" ClickType="Single" DelayBefore="1" DisplayName="Click 'DIV'" sap:VirtualizedContainerService.HintSize="434,157" sap2010:WorkflowViewState.IdRef="NClick_7" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ff5fd2a1-a9e6-4881-992e-70b4555919b4" Version="V3">
-                                          <uix:NClick.Target>
-                                            <uix:TargetAnchorable BrowserURL="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LeYM64UAAAAAM7xGmct9fOwsJ73fVUx8y0j4wfH&amp;co=aHR0cHM6Ly9jYXNjYXZlbC5hdGVuZGUubmV0OjQ0Mw..&amp;hl=en&amp;v=SglpK98hSCn2CroR0bKRSJl5&amp;size=normal&amp;cb=2zl6pqqknn4k" CvType="CheckBox" DesignTimeRectangle="521, 454, 28, 28" DesignTimeScaleFactor="1" FriendlyName="'DIV'" FullSelectorArgument="&lt;webctrl parentid='conteudo_*' tag='TABLE' /&gt;&lt;webctrl tableRow='1' tag='IFRAME' /&gt;&lt;webctrl aria-role='presentation' tag='DIV' /&gt;" FuzzySelectorArgument="&lt;webctrl parentid='conteudo_*' tag='TABLE' /&gt;&lt;webctrl tag='IFRAME' /&gt;&lt;webctrl aria-role='presentation' tag='DIV' type='' class='recaptcha-checkbox-border' aaname='' /&gt;" Guid="88146dc5-ecaf-4cec-aadc-a37575d0ebc9" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABlSURBVFhH7dexDcAwCETR7L8VnWERz0BFROHKTheEi2/pKgvda+9x9+jMPYA5Z6hqiEhpsiO7NoCZHQ8qkl0bYH1Wv9UDAAAAAAAAAAAAAACA+wDtwyTn0hjjePBnPqdZV5oBHi87+0tzaNbINAAAAABJRU5ErkJggg==" InformativeScreenshot="d2b234c81c68c2ac74a5577188dea64a.png" ScopeSelectorArgument="[string.Format(&quot;&lt;html app='chrome.exe' title='{0}' /&gt;&quot;, title)]" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
-                                          </uix:NClick.Target>
-                                        </uix:NClick>
-                                        <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_11">
-                                          <Assign.To>
-                                            <OutArgument x:TypeArguments="x:Boolean">[cliqueRecaptha]</OutArgument>
-                                          </Assign.To>
-                                          <Assign.Value>
-                                            <InArgument x:TypeArguments="x:Boolean">False</InArgument>
-                                          </Assign.Value>
-                                        </Assign>
-                                      </Sequence>
-                                    </uix:NCheckState.IfExists>
-                                    <uix:NCheckState.IfNotExists>
-                                      <Sequence DisplayName="Target does not appear" sap:VirtualizedContainerService.HintSize="450,105" sap2010:WorkflowViewState.IdRef="Sequence_40">
-                                        <sap:WorkflowViewStateService.ViewState>
-                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                          </scg:Dictionary>
-                                        </sap:WorkflowViewStateService.ViewState>
-                                      </Sequence>
-                                    </uix:NCheckState.IfNotExists>
-                                    <uix:NCheckState.Target>
-                                      <uix:TargetAnchorable BrowserURL="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LeYM64UAAAAAM7xGmct9fOwsJ73fVUx8y0j4wfH&amp;co=aHR0cHM6Ly9jYXNjYXZlbC5hdGVuZGUubmV0OjQ0Mw..&amp;hl=en&amp;v=SglpK98hSCn2CroR0bKRSJl5&amp;size=normal&amp;cb=2zl6pqqknn4k" CvType="CheckBox" DesignTimeRectangle="521, 454, 28, 28" DesignTimeScaleFactor="1" FriendlyName="'DIV'" FullSelectorArgument="&lt;webctrl parentid='conteudo_*' tag='TABLE' /&gt;&lt;webctrl tableRow='1' tag='IFRAME' /&gt;&lt;webctrl aria-role='presentation' tag='DIV' /&gt;" Guid="e6a7d8fe-d716-4b59-8e20-b4bd0c64301e" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABlSURBVFhH7dexDcAwCETR7L8VnWERz0BFROHKTheEi2/pKgvda+9x9+jMPYA5Z6hqiEhpsiO7NoCZHQ8qkl0bYH1Wv9UDAAAAAAAAAAAAAACA+wDtwyTn0hjjePBnPqdZV5oBHi87+0tzaNbINAAAAABJRU5ErkJggg==" InformativeScreenshot="7ab94c9416a0469ab7205cd200fd578e.png" ScopeSelectorArgument="[string.Format(&quot;&lt;html app='chrome.exe' title='{0}' /&gt;&quot;, title)]" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
-                                    </uix:NCheckState.Target>
-                                    <sap:WorkflowViewStateService.ViewState>
-                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                      </scg:Dictionary>
-                                    </sap:WorkflowViewStateService.ViewState>
-                                  </uix:NCheckState>
-                                </Sequence>
-                              </If.Then>
-                              <If.Else>
-                                <Sequence sap2010:WorkflowViewState.IdRef="Sequence_42" />
-                              </If.Else>
-                            </If>
-                          </Sequence>
-                        </uix:NCheckState.IfExists>
-                        <uix:NCheckState.IfNotExists>
-                          <Sequence DisplayName="Target does not appear" sap:VirtualizedContainerService.HintSize="450,105" sap2010:WorkflowViewState.IdRef="Sequence_44">
-                            <sap:WorkflowViewStateService.ViewState>
-                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                              </scg:Dictionary>
-                            </sap:WorkflowViewStateService.ViewState>
-                          </Sequence>
-                        </uix:NCheckState.IfNotExists>
-                        <uix:NCheckState.Target>
-                          <uix:TargetAnchorable BrowserURL="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LeYM64UAAAAAM7xGmct9fOwsJ73fVUx8y0j4wfH&amp;co=aHR0cHM6Ly9jYXNjYXZlbC5hdGVuZGUubmV0OjQ0Mw..&amp;hl=en&amp;v=SglpK98hSCn2CroR0bKRSJl5&amp;size=normal&amp;cb=2zl6pqqknn4k" CvType="CheckBox" DesignTimeRectangle="521, 454, 28, 28" DesignTimeScaleFactor="1" FriendlyName="'DIV'" FullSelectorArgument="&lt;webctrl tag='DIV' class='area_bloqueio_janela div_trans disabled_user_select' /&gt;" Guid="e6a7d8fe-d716-4b59-8e20-b4bd0c64301e" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABlSURBVFhH7dexDcAwCETR7L8VnWERz0BFROHKTheEi2/pKgvda+9x9+jMPYA5Z6hqiEhpsiO7NoCZHQ8qkl0bYH1Wv9UDAAAAAAAAAAAAAACA+wDtwyTn0hjjePBnPqdZV5oBHi87+0tzaNbINAAAAABJRU5ErkJggg==" InformativeScreenshot="7ab94c9416a0469ab7205cd200fd578e.png" ScopeSelectorArgument="[string.Format(&quot;&lt;html app='chrome.exe' title='{0}' /&gt;&quot;, title)]" SearchSteps="Selector" Version="V2" Visibility="Interactive" WaitForReadyArgument="Complete" />
-                        </uix:NCheckState.Target>
+                    <TryCatch.Try>
+                      <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'Confirmar'" sap:VirtualizedContainerService.HintSize="334,157" sap2010:WorkflowViewState.IdRef="NClick_3" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ff5fd2a1-a9e6-4881-992e-70b4555919b4" Version="V3">
+                        <uix:NClick.Target>
+                          <uix:TargetAnchorable BrowserURL="https://cascavel.atende.net/autoatendimento/servicos/certidao-negativa-de-debitos/detalhar/1" CvElementArea="472, 445, 81, 28" CvTextArea="488, 453, 50, 11" CvTextArgument="Confirmar" CvType="Button" DesignTimeRectangle="473, 446, 80, 26" DesignTimeScaleFactor="1" ElementType="Button" FriendlyName="'Confirmar'" FullSelectorArgument="&lt;webctrl name='confirmar' tag='BUTTON' /&gt;" FuzzySelectorArgument="&lt;webctrl name='confirmar' tag='BUTTON' type='' class='botao estrutura_botao disabled_user_select' aaname='Confirmar' check:innerText='Confirmar' /&gt;" Guid="2b348076-c335-4d43-bf11-984477008c07" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAFQAAAAeCAYAAACyqDnLAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJhSURBVGhD7ZrPbtpAEMb7SrwGp97yAjn1BbjlBXLKC/TUG6ccUGkPqCqqItlNURJFOAQSqQ1JZKKAbZCxjPV11vY4EC0tgemftPtJnwSzw9j786wXyX4BI1EZoMIqgL4bfMPLz29RalaNn2DFTLFjFUANzPWt2LEKoLpE49XNMkCFzDJAhcwyQIXMMkCFzDJAhcwyQIXMkgVqHaAaRJhSvWkyI0c4utLkreBy7wb9hAqpOkFXm/M3mSUKdM+L4HsdVKw8RoArJ4s5q3p3FKHv1rRjymVr+dhTLVGLJQi0AyfxsM8w520dojGhzk27dgafOu6Vivdc+NEQTqzidBLJGPUzil8P0y5Pu1MZEezeQ74dUi3Vtbce/HCIvvo9pQ+8q2wsrUXnkl7MAzTCvI7m2EWt+fNdwyw5oO0bDGIXu5qxbXeM6aSLrfT7R9Rpgn33Qzap+A57X7K8nfsQ/qiVflYdenGbxffpYhRAKf/1cd5RBBTh12xFWF04CNFoZ2NZrcMsr3CNjk21zunz41obmiUH9FydoB7omwAFnNQEYuq1s0lNLhfiPwW6JL/UbMGOqSsfj1ktfKIL+KAltTY0S3DJX+IiGaKqWfJ/Euj2Ha2OoINyHl9aa0OzBIHWCBzdo+Y3peZ7bNFy/uGS/8VAK3O3kdIJ3efjZwOUTJtPnSbPf5uAGZzrLL6wKdFEdlT+bwBaOm7DjnhTGsMJx88I6H9slhjQ0+A+r7Qoe+Rq8/81s0yHCpllgAqZZYAKmWWACpllgAqZVQA1j5HXt/YxsnnRYT0rZtoXHYxkZICKCvgOp8TmfyXnpF0AAAAASUVORK5CYII=" InformativeScreenshot="605e50bd95cfd994493162e4683f8851.png" ScopeSelectorArgument="[string.Format(&quot;&lt;html app='chrome.exe' title='{0}' /&gt;&quot;, title)]" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
+                        </uix:NClick.Target>
+                      </uix:NClick>
+                    </TryCatch.Try>
+                    <TryCatch.Catches>
+                      <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                             <x:Boolean x:Key="IsPinned">False</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                      </uix:NCheckState>
-                    </ui:InterruptibleDoWhile.Body>
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                  </ui:InterruptibleDoWhile>
+                        <ActivityAction x:TypeArguments="s:Exception">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                          </ActivityAction.Argument>
+                        </ActivityAction>
+                      </Catch>
+                    </TryCatch.Catches>
+                  </TryCatch>
                 </Sequence>
               </ActivityAction>
             </uix:NApplicationCard.Body>
@@ -812,28 +630,28 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </uix:NApplicationCard>
-          <uix:NCheckState DisplayName="Relatório Gerado" EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="590,635" sap2010:WorkflowViewState.IdRef="NCheckState_4" Timeout="15" Version="V3">
+          <uix:NCheckState DisplayName="Relatório Gerado" EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="590,1250" sap2010:WorkflowViewState.IdRef="NCheckState_4" Timeout="15" Version="V3">
             <uix:NCheckState.IfExists>
-              <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="546,416" sap2010:WorkflowViewState.IdRef="Sequence_17">
+              <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="546,1033" sap2010:WorkflowViewState.IdRef="Sequence_17">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Browser Chrome: Certidão PDF" sap:VirtualizedContainerService.HintSize="484,301" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" InteractionMode="DebuggerApi" OpenMode="Never" ScopeGuid="52a462f0-0a0e-4957-a8fa-b329397ea90c" Version="V2">
+                <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Always" DisplayName="Use Browser Chrome: Certidão PDF" sap:VirtualizedContainerService.HintSize="484,918" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" InteractionMode="DebuggerApi" OpenMode="Never" ScopeGuid="52a462f0-0a0e-4957-a8fa-b329397ea90c" Version="V2">
                   <uix:NApplicationCard.Body>
                     <ActivityAction x:TypeArguments="x:Object">
                       <ActivityAction.Argument>
                         <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
                       </ActivityAction.Argument>
-                      <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="450,83" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                      <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="450,701" sap2010:WorkflowViewState.IdRef="Sequence_14">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                             <x:Boolean x:Key="IsPinned">False</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'Download'" sap:VirtualizedContainerService.HintSize="608,53" sap2010:WorkflowViewState.IdRef="NClick_4" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="52a462f0-0a0e-4957-a8fa-b329397ea90c" Version="V3">
+                        <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'Download'" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="NClick_4" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="52a462f0-0a0e-4957-a8fa-b329397ea90c" Version="V3">
                           <uix:NClick.Target>
                             <uix:TargetAnchorable DesignTimeRectangle="1265, 176, 36, 37" DesignTimeScaleFactor="1" FriendlyName="'grouping'" FullSelectorArgument="[string.Format(&quot;&lt;ctrl name='{0}' role='document' /&gt;&lt;ctrl name='*' role='document' /&gt;&lt;ctrl name='Fazer o download' role='push button' /&gt;&lt;ctrl role='grouping' /&gt;&quot;, title)]" FuzzySelectorArgument="&lt;ctrl name='Autoatendimento - MUNICÍPIO DE CASCAVEL' role='document' /&gt;&lt;ctrl name='dffa8cc2-bb07-44e2-af60-abd47091731d' role='document' /&gt;&lt;ctrl name='Fazer o download' role='push button' /&gt;&lt;ctrl role='grouping' automationid='' /&gt;" Guid="24aa9b0a-a75e-4b1c-beda-de8409679d15" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACgAAAApCAYAAABHomvIAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD5SURBVFhH7dRdCoJAFIbh1tRFIBRFWwmiImot/biItC2EaFRUN+lOXMHEEYzUQ4zzTRF1Lp6bmXF8YRwbzZajvpkEoiQQJYEoCURJIOo/AgfDkVqu3QIa49bWZSVwsXJVmqYFNMatrUsCUb8bOJnOHxcijPaVQBrL58fTGbuHDuPAdrevzpdrJazscDxla7k9dEBHTC+mAC6M0JzT6bHP6oK/QQrgIsMoguOIlUtCIRT0HMetM2ElMEdhuyBg50xZDbRxpGVWA9/BODBOksKleOUWJ+weOowDPX+b/Yx1bDyf3UPH7x7xp0ggSgJREoiSQJQEoiQQ46g70xoW508MOlgAAAAASUVORK5CYII=" InformativeScreenshot="795f51ed8aa504b4374586002588002a.png" ScopeSelectorArgument="[string.Format(&quot;&lt;wnd app='chrome.exe' cls='Chrome_WidgetWin_1' title='{0}*' /&gt;&quot;, title)]" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
                           </uix:NClick.Target>
@@ -844,14 +662,14 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                         </uix:NClick>
-                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\Download\Salvar PDF.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="608,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Process\Download\Salvar PDF.xaml">
+                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\Download\Salvar PDF.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Process\Download\Salvar PDF.xaml">
                           <ui:InvokeWorkflowFile.Arguments>
                             <InArgument x:TypeArguments="x:String" x:Key="in_Path">[var]</InArgument>
                           </ui:InvokeWorkflowFile.Arguments>
                         </ui:InvokeWorkflowFile>
-                        <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="608,885" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_2">
+                        <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" Condition="[Not certidao.Exists And i &gt; 0]" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_2">
                           <ui:InterruptibleDoWhile.Body>
-                            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="572,717" sap2010:WorkflowViewState.IdRef="Sequence_21">
+                            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="572,715" sap2010:WorkflowViewState.IdRef="Sequence_21">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -865,7 +683,7 @@
                                   <InArgument x:TypeArguments="si:FileInfo">[New FileInfo(var)]</InArgument>
                                 </Assign.Value>
                               </Assign>
-                              <If Condition="[Not certidao.Exists]" sap:VirtualizedContainerService.HintSize="510,484" sap2010:WorkflowViewState.IdRef="If_4">
+                              <If Condition="[Not certidao.Exists]" sap:VirtualizedContainerService.HintSize="510,482" sap2010:WorkflowViewState.IdRef="If_4">
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -873,7 +691,7 @@
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
                                 <If.Then>
-                                  <Sequence sap:VirtualizedContainerService.HintSize="476,301" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                                  <Sequence sap:VirtualizedContainerService.HintSize="476,300" sap2010:WorkflowViewState.IdRef="Sequence_19">
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -887,7 +705,7 @@
                                         <InArgument x:TypeArguments="x:Int32">[i-1]</InArgument>
                                       </Assign.Value>
                                     </Assign>
-                                    <Delay Duration="00:00:01" sap:VirtualizedContainerService.HintSize="434,91" sap2010:WorkflowViewState.IdRef="Delay_1" />
+                                    <Delay Duration="00:00:01" sap:VirtualizedContainerService.HintSize="434,90" sap2010:WorkflowViewState.IdRef="Delay_1" />
                                   </Sequence>
                                 </If.Then>
                                 <If.Else>
@@ -896,17 +714,14 @@
                               </If>
                             </Sequence>
                           </ui:InterruptibleDoWhile.Body>
-                          <ui:InterruptibleDoWhile.Condition>
-                            <VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="Not certidao.Exists And i &gt; 0" />
-                          </ui:InterruptibleDoWhile.Condition>
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                               <x:Boolean x:Key="IsPinned">False</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                         </ui:InterruptibleDoWhile>
-                        <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'BUTTON fechar_impressao…'" sap:VirtualizedContainerService.HintSize="608,158" sap2010:WorkflowViewState.IdRef="NClick_5" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="52a462f0-0a0e-4957-a8fa-b329397ea90c" Version="V3">
+                        <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'BUTTON fechar_impressao…'" sap:VirtualizedContainerService.HintSize="388,157" sap2010:WorkflowViewState.IdRef="NClick_5" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="52a462f0-0a0e-4957-a8fa-b329397ea90c" Version="V3">
                           <uix:NClick.Target>
                             <uix:TargetAnchorable BrowserURL="https://cascavel.atende.net/autoatendimento/servicos/certidao-negativa-de-debitos/detalhar/1" CvType="CloseButton" DesignTimeRectangle="1371, 128, 21, 19" DesignTimeScaleFactor="1" ElementType="Button" FriendlyName="'BUTTON fechar_impressao…'" FullSelectorArgument="&lt;webctrl tag='BUTTON' name='fechar_relatorio' /&gt;" Guid="dfef15d2-8ad3-4f43-bec2-7a2d7251e219" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAABkAAAAXCAYAAAD+4+QTAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADLSURBVEhLYzDcs/Q/rfEwtKTs0uH/979+/E8NADIHZB6GJdSyAAZA5mFYQgsw4iy5//+/v/r//9PPQ/lIYH38///2/f//f4fysQAiLQGa0G7+/z+D+P///UgWgSxgYPj/P3w5VAA7INISEHiPsGj+daItAAESLAEBmEVAw4m0AARItAQIlodDLYH6iAhAmiXwIJqPPY5wAOItwYgDpDgiYBGRlgANEccWBzCL0qmRhIHgOx5T8EiBAPGWUACGsSV0qU/oUjPSDi/9DwBywb8rTZmoLQAAAABJRU5ErkJggg==" InformativeScreenshot="f4fbecc668d1df13dce9492b9b31642e.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Autoatendimento - MUNICÍPIO DE CASCAVEL' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
                           </uix:NClick.Target>
@@ -917,21 +732,21 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                         </uix:NClick>
-                        <If Condition="[Not certidao.Exists]" DisplayName="Não conseguiu Salvar" sap:VirtualizedContainerService.HintSize="608,362" sap2010:WorkflowViewState.IdRef="If_5">
+                        <If Condition="[Not certidao.Exists]" DisplayName="Não conseguiu Salvar" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="If_5">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                               <x:Boolean x:Key="IsPinned">False</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                           <If.Then>
-                            <Sequence sap:VirtualizedContainerService.HintSize="376,179" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                            <Sequence sap:VirtualizedContainerService.HintSize="376,178" sap2010:WorkflowViewState.IdRef="Sequence_22">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
-                              <Throw Exception="[New BusinessRuleException(&quot;Não foi possível salvar a Certidao Negativa CNPJ: &quot;+io_TransactionItem(&quot;CNPJ&quot;).ToString())]" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="Throw_1" />
+                              <Throw Exception="[New BusinessRuleException(&quot;Não foi possível salvar a Certidao Negativa CNPJ: &quot;+io_TransactionItem(&quot;CNPJ&quot;).ToString())]" sap:VirtualizedContainerService.HintSize="334,90" sap2010:WorkflowViewState.IdRef="Throw_1" />
                             </Sequence>
                           </If.Then>
                           <If.Else>
