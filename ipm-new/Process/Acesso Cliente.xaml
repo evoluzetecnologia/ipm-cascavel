@@ -6,7 +6,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1222,1934</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1222,2037</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Acesso_Cliente_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -95,7 +95,7 @@
       <AssemblyReference>UiPath.System.Activities.ViewModels</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Acesso_Cliente" sap:VirtualizedContainerService.HintSize="677,1869" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Acesso_Cliente" sap:VirtualizedContainerService.HintSize="677,1892" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="parametro" />
       <Variable x:TypeArguments="x:String" Name="var" />
@@ -133,20 +133,12 @@
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\IPM\Login.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Process\IPM\Login.xaml">
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\IPM\Login.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Process\IPM\Login.xaml">
             <ui:InvokeWorkflowFile.Arguments>
-              <InArgument x:TypeArguments="x:String" x:Key="in_Login">
-                <VisualBasicValue x:TypeArguments="x:String" ExpressionText="io_TransactionItem(&quot;LOGIN&quot;).ToString()" />
-              </InArgument>
-              <InArgument x:TypeArguments="x:String" x:Key="in_Password">
-                <VisualBasicValue x:TypeArguments="x:String" ExpressionText="io_TransactionItem(&quot;PASSWORD&quot;).ToString()" />
-              </InArgument>
-              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
-                <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="io_Config" />
-              </InArgument>
-              <InOutArgument x:TypeArguments="x:String" x:Key="io_Codigo">
-                <VisualBasicReference x:TypeArguments="x:String" ExpressionText="var" />
-              </InOutArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_Login">[io_TransactionItem("LOGIN").ToString()]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_Password">[io_TransactionItem("PASSWORD").ToString()]</InArgument>
+              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[io_Config]</InArgument>
+              <InOutArgument x:TypeArguments="x:String" x:Key="io_Codigo">[var]</InOutArgument>
             </ui:InvokeWorkflowFile.Arguments>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -186,26 +178,26 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </rs:Json_Convert_Dictionary>
-    <ui:ForEach x:TypeArguments="scg:KeyValuePair(x:String, x:Object)" CurrentIndex="{x:Null}" DisplayName="For Each ToDo" sap:VirtualizedContainerService.HintSize="615,1047" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[parametro]">
+    <ui:ForEach x:TypeArguments="scg:KeyValuePair(x:String, x:Object)" CurrentIndex="{x:Null}" DisplayName="For Each ToDo" sap:VirtualizedContainerService.HintSize="615,1070" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[parametro]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="scg:KeyValuePair(x:String, x:Object)">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="scg:KeyValuePair(x:String, x:Object)" Name="item" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="581,861" sap2010:WorkflowViewState.IdRef="Sequence_12">
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="581,884" sap2010:WorkflowViewState.IdRef="Sequence_12">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[item.Key]" sap:VirtualizedContainerService.HintSize="539,773" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+            <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[item.Key]" sap:VirtualizedContainerService.HintSize="539,796" sap2010:WorkflowViewState.IdRef="Switch`1_1">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <If x:Key="DownloadNFSaida" Condition="[Convert.ToBoolean(io_TransactionItem(&quot;FAZ_DOWNLOAD_SAIDA&quot;)) And Convert.ToBoolean(item.Value)]" sap:VirtualizedContainerService.HintSize="499,501" sap2010:WorkflowViewState.IdRef="If_1">
+              <If x:Key="DownloadNFSaida" Condition="[Convert.ToBoolean(io_TransactionItem(&quot;FAZ_DOWNLOAD_SAIDA&quot;)) And Convert.ToBoolean(item.Value)]" sap:VirtualizedContainerService.HintSize="499,524" sap2010:WorkflowViewState.IdRef="If_1">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -213,12 +205,28 @@
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
                 <If.Then>
-                  <Sequence sap:VirtualizedContainerService.HintSize="465,319" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                  <Sequence sap:VirtualizedContainerService.HintSize="465,342" sap2010:WorkflowViewState.IdRef="Sequence_2">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
+                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\Download.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="423,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Process\Download.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">
+                          <VisualBasicReference x:TypeArguments="sd:DataRow" ExpressionText="io_TransactionItem" />
+                        </InOutArgument>
+                        <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">
+                          <VisualBasicReference x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="io_Config" />
+                        </InOutArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_Tipo">
+                          <Literal x:TypeArguments="x:String">Saida</Literal>
+                        </InArgument>
+                        <InArgument x:TypeArguments="x:Boolean" x:Key="in_Fechar">
+                          <Literal x:TypeArguments="x:Boolean" Value="True" />
+                        </InArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                    </ui:InvokeWorkflowFile>
                     <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="423,101" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
                       <ui:MultipleAssign.AssignOperations>
                         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
@@ -233,14 +241,13 @@
                         </scg:List>
                       </ui:MultipleAssign.AssignOperations>
                     </ui:MultipleAssign>
-                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="423,90" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="nfs saida" />
                   </Sequence>
                 </If.Then>
                 <If.Else>
                   <Sequence sap2010:WorkflowViewState.IdRef="Sequence_3" />
                 </If.Else>
               </If>
-              <If x:Key="DownloadNFEntrada" Condition="[Convert.ToBoolean(io_TransactionItem(&quot;FAZ_DOWNLOAD_ENTRADA&quot;)) And Convert.ToBoolean(item.Value)]" sap:VirtualizedContainerService.HintSize="499,501" sap2010:WorkflowViewState.IdRef="If_6">
+              <If x:Key="DownloadNFEntrada" Condition="[Convert.ToBoolean(io_TransactionItem(&quot;FAZ_DOWNLOAD_ENTRADA&quot;)) And Convert.ToBoolean(item.Value)]" sap:VirtualizedContainerService.HintSize="334,182" sap2010:WorkflowViewState.IdRef="If_6">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -248,12 +255,28 @@
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
                 <If.Then>
-                  <Sequence sap:VirtualizedContainerService.HintSize="465,319" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                  <Sequence sap:VirtualizedContainerService.HintSize="465,342" sap2010:WorkflowViewState.IdRef="Sequence_4">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
+                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\Download.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="423,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Process\Download.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">
+                          <VisualBasicReference x:TypeArguments="sd:DataRow" ExpressionText="io_TransactionItem" />
+                        </InOutArgument>
+                        <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">
+                          <VisualBasicReference x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="io_Config" />
+                        </InOutArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_Tipo">
+                          <Literal x:TypeArguments="x:String">Entrada</Literal>
+                        </InArgument>
+                        <InArgument x:TypeArguments="x:Boolean" x:Key="in_Fechar">
+                          <Literal x:TypeArguments="x:Boolean" Value="True" />
+                        </InArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                    </ui:InvokeWorkflowFile>
                     <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="423,101" sap2010:WorkflowViewState.IdRef="MultipleAssign_4">
                       <ui:MultipleAssign.AssignOperations>
                         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
@@ -268,14 +291,13 @@
                         </scg:List>
                       </ui:MultipleAssign.AssignOperations>
                     </ui:MultipleAssign>
-                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="423,90" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="nfs entrada" />
                   </Sequence>
                 </If.Then>
                 <If.Else>
                   <Sequence sap2010:WorkflowViewState.IdRef="Sequence_5" />
                 </If.Else>
               </If>
-              <If x:Key="ProtocolarNFSaida" Condition="[Convert.ToBoolean(io_TransactionItem(&quot;FAZ_DECLARACAO_SAIDA&quot;)) And Convert.ToBoolean(item.Value)]" sap:VirtualizedContainerService.HintSize="499,501" sap2010:WorkflowViewState.IdRef="If_7">
+              <If x:Key="ProtocolarNFSaida" Condition="[Convert.ToBoolean(io_TransactionItem(&quot;FAZ_DECLARACAO_SAIDA&quot;)) And Convert.ToBoolean(item.Value)]" sap:VirtualizedContainerService.HintSize="334,182" sap2010:WorkflowViewState.IdRef="If_7">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -310,7 +332,7 @@
                   <Sequence sap2010:WorkflowViewState.IdRef="Sequence_7" />
                 </If.Else>
               </If>
-              <If x:Key="ProtocolarNFEntrada" Condition="[Convert.ToBoolean(io_TransactionItem(&quot;FAZ_DECLARACAO_ENTRADA&quot;)) And Convert.ToBoolean(item.Value)]" sap:VirtualizedContainerService.HintSize="499,501" sap2010:WorkflowViewState.IdRef="If_8">
+              <If x:Key="ProtocolarNFEntrada" Condition="[Convert.ToBoolean(io_TransactionItem(&quot;FAZ_DECLARACAO_ENTRADA&quot;)) And Convert.ToBoolean(item.Value)]" sap:VirtualizedContainerService.HintSize="334,182" sap2010:WorkflowViewState.IdRef="If_8">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -345,7 +367,7 @@
                   <Sequence sap2010:WorkflowViewState.IdRef="Sequence_9" />
                 </If.Else>
               </If>
-              <If x:Key="SimplesNacional" Condition="[Convert.ToBoolean(io_TransactionItem(&quot;FAZ_SIMPLES_NACIONAL&quot;)) And Convert.ToBoolean(item.Value)]" sap:VirtualizedContainerService.HintSize="499,501" sap2010:WorkflowViewState.IdRef="If_9">
+              <If x:Key="SimplesNacional" Condition="[Convert.ToBoolean(io_TransactionItem(&quot;FAZ_SIMPLES_NACIONAL&quot;)) And Convert.ToBoolean(item.Value)]" sap:VirtualizedContainerService.HintSize="334,182" sap2010:WorkflowViewState.IdRef="If_9">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
