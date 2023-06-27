@@ -1,0 +1,183 @@
+﻿<!-- form
+{
+  "Metadata": {
+    "Id": "bc8d2667-5174-4c0b-9ddc-d0cf94c72b81",
+    "Kind": "Html"
+  }
+}
+-->
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Roboluze</title>
+	<link rel="stylesheet" href="https://roboluze.com.br/_roboluze/www/css/bootstrap.5.2.3.min.css">
+	<script src="https://roboluze.com.br/_roboluze/www/js/bootstrap.5.2.3.js"></script>
+	<link rel="stylesheet" href="https://roboluze.com.br/_roboluze/www/css/roboluze.css">
+	<script src="https://roboluze.com.br/_roboluze/www/js/ajax.jquery.3.2.0.min.js"></script>
+	<script src="https://roboluze.com.br/_roboluze/www/js/roboluze.js"></script>
+	<script src="https://roboluze.com.br/_roboluze/www/js/imask.js"></script>
+	<script type="text/javascript">
+			var uiPathApi = {
+                getValue: function (elementId) {
+                    // this is a callback, being called from the workflow
+                    // enter your own code to get element values
+                    var el = document.getElementById(elementId);
+                    if (el.value == undefined) {
+                        return el.innerHTML;
+                    } else {
+                        if (el.checked == undefined) {
+                            return el.value;
+                        } else {
+                            return el.checked;
+                        }
+                    }
+                },
+        
+                setValue: function (elementId, value) {
+                    // this is a callback, being called from the workflow
+                    // enter your own code to set element values
+                    var el = document.getElementById(elementId);
+                    /*
+					if (el.value == undefined) {
+                        el.innerHTML = value;
+                    } else {
+                        if (el.checked == undefined) {
+                            el.value = value;
+                        } else {
+                            el.checked = value;
+                        }
+                    }
+					*/
+					if ((el.tagName === 'INPUT' && el.type === 'text') || el.type === 'email') {
+						el.value = value;
+					}  else if (el.tagName === 'SELECT') {
+						el.value = value;
+					} else {
+						el.innerHTML = value;
+					}
+					
+                },
+				
+				
+                // Call this to trigger a "Form Message" event
+                // This function is set by the forms engine after the page loads,
+                // but declaring it here as empty helps with code autocompletion
+                sendMessage: function (id, value) { },
+			};
+	</script>
+	<script>
+		function closedClicked() {
+			uiPathApi.sendMessage("close");
+		}
+		function saveClicked() {
+			var continuar = document.getElementById("continuar").checked;
+			/*
+			var radioButtons = document.querySelectorAll('input[name="radioOptions"]');
+			var valorSelecionado = '';
+
+			radioButtons.forEach(function(radioButton) {
+				if (radioButton.checked) {
+				  valorSelecionado = radioButton.value;
+				}
+			});
+			*/
+			var botao = document.getElementById("botao").value;
+			
+			var jsonData = {
+			  "Continuar": continuar,
+			  "Botao": botao
+			};
+
+			var jsonString = JSON.stringify(jsonData);
+			//alert(jsonString);
+			uiPathApi.sendMessage("save", jsonString );
+		}
+	</script>
+</head>
+<body class="body">
+	<div class="container-fluid mt-2">
+		<div class="row">
+			<div class="col-sm-11">
+				<div class="d-flex align-items-center mb-3">
+					<img src="https://roboluze.com.br/img/evoluze_logo.png" alt="Logo" class="logo">
+					<h4 class="m-0" id="title"></h4>
+			   </div>
+			</div>
+			<!--div class="col-sm-1">
+				<button type="button" class="btn-close float-end" aria-label="Close" onclick="closedClicked()"></button>
+			</div-->
+		</div>
+		<hr class="my-1">
+		<form class="needs-validation rneeds-validation" novalidate onsubmit="handleFormSubmit(event)">
+			<div class="mb-3">
+				<div class="form-group row g-3">
+					<div class="col-sm-12">
+						<textarea class="form-control" id="mensagem" rows="10" disabled></textarea>
+					</div>
+				</div>
+			</div>
+			
+			<!--div class="mb-1">
+				<div class="form-group row g-3">
+					<label for="radio" class="col-sm-4 col-form-label">Tipo da Ação</label>
+					<div class="col-sm-8">
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="radioOptions" id="radioContinuar" value="Continuar" checked>
+							<label class="form-check-label" for="radioContinuar">Continuar</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="radioOptions" id="radioCancelar" value="Cancelar">
+							<label class="form-check-label" for="radioCancelar">Cancelar</label>
+						</div>
+					</div>
+				</div>
+			</div-->
+			<div class="mb-1">
+				<div class="form-group row g-3">
+					<label for="radio" class="col-sm-4 col-form-label">Tipo Mensagem</label>
+					<div class="col-sm-8">
+						<div class="form-check form-switch">
+							<input class="form-check-input" type="checkbox" role="switch" id="continuar" checked>
+							<label class="form-check-label" for="continuar">Normal</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="mb-3">
+				<div class="form-group row g-3">
+					<label for="radio" class="col-sm-4 col-form-label">Botão da Ação</label>
+					<div class="col-sm-8">
+						<select class="form-select" id="botao" required>
+							<option value="Ok">Ok</option>
+							<option value="Sim">Sim</option>
+							<option value="Não">Não</option>
+							<option value="Cancelar">Cancelar</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="d-grid">
+				<button id="SubmitButton" type="submit" class="btn btn-primary" onclick="saveClicked()">Salvar</button>
+			</div>
+        </form>
+	</div>
+		  
+	<script>
+	  var checkbox = document.getElementById('continuar');
+	  var label = document.querySelector('label[for="continuar"]');
+
+	  checkbox.addEventListener('change', function() {
+		if (this.checked) {
+		  label.textContent = 'Normal';
+		} else {
+		  label.textContent = 'Cancelar operação';
+		}
+	  });
+	</script>
+	<script src="https://roboluze.com.br/_roboluze/www/js/jquery-3.6.0.min.js"></script>
+	<script src="https://roboluze.com.br/_roboluze/www/js/bootpag.js"></script>
+	
+</body>
+</html>
