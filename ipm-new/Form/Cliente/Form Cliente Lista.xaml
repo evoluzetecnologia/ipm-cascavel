@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Form" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.ComponentModel;assembly=System.ComponentModel.TypeConverter" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ufa="clr-namespace:UiPath.Forms.Activities;assembly=UiPath.Forms.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Form" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:rs="clr-namespace:Roboluze_Libre_Config.System;assembly=Roboluze.Libre.Config" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.ComponentModel;assembly=System.ComponentModel.TypeConverter" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ufa="clr-namespace:UiPath.Forms.Activities;assembly=UiPath.Forms.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="io_TransactionData" Type="InOutArgument(sd:DataTable)" />
     <x:Property Name="BreakTriggerScopeInArgument" Type="InArgument(x:String)" />
@@ -7,7 +7,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1222,3599</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1077,3827</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Form_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -57,6 +57,8 @@
       <x:String>Roboluze_Libre_Config.Tools</x:String>
       <x:String>Roboluze_Libre_Config</x:String>
       <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+      <x:String>Roboluze_Libre_Config.System</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -127,7 +129,7 @@
       <AssemblyReference>UiPath.System.Activities.ViewModels</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Form" sap:VirtualizedContainerService.HintSize="867,3534" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Form" sap:VirtualizedContainerService.HintSize="867,3762" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataRow" Name="row" />
       <Variable x:TypeArguments="x:Int32" Name="width" />
@@ -391,7 +393,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
-    <If Condition="[Not io_TransactionData Is Nothing]" DisplayName="Exit TransactionData" sap:VirtualizedContainerService.HintSize="805,3147" sap2010:WorkflowViewState.IdRef="If_1">
+    <If Condition="[Not io_TransactionData Is Nothing]" DisplayName="Exit TransactionData" sap:VirtualizedContainerService.HintSize="805,3375" sap2010:WorkflowViewState.IdRef="If_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -399,7 +401,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <Sequence sap:VirtualizedContainerService.HintSize="771,2965" sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <Sequence sap:VirtualizedContainerService.HintSize="771,3193" sap2010:WorkflowViewState.IdRef="Sequence_3">
           <Sequence.Variables>
             <Variable x:TypeArguments="x:String" Name="result" />
           </Sequence.Variables>
@@ -416,42 +418,75 @@
               <InArgument x:TypeArguments="x:String">[Newtonsoft.Json.JsonConvert.SerializeObject(io_TransactionData)]</InArgument>
             </Assign.Value>
           </Assign>
-          <ufa:ShowFormActivity Title="{x:Null}" DisplayName="Show Form" FormId="1071c246-f0e4-4c16-808c-c8d9f05c5e39" Height="[heigth]" sap:VirtualizedContainerService.HintSize="729,186" sap2010:WorkflowViewState.IdRef="ShowFormActivity_1" InstanceName="[formName]" IsAsync="True" Left="[posX]" Top="[posY]" Width="[width]" WindowState="[UiPath.Studio.Forms.Runtime.WindowState.Normal]">
-            <ufa:ShowFormActivity.Arguments>
-              <InArgument x:TypeArguments="x:String" x:Key="myTable">[result]</InArgument>
-              <InArgument x:TypeArguments="x:String" x:Key="title">Roboluze - Lista de Clientes</InArgument>
-              <InArgument x:TypeArguments="x:String" x:Key="FitroCheckbox">[in_Config("FiltroCheckbox").ToString()]</InArgument>
-            </ufa:ShowFormActivity.Arguments>
-            <ufa:ShowFormActivity.ShowInTaskbar>
-              <InArgument x:TypeArguments="s:Nullable(x:Boolean)">
-                <Literal x:TypeArguments="s:Nullable(x:Boolean)" Value="True">
-                  <Literal.Result>
-                    <OutArgument x:TypeArguments="s:Nullable(x:Boolean)" />
-                  </Literal.Result>
-                </Literal>
-              </InArgument>
-            </ufa:ShowFormActivity.ShowInTaskbar>
-            <ufa:ShowFormActivity.ShowMargin>
-              <InArgument x:TypeArguments="s:Nullable(x:Boolean)">
-                <Literal x:TypeArguments="s:Nullable(x:Boolean)" Value="False" />
-              </InArgument>
-            </ufa:ShowFormActivity.ShowMargin>
-            <ufa:ShowFormActivity.TopMost>
-              <InArgument x:TypeArguments="s:Nullable(x:Boolean)">
-                <Literal x:TypeArguments="s:Nullable(x:Boolean)" Value="False">
-                  <Literal.Result>
-                    <OutArgument x:TypeArguments="s:Nullable(x:Boolean)" />
-                  </Literal.Result>
-                </Literal>
-              </InArgument>
-            </ufa:ShowFormActivity.TopMost>
+          <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="729,414" sap2010:WorkflowViewState.IdRef="TryCatch_1">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-          </ufa:ShowFormActivity>
+            <TryCatch.Try>
+              <ufa:ShowFormActivity Title="{x:Null}" DisplayName="Show Form" FormId="1071c246-f0e4-4c16-808c-c8d9f05c5e39" Height="[heigth]" sap:VirtualizedContainerService.HintSize="334,186" sap2010:WorkflowViewState.IdRef="ShowFormActivity_1" InstanceName="[formName]" IsAsync="True" Left="[posX]" Top="[posY]" Width="[width]" WindowState="[UiPath.Studio.Forms.Runtime.WindowState.Normal]">
+                <ufa:ShowFormActivity.Arguments>
+                  <InArgument x:TypeArguments="x:String" x:Key="myTable">[result]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="title">Roboluze - Lista de Clientes</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="FitroCheckbox">[in_Config("FiltroCheckbox").ToString()]</InArgument>
+                </ufa:ShowFormActivity.Arguments>
+                <ufa:ShowFormActivity.ShowInTaskbar>
+                  <InArgument x:TypeArguments="s:Nullable(x:Boolean)">
+                    <Literal x:TypeArguments="s:Nullable(x:Boolean)" Value="True">
+                      <Literal.Result>
+                        <OutArgument x:TypeArguments="s:Nullable(x:Boolean)" />
+                      </Literal.Result>
+                    </Literal>
+                  </InArgument>
+                </ufa:ShowFormActivity.ShowInTaskbar>
+                <ufa:ShowFormActivity.ShowMargin>
+                  <InArgument x:TypeArguments="s:Nullable(x:Boolean)">
+                    <Literal x:TypeArguments="s:Nullable(x:Boolean)" Value="False" />
+                  </InArgument>
+                </ufa:ShowFormActivity.ShowMargin>
+                <ufa:ShowFormActivity.TopMost>
+                  <InArgument x:TypeArguments="s:Nullable(x:Boolean)">
+                    <Literal x:TypeArguments="s:Nullable(x:Boolean)" Value="False">
+                      <Literal.Result>
+                        <OutArgument x:TypeArguments="s:Nullable(x:Boolean)" />
+                      </Literal.Result>
+                    </Literal>
+                  </InArgument>
+                </ufa:ShowFormActivity.TopMost>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ufa:ShowFormActivity>
+            </TryCatch.Try>
+            <TryCatch.Catches>
+              <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ActivityAction x:TypeArguments="s:Exception">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                  </ActivityAction.Argument>
+                  <rs:Log sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="Log_1" in_AutomationName="[in_Config(&quot;ApplicationKey&quot;).ToString()]" in_EnvironmentCurrentDirectory="[Environment.CurrentDirectory]" in_FileXaml="Form Cliente Lista" in_Log="[&quot;Falha ao Abrir o Formulario&quot;+Environment.NewLine+exception.Message]" in_Tipo="Erro">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </rs:Log>
+                </ActivityAction>
+              </Catch>
+            </TryCatch.Catches>
+          </TryCatch>
           <ui:TriggerScope DisplayName="Trigger Scope" sap:VirtualizedContainerService.HintSize="729,2529" sap2010:WorkflowViewState.IdRef="TriggerScope_1" SchedulingMode="Sequential">
             <ui:TriggerScope.Action>
               <ActivityAction x:TypeArguments="ufa:MessageTriggerEventArgs">

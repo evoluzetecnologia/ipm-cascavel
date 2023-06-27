@@ -7,7 +7,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1222,656</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1077,867</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>XML_Dados_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -92,7 +92,7 @@
       <AssemblyReference>Roboluze.UiPath</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="XML_Dados" sap:VirtualizedContainerService.HintSize="523,591" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="XML_Dados" sap:VirtualizedContainerService.HintSize="585,802" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="textXML" />
     </Sequence.Variables>
@@ -101,8 +101,8 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:ReadTextFile File="{x:Null}" Content="[textXML]" DisplayName="Read Text File" FileName="[in_XML]" sap:VirtualizedContainerService.HintSize="461,80" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
-    <TryCatch DisplayName="Deserialize XML" sap:VirtualizedContainerService.HintSize="461,360" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <ui:ReadTextFile File="{x:Null}" Content="[textXML]" DisplayName="Read Text File" FileName="[in_XML]" sap:VirtualizedContainerService.HintSize="523,80" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
+    <TryCatch DisplayName="Deserialize XML" sap:VirtualizedContainerService.HintSize="523,571" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <TryCatch.Variables>
         <Variable x:TypeArguments="sxl:XDocument" Name="notaXML" />
       </TryCatch.Variables>
@@ -117,9 +117,9 @@
           <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="423,132" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
             <ui:MultipleAssign.AssignOperations>
               <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
-                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+                <ui:AssignOperation sap:VirtualizedContainerService.HintSize="334,25" sap2010:WorkflowViewState.IdRef="AssignOperation_1">
                   <ui:AssignOperation.To>
-                    <OutArgument x:TypeArguments="x:Object">[out_PrestadorCNPJ]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String">[out_PrestadorCNPJ]</OutArgument>
                   </ui:AssignOperation.To>
                   <ui:AssignOperation.Value>
                     <InArgument x:TypeArguments="x:String">[notaXML.Element("nfse").Element("prestador").Element("cpfcnpj").Value]</InArgument>
@@ -127,10 +127,10 @@
                 </ui:AssignOperation>
                 <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
                   <ui:AssignOperation.To>
-                    <OutArgument x:TypeArguments="x:Object">[out_TomadorCNPJ]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String">[out_TomadorCNPJ]</OutArgument>
                   </ui:AssignOperation.To>
                   <ui:AssignOperation.Value>
-                    <InArgument x:TypeArguments="x:Object">[notaXML.Element("nfse").Element("tomador").Element("cpfcnpj").Value]</InArgument>
+                    <InArgument x:TypeArguments="x:String">[notaXML.Element("nfse").Element("tomador").Element("cpfcnpj").Value]</InArgument>
                   </ui:AssignOperation.Value>
                 </ui:AssignOperation>
               </scg:List>

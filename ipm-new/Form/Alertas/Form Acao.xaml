@@ -1,8 +1,9 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Form_Acao" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ufa="clr-namespace:UiPath.Forms.Activities;assembly=UiPath.Forms.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Form_Acao" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:rs="clr-namespace:Roboluze_Libre_Config.System;assembly=Roboluze.Libre.Config" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ufa="clr-namespace:UiPath.Forms.Activities;assembly=UiPath.Forms.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_Mensagem" Type="InArgument(x:String)" />
     <x:Property Name="out_Acao" Type="OutArgument(scg:Dictionary(x:String, x:Object))" />
     <x:Property Name="BreakTriggerScopeInArgument" Type="InArgument(x:String)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
   </x:Members>
   <this:Form_Acao.in_Mensagem>
     <InArgument x:TypeArguments="x:String">
@@ -12,7 +13,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1222,1228</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1077,1464</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Form_Acao_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -61,6 +62,8 @@
       <x:String>UiPath.Web.Activities</x:String>
       <x:String>GlobalVariablesNamespace</x:String>
       <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+      <x:String>Roboluze_Libre_Config.System</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -120,9 +123,10 @@
       <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
       <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
       <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>Roboluze.Libre.Config</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Form_Acao" sap:VirtualizedContainerService.HintSize="599,1163" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Form_Acao" sap:VirtualizedContainerService.HintSize="599,1399" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Int32" Name="width" />
       <Variable x:TypeArguments="x:Int32" Name="heigth" />
@@ -211,33 +215,66 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:MultipleAssign>
-    <ufa:ShowFormActivity InstanceName="{x:Null}" Title="{x:Null}" DisplayName="Show Form" FormId="bc8d2667-5174-4c0b-9ddc-d0cf94c72b81" Height="[heigth]" sap:VirtualizedContainerService.HintSize="537,52" sap2010:WorkflowViewState.IdRef="ShowFormActivity_1" IsAsync="True" Left="[posX]" Top="[posY]" Width="[width]" WindowState="[UiPath.Studio.Forms.Runtime.WindowState.Normal]">
-      <ufa:ShowFormActivity.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="title">Alertas IPM</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="mensagem">[in_Mensagem]</InArgument>
-      </ufa:ShowFormActivity.Arguments>
-      <ufa:ShowFormActivity.ShowInTaskbar>
-        <InArgument x:TypeArguments="s:Nullable(x:Boolean)">
-          <Literal x:TypeArguments="s:Nullable(x:Boolean)" Value="True" />
-        </InArgument>
-      </ufa:ShowFormActivity.ShowInTaskbar>
-      <ufa:ShowFormActivity.ShowMargin>
-        <InArgument x:TypeArguments="s:Nullable(x:Boolean)">
-          <Literal x:TypeArguments="s:Nullable(x:Boolean)" Value="False" />
-        </InArgument>
-      </ufa:ShowFormActivity.ShowMargin>
-      <ufa:ShowFormActivity.TopMost>
-        <InArgument x:TypeArguments="s:Nullable(x:Boolean)">
-          <Literal x:TypeArguments="s:Nullable(x:Boolean)" Value="False" />
-        </InArgument>
-      </ufa:ShowFormActivity.TopMost>
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="537,288" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-    </ufa:ShowFormActivity>
+      <TryCatch.Try>
+        <ufa:ShowFormActivity InstanceName="{x:Null}" Title="{x:Null}" DisplayName="Show Form" FormId="bc8d2667-5174-4c0b-9ddc-d0cf94c72b81" Height="[heigth]" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="ShowFormActivity_1" IsAsync="True" Left="[posX]" Top="[posY]" Width="[width]" WindowState="[UiPath.Studio.Forms.Runtime.WindowState.Normal]">
+          <ufa:ShowFormActivity.Arguments>
+            <InArgument x:TypeArguments="x:String" x:Key="title">Alertas IPM</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="mensagem">[in_Mensagem]</InArgument>
+          </ufa:ShowFormActivity.Arguments>
+          <ufa:ShowFormActivity.ShowInTaskbar>
+            <InArgument x:TypeArguments="s:Nullable(x:Boolean)">
+              <Literal x:TypeArguments="s:Nullable(x:Boolean)" Value="True" />
+            </InArgument>
+          </ufa:ShowFormActivity.ShowInTaskbar>
+          <ufa:ShowFormActivity.ShowMargin>
+            <InArgument x:TypeArguments="s:Nullable(x:Boolean)">
+              <Literal x:TypeArguments="s:Nullable(x:Boolean)" Value="False" />
+            </InArgument>
+          </ufa:ShowFormActivity.ShowMargin>
+          <ufa:ShowFormActivity.TopMost>
+            <InArgument x:TypeArguments="s:Nullable(x:Boolean)">
+              <Literal x:TypeArguments="s:Nullable(x:Boolean)" Value="False" />
+            </InArgument>
+          </ufa:ShowFormActivity.TopMost>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ufa:ShowFormActivity>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <rs:Log sap:VirtualizedContainerService.HintSize="334,294" sap2010:WorkflowViewState.IdRef="Log_1" in_AutomationName="[in_Config(&quot;ApplicationKey&quot;).ToString()]" in_EnvironmentCurrentDirectory="[Environment.CurrentDirectory]" in_FileXaml="Form Acao" in_Log="[&quot;Falha ao Abrir o Formulario&quot;+Environment.NewLine+exception.Message]" in_Tipo="Erro">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </rs:Log>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
     <ui:TriggerScope DisplayName="Trigger Scope" sap:VirtualizedContainerService.HintSize="537,868" sap2010:WorkflowViewState.IdRef="TriggerScope_1" SchedulingMode="Sequential">
       <ui:TriggerScope.Action>
         <ActivityAction x:TypeArguments="ufa:MessageTriggerEventArgs">
