@@ -6,7 +6,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1077,3179</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1210,2312</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Form_Config_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -175,7 +175,7 @@
       <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Form_Config" sap:VirtualizedContainerService.HintSize="673,3114" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Form_Config" sap:VirtualizedContainerService.HintSize="673,2247" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Int32" Name="width" />
       <Variable x:TypeArguments="x:Int32" Name="heigth" />
@@ -511,19 +511,19 @@
         </Catch>
       </TryCatch.Catches>
     </TryCatch>
-    <ui:TriggerScope DisplayName="Trigger Scope" sap:VirtualizedContainerService.HintSize="611,2321" sap2010:WorkflowViewState.IdRef="TriggerScope_1" SchedulingMode="Sequential">
+    <ui:TriggerScope DisplayName="Trigger Scope" sap:VirtualizedContainerService.HintSize="611,1454" sap2010:WorkflowViewState.IdRef="TriggerScope_1" SchedulingMode="Sequential">
       <ui:TriggerScope.Action>
         <ActivityAction x:TypeArguments="ufa:MessageTriggerEventArgs">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="ufa:MessageTriggerEventArgs" Name="args" />
           </ActivityAction.Argument>
-          <Sequence sap:VirtualizedContainerService.HintSize="559,1356" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence sap:VirtualizedContainerService.HintSize="559,489" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[args.Id]" sap:VirtualizedContainerService.HintSize="497,1245" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+            <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[args.Id]" sap:VirtualizedContainerService.HintSize="497,378" sap2010:WorkflowViewState.IdRef="Switch`1_1">
               <Switch.Default>
                 <Sequence sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_3">
                   <sap:WorkflowViewStateService.ViewState>
@@ -566,7 +566,7 @@
                     <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Dominio">[dominio]</InArgument>
                   </ui:InvokeWorkflowFile.Arguments>
                 </ui:InvokeWorkflowFile>
-                <If Condition="[Not io_Config(&quot;CertidaoExcel&quot;).ToString().Equals(&quot;&quot;)]" DisplayName="Validar Arquivo" sap:VirtualizedContainerService.HintSize="388,506" sap2010:WorkflowViewState.IdRef="If_19">
+                <If Condition="[Not io_Config(&quot;CertidaoExcel&quot;).ToString().Equals(&quot;&quot;)]" DisplayName="Validar Arquivo" sap:VirtualizedContainerService.HintSize="388,182" sap2010:WorkflowViewState.IdRef="If_19">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -583,7 +583,7 @@
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="258,52" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
+                      <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" Condition="[Not CertidaoExcel.Exists]" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="258,52" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
                         <ui:InterruptibleDoWhile.Body>
                           <ui:GetFileInfoX DisplayName="Get File Info" FilePath="[&quot;C:\Users\&quot;+Environment.UserName+&quot;\Downloads\&quot;+io_Config(&quot;CertidaoExcel&quot;).ToString()]" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="GetFileInfoX_2" Output="[CertidaoExcel]">
                             <sap:WorkflowViewStateService.ViewState>
@@ -594,9 +594,6 @@
                             </sap:WorkflowViewStateService.ViewState>
                           </ui:GetFileInfoX>
                         </ui:InterruptibleDoWhile.Body>
-                        <ui:InterruptibleDoWhile.Condition>
-                          <VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="Not CertidaoExcel.Exists" />
-                        </ui:InterruptibleDoWhile.Condition>
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -1305,7 +1302,7 @@
                 </Assign>
                 <ui:Break sap:VirtualizedContainerService.HintSize="434,25" sap2010:WorkflowViewState.IdRef="Break_3" />
               </Sequence>
-              <uix:NCheckState x:Key="certidao" DisplayName="Check App State 'Abrir'" EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="NCheckState_2" Version="V3">
+              <uix:NCheckState x:Key="certidao" DisplayName="Check App State 'Abrir'" EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="208,52" sap2010:WorkflowViewState.IdRef="NCheckState_2" Version="V3">
                 <uix:NCheckState.IfExists>
                   <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="660,1313" sap2010:WorkflowViewState.IdRef="Sequence_50">
                     <sap:WorkflowViewStateService.ViewState>
