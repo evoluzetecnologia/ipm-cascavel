@@ -130,9 +130,11 @@
 						var tableBody = $("#myTable");
 						var nItem = 0;
 						var altura = window.innerHeight;
-						var nPag = 25;
+						var nPag = 20;
 						if (window.innerHeight > 900){
 							nPag = 30;
+						} else if (window.innerHeight > 768){
+							nPag = 25;
 						}
 						data.forEach(function(item) {
 							var row = $('<tr>');
@@ -340,12 +342,10 @@
 			}
 		} 
 		function excluirCliente(){
-			alert(jsonCliente());
 			uiPathApi.sendMessage("excluirCliente", jsonCliente() );
 		}
 		
 		function closedClicked() {
-			alert('Teste x');
 			uiPathApi.sendMessage("close");
 		}
 		
