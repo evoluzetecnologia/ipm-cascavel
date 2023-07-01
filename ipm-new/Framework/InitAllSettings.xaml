@@ -6,7 +6,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1210,724</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1074,1038</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GetAllSettings_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -153,7 +153,7 @@
       <AssemblyReference>WindowsBase</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Initialize All Settings" sap:VirtualizedContainerService.HintSize="485,659" sap2010:WorkflowViewState.IdRef="Sequence_2">
+  <Sequence DisplayName="Initialize All Settings" sap:VirtualizedContainerService.HintSize="485,973" sap2010:WorkflowViewState.IdRef="Sequence_2">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="var" />
       <Variable x:TypeArguments="scg:List(x:String)" Default="[New List(Of String)]" Name="TODOList" />
@@ -163,10 +163,10 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <r:Config sap:VirtualizedContainerService.HintSize="423,192" sap2010:WorkflowViewState.IdRef="Config_2" in_ApplicationName="IPM" in_Version="23.01.02" io_Config="[out_Config]">
+    <r:Config sap:VirtualizedContainerService.HintSize="423,52" sap2010:WorkflowViewState.IdRef="Config_2" in_ApplicationName="IPM" in_Version="23.01.01" io_Config="[out_Config]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
@@ -209,10 +209,10 @@
         </Sequence>
       </If.Else>
     </If>
-    <If Condition="[Not out_Config(&quot;ApplicationKey&quot;).Equals(&quot;&quot;)]" DisplayName="Continuar" sap:VirtualizedContainerService.HintSize="423,52" sap2010:WorkflowViewState.IdRef="If_34">
+    <If Condition="[Not out_Config(&quot;ApplicationKey&quot;).Equals(&quot;&quot;)]" DisplayName="Continuar" sap:VirtualizedContainerService.HintSize="423,506" sap2010:WorkflowViewState.IdRef="If_34">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
@@ -568,7 +568,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <If.Then>
-              <Sequence sap:VirtualizedContainerService.HintSize="300,324" sap2010:WorkflowViewState.IdRef="Sequence_41">
+              <Sequence sap:VirtualizedContainerService.HintSize="541,977" sap2010:WorkflowViewState.IdRef="Sequence_41">
                 <Sequence.Variables>
                   <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="parametro" />
                 </Sequence.Variables>
@@ -577,7 +577,7 @@
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <rs:Json_Convert_Dictionary in_Dictionary="{x:Null}" io_String="{x:Null}" DisplayName="Json Convert Dictionary" sap:VirtualizedContainerService.HintSize="258,52" sap2010:WorkflowViewState.IdRef="Json_Convert_Dictionary_2" in_AutomationName="[out_Config(&quot;ApplicationKey&quot;).ToString()]" in_String="[out_Config(&quot;Dominio&quot;).ToString()]" io_Dictionary="[parametro]">
+                <rs:Json_Convert_Dictionary in_Dictionary="{x:Null}" io_String="{x:Null}" DisplayName="Json Convert Dictionary" sap:VirtualizedContainerService.HintSize="499,52" sap2010:WorkflowViewState.IdRef="Json_Convert_Dictionary_2" in_AutomationName="[out_Config(&quot;ApplicationKey&quot;).ToString()]" in_String="[out_Config(&quot;Dominio&quot;).ToString()]" io_Dictionary="[parametro]">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -585,7 +585,7 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </rs:Json_Convert_Dictionary>
-                <ui:MessageBox AutoCloseAfter="00:00:00" Buttons="YesNo" Caption="Atenção" ChosenButton="[var]" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="258,52" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[&quot;Você ainda não possui nenhum cliente cadastrado!&quot;+Environment.NewLine+&quot;Deseja importar do dominio?&quot;]">
+                <ui:MessageBox AutoCloseAfter="00:00:00" Buttons="YesNo" Caption="Atenção" ChosenButton="[var]" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="499,52" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[&quot;Você ainda não possui nenhum cliente cadastrado!&quot;+Environment.NewLine+&quot;Deseja importar do dominio?&quot;]">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -593,21 +593,40 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </ui:MessageBox>
-                <If Condition="[var.ToUpper.Equals(&quot;YES&quot;)]" DisplayName="Cadastrar" sap:VirtualizedContainerService.HintSize="258,52" sap2010:WorkflowViewState.IdRef="If_18">
+                <If Condition="[var.ToUpper.Equals(&quot;YES&quot;)]" DisplayName="Cadastrar" sap:VirtualizedContainerService.HintSize="499,705" sap2010:WorkflowViewState.IdRef="If_18">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                   <If.Then>
-                    <Sequence sap:VirtualizedContainerService.HintSize="376,229" sap2010:WorkflowViewState.IdRef="Sequence_42">
+                    <Sequence sap:VirtualizedContainerService.HintSize="465,523" sap2010:WorkflowViewState.IdRef="Sequence_42">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <rt:Cadastrar_Clientes_Dominio BreakTriggerScopeInArgument="{x:Null}" DisplayName="Save Client Dominio" sap:VirtualizedContainerService.HintSize="334,141" sap2010:WorkflowViewState.IdRef="Cadastrar_Clientes_Dominio_1" in_Config="[out_Config]" />
+                      <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="423,101" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+                        <ui:MultipleAssign.AssignOperations>
+                          <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:Object">[out_Config("TodosOsCadastros")]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:Object">[True]</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                          </scg:List>
+                        </ui:MultipleAssign.AssignOperations>
+                      </ui:MultipleAssign>
+                      <rt:Cadastrar_Clientes_Dominio BreakTriggerScopeInArgument="{x:Null}" DisplayName="Save Client Dominio" sap:VirtualizedContainerService.HintSize="423,141" sap2010:WorkflowViewState.IdRef="Cadastrar_Clientes_Dominio_1" io_Config="[out_Config]" />
+                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Data\Temp\Mibracao.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="423,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Data\Temp\Mibracao.xaml">
+                        <ui:InvokeWorkflowFile.Arguments>
+                          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[out_Config]</InArgument>
+                        </ui:InvokeWorkflowFile.Arguments>
+                      </ui:InvokeWorkflowFile>
                     </Sequence>
                   </If.Then>
                   <If.Else>

@@ -1,11 +1,11 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Mibracao" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:r="clr-namespace:Roboluze_Libre_Config;assembly=Roboluze.Libre.Config" xmlns:rn="clr-namespace:Roboluze_Libre_Config.Notification;assembly=Roboluze.Libre.Config" xmlns:rs="clr-namespace:Roboluze_Libre_Config.System;assembly=Roboluze.Libre.Config" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Mibracao" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:rn="clr-namespace:Roboluze_Libre_Config.Notification;assembly=Roboluze.Libre.Config" xmlns:rs="clr-namespace:Roboluze_Libre_Config.System;assembly=Roboluze.Libre.Config" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1074,2106</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>937,1875</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Mibracao_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -118,21 +118,21 @@
       <AssemblyReference>UiPath.Forms.Activities</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Migração" sap:VirtualizedContainerService.HintSize="646,2041" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Migração" sap:VirtualizedContainerService.HintSize="681,2214" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="data_tmp" />
       <Variable x:TypeArguments="x:String" Name="querySql" />
       <Variable x:TypeArguments="x:String" Name="fileDb" />
-      <Variable x:TypeArguments="x:String" Name="conn" />
+      <Variable x:TypeArguments="x:String" Name="var" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="584,1930" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="619,2103" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <TryCatch.Try>
-        <Sequence sap:VirtualizedContainerService.HintSize="546,1702" sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <Sequence sap:VirtualizedContainerService.HintSize="581,1875" sap2010:WorkflowViewState.IdRef="Sequence_3">
           <Sequence.Variables>
             <Variable x:TypeArguments="ui:DatabaseConnection" Name="conection" />
           </Sequence.Variables>
@@ -141,13 +141,13 @@
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:SelectFile DisplayName="Browse For File" Filter="All files|*.*" sap:VirtualizedContainerService.HintSize="484,138" sap2010:WorkflowViewState.IdRef="SelectFile_1" SelectedFile="[fileDb]" />
-          <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="484,132" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+          <ui:SelectFile DisplayName="Browse For File" Filter="All files|*.*" sap:VirtualizedContainerService.HintSize="519,138" sap2010:WorkflowViewState.IdRef="SelectFile_1" SelectedFile="[fileDb]" />
+          <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="519,132" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
             <ui:MultipleAssign.AssignOperations>
               <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
                 <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
                   <ui:AssignOperation.To>
-                    <OutArgument x:TypeArguments="x:String">[conn]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String">[var]</OutArgument>
                   </ui:AssignOperation.To>
                   <ui:AssignOperation.Value>
                     <InArgument x:TypeArguments="x:String">["Driver=SQLite3 ODBC Driver;Database="+fileDb+";Version=3;"]</InArgument>
@@ -172,27 +172,26 @@
     DECLARACAO_TOMADOS AS LANCAR_NOTA_ENTRADA
 FROM ipm_cliente ipm inner join
 cliente cl on cl.ID_CLIENTE = ipm.ID_CLIENTE
-and  cl.SITUACAO = true or cl.SITUACAO = 1 or cl.SITUACAO = 'true'</InArgument>
+and  (cl.SITUACAO = true or cl.SITUACAO = 1)</InArgument>
                   </ui:AssignOperation.Value>
                 </ui:AssignOperation>
               </scg:List>
             </ui:MultipleAssign.AssignOperations>
           </ui:MultipleAssign>
-          <ui:DatabaseConnect DisplayName="Connect to database" sap:VirtualizedContainerService.HintSize="484,60" sap2010:WorkflowViewState.IdRef="DatabaseConnect_1" ProviderName="System.Data.Odbc" ConnectionString="[conn]" DatabaseConnection="[conection]" />
-          <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[data_tmp]" DisplayName="Run query" ExistingDbConnection="[conection]" sap:VirtualizedContainerService.HintSize="484,89" sap2010:WorkflowViewState.IdRef="ExecuteQuery_1" Sql="[querySql]">
+          <ui:DatabaseConnect DisplayName="Connect to database" sap:VirtualizedContainerService.HintSize="519,60" sap2010:WorkflowViewState.IdRef="DatabaseConnect_1" ProviderName="System.Data.Odbc" ConnectionString="[var]" DatabaseConnection="[conection]" />
+          <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[data_tmp]" DisplayName="Run query" ExistingDbConnection="[conection]" sap:VirtualizedContainerService.HintSize="519,89" sap2010:WorkflowViewState.IdRef="ExecuteQuery_1" Sql="[querySql]">
             <ui:ExecuteQuery.Parameters>
               <scg:Dictionary x:TypeArguments="x:String, Argument" />
             </ui:ExecuteQuery.Parameters>
           </ui:ExecuteQuery>
-          <ui:DatabaseDisconnect DatabaseConnection="[conection]" DisplayName="Disconnect from database" sap:VirtualizedContainerService.HintSize="484,25" sap2010:WorkflowViewState.IdRef="DatabaseDisconnect_1" />
-          <r:Config sap:VirtualizedContainerService.HintSize="484,192" sap2010:WorkflowViewState.IdRef="Config_2" in_ApplicationName="IPM" in_Version="23.0.1" io_Config="[in_Config]" />
-          <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[data_tmp]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="484,715" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+          <ui:DatabaseDisconnect DatabaseConnection="[conection]" DisplayName="Disconnect from database" sap:VirtualizedContainerService.HintSize="519,25" sap2010:WorkflowViewState.IdRef="DatabaseDisconnect_1" />
+          <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[data_tmp]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="519,1120" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
             <ui:ForEachRow.Body>
               <ActivityAction x:TypeArguments="sd:DataRow">
                 <ActivityAction.Argument>
                   <DelegateInArgument x:TypeArguments="sd:DataRow" Name="Row" />
                 </ActivityAction.Argument>
-                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="450,599" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="485,1003" sap2010:WorkflowViewState.IdRef="Sequence_2">
                   <Sequence.Variables>
                     <Variable x:TypeArguments="sd:DataRow" Name="cliente" />
                   </Sequence.Variables>
@@ -201,18 +200,53 @@ and  cl.SITUACAO = true or cl.SITUACAO = 1 or cl.SITUACAO = 'true'</InArgument>
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <rn:ShowProgress sap:VirtualizedContainerService.HintSize="388,243" sap2010:WorkflowViewState.IdRef="ShowProgress_1" in_Length="[data_tmp.RowCount]" in_Message="Importacao dos dados IPM" in_Progress="[data_tmp.Rows.IndexOf(Row)+1]" in_Title="Aguarde" />
-                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Data\Input\Get Cliente.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Data\Input\Get Cliente.xaml">
-                    <ui:InvokeWorkflowFile.Arguments>
-                      <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
-                      <InArgument x:TypeArguments="x:String" x:Key="in_Filtro">[Row("CODIGO").ToString()]</InArgument>
-                      <OutArgument x:TypeArguments="sd:DataRow" x:Key="out_Row">[cliente]</OutArgument>
-                    </ui:InvokeWorkflowFile.Arguments>
-                  </ui:InvokeWorkflowFile>
-                  <If Condition="[Convert.ToInt32(cliente(&quot;ID_CLIENTE&quot;)) &gt; 0]" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="If_1">
+                  <rn:ShowProgress sap:VirtualizedContainerService.HintSize="423,52" sap2010:WorkflowViewState.IdRef="ShowProgress_1" in_Length="[data_tmp.RowCount]" in_Message="Importacao dos dados IPM" in_Progress="[data_tmp.Rows.IndexOf(Row)+1]" in_Title="Aguarde">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </rn:ShowProgress>
+                  <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="423,132" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+                    <ui:MultipleAssign.AssignOperations>
+                      <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="sd:DataRow">[cliente]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="sd:DataRow">[Nothing]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[var]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[Row("CODIGO").ToString()]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                      </scg:List>
+                    </ui:MultipleAssign.AssignOperations>
+                  </ui:MultipleAssign>
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Data\Input\Get Cliente.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="423,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Data\Input\Get Cliente.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
+                        <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="in_Config" />
+                      </InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_Filtro">
+                        <VisualBasicValue x:TypeArguments="x:String" ExpressionText="var" />
+                      </InArgument>
+                      <OutArgument x:TypeArguments="sd:DataRow" x:Key="out_Row">
+                        <VisualBasicReference x:TypeArguments="sd:DataRow" ExpressionText="cliente" />
+                      </OutArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                  <If Condition="[Convert.ToInt32(cliente(&quot;ID_CLIENTE&quot;)) &gt; 0]" sap:VirtualizedContainerService.HintSize="423,475" sap2010:WorkflowViewState.IdRef="If_1">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         <x:Boolean x:Key="IsPinned">False</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
@@ -229,13 +263,13 @@ and  cl.SITUACAO = true or cl.SITUACAO = 1 or cl.SITUACAO = 'true'</InArgument>
                               <ActivityAction.Argument>
                                 <DelegateInArgument x:TypeArguments="sd:DataColumn" Name="currentDataColumn" />
                               </ActivityAction.Argument>
-                              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="476,169" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="476,170" sap2010:WorkflowViewState.IdRef="Sequence_4">
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
-                                <Assign sap:VirtualizedContainerService.HintSize="434,81" sap2010:WorkflowViewState.IdRef="Assign_1">
+                                <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_1">
                                   <Assign.To>
                                     <OutArgument x:TypeArguments="x:Object">[cliente(currentDataColumn.ToString())]</OutArgument>
                                   </Assign.To>
@@ -273,7 +307,7 @@ and  cl.SITUACAO = true or cl.SITUACAO = 1 or cl.SITUACAO = 'true'</InArgument>
         </Sequence>
       </TryCatch.Try>
       <TryCatch.Catches>
-        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="550,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="585,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">False</x:Boolean>
