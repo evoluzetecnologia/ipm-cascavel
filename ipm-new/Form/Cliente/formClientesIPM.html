@@ -60,7 +60,8 @@
 						limparValoresModal();
 						var jsonData = value;
 						var data = JSON.parse(jsonData);
-						
+						var idCliente = data['ID_CLIENTE'];
+
 						for (var key in data) {
 							if (data.hasOwnProperty(key)) {
 								var el = document.getElementById(key);
@@ -94,6 +95,7 @@
 									} else {
 										el.value = data[key];
 										if (key === 'ID_CLIENTE'){
+											document.getElementById('SalvarCliente').disabled = false;
 											el = document.getElementById('ExcluirCliente');
 											if (data[key] === 0){
 												el.disabled = true;
@@ -269,6 +271,48 @@
 			};
 	</script>
 	<script>
+	
+		function confirmDialog(message, callback) {
+		  // Cria os elementos HTML para o diálogo
+		  var dialog = document.createElement('div');
+		  dialog.className = 'confirm-dialog';
+		  var content = document.createElement('div');
+		  content.className = 'confirm-content';
+		  var messageElement = document.createElement('p');
+		  messageElement.textContent = message;
+		  var buttonContainer = document.createElement('div');
+		  buttonContainer.className = 'confirm-button-container';
+		  var yesButton = document.createElement('button');
+		  yesButton.textContent = 'Sim';
+		  var noButton = document.createElement('button');
+		  noButton.textContent = 'Não';
+
+		  // Adiciona os elementos ao diálogo
+		  buttonContainer.appendChild(yesButton);
+		  buttonContainer.appendChild(noButton);
+		  content.appendChild(messageElement);
+		  content.appendChild(buttonContainer);
+		  dialog.appendChild(content);
+
+		  // Adiciona o diálogo à página
+		  document.body.appendChild(dialog);
+
+		  // Adiciona os ouvintes de eventos para os botões
+		  yesButton.addEventListener('click', function() {
+			closeDialog();
+			callback(true); // Retorna true para resposta "Sim"
+		  });
+		  noButton.addEventListener('click', function() {
+			closeDialog();
+			callback(false); // Retorna false para resposta "Não"
+		  });
+
+		  // Função para fechar o diálogo
+		  function closeDialog() {
+			document.body.removeChild(dialog);
+		  }
+		}
+
 		function jsonCliente(){
 			var ID_CLIENTE = document.getElementById("ID_CLIENTE").value;
 			var CNPJ = document.getElementById("CNPJ").value;
@@ -331,18 +375,38 @@
 		}
 	
 		function buscarCliente(valor){
-			
 			if (valor !== null && valor !== '') {
+				var codigoInput = document.getElementById('CODIGO').value;
+				var cnpjInput = document.getElementById('CNPJ').value;
+			
 				var jsonData = {
-					"CODIGO": valor
+					"var": valor,
+					"CODIGO": codigoInput,
+					"CNPJ": cnpjInput
 				}
 				var jsonString = JSON.stringify(jsonData);
 				//alert(jsonString);
 				uiPathApi.sendMessage("buscarCliente", jsonString );
+				
 			}
 		} 
 		function excluirCliente(){
-			uiPathApi.sendMessage("excluirCliente", jsonCliente() );
+		/*	
+			// Exemplo de uso
+			confirmDialog('Deseja continuar?', function(response) {
+			  if (response) {
+				console.log('Usuário clicou em Sim');
+				// Realize a ação desejada ao clicar em "Sim"
+			  } else {
+				console.log('Usuário clicou em Não');
+				// Realize a ação desejada ao clicar em "Não"
+			  }
+			});
+		*/
+			var jsonString = jsonCliente();
+			limparValoresModal();
+			uiPathApi.sendMessage("excluirCliente", jsonString );
+			
 		}
 		
 		function closedClicked() {
@@ -351,9 +415,21 @@
 		
 		function salvarCliente() {
 			uiPathApi.sendMessage("salvarCliente", jsonCliente());
+			limparValoresModal();
 		}
 		
 		function iniciarAutomacao(){
+			// Exemplo de uso
+			confirmDialog('Deseja continuar?', function(response) {
+			  if (response) {
+				console.log('Usuário clicou em Sim');
+				// Realize a ação desejada ao clicar em "Sim"
+			  } else {
+				console.log('Usuário clicou em Não');
+				// Realize a ação desejada ao clicar em "Não"
+			  }
+			});
+		
 			var jsonData = []; // Array para armazenar os objetos JSON de cada linha
 			$('table tr').each(function() {
 				var row = $(this);
@@ -373,7 +449,9 @@
 	</script>
 </head>
 <body>
-
+	
+	
+	
 	<!--Menu automação -->
 	<nav class="navbar navbar-dark fixed-top bg-light">
     	<div class="container-fluid">
@@ -463,7 +541,7 @@
 	</div>
 	
 	<!-- Modal de Cadastro de Cliente -->
-	<div class="modal" id="clienteModal" tabindex="-1" aria-labelledby="clienteModalTitle" aria-hidden="true">
+	<div id="clienteModal" tabindex="-1" aria-labelledby="clienteModalTitle" aria-hidden="true" class="modal" >
 		<!--div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable"-->
 		<div class="modal-dialog modal-xl modal-dialog-scrollable">
 			<div class="modal-content">
@@ -744,13 +822,32 @@
 				<div class="modal-footer">
 					<div class="col-sm-12 d-flex me-0">
 						<button type="button" class="btn btn-danger btn-sm w-25 me-2" id="ExcluirCliente" onclick="excluirCliente()">Excluir</button>
+						<!--button type="button" class="btn btn-danger btn-sm w-25 me-2" data-bs-toggle="modal" data-bs-target="#modalExcluir" data-bs-dismiss="modal" onclick="excluirClientex()">Excluir</button-->
 						<button type="button" class="btn btn-secondary btn-sm w-25 me-2" onclick="limparValoresModal()">Limpar</button>
-						<button type="button" class="btn btn-primary btn-sm w-50" onclick="salvarCliente()">Salvar</button>
+						<button type="button" class="btn btn-primary btn-sm w-50" id="SalvarCliente" onclick="salvarCliente()">Salvar</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	<div id="modalExcluir" tabindex="-1" aria-labelledby="clienteModalDelet" aria-hidden="true" class="modal modal-alert position-static" role="dialog" >
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content rounded-3 shadow">
+		  <div class="modal-body p-4 text-center">
+			<h5 class="mb-0">Atenção?</h5>
+			<p class="mb-0">Deseja remover o cliente dessa automação ou excluir o cadastro.</p>
+		  </div>
+		  <div class="modal-footer flex-nowrap p-0">
+			<button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-end"  data-bs-dismiss="modal"><strong>Remover da Automação</strong></button>
+			<button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0" data-bs-dismiss="modal" id="ExcluirCliente" >Excluir Definitivamente</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
+		
+	
+	
 	
 	<!-- CNPJ Ou CPF no modal formatacao e validacao -->
 	<script>
@@ -897,7 +994,6 @@
 			var inputElement = event.target;
 			var inputValue = inputElement.value;
 			var cnpjCpf = inputValue.replace(/\D/g, '');
-			
 			if (inputValue !== ''){
 				//console.log(inputValue);
 				if (inputValue === codigo){
@@ -928,6 +1024,7 @@
 			document.querySelector('label[for="DECLARAR_SIMPLES_NACIONAL"]').textContent = "Não";
 			document.getElementById("LANCAR_NOTA_ENTRADA").checked = false;
 			document.getElementById("ExcluirCliente").disabled = true;
+			document.getElementById('SalvarCliente').disabled = true;
 			document.querySelector('label[for="LANCAR_NOTA_ENTRADA"]').textContent = "Não";
 			
 			var table = document.getElementById("myTableNotas");
