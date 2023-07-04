@@ -6,7 +6,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1222,1888</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1074,894</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Get_Transaction_Data_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -46,6 +46,7 @@
       <x:String>UiPath.Database</x:String>
       <x:String>System.Security</x:String>
       <x:String>UiPath.Database.Activities</x:String>
+      <x:String>UiPath.Activities.System.Arrays</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -102,7 +103,7 @@
       <AssemblyReference>System.Data.SqlClient</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Get_Transaction_Data" sap:VirtualizedContainerService.HintSize="612,1823" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Get_Transaction_Data" sap:VirtualizedContainerService.HintSize="485,789" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="querySql" />
     </Sequence.Variables>
@@ -112,7 +113,7 @@
         <x:Boolean x:Key="IsPinned">False</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="550,132" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="423,132" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -192,10 +193,10 @@ WHERE  (per.ID_PERFIL = {Perfil} AND cli.SITUACAO = True AND per.SITUACAO = True
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:MultipleAssign>
-    <If Condition="[in_Config.ContainsKey(&quot;FiltrarClientesPendentes&quot;)]" DisplayName="Contem Filtro Pendentes" sap:VirtualizedContainerService.HintSize="550,567" sap2010:WorkflowViewState.IdRef="If_2">
+    <If Condition="[in_Config.ContainsKey(&quot;FiltrarClientesPendentes&quot;)  And Not querySql.IsNullOrEmpty]" DisplayName="Contem Filtro Pendentes" sap:VirtualizedContainerService.HintSize="423,52" sap2010:WorkflowViewState.IdRef="If_2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
@@ -242,10 +243,10 @@ WHERE  (per.ID_PERFIL = {Perfil} AND cli.SITUACAO = True AND per.SITUACAO = True
         <Sequence sap2010:WorkflowViewState.IdRef="Sequence_5" />
       </If.Else>
     </If>
-    <If Condition="[in_Config.ContainsKey(&quot;QueryTransactionData&quot;)]" sap:VirtualizedContainerService.HintSize="550,371" sap2010:WorkflowViewState.IdRef="If_1">
+    <If Condition="[in_Config.ContainsKey(&quot;QueryTransactionData&quot;) And Not querySql.IsNullOrEmpty]" DisplayName="Tem query" sap:VirtualizedContainerService.HintSize="423,52" sap2010:WorkflowViewState.IdRef="If_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
@@ -296,39 +297,53 @@ WHERE  (per.ID_PERFIL = {Perfil} AND cli.SITUACAO = True AND per.SITUACAO = True
         </Sequence>
       </If.Else>
     </If>
-    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="550,522" sap2010:WorkflowViewState.IdRef="TryCatch_1">
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-      <TryCatch.Try>
-        <rd:Get_Transaction_Data DisplayName="Get Transaction Data" sap:VirtualizedContainerService.HintSize="334,294" sap2010:WorkflowViewState.IdRef="Get_Transaction_Data_3" in_Config="[in_Config]" in_EnvironmentCurrentDirectory="[Environment.CurrentDirectory]" in_NameFile="Get Transaction Data IPM" in_QuerySql="[querySql]" out_TransactionData="[out_TransactionData]">
+    <If Condition="[Not querySql.IsNullOrEmpty]" DisplayName="Com query" sap:VirtualizedContainerService.HintSize="423,322" sap2010:WorkflowViewState.IdRef="If_6">
+      <If.Then>
+        <Sequence sap:VirtualizedContainerService.HintSize="300,140" sap2010:WorkflowViewState.IdRef="Sequence_12">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-              <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-        </rd:Get_Transaction_Data>
-      </TryCatch.Try>
-      <TryCatch.Catches>
-        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-              <x:Boolean x:Key="IsPinned">False</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-          <ActivityAction x:TypeArguments="s:Exception">
-            <ActivityAction.Argument>
-              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
-            </ActivityAction.Argument>
-            <rs:Log sap:VirtualizedContainerService.HintSize="334,294" sap2010:WorkflowViewState.IdRef="Log_2" in_AutomationName="[in_Config(&quot;ApplicationKey&quot;).ToString()]" in_EnvironmentCurrentDirectory="[Environment.CurrentDirectory]" in_FileXaml="Get Transaction Data" in_Log="[&quot;Erro ao tentrar obter os clientes:&quot;+Environment.NewLine+exception.Message+Environment.NewLine+Environment.NewLine+&quot;Query SQL:&quot;+Environment.NewLine+querySql]" in_Tipo="Erro" />
-          </ActivityAction>
-        </Catch>
-      </TryCatch.Catches>
-    </TryCatch>
+          <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="258,52" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <TryCatch.Try>
+              <rd:Get_Transaction_Data DisplayName="Get Transaction Data" sap:VirtualizedContainerService.HintSize="334,294" sap2010:WorkflowViewState.IdRef="Get_Transaction_Data_3" in_Config="[in_Config]" in_EnvironmentCurrentDirectory="[Environment.CurrentDirectory]" in_NameFile="Get Transaction Data IPM" in_QuerySql="[querySql]" out_TransactionData="[out_TransactionData]">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </rd:Get_Transaction_Data>
+            </TryCatch.Try>
+            <TryCatch.Catches>
+              <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ActivityAction x:TypeArguments="s:Exception">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                  </ActivityAction.Argument>
+                  <rs:Log sap:VirtualizedContainerService.HintSize="334,294" sap2010:WorkflowViewState.IdRef="Log_2" in_AutomationName="[in_Config(&quot;ApplicationKey&quot;).ToString()]" in_EnvironmentCurrentDirectory="[Environment.CurrentDirectory]" in_FileXaml="Get Transaction Data" in_Log="[&quot;Erro ao tentrar obter os clientes:&quot;+Environment.NewLine+exception.Message+Environment.NewLine+Environment.NewLine+&quot;Query SQL:&quot;+Environment.NewLine+querySql]" in_Tipo="Erro" />
+                </ActivityAction>
+              </Catch>
+            </TryCatch.Catches>
+          </TryCatch>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_13" />
+      </If.Else>
+    </If>
   </Sequence>
 </Activity>

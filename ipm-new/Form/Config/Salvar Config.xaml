@@ -9,7 +9,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1077,2099</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1189,2121</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Salvar_Config_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -113,7 +113,7 @@
       <AssemblyReference>UiPath.Cryptography.Activities</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Salvar_Config" sap:VirtualizedContainerService.HintSize="635,2034" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Salvar_Config" sap:VirtualizedContainerService.HintSize="635,2056" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="perfil" />
       <Variable x:TypeArguments="x:String" Name="periodo" />
@@ -224,19 +224,19 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
-    <ui:ForEach x:TypeArguments="njl:JToken" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="573,691" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[JsonObject.SelectTokens(&quot;*&quot;)]">
+    <ui:ForEach x:TypeArguments="njl:JToken" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="573,713" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[JsonObject.SelectTokens(&quot;*&quot;)]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="njl:JToken">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="njl:JToken" Name="item" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="539,505" sap2010:WorkflowViewState.IdRef="Sequence_6">
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="539,527" sap2010:WorkflowViewState.IdRef="Sequence_6">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[item.Path]" sap:VirtualizedContainerService.HintSize="497,417" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+            <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[item.Path]" sap:VirtualizedContainerService.HintSize="497,439" sap2010:WorkflowViewState.IdRef="Switch`1_1">
               <Switch.Default>
                 <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="MultipleAssign_4">
                   <ui:MultipleAssign.AssignOperations>
@@ -440,6 +440,26 @@
                       </ui:AssignOperation.To>
                       <ui:AssignOperation.Value>
                         <InArgument x:TypeArguments="x:Object">[JsonObject.SelectToken("CertidaoExcel").ToString]</InArgument>
+                      </ui:AssignOperation.Value>
+                    </ui:AssignOperation>
+                  </scg:List>
+                </ui:MultipleAssign.AssignOperations>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:MultipleAssign>
+              <ui:MultipleAssign x:Key="ArquivoNotas" DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="423,101" sap2010:WorkflowViewState.IdRef="MultipleAssign_16">
+                <ui:MultipleAssign.AssignOperations>
+                  <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_25">
+                      <ui:AssignOperation.To>
+                        <OutArgument x:TypeArguments="x:Object">[io_Config("ArquivoNotas")]</OutArgument>
+                      </ui:AssignOperation.To>
+                      <ui:AssignOperation.Value>
+                        <InArgument x:TypeArguments="x:Object">[JsonObject.SelectToken("ArquivoNotas").ToString]</InArgument>
                       </ui:AssignOperation.Value>
                     </ui:AssignOperation>
                   </scg:List>

@@ -108,6 +108,17 @@
 								} else if (typeof data[key] === 'boolean') {
 									var label = document.querySelector('label[for="' + key + '"]');
 									el.checked = data[key];
+									
+									if (key === 'EmitirNFS'){
+										if (data[key]){
+											document.getElementById("divEmissaoNF").style.display = "block";
+											document.getElementById("divCertidao").style.display = "none";
+										} else {
+											document.getElementById("divEmissaoNF").style.display = "none";
+											document.getElementById("divCertidao").style.display = "block";
+										}
+									}
+									
 									if (key === 'FiltrarClientesPendentes'){
 										label.textContent = data[key] ? 'Clientes Pendentes' : 'Todos os Clientes';
 									} else {
@@ -301,21 +312,40 @@
 		}
 		
 		function jsonData(){
-		
-			var fileInput = document.getElementById('fileInput');
-			var file = fileInput.files[0];
+			var emitirNFS = document.getElementById("EmitirNFS").checked;
 			var certidaoExcel = '';
-			if(file){
-				var fileName = file.name;
-				var fileExtension = fileName.split('.').pop(); // Obtém a extensão do arquivo
-				var currentDate = new Date();
-				var formattedDate = currentDate.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' });
-				certidaoExcel = formattedDate.replace(/[^\d]/g, '') + '.' + fileExtension; // Novo nome do arquivo
-				
-				var downloadLink = document.createElement('a');
-				downloadLink.href = URL.createObjectURL(file);
-				downloadLink.download = certidaoExcel;
-				downloadLink.click();
+			var arquivoNotas = '';
+			
+			if (emitirNFS){
+				var fileInput = document.getElementById('fileInputEmissaoNFS');
+				var file = fileInput.files[0];
+				if(file){
+					var fileName = file.name;
+					var fileExtension = fileName.split('.').pop(); // Obtém a extensão do arquivo
+					var currentDate = new Date();
+					var formattedDate = currentDate.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+					arquivoNotas = formattedDate.replace(/[^\d]/g, '') + '.' + fileExtension; // Novo nome do arquivo
+					
+					var downloadLink = document.createElement('a');
+					downloadLink.href = URL.createObjectURL(file);
+					downloadLink.download = arquivoNotas;
+					downloadLink.click();
+				}
+			} else {
+				var fileInput = document.getElementById('fileInputCertidao');
+				var file = fileInput.files[0];
+				if(file){
+					var fileName = file.name;
+					var fileExtension = fileName.split('.').pop(); // Obtém a extensão do arquivo
+					var currentDate = new Date();
+					var formattedDate = currentDate.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+					certidaoExcel = formattedDate.replace(/[^\d]/g, '') + '.' + fileExtension; // Novo nome do arquivo
+					
+					var downloadLink = document.createElement('a');
+					downloadLink.href = URL.createObjectURL(file);
+					downloadLink.download = certidaoExcel;
+					downloadLink.click();
+				}
 			}
 			
 			
@@ -328,7 +358,6 @@
 			var downloadNFEntrada = document.getElementById("DownloadNFEntrada").checked;
 			var protocolarNFEntrada = document.getElementById("ProtocolarNFEntrada").checked;
 			var simplesNacional = document.getElementById("SimplesNacional").checked;
-			var emitirNFS = document.getElementById("EmitirNFS").checked;
 			
 			var FinalidadeCertidao = document.getElementById("FinalidadeCertidao").value;
 			//var certidaoExcel = document.getElementById("CertidaoExcel").value;
@@ -402,6 +431,7 @@
 				"EmitirNFS": emitirNFS,
 				"FinalidadeCertidao": FinalidadeCertidao,
 				"CertidaoExcel": certidaoExcel,
+				"ArquivoNotas": arquivoNotas,
 				
 				"CodigoServico": codigoServico,
 				"ObservacaoNFS": observacaoNFS,
@@ -612,32 +642,47 @@
 						</div>
 					</div>
 				</div>
-				
-				<hr class="my-3">
-				<div class="container-fluid d-flex justify-content-center"><h6>Emissão da Certidão Negativa de Débitos - CND</h6></div>
-				<div>
-					<div class="row">
-						<div class="col-3 d-flex align-items-center">
-							<label class="col-form-label">Finalidade</label>
+				<div id='divCertidao' style="display: block;">
+					<hr class="my-3">
+					<div class="container-fluid d-flex justify-content-center"><h6>Emissão da Certidão Negativa de Débitos - CND</h6></div>
+					<div>
+						<div class="row">
+							<div class="col-3 d-flex align-items-center">
+								<label class="col-form-label">Finalidade</label>
+							</div>
+							<div class="col-9 d-flex align-items-center ">
+								<select class="form-select form-select-sm" id="FinalidadeCertidao">
+									<option value=""></option>
+									<option value="Financiamento - Contribuinte">Financiamento - Contribuinte</option>
+									<option value="Juridico - Contribuinte">Juridico - Contribuinte</option>
+									<option value="Licitação - Contribuinte">Licitação - Contribuinte</option>
+									<option value="Transmissão - Contribuinte">Transmissão - Contribuinte</option>
+								</select>
+							</div>
 						</div>
-						<div class="col-9 d-flex align-items-center ">
-							<select class="form-select form-select-sm" id="FinalidadeCertidao">
-								<option value=""></option>
-								<option value="Financiamento - Contribuinte">Financiamento - Contribuinte</option>
-								<option value="Juridico - Contribuinte">Juridico - Contribuinte</option>
-								<option value="Licitação - Contribuinte">Licitação - Contribuinte</option>
-								<option value="Transmissão - Contribuinte">Transmissão - Contribuinte</option>
-							</select>
-						</div>
+						<div class="row">
+							<div class="col-3 d-flex align-items-center">
+								<label class="col-form-label">Arquivo Excel com CNPJs</label>
+							</div>
+							<div class="col-9 d-flex align-items-center ">
+								<input class="form-control form-control-sm" id="fileInputCertidao" type="file" accept=".xlsx, .xls">
+							</div>
+						</div>	
 					</div>
-					<div class="row">
-						<div class="col-3 d-flex align-items-center">
-							<label class="col-form-label">Arquivo Excel com CNPJs</label>
-						</div>
-						<div class="col-9 d-flex align-items-center ">
-							<input class="form-control form-control-sm" id="fileInput" type="file" accept=".xlsx, .xls">
-						</div>
-					</div>	
+				</div>
+				<div id='divEmissaoNF' style="display: none;">
+					<hr class="my-3">
+					<div class="container-fluid d-flex justify-content-center"><h6>Emissão de Nota Fiscal de Serviço</h6></div>
+					<div>
+						<div class="row">
+							<div class="col-3 d-flex align-items-center">
+								<label class="col-form-label">Arquivo Notas</label>
+							</div>
+							<div class="col-9 d-flex align-items-center ">
+								<input class="form-control form-control-sm" id="fileInputEmissaoNFS" type="file" accept=".pdf, .xlsx, .xls">
+							</div>
+						</div>	
+					</div>
 				</div>
 			</div>
 			
@@ -980,12 +1025,18 @@
 	  
 	  var ckEmitirNFS = document.getElementById('EmitirNFS');
 	  var labelEmitirNFS = document.querySelector('label[for="EmitirNFS"]');
+	  var divEmissaoNF = document.getElementById("divEmissaoNF");
+	  var divCertidao = document.getElementById("divCertidao");
 
 	  ckEmitirNFS.addEventListener('change', function() {
 		if (this.checked) {
 		  labelEmitirNFS.textContent = 'Sim';
+		  divEmissaoNF.style.display = "block";
+		  divCertidao.style.display = "none";
 		} else {
 		  labelEmitirNFS.textContent = 'Não';
+		  divEmissaoNF.style.display = "none";
+		  divCertidao.style.display = "block";
 		}
 	  });
 	  
