@@ -1,11 +1,11 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Menu" this:Menu.in_Menu="[&quot;Escrita Fiscal&quot;+&quot;Nota Fiscal&quot;]" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Menu" this:Menu.in_Menu="[&quot;Escrita Fiscal&quot;+&quot;Nota Fiscal&quot;]" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_Menu" Type="InArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>594,401</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>937,844</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Menu_Fiscal_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -40,6 +40,9 @@
       <x:String>UiPath.Platform.ObjectLibrary</x:String>
       <x:String>System.ComponentModel</x:String>
       <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>UiPath.UIAutomationNext.Models.CV</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -96,97 +99,158 @@
       <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
       <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Menu" sap:VirtualizedContainerService.HintSize="450,163" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Menu" sap:VirtualizedContainerService.HintSize="548,532" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="Atende.Net - IPM Sistemas Ltda - Cascavel / PR" Name="title" />
+      <Variable x:TypeArguments="x:Boolean" Name="aberto" />
+      <Variable x:TypeArguments="x:Int32" Name="i">
+        <Variable.Default>
+          <Literal x:TypeArguments="x:Int32" Value="3" />
+        </Variable.Default>
+      </Variable>
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <uix:NCheckState DelayBefore="0" DisplayName="Sistema" EnableIfExists="False" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="NCheckState_1" Version="V3">
-      <uix:NCheckState.IfExists>
-        <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="450,105" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="486,421" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
+      <ui:InterruptibleDoWhile.Body>
+        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="450,255" sap2010:WorkflowViewState.IdRef="Sequence_5">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-        </Sequence>
-      </uix:NCheckState.IfExists>
-      <uix:NCheckState.IfNotExists>
-        <Sequence DisplayName="Target does not appear" sap:VirtualizedContainerService.HintSize="546,683" sap2010:WorkflowViewState.IdRef="Sequence_4">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-          <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser Chrome: Atende.Net - IPM Sistemas Ltda - Cascavel / PR" sap:VirtualizedContainerService.HintSize="484,568" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" ScopeGuid="ee8de1b0-b64d-4baa-9170-f1e63262eec1" Version="V2">
-            <uix:NApplicationCard.Body>
-              <ActivityAction x:TypeArguments="x:Object">
-                <ActivityAction.Argument>
-                  <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
-                </ActivityAction.Argument>
-                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="450,351" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <uix:NCheckState DelayBefore="0" DisplayName="Sistema" EnableIfExists="False" Exists="[aberto]" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="NCheckState_1" Timeout="0.5" Version="V3">
+            <uix:NCheckState.IfExists>
+              <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="450,105" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </Sequence>
+            </uix:NCheckState.IfExists>
+            <uix:NCheckState.IfNotExists>
+              <Sequence DisplayName="Target does not appear" sap:VirtualizedContainerService.HintSize="513,167" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser Chrome: Atende.Net - IPM Sistemas Ltda - Cascavel / PR" sap:VirtualizedContainerService.HintSize="451,52" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" ScopeGuid="ee8de1b0-b64d-4baa-9170-f1e63262eec1" Version="V2">
+                  <uix:NApplicationCard.Body>
+                    <ActivityAction x:TypeArguments="x:Object">
+                      <ActivityAction.Argument>
+                        <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+                      </ActivityAction.Argument>
+                      <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="450,351" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="0" DelayBefore="0" DisplayName="Menu" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="NClick_1" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ee8de1b0-b64d-4baa-9170-f1e63262eec1" Version="V3">
+                          <uix:NClick.Target>
+                            <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/64" CvElementArea="10, 114, 42, 41" CvTextArea="16, 124, 32, 23" CvTextArgument="'pm" CvType="Icon" DesignTimeRectangle="8, 111, 48, 48" DesignTimeScaleFactor="1" ElementType="Button" FriendlyName="'atende.net'" FullSelectorArgument="&lt;webctrl id='estrutura_logo_menu' tag='BUTTON' /&gt;" FuzzySelectorArgument="&lt;webctrl id='estrutura_logo_menu' tag='BUTTON' type='' class='' aaname='atende.net' check:innerText='atende.net' /&gt;" Guid="b34fb3ae-f150-4c18-b23c-df9e27ecd6ab" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAADQAAAA0CAYAAADFeBvrAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAOFSURBVGhD7ZhLTBNBGMc5+vZgTHwcjNFEjTHxdTUaTyYePKiJB+PNaOQiaiBqBERROBjBaAiCJhgDauLjIIhE5GHLozwKLW+KtgiUhxTaUgoF8tnv21m6LQOCW8sW95/8k91vZof/j5nZnTRCFCwRMRwBqN3UEfZmOAJQRGRp2Nrj8ZAZjgqkOKtASvf/C1TQbMMmRSi3YZCbET1vIKWJlxGtAilFvIxoFUgp4mVEq0BKES8jWgWS6mRGE7WZBtysEjoF5hMtCyj2owWOpBiga2iMVUInXka0LKDFFC8jWhbQW/0AxOeaYdA1wSqC3J4pKG4bBk2H/Y+zl6m10hil7cOsAtDv9EBivgVSi7rANT7Fqv7iZUTLAhL3UEOPi1UAHhT+hHXR5X7Pbo+vgsLWIdZDUE2nE3YkVPn1e6qxQnZVHyy/rJmurY8ph/d1v9hTPkmfk1oW0OnMZmpr6R2l+5gPP+h+a6wOkgs64UvLEIXccktH9Xd1A9QPtflmJdXici00m8fTGghkzVUt7L5bDTnV/fC4pJv6rLqiBVvAKsA6z7KATmUKM4RAlWYHXR97YmStPtndk3A4pR5WRmnBPOiGJquL+uILRRQurWVsZozdI6wKEM3+Sbi8pcIaz7KA3tT2UxsCnXkuzFbZdztr9ZfVPk7tka9N8M00TNcXctpZq6CdCdUz/laGd49hLV3TwyqCsMazLCBUkndptfWNwr6kWlh7rYxV+cI+2+J0tMRwTISTigeELw2spZWGCEjUxhsVsCexht3xdehhPey9Xwsl3jcajnlpAUC4n6QScwVar9eTGY48IAw7m0bGJ2FFlAbOZrVMA1185b/kdt2ZCfSsbOFAQZmhDdcrYL93Sc2mcy9aaRz8NqHxOhBorhl6VLwIQAeT9ZDfZIMT6Y1Q5N0nuFdwUx9NNdAYeFRC/Q1QytcuVhGENZ6DDoRvucBnV3u/Lfg9EhUWQLiHDiQLSw5PAbfzzHSkyaropaOQVMOjE5CQZ4FPjf4/jb3U9dFxRyqLbYzGae71nUZQvIzooAFtQqA59lCwxcuIVoFmkwokU7yM6KAB4UH1fHYbu/v34mVEBw0o1OJlRKtAShEvI1oFUop4GdH/LxD+mqME4bnw3udObkb0vIHCxSqQ0q0CKd1LEgjNcAQgsWg0GsFgMISlGY4PCGFsNhs4HA6y0+kMIzvhN5pEbCL7RHSLAAAAAElFTkSuQmCC" InformativeScreenshot="8e36b014264378cee26541406b2d8fa3.png" ScopeSelectorArgument="[string.Format(&quot;&lt;html app='chrome.exe' title='{0}' /&gt;&quot;, title)]" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
+                          </uix:NClick.Target>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </uix:NClick>
+                        <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="0" DelayBefore="0" DisplayName="Click 'Fiscal'" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="NClick_3" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ee8de1b0-b64d-4baa-9170-f1e63262eec1" Version="V3">
+                          <uix:NClick.Target>
+                            <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/64" CvElementArea="13, 164, 240, 47" CvTextArea="70, 185, 38, 13" CvTextArgument="Fiscal" CvType="Button" DesignTimeRectangle="11, 174, 234, 36" DesignTimeScaleFactor="1" FriendlyName="'Fiscal'" FullSelectorArgument="&lt;webctrl class='estrutura_conjunto_container_icone' parentid='estrutura_menu_conjuntos' tag='DIV' visibleinnertext='Fiscal' /&gt;" Guid="2820e1f6-70ad-481e-9274-eab285b906c6" ImageBase64="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" InformativeScreenshot="b3aff43ebf291b7e9ffce306a5d815c0.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Atende.Net - IPM Sistemas Ltda - Cascavel / PR' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
+                          </uix:NClick.Target>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </uix:NClick>
+                        <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="0" DelayBefore="0" DisplayName="Click 'Menu'" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="NClick_2" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ee8de1b0-b64d-4baa-9170-f1e63262eec1" Version="V3">
+                          <uix:NClick.Target>
+                            <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/64" DesignTimeRectangle="11, 210, 234, 34" DesignTimeScaleFactor="1" FriendlyName="'Escrita Fiscal'" FullSelectorArgument="[string.Format(&quot;&lt;webctrl class='estrutura_sistema_container_icone' parentid='estrutura_menu_conjuntos' tag='DIV' visibleinnertext='{0}*' /&gt;&quot;, in_Menu)]" Guid="d97cadef-9172-4e04-a99c-ba5008a1367a" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAO4AAAAmCAYAAADDVaf7AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAULSURBVHhe7ZoxSytLFMf9JvkIt/ADWFre0tIyxeNiaZnS24mNgQePFLfwFkKwumCz8FJEQlCMhGAkd8GICbIYg4QQg5x3zszsuhsnG81TX+b5H/hhsjN7Zjfsb8+ZXZeW/vpNij/+dgfXjhe4y6Jda6Gv0QfboEXFteMF7rJo11roa/ThWwkAsOhAXAAcBOIC4CAQFwAHgbgAOAjEBcBBIC4ADgJxAXAQiAuAg0BcAD6YXI3WD7u0dxpQsXpDhcNzWslZxqUBcQH4KCqUrQ6oR7Y2pkb1gjLW/SxAXAA+ggptNEdG0umt12y9TN7Xi3tGm0c3tMcpPk5+v2YZOx+bpwM6qbbM9xbt+Te0MTFmJrkL2p44RmHrB/cdBNRozxFzFjtX5L1HXOA++3fJTPswokYz4HL5jhr9R7NR2iOVDyv2GHFeL26XGhy+Fwyo0X2ifNSwjJ2PpLgy34AKE2Nmon6oR+rEjlEoHnDfe4mr5pzjWMH/nArl21pL3UZU3OWy2ZNkckXZ3BkVA9MlrdudnXXnE3dM3r6tTzim1YNrPqBr2tw9TvRlds5pS7J1yafV77HxhTP6wgv2r4WG2p7ZqdPXHb7rqG0B+TSkIvet/VmLTujLj0sqcAbNH/C+ZluCNIkkbhSrQisqVpez8VP8cJx6iGA5F+v8EBdYuaTyg5FStRGVq33qyMcHvrb3J8W+p21rnBhvK26NCt1HGvZ1duvwwXbqOnNmTKmgMrWUBlwqFCWGyYzDB41/2uAYutZf8vrU423SVH8Q0BrH2qjzWkFKDcmiHGvId6jVxHGEcadIdDQgGtypjLvRHPPnoYrl82aJtSJjci3y+LvuG/Gtg7P3qT6XqfNDXGBFV6mTTa6btdyx5YHVC66h+cTlZkTTjKnshX0xqXd9lZGWvjXoV18kPjcxKrTtj8mvX0Tixuv6SNxovviJ1Gij1OUMaL7nbjgjj+hXIew3mLjJUvmWtuSxeySultOvmrllXezpJ3trImf/ltZNvIzcRIJbyqbND3GBlcmMq9uwfc2ZNr6+Dds7Ztyyx6WrlK8GXfrWlJCywO4FffpVapn3U1qQxlE8jsFysaeLK6V0iwrNe852Y3XjkEfpzyoAFVdKkvjDKVlPcF88454OOZvyfFwleNVLWjclvMrEfEdMxDRMnR/iAiuTpbBuvXZAxbb4MtH4uvsP1rh6jbpZuqUTKYn7Ut4+Fzdax75W3B3+zrL49UvKqnXnlONJkygmrvr+/YyyhzfkBfwjPui73TNxw3Vx2vwQF0xDXRvJ1uGKMyuVXaKluxXxpuKycWW+i2yarJXx7jmbiQgVJeOwfaUf5HBJKqVzrxmWyrPElflMOavG31Pe/KfJalXy5bzi+lTs3lG+YGLvBtQxZW9GxojE6lwq+gfmfbJp86fNCT45L3uP2+Hrfma2FeYT19JUdjrjkkCXyrqEfOQsK2tc3m/3mk7YBbU2lvF9Fkcu/p+zxI2f8IDyPIc8AAvnGAYj3p/F+fm0v8ISNyISl2PXdamsYvHfpx8ufi78h4XWN4+U+dPmBICvt7XSPV8jtrYI/zmVeN2SRErkp1dB/wIub98kjsK8krL1yblMvApSvOn84FMRvmbE/yoD8MmAuAA4CMQFwEEgLgAOAnEBcBCIC4CDQFwAHATiAuAgEBcAB4G4ADgIxAXAQSAuAA4yKe7y8jIAYMF5Jq7VbgDAYqF8/U3/AHmiZEuqtodEAAAAAElFTkSuQmCC" InformativeScreenshot="d43a191e2535f2d6feb28db4fa16a210.png" ScopeSelectorArgument="[string.Format(&quot;&lt;html app='chrome.exe' title='{0}' /&gt;&quot;, title)]" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
+                          </uix:NClick.Target>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </uix:NClick>
+                      </Sequence>
+                    </ActivityAction>
+                  </uix:NApplicationCard.Body>
+                  <uix:NApplicationCard.TargetApp>
+                    <uix:TargetApp Area="-8, -8, 1936, 1048" BrowserType="Chrome" IconBase64="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAABQ0lEQVQ4T6XTPyiFURzG8XuVbvmXDHfypzuwKCULg5QSGQzuIBMjpdgMJgMGk9EgFmWRUlI3d1EGWZSSwSRkcBWTRMf34Zw673mPyfAZ7nme3+l07nkzxph/iS46jWPrtejCMIoYxyDakVUnOigUJnGGZxjPF+5wgP6/hhdsUQP3OMQWdlDGO5RVYsMdeLGFTbQEeRYDuEVy2BZ0dA2rkA9zh2xDvViQRzdaI1k1mtCDcyQLPsI66KizWMM2jnCBV+iU0cEq6BKv4S7S+cQTdnGitdgGSwqsU/t7An1oRs72VpAabsCNAuyj3s99ZHvqhYtteFSART/zkQ3hDR9hUINLaIMr9AZ5AXN4gDrLiQ1sacaGUoFuXpd2DD1hl60il9rAbjIP3UX4L+iFljDquqlhh5Ie1AimMA19iZ34+Qp/mcw3oXI0Am7zY1EAAAAASUVORK5CYII=" InformativeScreenshot="778de0da0f6f3686052b68c35d0c98a3.jpg" Selector="[string.Format(&quot;&lt;html app='chrome.exe' title='{0}' /&gt;&quot;, title)]" Title="Atende.Net - IPM Sistemas Ltda - Cascavel / PR" />
+                  </uix:NApplicationCard.TargetApp>
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="0" DelayBefore="0" DisplayName="Menu" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="NClick_1" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ee8de1b0-b64d-4baa-9170-f1e63262eec1" Version="V3">
-                    <uix:NClick.Target>
-                      <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/64" CvElementArea="10, 114, 42, 41" CvTextArea="16, 124, 32, 23" CvTextArgument="'pm" CvType="Icon" DesignTimeRectangle="8, 111, 48, 48" DesignTimeScaleFactor="1" ElementType="Button" FriendlyName="'atende.net'" FullSelectorArgument="&lt;webctrl id='estrutura_logo_menu' tag='BUTTON' /&gt;" FuzzySelectorArgument="&lt;webctrl id='estrutura_logo_menu' tag='BUTTON' type='' class='' aaname='atende.net' check:innerText='atende.net' /&gt;" Guid="b34fb3ae-f150-4c18-b23c-df9e27ecd6ab" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAADQAAAA0CAYAAADFeBvrAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAOFSURBVGhD7ZhLTBNBGMc5+vZgTHwcjNFEjTHxdTUaTyYePKiJB+PNaOQiaiBqBERROBjBaAiCJhgDauLjIIhE5GHLozwKLW+KtgiUhxTaUgoF8tnv21m6LQOCW8sW95/8k91vZof/j5nZnTRCFCwRMRwBqN3UEfZmOAJQRGRp2Nrj8ZAZjgqkOKtASvf/C1TQbMMmRSi3YZCbET1vIKWJlxGtAilFvIxoFUgp4mVEq0BKES8jWgWS6mRGE7WZBtysEjoF5hMtCyj2owWOpBiga2iMVUInXka0LKDFFC8jWhbQW/0AxOeaYdA1wSqC3J4pKG4bBk2H/Y+zl6m10hil7cOsAtDv9EBivgVSi7rANT7Fqv7iZUTLAhL3UEOPi1UAHhT+hHXR5X7Pbo+vgsLWIdZDUE2nE3YkVPn1e6qxQnZVHyy/rJmurY8ph/d1v9hTPkmfk1oW0OnMZmpr6R2l+5gPP+h+a6wOkgs64UvLEIXccktH9Xd1A9QPtflmJdXici00m8fTGghkzVUt7L5bDTnV/fC4pJv6rLqiBVvAKsA6z7KATmUKM4RAlWYHXR97YmStPtndk3A4pR5WRmnBPOiGJquL+uILRRQurWVsZozdI6wKEM3+Sbi8pcIaz7KA3tT2UxsCnXkuzFbZdztr9ZfVPk7tka9N8M00TNcXctpZq6CdCdUz/laGd49hLV3TwyqCsMazLCBUkndptfWNwr6kWlh7rYxV+cI+2+J0tMRwTISTigeELw2spZWGCEjUxhsVsCexht3xdehhPey9Xwsl3jcajnlpAUC4n6QScwVar9eTGY48IAw7m0bGJ2FFlAbOZrVMA1185b/kdt2ZCfSsbOFAQZmhDdcrYL93Sc2mcy9aaRz8NqHxOhBorhl6VLwIQAeT9ZDfZIMT6Y1Q5N0nuFdwUx9NNdAYeFRC/Q1QytcuVhGENZ6DDoRvucBnV3u/Lfg9EhUWQLiHDiQLSw5PAbfzzHSkyaropaOQVMOjE5CQZ4FPjf4/jb3U9dFxRyqLbYzGae71nUZQvIzooAFtQqA59lCwxcuIVoFmkwokU7yM6KAB4UH1fHYbu/v34mVEBw0o1OJlRKtAShEvI1oFUop4GdH/LxD+mqME4bnw3udObkb0vIHCxSqQ0q0CKd1LEgjNcAQgsWg0GsFgMISlGY4PCGFsNhs4HA6y0+kMIzvhN5pEbCL7RHSLAAAAAElFTkSuQmCC" InformativeScreenshot="8e36b014264378cee26541406b2d8fa3.png" ScopeSelectorArgument="[string.Format(&quot;&lt;html app='chrome.exe' title='{0}' /&gt;&quot;, title)]" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
-                    </uix:NClick.Target>
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                  </uix:NClick>
-                  <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="0" DelayBefore="0" DisplayName="Click 'Fiscal'" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="NClick_3" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ee8de1b0-b64d-4baa-9170-f1e63262eec1" Version="V3">
-                    <uix:NClick.Target>
-                      <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/64" CvElementArea="13, 164, 240, 47" CvTextArea="70, 185, 38, 13" CvTextArgument="Fiscal" CvType="Button" DesignTimeRectangle="11, 174, 234, 36" DesignTimeScaleFactor="1" FriendlyName="'Fiscal'" FullSelectorArgument="&lt;webctrl class='estrutura_conjunto_container_icone' parentid='estrutura_menu_conjuntos' tag='DIV' visibleinnertext='Fiscal' /&gt;" Guid="2820e1f6-70ad-481e-9274-eab285b906c6" ImageBase64="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" InformativeScreenshot="b3aff43ebf291b7e9ffce306a5d815c0.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Atende.Net - IPM Sistemas Ltda - Cascavel / PR' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
-                    </uix:NClick.Target>
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                  </uix:NClick>
-                  <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="0" DelayBefore="0" DisplayName="Click 'Menu'" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="NClick_2" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ee8de1b0-b64d-4baa-9170-f1e63262eec1" Version="V3">
-                    <uix:NClick.Target>
-                      <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/64" DesignTimeRectangle="11, 210, 234, 34" DesignTimeScaleFactor="1" FriendlyName="'Escrita Fiscal'" FullSelectorArgument="[string.Format(&quot;&lt;webctrl class='estrutura_sistema_container_icone' parentid='estrutura_menu_conjuntos' tag='DIV' visibleinnertext='{0}*' /&gt;&quot;, in_Menu)]" Guid="d97cadef-9172-4e04-a99c-ba5008a1367a" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAO4AAAAmCAYAAADDVaf7AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAULSURBVHhe7ZoxSytLFMf9JvkIt/ADWFre0tIyxeNiaZnS24mNgQePFLfwFkKwumCz8FJEQlCMhGAkd8GICbIYg4QQg5x3zszsuhsnG81TX+b5H/hhsjN7Zjfsb8+ZXZeW/vpNij/+dgfXjhe4y6Jda6Gv0QfboEXFteMF7rJo11roa/ThWwkAsOhAXAAcBOIC4CAQFwAHgbgAOAjEBcBBIC4ADgJxAXAQiAuAg0BcAD6YXI3WD7u0dxpQsXpDhcNzWslZxqUBcQH4KCqUrQ6oR7Y2pkb1gjLW/SxAXAA+ggptNEdG0umt12y9TN7Xi3tGm0c3tMcpPk5+v2YZOx+bpwM6qbbM9xbt+Te0MTFmJrkL2p44RmHrB/cdBNRozxFzFjtX5L1HXOA++3fJTPswokYz4HL5jhr9R7NR2iOVDyv2GHFeL26XGhy+Fwyo0X2ifNSwjJ2PpLgy34AKE2Nmon6oR+rEjlEoHnDfe4mr5pzjWMH/nArl21pL3UZU3OWy2ZNkckXZ3BkVA9MlrdudnXXnE3dM3r6tTzim1YNrPqBr2tw9TvRlds5pS7J1yafV77HxhTP6wgv2r4WG2p7ZqdPXHb7rqG0B+TSkIvet/VmLTujLj0sqcAbNH/C+ZluCNIkkbhSrQisqVpez8VP8cJx6iGA5F+v8EBdYuaTyg5FStRGVq33qyMcHvrb3J8W+p21rnBhvK26NCt1HGvZ1duvwwXbqOnNmTKmgMrWUBlwqFCWGyYzDB41/2uAYutZf8vrU423SVH8Q0BrH2qjzWkFKDcmiHGvId6jVxHGEcadIdDQgGtypjLvRHPPnoYrl82aJtSJjci3y+LvuG/Gtg7P3qT6XqfNDXGBFV6mTTa6btdyx5YHVC66h+cTlZkTTjKnshX0xqXd9lZGWvjXoV18kPjcxKrTtj8mvX0Tixuv6SNxovviJ1Gij1OUMaL7nbjgjj+hXIew3mLjJUvmWtuSxeySultOvmrllXezpJ3trImf/ltZNvIzcRIJbyqbND3GBlcmMq9uwfc2ZNr6+Dds7Ztyyx6WrlK8GXfrWlJCywO4FffpVapn3U1qQxlE8jsFysaeLK6V0iwrNe852Y3XjkEfpzyoAFVdKkvjDKVlPcF88454OOZvyfFwleNVLWjclvMrEfEdMxDRMnR/iAiuTpbBuvXZAxbb4MtH4uvsP1rh6jbpZuqUTKYn7Ut4+Fzdax75W3B3+zrL49UvKqnXnlONJkygmrvr+/YyyhzfkBfwjPui73TNxw3Vx2vwQF0xDXRvJ1uGKMyuVXaKluxXxpuKycWW+i2yarJXx7jmbiQgVJeOwfaUf5HBJKqVzrxmWyrPElflMOavG31Pe/KfJalXy5bzi+lTs3lG+YGLvBtQxZW9GxojE6lwq+gfmfbJp86fNCT45L3uP2+Hrfma2FeYT19JUdjrjkkCXyrqEfOQsK2tc3m/3mk7YBbU2lvF9Fkcu/p+zxI2f8IDyPIc8AAvnGAYj3p/F+fm0v8ISNyISl2PXdamsYvHfpx8ufi78h4XWN4+U+dPmBICvt7XSPV8jtrYI/zmVeN2SRErkp1dB/wIub98kjsK8krL1yblMvApSvOn84FMRvmbE/yoD8MmAuAA4CMQFwEEgLgAOAnEBcBCIC4CDQFwAHATiAuAgEBcAB4G4ADgIxAXAQSAuAA4yKe7y8jIAYMF5Jq7VbgDAYqF8/U3/AHmiZEuqtodEAAAAAElFTkSuQmCC" InformativeScreenshot="d43a191e2535f2d6feb28db4fa16a210.png" ScopeSelectorArgument="[string.Format(&quot;&lt;html app='chrome.exe' title='{0}' /&gt;&quot;, title)]" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
-                    </uix:NClick.Target>
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                  </uix:NClick>
-                </Sequence>
-              </ActivityAction>
-            </uix:NApplicationCard.Body>
-            <uix:NApplicationCard.TargetApp>
-              <uix:TargetApp Area="-8, -8, 1936, 1048" BrowserType="Chrome" IconBase64="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAABQ0lEQVQ4T6XTPyiFURzG8XuVbvmXDHfypzuwKCULg5QSGQzuIBMjpdgMJgMGk9EgFmWRUlI3d1EGWZSSwSRkcBWTRMf34Zw673mPyfAZ7nme3+l07nkzxph/iS46jWPrtejCMIoYxyDakVUnOigUJnGGZxjPF+5wgP6/hhdsUQP3OMQWdlDGO5RVYsMdeLGFTbQEeRYDuEVy2BZ0dA2rkA9zh2xDvViQRzdaI1k1mtCDcyQLPsI66KizWMM2jnCBV+iU0cEq6BKv4S7S+cQTdnGitdgGSwqsU/t7An1oRs72VpAabsCNAuyj3s99ZHvqhYtteFSART/zkQ3hDR9hUINLaIMr9AZ5AXN4gDrLiQ1sacaGUoFuXpd2DD1hl60il9rAbjIP3UX4L+iFljDquqlhh5Ie1AimMA19iZ34+Qp/mcw3oXI0Am7zY1EAAAAASUVORK5CYII=" InformativeScreenshot="778de0da0f6f3686052b68c35d0c98a3.jpg" Selector="[string.Format(&quot;&lt;html app='chrome.exe' title='{0}' /&gt;&quot;, title)]" Title="Atende.Net - IPM Sistemas Ltda - Cascavel / PR" />
-            </uix:NApplicationCard.TargetApp>
-          </uix:NApplicationCard>
+                </uix:NApplicationCard>
+              </Sequence>
+            </uix:NCheckState.IfNotExists>
+            <uix:NCheckState.Target>
+              <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/64" DesignTimeRectangle="98, 115, 195, 14" DesignTimeScaleFactor="1" ElementType="Text" FriendlyName="'Escrita Fiscal'" FullSelectorArgument="[string.Format(&quot;&lt;webctrl tag='H1' aaname='{0}*' /&gt;&quot;, in_Menu)]" Guid="1e7559d3-e194-4057-8d2a-4b9699e84f54" ImageBase64="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" InformativeScreenshot="13588b336c4f4d44b987a054adb25ca2.png" ScopeSelectorArgument="[string.Format(&quot;&lt;html app='chrome.exe' title='{0}' /&gt;&quot;, title)]" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
+            </uix:NCheckState.Target>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </uix:NCheckState>
+          <If Condition="[Not aberto]" DisplayName="Nao Abriu o formulario" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="If_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <If.Then>
+              <Sequence sap:VirtualizedContainerService.HintSize="476,170" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_1">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:Int32">[i]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:Int32">[i-1]</InArgument>
+                  </Assign.Value>
+                </Assign>
+              </Sequence>
+            </If.Then>
+            <If.Else>
+              <Sequence sap:VirtualizedContainerService.HintSize="300,80" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </Sequence>
+            </If.Else>
+          </If>
         </Sequence>
-      </uix:NCheckState.IfNotExists>
-      <uix:NCheckState.Target>
-        <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/64" DesignTimeRectangle="98, 115, 195, 14" DesignTimeScaleFactor="1" ElementType="Text" FriendlyName="'Escrita Fiscal'" FullSelectorArgument="[string.Format(&quot;&lt;webctrl tag='H1' aaname='{0}*' /&gt;&quot;, in_Menu)]" Guid="1e7559d3-e194-4057-8d2a-4b9699e84f54" ImageBase64="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" InformativeScreenshot="13588b336c4f4d44b987a054adb25ca2.png" ScopeSelectorArgument="[string.Format(&quot;&lt;html app='chrome.exe' title='{0}' /&gt;&quot;, title)]" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
-      </uix:NCheckState.Target>
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-    </uix:NCheckState>
+      </ui:InterruptibleDoWhile.Body>
+      <ui:InterruptibleDoWhile.Condition>
+        <VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="Not aberto And i &gt; 0" />
+      </ui:InterruptibleDoWhile.Condition>
+    </ui:InterruptibleDoWhile>
   </Sequence>
 </Activity>

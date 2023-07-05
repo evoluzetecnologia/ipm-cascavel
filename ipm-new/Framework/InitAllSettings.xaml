@@ -6,7 +6,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1189,2455</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1074,2209</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GetAllSettings_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -153,7 +153,7 @@
       <AssemblyReference>WindowsBase</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Initialize All Settings" sap:VirtualizedContainerService.HintSize="787,2350" sap2010:WorkflowViewState.IdRef="Sequence_2">
+  <Sequence DisplayName="Initialize All Settings" sap:VirtualizedContainerService.HintSize="787,2144" sap2010:WorkflowViewState.IdRef="Sequence_2">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="var" />
       <Variable x:TypeArguments="scg:List(x:String)" Default="[New List(Of String)]" Name="TODOList" />
@@ -209,7 +209,7 @@
         </Sequence>
       </If.Else>
     </If>
-    <If Condition="[Not out_Config(&quot;ApplicationKey&quot;).Equals(&quot;&quot;)]" DisplayName="Continuar" sap:VirtualizedContainerService.HintSize="725,1883" sap2010:WorkflowViewState.IdRef="If_34">
+    <If Condition="[Not out_Config(&quot;ApplicationKey&quot;).Equals(&quot;&quot;)]" DisplayName="Continuar" sap:VirtualizedContainerService.HintSize="725,1677" sap2010:WorkflowViewState.IdRef="If_34">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -217,13 +217,13 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <Sequence sap:VirtualizedContainerService.HintSize="691,1701" sap2010:WorkflowViewState.IdRef="Sequence_70">
+        <Sequence sap:VirtualizedContainerService.HintSize="528,1495" sap2010:WorkflowViewState.IdRef="Sequence_70">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <If Condition="[out_Config.ContainsKey(&quot;Parametro&quot;)]" DisplayName="Existe parametro" sap:VirtualizedContainerService.HintSize="649,1429" sap2010:WorkflowViewState.IdRef="If_8">
+          <If Condition="[out_Config.ContainsKey(&quot;Parametro&quot;)]" DisplayName="Existe parametro" sap:VirtualizedContainerService.HintSize="486,1223" sap2010:WorkflowViewState.IdRef="If_8">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -231,7 +231,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <If.Then>
-              <Sequence sap:VirtualizedContainerService.HintSize="615,1247" sap2010:WorkflowViewState.IdRef="Sequence_22">
+              <Sequence sap:VirtualizedContainerService.HintSize="452,1041" sap2010:WorkflowViewState.IdRef="Sequence_22">
                 <Sequence.Variables>
                   <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="parametro" />
                 </Sequence.Variables>
@@ -240,7 +240,7 @@
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <rs:Json_Convert_Dictionary in_Dictionary="{x:Null}" io_String="{x:Null}" DisplayName="Json Convert Dictionary" sap:VirtualizedContainerService.HintSize="573,52" sap2010:WorkflowViewState.IdRef="Json_Convert_Dictionary_1" in_AutomationName="[out_Config(&quot;ApplicationKey&quot;).ToString()]" in_String="[out_Config(&quot;Parametro&quot;).ToString()]" io_Dictionary="[parametro]">
+                <rs:Json_Convert_Dictionary in_Dictionary="{x:Null}" io_String="{x:Null}" DisplayName="Json Convert Dictionary" sap:VirtualizedContainerService.HintSize="410,52" sap2010:WorkflowViewState.IdRef="Json_Convert_Dictionary_1" in_AutomationName="[out_Config(&quot;ApplicationKey&quot;).ToString()]" in_String="[out_Config(&quot;Parametro&quot;).ToString()]" io_Dictionary="[parametro]">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -248,7 +248,35 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </rs:Json_Convert_Dictionary>
-                <ui:ForEach x:TypeArguments="scg:KeyValuePair(x:String, x:Object)" CurrentIndex="{x:Null}" DisplayName="For Each ToDo" sap:VirtualizedContainerService.HintSize="573,52" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[parametro]">
+                <If Condition="[Convert.ToBoolean(parametro(&quot;DownloadNFSaida&quot;)) Or&#xD;&#xA;Convert.ToBoolean(parametro(&quot;DownloadNFEntrada&quot;)) Or&#xD;&#xA;Convert.ToBoolean(parametro(&quot;ProtocolarNFSaida&quot;)) Or&#xD;&#xA;Convert.ToBoolean(parametro(&quot;ProtocolarNFEntrada&quot;)) Or&#xD;&#xA;Convert.ToBoolean(parametro(&quot;SimplesNacional&quot;))]" DisplayName="Acesso Cliente" sap:VirtualizedContainerService.HintSize="410,403" sap2010:WorkflowViewState.IdRef="If_35">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <If.Then>
+                    <Sequence sap:VirtualizedContainerService.HintSize="376,221" sap2010:WorkflowViewState.IdRef="Sequence_72">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <uasa:AppendItemToList x:TypeArguments="x:String" ItemIndex="{x:Null}" DisplayName="Append Item to List" sap:VirtualizedContainerService.HintSize="334,133" sap2010:WorkflowViewState.IdRef="AppendItemToList`1_8" ItemToAppend="AcessoCliente" List="[TODOList]">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </uasa:AppendItemToList>
+                    </Sequence>
+                  </If.Then>
+                  <If.Else>
+                    <Sequence sap2010:WorkflowViewState.IdRef="Sequence_73" />
+                  </If.Else>
+                </If>
+                <ui:ForEach x:TypeArguments="scg:KeyValuePair(x:String, x:Object)" CurrentIndex="{x:Null}" DisplayName="For Each ToDo" sap:VirtualizedContainerService.HintSize="410,326" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[parametro]">
                   <ui:ForEach.Body>
                     <ActivityAction x:TypeArguments="scg:KeyValuePair(x:String, x:Object)">
                       <ActivityAction.Argument>
@@ -298,7 +326,7 @@
                               <Sequence sap2010:WorkflowViewState.IdRef="Sequence_26" />
                             </If.Else>
                           </If>
-                          <If x:Key="DownloadNFEntrada" Condition="[Convert.ToBoolean(item.Value)]" sap:VirtualizedContainerService.HintSize="334,182" sap2010:WorkflowViewState.IdRef="If_10">
+                          <If x:Key="DownloadNFEntrada" Condition="[Convert.ToBoolean(item.Value)]" sap:VirtualizedContainerService.HintSize="334,152" sap2010:WorkflowViewState.IdRef="If_10">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -319,7 +347,7 @@
                               <Sequence sap2010:WorkflowViewState.IdRef="Sequence_28" />
                             </If.Else>
                           </If>
-                          <If x:Key="ProtocolarNFSaida" Condition="[Convert.ToBoolean(item.Value)]" sap:VirtualizedContainerService.HintSize="334,182" sap2010:WorkflowViewState.IdRef="If_11">
+                          <If x:Key="ProtocolarNFSaida" Condition="[Convert.ToBoolean(item.Value)]" sap:VirtualizedContainerService.HintSize="334,152" sap2010:WorkflowViewState.IdRef="If_11">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -409,59 +437,31 @@
                   </ui:ForEach.Body>
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </ui:ForEach>
-                <If Condition="[TODOList.Count &gt; 0]" DisplayName="Tem Tafera IPM" sap:VirtualizedContainerService.HintSize="573,52" sap2010:WorkflowViewState.IdRef="If_27">
-                  <sap:WorkflowViewStateService.ViewState>
-                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                    </scg:Dictionary>
-                  </sap:WorkflowViewStateService.ViewState>
-                  <If.Then>
-                    <Sequence sap:VirtualizedContainerService.HintSize="300,140" sap2010:WorkflowViewState.IdRef="Sequence_62">
-                      <sap:WorkflowViewStateService.ViewState>
-                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                        </scg:Dictionary>
-                      </sap:WorkflowViewStateService.ViewState>
-                      <uasa:AppendItemToList x:TypeArguments="x:String" ItemIndex="{x:Null}" DisplayName="Append Item to List" sap:VirtualizedContainerService.HintSize="258,52" sap2010:WorkflowViewState.IdRef="AppendItemToList`1_8" ItemToAppend="AcessoCliente" List="[TODOList]">
-                        <sap:WorkflowViewStateService.ViewState>
-                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                          </scg:Dictionary>
-                        </sap:WorkflowViewStateService.ViewState>
-                      </uasa:AppendItemToList>
-                    </Sequence>
-                  </If.Then>
-                  <If.Else>
-                    <Sequence sap2010:WorkflowViewState.IdRef="Sequence_63" />
-                  </If.Else>
-                </If>
-                <ui:ForEach x:TypeArguments="scg:KeyValuePair(x:String, x:Object)" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="573,883" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[parametro]">
+                <ui:ForEach x:TypeArguments="scg:KeyValuePair(x:String, x:Object)" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="410,52" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[parametro]">
                   <ui:ForEach.Body>
                     <ActivityAction x:TypeArguments="scg:KeyValuePair(x:String, x:Object)">
                       <ActivityAction.Argument>
                         <DelegateInArgument x:TypeArguments="scg:KeyValuePair(x:String, x:Object)" Name="item" />
                       </ActivityAction.Argument>
-                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="539,697" sap2010:WorkflowViewState.IdRef="Sequence_61">
+                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="300,140" sap2010:WorkflowViewState.IdRef="Sequence_61">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[item.Key]" sap:VirtualizedContainerService.HintSize="497,609" sap2010:WorkflowViewState.IdRef="Switch`1_2">
+                        <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[item.Key]" sap:VirtualizedContainerService.HintSize="258,52" sap2010:WorkflowViewState.IdRef="Switch`1_2">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                               <x:Boolean x:Key="IsPinned">False</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <If x:Key="EmitirNFS" Condition="[Convert.ToBoolean(item.Value) AND out_Config.ContainsKey(&quot;ArquivoNotas&quot;)]" DisplayName="Emitir Notas" sap:VirtualizedContainerService.HintSize="410,403" sap2010:WorkflowViewState.IdRef="If_25">
+                          <If x:Key="EmitirNFS" Condition="[Convert.ToBoolean(item.Value) AND out_Config.ContainsKey(&quot;ArquivoNotas&quot;)]" DisplayName="Emitir Notas" sap:VirtualizedContainerService.HintSize="334,182" sap2010:WorkflowViewState.IdRef="If_25">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -543,7 +543,7 @@
                   </ui:ForEach.Body>
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
@@ -560,7 +560,7 @@
               </Sequence>
             </If.Else>
           </If>
-          <If Condition="[out_Config.ContainsKey(&quot;Dominio&quot;) And Convert.ToInt32(out_Config(&quot;TotalClientes&quot;)) &lt;= 1]" DisplayName="Cadastrar Clientes" sap:VirtualizedContainerService.HintSize="649,52" sap2010:WorkflowViewState.IdRef="If_17">
+          <If Condition="[out_Config.ContainsKey(&quot;Dominio&quot;) And Convert.ToInt32(out_Config(&quot;TotalClientes&quot;)) &lt;= 1]" DisplayName="Cadastrar Clientes" sap:VirtualizedContainerService.HintSize="486,52" sap2010:WorkflowViewState.IdRef="If_17">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -645,7 +645,7 @@
               </Sequence>
             </If.Else>
           </If>
-          <If Condition="[in_Remoto]" DisplayName="Remoto" sap:VirtualizedContainerService.HintSize="649,52" sap2010:WorkflowViewState.IdRef="If_32">
+          <If Condition="[in_Remoto]" DisplayName="Remoto" sap:VirtualizedContainerService.HintSize="486,52" sap2010:WorkflowViewState.IdRef="If_32">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">False</x:Boolean>

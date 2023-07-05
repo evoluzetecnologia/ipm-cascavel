@@ -9,7 +9,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1074,3383</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1074,3271</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Login_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -120,7 +120,7 @@
       <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Login" sap:VirtualizedContainerService.HintSize="850,3318" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Login" sap:VirtualizedContainerService.HintSize="850,3206" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="&lt;html app='chrome.exe' title='Acesso Atende.Net - Cascavel/PR' /&gt;" Name="titleLogin" />
       <Variable x:TypeArguments="x:String" Name="print" />
@@ -132,7 +132,13 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <If Condition="[Not in_Password.Equals(&quot;&quot;)]" DisplayName="Senha" sap:VirtualizedContainerService.HintSize="788,360" sap2010:WorkflowViewState.IdRef="If_3">
+    <If Condition="[Not in_Password.Equals(&quot;&quot;)]" DisplayName="Senha" sap:VirtualizedContainerService.HintSize="788,52" sap2010:WorkflowViewState.IdRef="If_3">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
       <If.Then>
         <Sequence sap:VirtualizedContainerService.HintSize="376,178" sap2010:WorkflowViewState.IdRef="Sequence_25">
           <sap:WorkflowViewStateService.ViewState>
@@ -147,7 +153,7 @@
         <Sequence sap2010:WorkflowViewState.IdRef="Sequence_26" />
       </If.Else>
     </If>
-    <uix:NCheckState DelayBefore="0" DisplayName="Logado No Sistema" EnableIfExists="False" Exists="[logado]" sap:VirtualizedContainerService.HintSize="788,485" sap2010:WorkflowViewState.IdRef="NCheckState_4" Timeout="0" Version="V3">
+    <uix:NCheckState DelayBefore="0" DisplayName="Logado No Sistema" EnableIfExists="False" Exists="[logado]" sap:VirtualizedContainerService.HintSize="788,52" sap2010:WorkflowViewState.IdRef="NCheckState_4" Timeout="0" Version="V3">
       <uix:NCheckState.IfExists>
         <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="450,105" sap2010:WorkflowViewState.IdRef="Sequence_13">
           <sap:WorkflowViewStateService.ViewState>
@@ -158,7 +164,7 @@
         </Sequence>
       </uix:NCheckState.IfExists>
       <uix:NCheckState.IfNotExists>
-        <Sequence DisplayName="Target does not appear" sap:VirtualizedContainerService.HintSize="450,228" sap2010:WorkflowViewState.IdRef="Sequence_14">
+        <Sequence DisplayName="Target does not appear" sap:VirtualizedContainerService.HintSize="450,224" sap2010:WorkflowViewState.IdRef="Sequence_14">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -166,7 +172,9 @@
           </sap:WorkflowViewStateService.ViewState>
           <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\IPM\Logout.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Process\IPM\Logout.xaml">
             <ui:InvokeWorkflowFile.Arguments>
-              <scg:Dictionary x:TypeArguments="x:String, Argument" />
+              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
+                <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="in_Config" />
+              </InArgument>
             </ui:InvokeWorkflowFile.Arguments>
           </ui:InvokeWorkflowFile>
         </Sequence>
@@ -176,12 +184,12 @@
       </uix:NCheckState.Target>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </uix:NCheckState>
-    <If Condition="[Not logado]" DisplayName="Loga no IPM" sap:VirtualizedContainerService.HintSize="788,2282" sap2010:WorkflowViewState.IdRef="If_1">
+    <If Condition="[Not logado]" DisplayName="Loga no IPM" sap:VirtualizedContainerService.HintSize="788,2911" sap2010:WorkflowViewState.IdRef="If_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -189,34 +197,76 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <Sequence sap:VirtualizedContainerService.HintSize="754,2100" sap2010:WorkflowViewState.IdRef="Sequence_15">
+        <Sequence sap:VirtualizedContainerService.HintSize="754,2729" sap2010:WorkflowViewState.IdRef="Sequence_15">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Login" sap:VirtualizedContainerService.HintSize="712,1920" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" OpenMode="IfNotOpen" ScopeGuid="a3fd885b-663e-4c66-ae91-6da1b0615914" Version="V2" WindowResize="Maximize">
+          <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="712,101" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+            <ui:MultipleAssign.AssignOperations>
+              <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="x:Boolean">[logado]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="x:Boolean">[Not in_Config("ToDo").ToString().Equals("CertidaoNegativa")]</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+              </scg:List>
+            </ui:MultipleAssign.AssignOperations>
+          </ui:MultipleAssign>
+          <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Login" sap:VirtualizedContainerService.HintSize="712,2408" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" IsIncognito="[logado]" OpenMode="IfNotOpen" ScopeGuid="a3fd885b-663e-4c66-ae91-6da1b0615914" Version="V2" WindowResize="Maximize">
             <uix:NApplicationCard.Body>
               <ActivityAction x:TypeArguments="x:Object">
                 <ActivityAction.Argument>
                   <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
                 </ActivityAction.Argument>
-                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="678,1703" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="678,2191" sap2010:WorkflowViewState.IdRef="Sequence_2">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <uix:NCheckState DelayBefore="0" DisplayName="Logar" EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="616,1153" sap2010:WorkflowViewState.IdRef="NCheckState_6" ScopeIdentifier="a3fd885b-663e-4c66-ae91-6da1b0615914" Timeout="[in_Time]" Version="V3">
+                  <uix:NCheckState DelayBefore="0" DisplayName="Check App State 'Cancelar'" EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="616,489" sap2010:WorkflowViewState.IdRef="NCheckState_8" ScopeIdentifier="a3fd885b-663e-4c66-ae91-6da1b0615914" Timeout="0" Version="V3">
                     <uix:NCheckState.IfExists>
-                      <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="572,896" sap2010:WorkflowViewState.IdRef="Sequence_23">
+                      <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="450,272" sap2010:WorkflowViewState.IdRef="Sequence_38">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <If Condition="[Not in_Password.Equals(&quot;&quot;)]" DisplayName="Logar" sap:VirtualizedContainerService.HintSize="510,781" sap2010:WorkflowViewState.IdRef="If_5">
+                        <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="0" DelayBefore="0" DisplayName="Click 'Fechar'" sap:VirtualizedContainerService.HintSize="388,157" sap2010:WorkflowViewState.IdRef="NClick_3" InteractionMode="HardwareEvents" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="a3fd885b-663e-4c66-ae91-6da1b0615914" Version="V3">
+                          <uix:NClick.Target>
+                            <uix:TargetAnchorable DesignTimeRectangle="299, 9, 24, 22" DesignTimeScaleFactor="1" ElementType="Button" FriendlyName="'Fechar'" FullSelectorArgument="&lt;ctrl name='Restaurar páginas?' role='alert' /&gt;&lt;ctrl name='Fechar' role='push button' /&gt;" FuzzySelectorArgument="&lt;ctrl name='Restaurar páginas?' role='alert' /&gt;&lt;ctrl name='Fechar' role='push button' automationid='' check:text='Fechar' /&gt;" Guid="fa54402d-5cfb-4df5-b162-ad964ca11b1e" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAABwAAAAaCAYAAACkVDyJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGFSURBVEhLzVbBUoMwFPRPPXjxC2ytWtpaxNqOjj8o7VUCyFjpBXhm0WhCHmlrlXFndoYh7C4vvCQcUcf4n4FFUVCe55RlGSVJQpEQNXGNexgry/LzaTecgVVV0et6Tc9RtBPxLDQutAbijWNZAWfsIjSuatlATKGIY9ZwFwqphQcHNjBNU9ZoH8KDgxX4JhuAM/gJ4dWEEYgPju5rCmeLB/KuA1quVtbYUxjScOzT/P7RGoNXs4mMwHyzsUTgxJ/R8ckp9S88CpffoQjrDbx6bBrMDY0iPHUYgS9yTXEiGCNMhaJS7h6nxTrVYQRy06moV9MbDOns/Orj+nJkVN0kPHUYgZxAp17Vtsp06tg70JvcfAWOpoGzOkUdRqBwLHZzSr16WutrOaWuKoX01GEE4gM3BSDXINw9TutsmsOWxZ2hUXQuC2y6XKfCrN/SjXWlcsy/XVhjWxc+8JtbG87JJqxAoNPNG8A0iAOPp7aDmA0EOj2AFSDs7BdDR2c/UX+BjgOJ3gG9s7DJJA8oIgAAAABJRU5ErkJggg==" InformativeScreenshot="6ea95d9ff2b2407c9ff963ee7e42fc30.png" ScopeSelectorArgument="&lt;wnd app='chrome.exe' cls='Chrome_WidgetWin_1' title='Restaurar páginas?' /&gt;" SearchSteps="Selector, FuzzySelector" Version="V2" Visibility="Interactive" />
+                          </uix:NClick.Target>
+                        </uix:NClick>
+                      </Sequence>
+                    </uix:NCheckState.IfExists>
+                    <uix:NCheckState.IfNotExists>
+                      <Sequence DisplayName="Target does not appear" sap:VirtualizedContainerService.HintSize="450,105" sap2010:WorkflowViewState.IdRef="Sequence_39">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </Sequence>
+                    </uix:NCheckState.IfNotExists>
+                    <uix:NCheckState.Target>
+                      <uix:TargetAnchorable DesignTimeRectangle="227, 87, 84, 32" DesignTimeScaleFactor="1" ElementType="Button" FriendlyName="'Cancelar'" FullSelectorArgument="&lt;ctrl name='Restaurar páginas?' role='alert' /&gt;&lt;ctrl name='Cancelar' role='push button' /&gt;" FuzzySelectorArgument="&lt;ctrl name='Restaurar páginas?' role='alert' /&gt;&lt;ctrl name='Cancelar' role='push button' automationid='' check:text='Cancelar' /&gt;" Guid="3334c340-ab3a-4fc5-afba-66c52e54e8d0" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAFgAAAAkCAYAAAANdf2OAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAM9SURBVGhD7ZpBSxtBFMf7XfwMnnry1Junnjx585RbD0UEPRQKIgi5KDkoFHIoJQc9GRDxYBCqYBeEbQ0xkMW02c1m12VNlVT+fW9nd5vIpjZtRtC+B39iZt6bYX775u0Y5hnEtJoA1mwDgK9ufqDe9GF8+YqPpw3RCGJmzI4Z9lsKOLzuwah+w1nDw4V7Azu4FY0gZsbsmCGzTCwFXG9eRg5ZwaI/15nl4/zCj6n2Af70uSmZOwYxQ2aZWAqY60hWgGh0McvEBLAGCWDNEsCaJYA1SwBrlgDWrAcA3EPt1MX82xYmX7cwQZorBbAyfTXouE1z2ijWM/oeQJoB07/cZQfPCeps0cNRowvj2MXcqgsz01+DnjTgjoclzthyONBumYEAznIeVdaBQ4tzsJfRx6qduMgtqrIxsdDC/H78IGIo6+U2Zqid+9M+LjmH7TRuatmFwe12gGKhFe2WaKzdwbEiwE0f+dXYhzRT6KjYIERxmdrW2si/oc8NP57r36UVsFm2MUEAhmWrVQ9g2PybR498+WG0UeG+CArX6kvUOl1Uigwk7qN6Pk19SwchLOrb2XDpAV5hO0/+WzHUqotZ8tmsJmPFgDshjOp35dOgh0s+Kyf0dwJ40cFOs6f6xyStgGv7fdCy1PCwWbDxkrJGZVVbZfvdbR19d7DdvFWw8x3UkjHqIUyCNRfFD2rl+O5YIfZKDnI033S8MyKfBPAYMzeRVsCcSTO0iKXDOGsGFGCdtvnsVnyiiED8DrD6XnlHIAre4CkkBpw/7WtL1Bd79J5iuaR0OEt9rDx6wMG1AkILmS/5MJpdmCZlbcmjsqEW+Gq/S1v3irY6+90P2Dp0ouOeKhHXMA/odEKANvkYSKeTCB6NVym5feVGxe7xHGseZf8NavR+ePH4AbO6OKL6mrys+AWUK/q0SHWEm6K2yQUHH7ZUObkPsE1wjN1f46UvOSo3eYIUnbV5jg1+iHdi61R347hc2Y1OOE8A8P8tAaxZAlizBLBmCWDNEsCaJYA1SwBrViZguXgyHg29eCJXp8ajoVen0st/5CCZPLqYGbMbevmPja9enl94cn31L8TMmN3Q66tiekwAazXgJ0ZO4zJtApMIAAAAAElFTkSuQmCC" InformativeScreenshot="0de85689b88b331176e94b517b1cf85a.png" ScopeSelectorArgument="&lt;wnd app='chrome.exe' title='Restaurar páginas?' /&gt;" SearchSteps="Selector, FuzzySelector" Version="V2" Visibility="Interactive" />
+                    </uix:NCheckState.Target>
+                  </uix:NCheckState>
+                  <uix:NCheckState DelayBefore="0" DisplayName="Logar" EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="616,1112" sap2010:WorkflowViewState.IdRef="NCheckState_6" ScopeIdentifier="a3fd885b-663e-4c66-ae91-6da1b0615914" Timeout="[in_Time]" Version="V3">
+                    <uix:NCheckState.IfExists>
+                      <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="572,895" sap2010:WorkflowViewState.IdRef="Sequence_23">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <If Condition="[Not in_Password.Equals(&quot;&quot;)]" DisplayName="Logar" sap:VirtualizedContainerService.HintSize="510,780" sap2010:WorkflowViewState.IdRef="If_5">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -224,7 +274,7 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                           <If.Then>
-                            <Sequence sap:VirtualizedContainerService.HintSize="476,599" sap2010:WorkflowViewState.IdRef="Sequence_29">
+                            <Sequence sap:VirtualizedContainerService.HintSize="476,598" sap2010:WorkflowViewState.IdRef="Sequence_29">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -263,7 +313,7 @@
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
                               </uix:NClick>
-                              <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_3">
+                              <Assign sap:VirtualizedContainerService.HintSize="434,81" sap2010:WorkflowViewState.IdRef="Assign_3">
                                 <Assign.To>
                                   <OutArgument x:TypeArguments="x:Boolean">[logado]</OutArgument>
                                 </Assign.To>
