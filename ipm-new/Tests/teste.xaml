@@ -1,4 +1,12 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="teste" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1074,2877" sap2010:WorkflowViewState.IdRef="teste_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:r="clr-namespace:Roboluze_Libre_Config;assembly=Roboluze.Libre.Config" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.ComponentModel;assembly=System.ComponentModel.TypeConverter" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sg="clr-namespace:System.Globalization;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="teste" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:r="clr-namespace:Roboluze_Libre_Config;assembly=Roboluze.Libre.Config" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.ComponentModel;assembly=System.ComponentModel.TypeConverter" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sg="clr-namespace:System.Globalization;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="BreakTriggerScopeInArgument" Type="InArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1228,3093</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>teste_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -41,6 +49,9 @@
       <x:String>Roboluze_Libre_Config</x:String>
       <x:String>System.Xml.Serialization</x:String>
       <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Models</x:String>
+      <x:String>UiPath.UIAutomationNext.Models.ExtractData</x:String>
+      <x:String>UiPath.Shared.Activities.Business</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -116,42 +127,171 @@
       <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="teste" sap:VirtualizedContainerService.HintSize="614,2812" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="teste" sap:VirtualizedContainerService.HintSize="614,3028" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="x:String" Name="var" />
+      <Variable x:TypeArguments="x:String" Name="var">
+        <Variable.Default>
+          <Literal x:TypeArguments="x:String">2</Literal>
+        </Variable.Default>
+      </Variable>
       <Variable x:TypeArguments="sg:CultureInfo" Default="[New CultureInfo(&quot;pt-BR&quot;)]" Name="cultureInfo" />
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="in_Config" />
       <Variable x:TypeArguments="ui:GenericValue" Name="valor" />
-      <Variable x:TypeArguments="x:Int32" Default="0" Name="i" />
+      <Variable x:TypeArguments="x:Int32" Name="i">
+        <Variable.Default>
+          <Literal x:TypeArguments="x:Int32" />
+        </Variable.Default>
+      </Variable>
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Browser Chrome: Atende.Net - IPM Sistemas Ltda - Cascavel / PR" sap:VirtualizedContainerService.HintSize="552,487" sap2010:WorkflowViewState.IdRef="NApplicationCard_3" InteractionMode="DebuggerApi" OpenMode="Never" ScopeGuid="e5418e2f-2a1f-4731-9efc-bbd4d2c6627f" Version="V2">
+    <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Simples Nacional" sap:VirtualizedContainerService.HintSize="552,703" sap2010:WorkflowViewState.IdRef="NApplicationCard_4" InteractionMode="DebuggerApi" OpenMode="Never" ScopeGuid="47d85b80-cc96-43df-9308-f4ec8b18f0eb" Version="V2">
       <uix:NApplicationCard.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="450,270" sap2010:WorkflowViewState.IdRef="Sequence_19">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="496,486" sap2010:WorkflowViewState.IdRef="Sequence_21">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="0" DelayBefore="0" DisplayName="Click 'Emissão do Carnê'" sap:VirtualizedContainerService.HintSize="388,157" sap2010:WorkflowViewState.IdRef="NClick_1" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="e5418e2f-2a1f-4731-9efc-bbd4d2c6627f" Version="V3">
+            <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_1">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Int32">[i]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Int32">2</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="434,52" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
+              <ui:InterruptibleDoWhile.Body>
+                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="561,1222" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="499,101" sap2010:WorkflowViewState.IdRef="MultipleAssign_16">
+                    <ui:MultipleAssign.AssignOperations>
+                      <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_39">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[var]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[i.ToString()]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                      </scg:List>
+                    </ui:MultipleAssign.AssignOperations>
+                  </ui:MultipleAssign>
+                  <uix:NGetAttributeGeneric x:TypeArguments="x:String" Attribute="text" DelayAfter="0" DelayBefore="0" DisplayName="Competencia" sap:VirtualizedContainerService.HintSize="499,52" sap2010:WorkflowViewState.IdRef="NGetAttributeGeneric`1_1" Result="[var]" ScopeIdentifier="47d85b80-cc96-43df-9308-f4ec8b18f0eb" Version="V3">
+                    <uix:NGetAttributeGeneric.Target>
+                      <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/64" CvElementArea="348, 397, 67, 20" CvTextArea="351, 402, 40, 10" CvType="InputBox" DesignTimeRectangle="349, 298, 65, 18" DesignTimeScaleFactor="0.8999999761581421" ElementType="InputBox" FriendlyName="'06/2023'" FullSelectorArgument="[string.Format(&quot;&lt;webctrl tag='SECTION' aria-label='Janela - Incluir' /&gt;&lt;webctrl aria-label='Grid de Dados - Competências' tableRow='1' tag='TABLE' /&gt;&lt;webctrl tableRow='{0}' tag='INPUT' name='competencia' /&gt;&quot;, var)]" Guid="77ccf80a-1f00-4ea1-9c4b-31cd9d59ff66" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAEUAAAAWCAYAAACWl1FwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFHSURBVFhH7ZSxkYQwDEWvFMqhCKiABjZnSCmCmD4oASiBlJDEd89zn9H5lC6zgYI3u5Yl+evbu1/XdaV3sixLats2Hcdxx/jedV1a1zXTNE2mqqo7l3hd1zkG9DnPM71erz8x+o3jmKZpyvnDMNy92eOT9b7vubdqqWG/7DnPc3rEFA7lcMUYGoHsyRQNgVhAnIQLG9Ow9CJmz7B56qUeZS17pb6PeCkSyF45ELcn0VoLXgb15eDquW3bfQ797UuRJs+0t5siMfZghGhQBHsvRbmKUW8N8/bLmGBta+1FEX/8pUB5S1YEZrDmRu0NIra8VWrILft4pjA4OXzqHP1HUQdeT/IfMeXTkbGYxDpM+YWX1Pd9NihM+UE/Nf0EwxSHMMUhTHEIUxzCFIcwxSFMcQhTHMIUhzDFIUxxCFMcwhSHMOUfV/oG6iltAv0STEMAAAAASUVORK5CYII=" InformativeScreenshot="c311723f33dbd7b95b6a8eda2923a43f.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Atende.Net - IPM Sistemas Ltda - Cascavel / PR' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
+                    </uix:NGetAttributeGeneric.Target>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </uix:NGetAttributeGeneric>
+                  <If Condition="[var.Trim.Equals(&quot;06/2016&quot;)]" DisplayName="Linha correta" sap:VirtualizedContainerService.HintSize="499,878" sap2010:WorkflowViewState.IdRef="If_10">
+                    <If.Then>
+                      <Sequence sap:VirtualizedContainerService.HintSize="465,696" sap2010:WorkflowViewState.IdRef="Sequence_23">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="423,101" sap2010:WorkflowViewState.IdRef="MultipleAssign_17">
+                          <ui:MultipleAssign.AssignOperations>
+                            <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_40">
+                                <ui:AssignOperation.To>
+                                  <OutArgument x:TypeArguments="x:String">[var]</OutArgument>
+                                </ui:AssignOperation.To>
+                                <ui:AssignOperation.Value>
+                                  <InArgument x:TypeArguments="x:String">[i.ToString()]</InArgument>
+                                </ui:AssignOperation.Value>
+                              </ui:AssignOperation>
+                            </scg:List>
+                          </ui:MultipleAssign.AssignOperations>
+                        </ui:MultipleAssign>
+                        <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DelayAfter="0" DelayBefore="0" DisplayName="Valor" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="423,218" sap2010:WorkflowViewState.IdRef="NTypeInto_2" ScopeIdentifier="47d85b80-cc96-43df-9308-f4ec8b18f0eb" Text="[var+ &quot;[k(Tab)]&quot;]" Version="V3">
+                          <uix:NTypeInto.Target>
+                            <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/64" CvElementArea="438, 297, 140, 20" CvTextArea="552, 302, 22, 11" CvType="InputBox" DesignTimeRectangle="439, 298, 138, 18" DesignTimeScaleFactor="0.8999999761581421" ElementType="InputBox" FriendlyName="'0,00'" FullSelectorArgument="[string.Format(&quot;&lt;webctrl aria-label='Grid de Dados - Competências' tableRow='1' tag='TABLE' /&gt;&lt;webctrl tableRow='{0}' tag='INPUT' name='receitaServico' /&gt;&quot;, var)]" FuzzySelectorArgument="&lt;webctrl aria-label='Grid de Dados - Competências' tag='TABLE' /&gt;&lt;webctrl type='text' tag='INPUT' name='receitaServico' class='campo' aaname='' /&gt;" Guid="11c2a90f-9113-4e07-b3ec-1d8f39f49da9" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAI4AAAAWCAYAAAAWyKQmAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFjSURBVGhD7do9boMwGMbx3ISLlK5cAqnt6ipSN04R7pAu/eIUXRibqVbSEzBFIkMllrd9LL2ucYNKWf0Mf8kBPPGTITKrYRiEsf9GOGxRIzjm8SCX9U5Wt6+M+S42b7J+PpyHYx72cnNv5Xj6HF3AGExcb62sn37weDj5tyqiYWFZlvkxbGDl0d8eDpYkHTOGQjgoNEI4bDLCYYsinMTq+16qqnI3vigKsdb+uqZtW3ce1XV9dh7hJFbTNA4AIACIjvV813VSlqU7p1gwjucRTmJhBQECjLHaGGMcFj0fH9Pr43mEk1ghAOAAkvBxFcNRNPE8wkmseOXgisNmpQgwnnrH0VUofscJ5xFOYikG3PjwXxVQAATGCgMplnge4TC3ygBF+Mj6K8Jhi5oFBxtY3ORkYSGcyU1ObJlj65x4WBxMXG3f5e7lwx/zcBA+1sn5IReLyje7ERo0gsPY3AiHLWiQL1vXT3fAL/+MAAAAAElFTkSuQmCC" InformativeScreenshot="42cbb8ab85f8ecd133bfce0c0d779783.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Atende.Net - IPM Sistemas Ltda - Cascavel / PR' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
+                          </uix:NTypeInto.Target>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </uix:NTypeInto>
+                        <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="0" DelayBefore="0.5" DisplayName="Click 'Confirmar'" sap:VirtualizedContainerService.HintSize="423,52" sap2010:WorkflowViewState.IdRef="NClick_3" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="47d85b80-cc96-43df-9308-f4ec8b18f0eb" Version="V3">
+                          <uix:NClick.Target>
+                            <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/64" CvType="Text" DesignTimeRectangle="342, 766, 72, 18" DesignTimeScaleFactor="0.8999999761581421" ElementType="Button" FriendlyName="'Confirmar'" FullSelectorArgument="&lt;webctrl tag='SECTION' aria-label='Janela - Incluir' /&gt;&lt;webctrl name='confirmar' tag='BUTTON' /&gt;" Guid="35a5e52d-c2e5-4a9e-8cec-b45b3cadad01" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAEwAAAAWCAYAAABqgnq6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALGSURBVFhH7ZhNaxNRFIbzB9wKVtf+A1cuBHfiyp0bwZ3iwoULEduFKLgSBC2IqBDaQqSF2LS2UClWlFCsqG2S2kq16SRN0iTN99fk83jeA9OMyTQkJq0RZ+CFO/eee+65zz3nZohFSalkqn2ZwDrUHjDbskIDg2NkufLIlE7HBkdp3OUTRh4lUAcmsIZdZHmxaUovZnJ8aEwY2ScddWBC1GiCKWEDRlar1QTWlkxgHapXwB56khRTq1QjEm3nKnRhfsfQtpVOTvhpPpCnMjuBn9e+nKHdX1MvgN35kqBCpUbxYpWmeYP2rRx93i3SxYWwoX0r3VyKUZ59rSZKNLKRkfdGmxM2hY6MeJv6/0Qd++oFMGdYpUypRtecu01jT9fTMoYHUKeUHJ1/E5IM/JEuC2SMbnL71qeY9Dc+z7+nJeuSbLuVKZM/W5EDQUZjHuYHeJ47XiJeQoDf+5qQdWCPcWgtWaJzcyHxh1g2UmVKsM9L7yJNce+rboGhhLCwlwM75eBvE93Y5fcRSjGsaKFKE96s2CDQZwwRYNCe287L5qu8o5c/s5KdKMdFPgStNDVggAHbGx9jtBAqCAQPQ0If2vA/68+LX1e8KMBs7BOH9GGnICAd3IY/2K8zwPvLCckyfdwtdZDAHriTxAdIw99S8n6XTx3vM/6cAEPZ6fuxkf3aAJZm+Fo26N9hpzIMZPPZ2eCeb4BFBusfzIM/dGOeFmvb6hYYhBPOcipcX/y9JA8TmGanB/Y2WJCyRRyILZSv9Acw7dLHBlASKK2lqEpP1lItS/IwgMFmkssQh8pL9wcwqPGzIlyoyK9kq0v/oIFddUYpwoeF1XH5I76+AfbfqFtgp6cDkj1Gz5mZoOGcf1pmhnUoI2BHb4+af+8Y6fGKsAGjV46pOrDxFR8NDJl/IDYKTOxuvzBaVfi60YCZak8msI6k0i/XIgSqfKRALgAAAABJRU5ErkJggg==" InformativeScreenshot="85bc49ab4d7cfe73cb3f1b9e619067e4.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Atende.Net - IPM Sistemas Ltda - Cascavel / PR' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
+                          </uix:NClick.Target>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </uix:NClick>
+                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\IPM\Aguardar.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="423,52" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Process\IPM\Aguardar.xaml">
+                          <ui:InvokeWorkflowFile.Arguments>
+                            <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                          </ui:InvokeWorkflowFile.Arguments>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:InvokeWorkflowFile>
+                        <ui:Break sap:VirtualizedContainerService.HintSize="423,25" sap2010:WorkflowViewState.IdRef="Break_1" />
+                      </Sequence>
+                    </If.Then>
+                    <If.Else>
+                      <Sequence sap2010:WorkflowViewState.IdRef="Sequence_24" />
+                    </If.Else>
+                  </If>
+                </Sequence>
+              </ui:InterruptibleDoWhile.Body>
+              <ui:InterruptibleDoWhile.Condition>
+                <VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="i &lt; 16" />
+              </ui:InterruptibleDoWhile.Condition>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:InterruptibleDoWhile>
+            <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="0" DelayBefore="0" DisplayName="Click 'INPUT'" sap:VirtualizedContainerService.HintSize="434,157" sap2010:WorkflowViewState.IdRef="NClick_4" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="47d85b80-cc96-43df-9308-f4ec8b18f0eb" Version="V3">
               <uix:NClick.Target>
-                <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/64" CvElementArea="478, 262, 119, 19" CvTextArea="502, 266, 87, 11" CvTextArgument="Emissao do Carne" CvType="Button" DesignTimeRectangle="505, 289, 91, 13" DesignTimeScaleFactor="0.8999999761581421" ElementType="Text" FriendlyName="'Emissão do Carnê'" FullSelectorArgument="&lt;webctrl tag='SPAN' class='label_botao_acao' innertext='Emissão do Carnê' idx='*' /&gt;" Guid="2ce7c664-eef7-4155-8840-89773c5a9057" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAF8AAAARCAYAAAC7HnDpAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAOdSURBVFhH7ZbLK+1RFMfv32IgMyMTxkIieYcoGRAhEQPyKAYiIxTlMZOUV3QURd55J4/yyrvk9R+s22fVPv0c+7q/3x3cM/kNvp2z917P7157rd+vz89P8REe+OSHET75YYRPfhhhJf/5+VnKy8slIiIiiLi4ONnf3/8ma8Pi4qKkpqbKzc2N9dwGbOPD+MOGTe5vaGtrk9HRUeuZDRsbG5KXlyeRkZESFRUlLS0t8vLyYpX1gsfHR6mvr5fa2lr9b5P5kfzp6WklENze3srr6+s3WRsIHvn393fruQ3YRsf4+1cCvJB/fHwsKSkpMjIyItfX14rt7W1Xvsnt4+PDevb29ibz8/Oytram4L+Nix/JD60+SMnPz5fW1laJjY2V+Ph4GRwclISEBK2anp4euby81KoHFxcX0t/fL9HR0VpZXV1daht95MHY2JjanpmZkZiYGK36nJwcOTw81AsZHh7WffTLysqUIGdMyPT19akP4khMTFTy3egiV11dbSXbFg98ZGRkqE5lZaWSyquhusklOTlZ9vb2vsQEuru7dS/Uh+u2Q0VBflpamnR2dsr5+bmSWFJSIicnJzI1NSXp6elK/uzsrJJ/cHAgubm5GjS6Z2dn2l6ys7Nld3c3WG34vLu7C1Y9l9jR0SGrq6tK6Pr6ul5kY2OjNDU1fUlkbm5OY9rZ2dE4iAdS3eiS09DQUHDthC0e8khKSpKFhQW9MNa0SjoEecCHibuiokI5wjeXFVrIwHXbeXh40N/CwsJg7ydJEuC/8wxHkH96eio1NTVaLRMTE/L09KRBIldcXBxMwlkpzsvGfnNzc/B5Y7e0tFTtmFiR6+3t/bJGz60ucmZt8Kd4sAEv8INc6Nrwwa/RM7D58dx2vJDPHr2OSqiqqpKCggLt6xAO8UVFRVJXV6evIDMzU7a2tlSHVmWScEOgs3qNnhvdgYEBHYqhLeHo6MgaTyjZoWvDB78NDQ1aaOgDI+OEp4FLS/FCPk+Op8fZysqK7kG02ZucnNQWxFBilnBG6+C1YNdN64BA0/q8tp3QgUtMm5ubOnRt8bglny8oZs/S0pLapAPc398H/Rq47vn0tuXlZU/kQzIVwMDjCfOUSZKKxyZDe3x8XAmhdTC0IKy9vV3tmv2fhiZr9jmnveGPuNzoAuenJqAdXl1dWeNxSz6vnQ8J8iPPrKwsvQCnX2Al38f/gU9+GOGTH0b45IcRvwKBgPgIBwLyG/5w0cK9POl6AAAAAElFTkSuQmCC" InformativeScreenshot="4b33671599596e5b01264551e307a3e1.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Atende.Net - IPM Sistemas Ltda - Cascavel / PR' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
+                <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/64" CvType="CloseButton" DesignTimeRectangle="1369, 180, 27, 24" DesignTimeScaleFactor="0.8999999761581421" ElementType="Button" FriendlyName="'INPUT'" FullSelectorArgument="&lt;webctrl tag='SECTION' aria-label='Janela - Consultar Faturamento do Simples Nacional' /&gt;&lt;webctrl aria-label='Fechar Janela' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='SECTION' aria-label='Janela - Consultar Faturamento do Simples Nacional' /&gt;&lt;webctrl aria-label='Fechar Janela' tag='INPUT' type='button' class='botao_acao botao_acao_estrutura' aaname='' /&gt;" Guid="21cf0afc-e439-4686-a9db-c41e293ac796" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAB8AAAAcCAYAAACZOmSXAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAE7SURBVEhL7ZYxS8NAGIb7w1zdXBzcBGcdRBBEitBBN2c3hwyOWTIkq4MXUH9BoEVQFFtigjEkxpjkba8xba45sL3gxSGBh3Af+XhevvuGdMIwhAyCIKjUOoqiQAaapsEwDFiWNZc/ehEorxtr0igCNCLXdR2+7zcjV1UVpmk2I6c7QAhp5cvJvYtzZB8eojsTw631Wd3e3cb3Qx/J8AVOd5/p4SEkd3uHSO0RkCaI7vMAhRhZNnkPpmdebxnhsbunx/MAtzcriym17nwW4OdZRUypJc9HPcjNkwl8kmtmB35DWF6+4+T5CaljMzvA61lESF4WF6NmdmDJAEJy/+oSiL8qd1wEyLx3uGddpoeH8NidkwOMdjYrdRrm7WivUudRa+Hq0spbOfejv6KVS/tvX2Qqj+MYsvkHcoIxukWAZYRUwg0AAAAASUVORK5CYII=" InformativeScreenshot="3f902459d5e1221981936b6ca9e5947c.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Atende.Net - IPM Sistemas Ltda - Cascavel / PR' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
               </uix:NClick.Target>
             </uix:NClick>
           </Sequence>
         </ActivityAction>
       </uix:NApplicationCard.Body>
       <uix:NApplicationCard.TargetApp>
-        <uix:TargetApp Area="-1448, -8, 1456, 868" BrowserType="Chrome" IconBase64="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAABQ0lEQVQ4T6XTPyiFURzG8XuVbvmXDHfypzuwKCULg5QSGQzuIBMjpdgMJgMGk9EgFmWRUlI3d1EGWZSSwSRkcBWTRMf34Zw673mPyfAZ7nme3+l07nkzxph/iS46jWPrtejCMIoYxyDakVUnOigUJnGGZxjPF+5wgP6/hhdsUQP3OMQWdlDGO5RVYsMdeLGFTbQEeRYDuEVy2BZ0dA2rkA9zh2xDvViQRzdaI1k1mtCDcyQLPsI66KizWMM2jnCBV+iU0cEq6BKv4S7S+cQTdnGitdgGSwqsU/t7An1oRs72VpAabsCNAuyj3s99ZHvqhYtteFSART/zkQ3hDR9hUINLaIMr9AZ5AXN4gDrLiQ1sacaGUoFuXpd2DD1hl60il9rAbjIP3UX4L+iFljDquqlhh5Ie1AimMA19iZ34+Qp/mcw3oXI0Am7zY1EAAAAASUVORK5CYII=" InformativeScreenshot="709b9d535964c114296824815c845cb2.jpg" Selector="&lt;html app='chrome.exe' title='Atende.Net - IPM Sistemas Ltda - Cascavel / PR' /&gt;" Title="Atende.Net - IPM Sistemas Ltda - Cascavel / PR" />
+        <uix:TargetApp Area="-1448, -8, 1456, 868" BrowserType="Chrome" IconBase64="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAABQ0lEQVQ4T6XTPyiFURzG8XuVbvmXDHfypzuwKCULg5QSGQzuIBMjpdgMJgMGk9EgFmWRUlI3d1EGWZSSwSRkcBWTRMf34Zw673mPyfAZ7nme3+l07nkzxph/iS46jWPrtejCMIoYxyDakVUnOigUJnGGZxjPF+5wgP6/hhdsUQP3OMQWdlDGO5RVYsMdeLGFTbQEeRYDuEVy2BZ0dA2rkA9zh2xDvViQRzdaI1k1mtCDcyQLPsI66KizWMM2jnCBV+iU0cEq6BKv4S7S+cQTdnGitdgGSwqsU/t7An1oRs72VpAabsCNAuyj3s99ZHvqhYtteFSART/zkQ3hDR9hUINLaIMr9AZ5AXN4gDrLiQ1sacaGUoFuXpd2DD1hl60il9rAbjIP3UX4L+iFljDquqlhh5Ie1AimMA19iZ34+Qp/mcw3oXI0Am7zY1EAAAAASUVORK5CYII=" InformativeScreenshot="57f06914e623da4bb5d523d8ef7ac2dc.jpg" Selector="&lt;html app='chrome.exe' title='Atende.Net - IPM Sistemas Ltda - Cascavel / PR' /&gt;" Title="Atende.Net - IPM Sistemas Ltda - Cascavel / PR" />
       </uix:NApplicationCard.TargetApp>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </uix:NApplicationCard>
     <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="552,101" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
       <ui:MultipleAssign.AssignOperations>
