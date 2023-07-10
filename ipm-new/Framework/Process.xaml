@@ -6,7 +6,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1008,632</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1077,632</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="200">
@@ -277,13 +277,13 @@
       <AssemblyReference>Roboluze.Libre.Dominio</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Process" sap:VirtualizedContainerService.HintSize="559,540" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Process" sap:VirtualizedContainerService.HintSize="559,564" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[io_Config(&quot;ToDo&quot;).ToString()]" sap:VirtualizedContainerService.HintSize="497,429" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+    <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[io_Config(&quot;ToDo&quot;).ToString()]" sap:VirtualizedContainerService.HintSize="497,453" sap2010:WorkflowViewState.IdRef="Switch`1_1">
       <Switch.Default>
         <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\Acesso Cliente.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_14" UnSafe="False" WorkflowFileName="Process\Acesso Cliente.xaml">
           <ui:InvokeWorkflowFile.Arguments>
@@ -318,34 +318,18 @@
       </ui:InvokeWorkflowFile>
       <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="ProtocolarNFSaida" DisplayName="Process\Declaracao.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_13" UnSafe="False" WorkflowFileName="Process\Declaracao.xaml">
         <ui:InvokeWorkflowFile.Arguments>
-          <InArgument x:TypeArguments="x:String" x:Key="in_Tipo">
-            <Literal x:TypeArguments="x:String">Saida</Literal>
-          </InArgument>
-          <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">
-            <VisualBasicReference x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="io_Config" />
-          </InOutArgument>
-          <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">
-            <VisualBasicReference x:TypeArguments="sd:DataRow" ExpressionText="io_TransactionItem" />
-          </InOutArgument>
-          <InArgument x:TypeArguments="x:Boolean" x:Key="in_Fechar">
-            <Literal x:TypeArguments="x:Boolean" />
-          </InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_Tipo">Saida</InArgument>
+          <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">[io_Config]</InOutArgument>
+          <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[io_TransactionItem]</InOutArgument>
+          <InArgument x:TypeArguments="x:Boolean" x:Key="in_Fechar">False</InArgument>
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
       <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="ProtocolarNFEntrada" DisplayName="Process\Declaracao.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_12" UnSafe="False" WorkflowFileName="Process\Declaracao.xaml">
         <ui:InvokeWorkflowFile.Arguments>
-          <InArgument x:TypeArguments="x:String" x:Key="in_Tipo">
-            <Literal x:TypeArguments="x:String">Entrada</Literal>
-          </InArgument>
-          <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">
-            <VisualBasicReference x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="io_Config" />
-          </InOutArgument>
-          <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">
-            <VisualBasicReference x:TypeArguments="sd:DataRow" ExpressionText="io_TransactionItem" />
-          </InOutArgument>
-          <InArgument x:TypeArguments="x:Boolean" x:Key="in_Fechar">
-            <Literal x:TypeArguments="x:Boolean" />
-          </InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_Tipo">Entrada</InArgument>
+          <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">[io_Config]</InOutArgument>
+          <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[io_TransactionItem]</InOutArgument>
+          <InArgument x:TypeArguments="x:Boolean" x:Key="in_Fechar">False</InArgument>
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
       <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="SimplesNacional" DisplayName="Process\Simples Nacional.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_10" UnSafe="False" WorkflowFileName="Process\Simples Nacional.xaml">
@@ -362,11 +346,21 @@
           <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[io_TransactionItem]</InOutArgument>
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
-      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="CertidaoNegativa" DisplayName="Certidao.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Process\Certidao.xaml">
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="CertidaoNegativa" DisplayName="Certidao Negativa.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_16" UnSafe="False" WorkflowFileName="Process\Prefeitura\Certidao Negativa.xaml">
         <ui:InvokeWorkflowFile.Arguments>
-          <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[io_TransactionItem]</InOutArgument>
-          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[io_Config]</InArgument>
+          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
+            <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="io_Config" />
+          </InArgument>
           <InArgument x:TypeArguments="x:String" x:Key="BreakTriggerScopeInArgument" />
+          <InArgument x:TypeArguments="sd:DataRow" x:Key="in_TransactionItem">
+            <VisualBasicValue x:TypeArguments="sd:DataRow" ExpressionText="io_TransactionItem" />
+          </InArgument>
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="DebitosIPM" DisplayName="Process\Prefeitura\Debito Cliente.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_15" UnSafe="False" WorkflowFileName="Process\Prefeitura\Debito Cliente.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[io_Config]</InArgument>
+          <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[io_TransactionItem]</InOutArgument>
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
     </Switch>
