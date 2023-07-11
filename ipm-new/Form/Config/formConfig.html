@@ -504,10 +504,10 @@
 				<div class="offcanvas-body" id="pills-iniciar-tab">
 					<ul class="navbar-nav justify-content-end flex-grow-1 pe-3" id="pills-tab" role="tablist">
 						<li class="nav-item">
-						  <button class="nav-link active" id="pills-iniciar-tab" data-bs-toggle="pill" data-bs-target="#pills-iniciar" type="button" role="tab" aria-controls="pills-iniciar" aria-selected="true">Home</button>
+						  <button class="nav-link active" id="pills-iniciar-tab" data-bs-toggle="pill" data-bs-target="#pills-iniciar" type="button" role="tab" aria-controls="pills-iniciar" aria-selected="true" onclick="closeOffcanvas()">Home</button>
 						</li>
 						<li class="nav-item">
-						  <button class="nav-link" id="pills-automacao-tab" data-bs-toggle="pill" data-bs-target="#pills-automacao" type="button" role="tab" aria-controls="pills-automacao" aria-selected="true">IPM</button>
+						  <button class="nav-link" id="pills-automacao-tab" data-bs-toggle="pill" data-bs-target="#pills-automacao" type="button" role="tab" aria-controls="pills-automacao" aria-selected="true" onclick="closeOffcanvas()">IPM</button>
 						</li>
 						
 						<li class="nav-item dropdown" role="presentation">
@@ -516,7 +516,7 @@
 							</button>
 						  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" data-bs-theme="dark">
 							
-							<li><a class="dropdown-item" id="pills-dominio-tab" data-bs-target="#pills-dominio" role="tab" aria-controls="pills-dominio" aria-selected="false">Geral</a></li>
+							<li><a class="dropdown-item" id="pills-dominio-tab" data-bs-target="#pills-dominio" role="tab" aria-controls="pills-dominio" aria-selected="false" onclick="closeOffcanvas()">Geral</a></li>
 							<li><hr class="dropdown-divider"></li>
 						  </ul>
 						</li>
@@ -851,7 +851,7 @@
 			
 		</div>
 		<div class="position-fixed d-flex align-items-center bottom-0 end-0 mb-1 me-1 bd-mode-toggle">
-		  <button class="btn btn-primary  py-4 rounded-0 " type="button" onclick="startClicked()">
+		  <button class="btn btn-primary  py-2 rounded-0 " type="button" onclick="startClicked()">
 			Iniciar  <i class="bi bi-play-fill"></i>
 		  </button>
 		</div>
@@ -931,6 +931,13 @@
 		}
 	</script-->
 	
+	<script>
+	  function closeOffcanvas() {
+		var offcanvasElement = document.getElementById('menuButton');
+		var offcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
+		offcanvas.hide();
+	  }
+	</script>
 	
 	<!-- Javascrit da pagina -->
     <script>
