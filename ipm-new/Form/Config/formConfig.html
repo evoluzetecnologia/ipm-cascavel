@@ -417,6 +417,7 @@
 			var dominioLogin = document.getElementById("DominioLogin").value;
 			var dominioPassword = document.getElementById("DominioPassword").value;
 			var dominioWeb = document.getElementById("DominioWeb").checked;
+			var importarClientes = document.getElementById("ImportarClientes").checked;
 			
 			var jsonData = {
 				"Perfil": perfil,
@@ -447,8 +448,8 @@
 				
 				"DominioWeb": dominioWeb,
 				"DominioLogin": dominioLogin,
-				"DominioPassword": dominioPassword				
-				
+				"DominioPassword": dominioPassword,				
+				"ImportarClientes": importarClientes
 			};
 			return jsonData;
 		}
@@ -839,6 +840,17 @@
 					<hr class="my-3">
 					<div class="row">
 						<div class="col-2 d-flex align-items-center">
+							<label class="col-form-label">Importar Clientes</label>
+						</div>
+						<div class="col-10 d-flex align-items-center ">
+							<div class="form-check form-switch form-check-inline">
+								<input class="form-check-input" type="checkbox" role="switch" id="ImportarClientes" name="ImportarClientes">
+								<label class="form-check-label" for="ImportarClientes">Não</label>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-2 d-flex align-items-center">
 							<label class="col-form-label">Arquivo clientes</label>
 						</div>
 						<div class="col-10 d-flex align-items-center ">
@@ -951,6 +963,17 @@
 		  labelDominioWeb.textContent = 'Sim';
 		} else {
 		  labelDominioWeb.textContent = 'Não';
+		}
+	  });
+	  
+	  var ckImportarClientes = document.getElementById('ImportarClientes');
+	  var labelImportarClientes = document.querySelector('label[for="ImportarClientes"]');
+
+	  ckImportarClientes.addEventListener('change', function() {
+		if (this.checked) {
+		  labelImportarClientes.textContent = 'Sim';
+		} else {
+		  labelImportarClientes.textContent = 'Não';
 		}
 	  });
 	  
