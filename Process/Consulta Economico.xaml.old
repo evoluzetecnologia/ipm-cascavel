@@ -1,0 +1,436 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Consulta_Economico" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="io_TransactionItem" Type="InOutArgument(sd:DataRow)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1222,1020</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Consulta_Economico_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Models</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Models.CV</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Cryptography.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Database.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.PDF.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>UiPath.Cryptography</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>Microsoft.Win32.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.ViewModels</AssemblyReference>
+      <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Consulta_Economico" sap:VirtualizedContainerService.HintSize="546,955" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="Atende.Net - IPM Sistemas Ltda - Cascavel / PR" Name="title" />
+      <Variable x:TypeArguments="x:String" Name="var">
+        <Variable.Default>
+          <Literal x:TypeArguments="x:String" Value="" />
+        </Variable.Default>
+      </Variable>
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="484,52" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="485,243" sap2010:WorkflowViewState.IdRef="Sequence_7">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="423,132" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+            <ui:MultipleAssign.AssignOperations>
+              <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="x:String">[var]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="x:String">26.444.040/0001-16</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="x:String">[var]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="x:String">["**.*"+var.Substring(4,12)+"**"]</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+              </scg:List>
+            </ui:MultipleAssign.AssignOperations>
+          </ui:MultipleAssign>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser Chrome: Atende.Net - IPM Sistemas Ltda - Cascavel / PR" sap:VirtualizedContainerService.HintSize="484,568" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" ScopeGuid="19e46575-da7a-4138-b8b7-c7405efa2123" Version="V2">
+      <uix:NApplicationCard.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="450,351" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <uix:NSelectItem DelayAfter="0" DelayBefore="0" DisplayName="Select Item 'Situação'" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="NSelectItem_1" Item="Contribuinte - */*" ScopeIdentifier="19e46575-da7a-4138-b8b7-c7405efa2123" Version="V3">
+              <uix:NSelectItem.Items>
+                <scg:List x:TypeArguments="x:String" Capacity="8">
+                  <x:String>Cadastro</x:String>
+                  <x:String>Situação</x:String>
+                  <x:String>Contribuinte - Tipo Pessoa</x:String>
+                  <x:String>Contribuinte - Código</x:String>
+                  <x:String>Contribuinte - Nome Razão</x:String>
+                  <x:String>Contribuinte - CPF/CNPJ</x:String>
+                  <x:String>Contador - Código</x:String>
+                  <x:String>Contador - Nome</x:String>
+                </scg:List>
+              </uix:NSelectItem.Items>
+              <uix:NSelectItem.Target>
+                <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/66" DesignTimeRectangle="139, 225, 171, 20" DesignTimeScaleFactor="1" ElementType="DropDown" FriendlyName="'Situação'" FullSelectorArgument="&lt;webctrl parentid='estrutura_container_sistema' tag='SECTION' aria-label='Janela - Consultar Econômico' /&gt;&lt;webctrl tableRow='2' tag='SELECT' rowName='*C*/C*' name='filtro' /&gt;" FuzzySelectorArgument="&lt;webctrl parentid='estrutura_container_sistema' tag='SECTION' aria-label='Janela - Consultar Econômico' /&gt;&lt;webctrl type='' tag='SELECT' rowName='*C*/C*' name='filtro' class='campo estrutura_campo_lista' aaname='' /&gt;" Guid="1e5a09ff-5b9b-4b5b-a14e-6f40e0b5ec1c" ImageBase64="" InformativeScreenshot="6cd142a67ca94ccaae057ff901311053.png" ScopeSelectorArgument="[string.Format(&quot;&lt;html app='chrome.exe' title='{0}' /&gt;&quot;, title)]" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
+              </uix:NSelectItem.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </uix:NSelectItem>
+            <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DelayAfter="0" DelayBefore="0" DisplayName="Type Into 'INPUT'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="NTypeInto_1" ScopeIdentifier="19e46575-da7a-4138-b8b7-c7405efa2123" Text="[io_TransactionItem(&quot;CNPJ&quot;).ToString()+&quot;[k(Enter)]&quot;]" Version="V3">
+              <uix:NTypeInto.Target>
+                <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/66" CvType="InputBox" DesignTimeRectangle="429, 225, 180, 20" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'INPUT'" FullSelectorArgument="&lt;webctrl parentid='estrutura_container_sistema' tag='SECTION' aria-label='Janela - Consultar Econômico' /&gt;&lt;webctrl tableRow='2' tag='INPUT' /&gt;" FuzzySelectorArgument="&lt;webctrl parentid='estrutura_container_sistema' tag='SECTION' aria-label='Janela - Consultar Econômico' /&gt;&lt;webctrl type='text' tag='INPUT' class='campo' aaname='' /&gt;" Guid="295d2a6d-52c8-4670-8f07-9892a0ca1908" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAALgAAAAYCAYAAABJLzcpAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAC2SURBVHhe7duxDcAgEARB918ROTElQAvkJG9dALIlu4A/bTASBocrIv5aawXgisBh7RV47z1qrVFKAdJRu2OM78AVd2st5pyvH4As1K4aVst77wSu+okb2alhtby/T+C64vcayOzZMoHDDoHDGoHDGoHDGoHDGoHDGoHDGoHDGoHDGoHDGoHDGoHDGoHD2mfgPJeFg9/nsgw8IDu1q4afUz0ncNGB6tcVD2Sjdn9H1gBHBA5jK27sGo5XLBUOPQAAAABJRU5ErkJggg==" InformativeScreenshot="fc10ef20abd9094f40b0cab9140d8bcc.png" ScopeSelectorArgument="[string.Format(&quot;&lt;html app='chrome.exe' title='{0}' /&gt;&quot;, title)]" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
+              </uix:NTypeInto.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </uix:NTypeInto>
+            <uix:NCheckState DisplayName="Check App State CNPJ" EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="NCheckState_1" ScopeIdentifier="19e46575-da7a-4138-b8b7-c7405efa2123" Version="V3">
+              <uix:NCheckState.IfExists>
+                <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="450,621" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <uix:NGetText DelayAfter="0" DelayBefore="0" DisplayName="Get Text 'cnpj'" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="NGetText_1" ScopeIdentifier="19e46575-da7a-4138-b8b7-c7405efa2123" TextString="[var]" Version="V3">
+                    <uix:NGetText.Target>
+                      <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/66" CvType="AnyWordGroup" DesignTimeRectangle="1156, 320, 109, 15" DesignTimeScaleFactor="1" ElementType="Text" FriendlyName="'**.*44.040/0001-**'" FullSelectorArgument="&lt;webctrl parentid='estrutura_container_sistema' tag='SECTION' aria-label='Janela - Consultar Econômico' /&gt;&lt;webctrl aria-role='grid' tag='TABLE' /&gt;&lt;webctrl aaname='*.*-*' tableRow='1' tag='SPAN' /&gt;" Guid="680403c3-65c5-4c8c-9837-5e7576ba8e75" ImageBase64="" InformativeScreenshot="db43e9354171d911c84b6ac195e77aae.png" ScopeSelectorArgument="[string.Format(&quot;&lt;html app='chrome.exe' title='{0}' /&gt;&quot;, title)]" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
+                    </uix:NGetText.Target>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </uix:NGetText>
+                  <If Condition="[System.Text.RegularExpressions.Regex.Replace(var,&quot;[^0-9]+&quot;, &quot;&quot;).Equals(System.Text.RegularExpressions.Regex.Replace(io_TransactionItem(&quot;CNPJ&quot;).ToString().Substring(4,12),&quot;[^0-9]+&quot;, &quot;&quot;)) = true]" DisplayName="Cadastro Economico" sap:VirtualizedContainerService.HintSize="388,414" sap2010:WorkflowViewState.IdRef="If_1">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <If.Then>
+                      <Sequence sap:VirtualizedContainerService.HintSize="300,232" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <uix:NGetText DelayAfter="0" DelayBefore="0" DisplayName="Codigo" sap:VirtualizedContainerService.HintSize="258,52" sap2010:WorkflowViewState.IdRef="NGetText_2" ScopeIdentifier="19e46575-da7a-4138-b8b7-c7405efa2123" TextString="[var]" Version="V3">
+                          <uix:NGetText.Target>
+                            <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/66" CvType="AnyWordGroup" DesignTimeRectangle="179, 320, 65, 15" DesignTimeScaleFactor="1" ElementType="Text" FriendlyName="'630002474'" FullSelectorArgument="&lt;webctrl parentid='estrutura_container_sistema' tag='SECTION' aria-label='Janela - Consultar Econômico' /&gt;&lt;webctrl aria-role='grid' tag='TABLE' /&gt;&lt;webctrl tableRow='1' tag='SPAN' tableCol='2' parentclass='linha_dados linha_normal' /&gt;" FuzzySelectorArgument="&lt;webctrl parentid='estrutura_container_sistema' tag='SECTION' aria-label='Janela - Consultar Econômico' /&gt;&lt;webctrl aria-role='grid' tag='TABLE' /&gt;&lt;webctrl class='' tag='SPAN' type='' parentclass='linha_dados linha_normal' /&gt;" Guid="29326570-118a-444c-80ef-33c53f1882ce" ImageBase64="" InformativeScreenshot="daa7b3e52ac44ad980d85288c1139ee8.png" ScopeSelectorArgument="[string.Format(&quot;&lt;html app='chrome.exe' title='{0}' /&gt;&quot;, title)]" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
+                          </uix:NGetText.Target>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </uix:NGetText>
+                        <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="0" DelayBefore="0" DisplayName="Click 'codigo'" sap:VirtualizedContainerService.HintSize="258,52" sap2010:WorkflowViewState.IdRef="NClick_1" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="19e46575-da7a-4138-b8b7-c7405efa2123" Version="V3">
+                          <uix:NClick.Target>
+                            <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/66" CvType="Text" DesignTimeRectangle="179, 320, 65, 15" DesignTimeScaleFactor="1" ElementType="Text" FriendlyName="'630002474'" FullSelectorArgument="[string.Format(&quot;&lt;webctrl parentid='estrutura_container_sistema' tag='SECTION' aria-label='Janela - Consultar Econômico' /&gt;&lt;webctrl aria-role='grid' tag='TABLE' /&gt;&lt;webctrl tableRow='1' tag='SPAN' aaname='{0}' tableCol='2' /&gt;&quot;, var)]" Guid="9ea93967-42cb-4c0d-9e65-73fb68f98cb3" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAEUAAAATCAYAAADGWsDDAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHCSURBVFhH7ZWxrYNAEER/Jy6HIqACN0ABzokpwqlrcGpH1EBKSHJfD2vQaLVfRnb4z9Lo7vbmdmeHA/+s61oqXuDHWE0xVFMSVFMSVFMSVFMSHDbler2W0+m0YRiGsixL6ft+jwE44sPJ4jGP4tM0laZptnjXdWWe5y1+v993PmCtMwI5dSbyAXnJLz48+K7LccgUL+rxx+OxmcMcMS5Mc8S0bbuNPpcwuDJYIjFLxl8ul72hTIdMyPRpn9zS6Q/zY1OUhOTZvkABFWfut4A5sShQPJo5n89784ysY5Oc9+Z17na7pXxp9+ZVU5qcL7w1RQLHcdyvo5K569GEbM25aArr5/O53yDijL6OeXxNjqMmOk9nnS8cMoV3UgliIcHjmXiJ+NQUuF6XeqrhzYoPXAc1/VWUHucLh0xxgRRGgAuOPIpJDJAAGommsBdzMnqT0RC/oQ7/oLoe1tSOfOA6hbemSIBc/eumuHDnIAqxxFwoe3A4F2sgVOZFQzKQL94UcmQNC+ypXsRbU4AakLs0GGPxb4+C2vPi/sRctOeTCbGGQA6dA9EU1noQznN8bcp/QzUlQTUlQTUlQTUlwcuUtfwCYHOqGqI0EcgAAAAASUVORK5CYII=" InformativeScreenshot="9f157ef61c96f976eae5446e725a4b61.png" ScopeSelectorArgument="[string.Format(&quot;&lt;html app='chrome.exe' title='{0}' /&gt;&quot;, title)]" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
+                          </uix:NClick.Target>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </uix:NClick>
+                      </Sequence>
+                    </If.Then>
+                    <If.Else>
+                      <Sequence sap:VirtualizedContainerService.HintSize="476,170" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_1">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[var]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">
+                              <Literal x:TypeArguments="x:String" Value="" />
+                            </InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </Sequence>
+                    </If.Else>
+                  </If>
+                </Sequence>
+              </uix:NCheckState.IfExists>
+              <uix:NCheckState.IfNotExists>
+                <Sequence DisplayName="Target does not appear" sap:VirtualizedContainerService.HintSize="450,105" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </Sequence>
+              </uix:NCheckState.IfNotExists>
+              <uix:NCheckState.Target>
+                <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/66" CvType="Text" DesignTimeRectangle="1156, 320, 109, 15" DesignTimeScaleFactor="1" ElementType="Text" FriendlyName="'**.*44.040/0001-**'" FullSelectorArgument="&lt;webctrl parentid='estrutura_container_sistema' tag='SECTION' aria-label='Janela - Consultar Econômico' /&gt;&lt;webctrl aria-role='grid' tag='TABLE' /&gt;&lt;webctrl aaname='*' tableRow='1' tag='SPAN' /&gt;" Guid="d15969c5-440a-4cc2-a2a8-608cafd58a13" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAHEAAAATCAYAAACnQuKBAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJdSURBVGhD7ZYxbkIxEERzE47DGRCcgIqOA9BzEloaLoDo6DgDLeVvHD2kkYbFNj8KUYTlSKNvr2d37Rk7ydcwDIkfvh2fiW5iA+gmNoBuYgPoJjaAbmIDeGnidrtNx+NxdNxR47C2Xq/T7XZ7iO92u7RYLNL1en2Ig8vlkqbTaZpMJlkOc+LUUIwxfEBP59ObPbBH5cKjB73EI081xtbO7SUH+mw2mycdSvEcRptIMRetFHeUODp8NBEu8ZxB8OBLFGq7cFp3oRFiPp/fvxKVHsohvlwu72tej3ztDb724/VqtbUGfmIidaRHKZ5D0UQOpFsmsKFSfEwua2wO4fb7/YOJbFRxCes1tU6+1xFPewPqhajeQxzGPmcdnkzwXjFH9Wu1+bIurnId1NZvFYGLcDqdsvGoh6P6ErVR4EVKcUeO42JpXSLowNEcgbhufpx7jgvH13v4HK5ej4/h+Zx6gDjQvFbbudpLDnB5bcB5pXgJRRM5SO42luJjchlrU26ixCLuhqie4jkTz+fz/bCKu3B8S0J7fzcNns+p52fUvFbbudpLDqzBcb1q8RJe/k18FySM/5oAs9ksrVarp3j85yIeiC/zw+HwlAsQwY0iR+IwdoFZh+cmqpfneF6tduQyVg/2hg70cO5v8DYTOTAvwm9iDVEEQebokAgBVyJIFOK5fBeOWnq9ukSsxQuhPMAYjoSmt8bwuVzESrVVTzVj7C/wNhM5WHw9NYwxUcZJXIlVu81ROPr461Qs9lYvePEc1FONV7UdH2dix/+hm9gAuokNoJvYALqJH48hfQOwmeWQ0u4xeQAAAABJRU5ErkJggg==" InformativeScreenshot="cc5bdb819684c4b55099f7526a76234d.png" ScopeSelectorArgument="[string.Format(&quot;&lt;html app='chrome.exe' title='{0}' /&gt;&quot;, title)]" SearchSteps="Selector" Version="V2" Visibility="Interactive" WaitForReadyArgument="Complete" />
+              </uix:NCheckState.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </uix:NCheckState>
+          </Sequence>
+        </ActivityAction>
+      </uix:NApplicationCard.Body>
+      <uix:NApplicationCard.TargetApp>
+        <uix:TargetApp Area="-8, -8, 1936, 1048" BrowserType="Chrome" IconBase64="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAABQ0lEQVQ4T6XTPyiFURzG8XuVbvmXDHfypzuwKCULg5QSGQzuIBMjpdgMJgMGk9EgFmWRUlI3d1EGWZSSwSRkcBWTRMf34Zw673mPyfAZ7nme3+l07nkzxph/iS46jWPrtejCMIoYxyDakVUnOigUJnGGZxjPF+5wgP6/hhdsUQP3OMQWdlDGO5RVYsMdeLGFTbQEeRYDuEVy2BZ0dA2rkA9zh2xDvViQRzdaI1k1mtCDcyQLPsI66KizWMM2jnCBV+iU0cEq6BKv4S7S+cQTdnGitdgGSwqsU/t7An1oRs72VpAabsCNAuyj3s99ZHvqhYtteFSART/zkQ3hDR9hUINLaIMr9AZ5AXN4gDrLiQ1sacaGUoFuXpd2DD1hl60il9rAbjIP3UX4L+iFljDquqlhh5Ie1AimMA19iZ34+Qp/mcw3oXI0Am7zY1EAAAAASUVORK5CYII=" InformativeScreenshot="1eb85b167415e5c43580aecc044e9e1c.jpg" Selector="[string.Format(&quot;&lt;html app='chrome.exe' title='{0}' /&gt;&quot;, title)]" Title="Atende.Net - IPM Sistemas Ltda - Cascavel / PR" />
+      </uix:NApplicationCard.TargetApp>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </uix:NApplicationCard>
+    <uix:NCheckState DelayBefore="0" DisplayName="Check App State 'Consultar Econômico'" EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="484,52" sap2010:WorkflowViewState.IdRef="NCheckState_2" Timeout="0" Version="V3">
+      <uix:NCheckState.IfExists>
+        <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="513,167" sap2010:WorkflowViewState.IdRef="Sequence_9">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser Chrome: Atende.Net - IPM Sistemas Ltda - Cascavel / PR" sap:VirtualizedContainerService.HintSize="451,52" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" InteractionMode="DebuggerApi" ScopeGuid="19e46575-da7a-4138-b8b7-c7405efa2123" Version="V2">
+            <uix:NApplicationCard.Body>
+              <ActivityAction x:TypeArguments="x:Object">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="450,272" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="0" DelayBefore="0" DisplayName="Click 'INPUT'" sap:VirtualizedContainerService.HintSize="388,157" sap2010:WorkflowViewState.IdRef="NClick_3" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="19e46575-da7a-4138-b8b7-c7405efa2123" Version="V3">
+                    <uix:NClick.Target>
+                      <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/66" CvType="CloseButton" DesignTimeRectangle="1871, 190, 30, 26" DesignTimeScaleFactor="1" ElementType="Button" FriendlyName="'INPUT'" FullSelectorArgument="&lt;webctrl parentid='estrutura_container_sistema' tag='SECTION' aria-label='Janela - Consultar Econômico' /&gt;&lt;webctrl aria-label='Fechar Janela' tag='INPUT' type='button' /&gt;" FuzzySelectorArgument="&lt;webctrl parentid='estrutura_container_sistema' tag='SECTION' aria-label='Janela - Consultar Econômico' /&gt;&lt;webctrl aria-label='Fechar Janela' tag='INPUT' type='button' class='botao_acao botao_acao_estrutura' aaname='' /&gt;" Guid="31d72edc-473b-4b46-95b0-01af695a6047" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACIAAAAeCAYAAABJ/8wUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFsSURBVFhHY1izZs1/auMJEyaA8eTJk8H8devWEcSDxyELFiz4T2+8du1aMEZ2JMPDjz/+0xvff//t/+HLt/4v3Ljj/+rVqwfOITAMcsyAhggMg0Jm1apV/ydNmjSwDgFhUJrp7u4edQgcD32HHL9y+/+0BUv/X3v6BqvcjEXL/t94/g5DDhcm2yErNu/4r6ml9T+/tALFMYcuXPvv7R/439HF9f/B81dR9ODDZDvk7tsv/zsmTEFxzJFLN/6HRET9N7e0+r9u14H/Dz58x6oXG6YojYAc0z9jDtgx4TFx/wNCQslyBAhTnFhBjumcNO2/vLz8fwNDo/+rt+8h2REgTLFDYNEBcggIo6cZYjFFDoElTFB0gEKib/psrAmYGEy2Q5AdAUsTyAm4oKySftnX2tYOI2HCHOPs5k6f7Auy/NarjyTL4cIUJ1Zq4VGHoONRh6DjUYeg48HnEBBjoDHYIb9+/fo/kBjikO7/AOidJqC5oELxAAAAAElFTkSuQmCC" InformativeScreenshot="890f3cfd50ae62ea1ee8b536412cd724.png" ScopeSelectorArgument="[string.Format(&quot;&lt;html app='chrome.exe' title='{0}' /&gt;&quot;, title)]" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
+                    </uix:NClick.Target>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </uix:NClick>
+                </Sequence>
+              </ActivityAction>
+            </uix:NApplicationCard.Body>
+            <uix:NApplicationCard.TargetApp>
+              <uix:TargetApp Area="-8, -8, 1936, 1048" BrowserType="Chrome" IconBase64="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAABQ0lEQVQ4T6XTPyiFURzG8XuVbvmXDHfypzuwKCULg5QSGQzuIBMjpdgMJgMGk9EgFmWRUlI3d1EGWZSSwSRkcBWTRMf34Zw673mPyfAZ7nme3+l07nkzxph/iS46jWPrtejCMIoYxyDakVUnOigUJnGGZxjPF+5wgP6/hhdsUQP3OMQWdlDGO5RVYsMdeLGFTbQEeRYDuEVy2BZ0dA2rkA9zh2xDvViQRzdaI1k1mtCDcyQLPsI66KizWMM2jnCBV+iU0cEq6BKv4S7S+cQTdnGitdgGSwqsU/t7An1oRs72VpAabsCNAuyj3s99ZHvqhYtteFSART/zkQ3hDR9hUINLaIMr9AZ5AXN4gDrLiQ1sacaGUoFuXpd2DD1hl60il9rAbjIP3UX4L+iFljDquqlhh5Ie1AimMA19iZ34+Qp/mcw3oXI0Am7zY1EAAAAASUVORK5CYII=" InformativeScreenshot="1eb85b167415e5c43580aecc044e9e1c.jpg" Selector="[string.Format(&quot;&lt;html app='chrome.exe' title='{0}' /&gt;&quot;, title)]" Title="Atende.Net - IPM Sistemas Ltda - Cascavel / PR" />
+            </uix:NApplicationCard.TargetApp>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </uix:NApplicationCard>
+        </Sequence>
+      </uix:NCheckState.IfExists>
+      <uix:NCheckState.IfNotExists>
+        <Sequence DisplayName="Target does not appear" sap:VirtualizedContainerService.HintSize="450,105" sap2010:WorkflowViewState.IdRef="Sequence_10">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Sequence>
+      </uix:NCheckState.IfNotExists>
+      <uix:NCheckState.Target>
+        <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/66" DesignTimeRectangle="140, 191, 1680, 25" DesignTimeScaleFactor="1" ElementType="Text" FriendlyName="'Consultar Econômico'" FullSelectorArgument="&lt;webctrl parentid='janela_66003_101_39713400' tag='H2' /&gt;" FuzzySelectorArgument="&lt;webctrl parentid='janela_66003_101_39713400' tag='H2' type='' class='label_janela' aaname='' check:innerText='Consultar Econômico' /&gt;" Guid="4a1c162d-4400-4118-8614-8411d4ee69ce" ImageBase64="iVBORw0KGgoAAAANSUhEUgAABpQAAAAdCAYAAACkNo+HAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAASaSURBVHhe7d3BSxxXHMBx/4Lc61/hyT/Ai7eAOfXWu/SanNQckkJrbVIotdBU2Aa9VCWHxEANQk9aCCmJ9JAKUXuKHjZtwQ2Jl1dnZsedNaOrbXZmwnwOn8O8N8wKHr+83xt48/ZtADivj65thqWlJQAAAAAAamSg9fp1ADivKCg1Gg0AAAAAAGpEUAIuJApKf/7zBgAAAACAGhGUgAsRlAAAAAAA6kdQAi5EUAIAAAAAqJ9aBqU/tl5QIXn/oye/PaNCsv8bQQkAAAAAoH5qG5Ty1ineWUHp1au/qQBBCQAAAACgvh7vt8KVR3uCEuUSlKpPUAIAAAAAqK/Lqy/DwNy2oES5BKXqE5QAAAAAAOrr0t0dQYnyCUrVJygBAAAAANRXHJMEJcomKFWfoAQAAAAAUF+CUs46xROUqk9QAgAAAACoL0EpZ53iCUrVJygBAAAAANSXoJSzTvEEpeoTlAAAAAAA6ktQylmneIJS9QlKAAAAAAD1JSjlrBdhe20u3JicCpNT18PE5Gx4sNPKfe+8DnbXwp2bU8m3flkO018shPX9//fNIlU9KDWbW2FxfCgMDg4mxr4Lm82/ct99354vjofRqythu6DfO42gBAAAAABQX4JSzno/HbR2w9oPn4WJb1fCi1YSfA5az8KDe+thr/38XzxdmgnfrOzk7n0IqhyUms+Xw/jQYBib/b2ztjEXbt/f7XqvXwQlAAAAAADKJijlrPfTwdPlMJ2JSe+LoNQ/GzMjXTGpaIISAAAAAABlE5Ry1vupV/iJTistfpmMwot8Pp+cXEpONn0d5lcfxqPtsnvRN9P345NPmWgVjda7NX8vLBx9M96LRuPdXgg/P0xG7k3Eo/E6v5k9OVWkqgalZvPXMDMyFmY382NOst8eg3dkuB1+4lNNo9fCj3fGw1C8NxyuZk40RZEoWe+Mz+v+Vud9QQkAAAAAgLIJSjnr/XIchdb3T9lPwk4anNLxeNHz8ai89t1IyZ1JnbuXsqEqewoquaup815611I2RqV3OCW/P33q39dPlQ1K7TB0f7t3zMnGp3RMXhqY4oCUhqONr8LIcPc3T4ar7O8KSgAAAAAAlE1Qylnvp7NOKMWx5/vuE0KdONQdo07GqbOC0q12PIr32ieUoigVPWf3ewWvfvpQTyhFuk4btU8WnQxR2ee8EXppgEq+kUp+V1ACAAAAAKBsl+7uCEpFik8MnTJWTlB6d738oLQVFseHTr1DqevkUfzuaI+g1Hkn+52T72cJSgAAAAAAlO3y6ktBqUjpWLt05Fy8trsWFn6KnnuNvBOUyhCPqHvnDqTJcOPoOTpt1HVv0lDvE0pxhModeTeYG64EJQAAAAAAyvZ4vxWuPNoTlIqUhqLJqeux9F6keC8KPjenjvfS8CQolSuJRZ1xdN0Rqb0+/En49ONeJ5SS5yhEHY+2S084nfiNdF1QAgAAAACgKgQlSlX1oISgBAAAAACAoETJBKXqE5QAAAAAABCUKJWgVH2CEgAAAAAAghKlEpSqLy8oNRoNAAAAAABqRFCiVIJS9eUFpcPDQwAAAAAAauMw/AscyJKvhBQUuwAAAABJRU5ErkJggg==" InformativeScreenshot="f8ca3bda2246d9649a4cb8802cf7061f.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Atende.Net - IPM Sistemas Ltda - Cascavel / PR' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
+      </uix:NCheckState.Target>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </uix:NCheckState>
+    <If Condition="[Not var.Equals(&quot;&quot;)]" DisplayName="Atualizar Cadastro" sap:VirtualizedContainerService.HintSize="484,52" sap2010:WorkflowViewState.IdRef="If_2">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Then>
+        <Sequence sap:VirtualizedContainerService.HintSize="465,189" sap2010:WorkflowViewState.IdRef="Sequence_11">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="423,101" sap2010:WorkflowViewState.IdRef="MultipleAssign_4">
+            <ui:MultipleAssign.AssignOperations>
+              <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="x:Object">[io_TransactionItem("CADASTRO_ECONOMICO")]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="x:Object">[var.Trim]</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+              </scg:List>
+            </ui:MultipleAssign.AssignOperations>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:MultipleAssign>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence sap:VirtualizedContainerService.HintSize="376,178" sap2010:WorkflowViewState.IdRef="Sequence_12">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Throw Exception="[New BusinessRuleException(&quot;Não foi possível obter o código do cadastro economico do cliente&quot;)]" sap:VirtualizedContainerService.HintSize="334,90" sap2010:WorkflowViewState.IdRef="Throw_1" />
+        </Sequence>
+      </If.Else>
+    </If>
+  </Sequence>
+</Activity>
