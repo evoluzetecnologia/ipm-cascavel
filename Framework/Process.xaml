@@ -1,0 +1,453 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Process" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:rt="clr-namespace:Roboluze_Libre_Config.Tools;assembly=Roboluze.Libre.Config" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="io_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property sap2010:Annotation.AnnotationText="Transaction item to be processed." Name="io_TransactionItem" Type="InArgument(sd:DataRow)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1139,633</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="200">
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Windows.Forms</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>UiPath.Activities.System.Arrays</x:String>
+      <x:String>UiPath.Activities.Presentation</x:String>
+      <x:String>UiPath.Activities.Presentation.Converters</x:String>
+      <x:String>UiPath.CSV.Activities.Design</x:String>
+      <x:String>UiPath.Shared.Activities.Design</x:String>
+      <x:String>UiPath.Shared.Activities.Design.ViewModels.Contracts</x:String>
+      <x:String>UiPath.Shared.Activities.Design.Utils</x:String>
+      <x:String>UiPath.Shared.Activities.Design.Services</x:String>
+      <x:String>UiPath.Shared.Activities.Design.Services.Interfaces</x:String>
+      <x:String>UiPath.Shared.Activities.Design.Factories</x:String>
+      <x:String>UiPath.Shared.Activities.Design.Extensions</x:String>
+      <x:String>UiPath.Shared.Activities.Design.Editors</x:String>
+      <x:String>UiPath.Shared.Activities.Design.Converters</x:String>
+      <x:String>UiPath.Shared.Activities.Design.AttachedProperties</x:String>
+      <x:String>UiPath.Shared.Activities.Design.Controls</x:String>
+      <x:String>UiPath.Shared.Activities.Design.Controls.PropertyEditors</x:String>
+      <x:String>UiPath.Shared.Activities.Design.Controls.Models</x:String>
+      <x:String>UiPath.Shared.Activities.Design.Business</x:String>
+      <x:String>UiPath.Shared.Activities.Design.Behaviors</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities.Design</x:String>
+      <x:String>UiPath.Excel.Activities.Design.Rules</x:String>
+      <x:String>UiPath.Excel.Activities.Design.Properties</x:String>
+      <x:String>UiPath.Excel.Activities.Design.Services</x:String>
+      <x:String>UiPath.Excel.Activities.Design.CSV</x:String>
+      <x:String>UiPath.Excel.Activities.Design.Converters</x:String>
+      <x:String>UiPath.Excel.Activities.Design.Common</x:String>
+      <x:String>UiPath.Excel.Activities.Design.Client</x:String>
+      <x:String>UiPath.Excel.Activities.Design.Business</x:String>
+      <x:String>UiPath.Excel.Activities.Design.Business.ProjectResources.EditUi</x:String>
+      <x:String>UiPath.Excel.Activities.Design.Business.ViewModels</x:String>
+      <x:String>UiPath.Excel.Activities.Design.Business.HostedTools</x:String>
+      <x:String>UiPath.Excel.Activities.Design.Business.AddInContract</x:String>
+      <x:String>UiPath.Excel.Activities.Design.ApiRegistration</x:String>
+      <x:String>UiPath.Shared.Contracts</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Shared.Activities.Business</x:String>
+      <x:String>UiPath.Shared.Activities.Services</x:String>
+      <x:String>UiPath.Shared.Activities.Services.Interfaces</x:String>
+      <x:String>UiPath.Shared.Activities.ConnectionService.Contracts</x:String>
+      <x:String>UiPath.Shared.Activities.Bindings</x:String>
+      <x:String>UiPath.Shared.Activities.Utils</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.Excel.Activities.Business</x:String>
+      <x:String>UiPath.Excel.Activities.Business.ChartModifications</x:String>
+      <x:String>UiPath.Excel.Activities.Business.Filter</x:String>
+      <x:String>UiPath.Excel.Activities.Properties</x:String>
+      <x:String>UiPath.Shared.ObjectLibrary</x:String>
+      <x:String>UiPath.Shared.ObjectLibrary.ViewModels.DragDrop</x:String>
+      <x:String>UiPath.Shared.Recorder.Design.Actipro</x:String>
+      <x:String>UiPath.Shared.Recorder.Localization</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Design</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Design.Windows</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Design.ViewModels</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Design.ViewModels.SyntaxEditor</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Design.ViewModels.SyntaxEditor.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Design.Recorder.Enums</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Design.Recorder.Controls</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Design.PropertyEditors</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Design.Extensions</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Design.Converters</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Design.Controls</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Design.Client</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Design.Client.Models</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Design.Client.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Design.ActivityFactory</x:String>
+      <x:String>UiPath.CV.Activities.Design</x:String>
+      <x:String>UiPath.CV.Activities.Design.Windows</x:String>
+      <x:String>UiPath.CV.Activities.Design.ViewModels</x:String>
+      <x:String>UiPath.CV.Activities.Design.Services</x:String>
+      <x:String>UiPath.CV.Activities.Design.Recorder</x:String>
+      <x:String>UiPath.CV.Activities.Design.Properties</x:String>
+      <x:String>UiPath.CV.Activities.Design.Models</x:String>
+      <x:String>UiPath.CV.Activities.Design.Extensions</x:String>
+      <x:String>UiPath.CV.Activities.Design.Editors</x:String>
+      <x:String>UiPath.CV.Activities.Design.Controls</x:String>
+      <x:String>UiPath.CV.Activities.Design.Behaviors</x:String>
+      <x:String>UiPath.Semantic.Activities.Design</x:String>
+      <x:String>UiPath.Semantic.Activities.Design.Properties</x:String>
+      <x:String>UiPath.Semantic.Activities.Design.Configuration</x:String>
+      <x:String>UiPath.Core.Activities.Design</x:String>
+      <x:String>UiPath.Core.Activities.Design.Windows</x:String>
+      <x:String>UiPath.Core.Activities.Design.ViewModels</x:String>
+      <x:String>UiPath.Core.Activities.Design.Services</x:String>
+      <x:String>UiPath.Core.Activities.Design.Scrape.Tesseract</x:String>
+      <x:String>UiPath.Core.Activities.Design.Scrape.MicrosoftAzure</x:String>
+      <x:String>UiPath.Core.Activities.Design.Scrape.GoogleCloud</x:String>
+      <x:String>UiPath.Core.Activities.Design.Properties</x:String>
+      <x:String>UiPath.Core.Activities.Design.Editors</x:String>
+      <x:String>UiPath.Core.Activities.Design.SAP</x:String>
+      <x:String>UiPath.Core.Activities.Design.Designers.SAP</x:String>
+      <x:String>UiPath.Core.Activities.Design.Designers.ExportUiTree</x:String>
+      <x:String>UiPath.Core.Activities.Design.Controls</x:String>
+      <x:String>UiPath.Core.Activities.Design.Behaviors</x:String>
+      <x:String>UiPath.Studio.Workflow.Wizards.ViewModels</x:String>
+      <x:String>UiPath.Studio.Plugin.Workflow.Wizards</x:String>
+      <x:String>UiPath.Workflow</x:String>
+      <x:String>UiPath.Workflow.Wizards</x:String>
+      <x:String>UiPath.Workflow.Wizards.Views</x:String>
+      <x:String>UiPath.Workflow.Wizards.ViewModels</x:String>
+      <x:String>UiPath.Workflow.Wizards.Properties</x:String>
+      <x:String>UiPath.Workflow.Wizards.LocalizationResources</x:String>
+      <x:String>UiPath.Workflow.Wizards.ExportedWizards</x:String>
+      <x:String>UiPath.Studio.Entities.Models.Api</x:String>
+      <x:String>UiPath.Profiling.Api.Util</x:String>
+      <x:String>UiPath.Profiling.Api.Services</x:String>
+      <x:String>UiPath.Profiling.Api.Models</x:String>
+      <x:String>UiPath.Profiling.Api.Interfaces</x:String>
+      <x:String>UiPath.Testing.Converters</x:String>
+      <x:String>UiPath.Testing.Activities</x:String>
+      <x:String>UiPath.Testing.Activities.TestData</x:String>
+      <x:String>UiPath.Testing.Activities.TestDataQueues.Enums</x:String>
+      <x:String>UiPath.Testing.Activities.Runtime</x:String>
+      <x:String>UiPath.Testing.Activities.PropertySettings</x:String>
+      <x:String>UiPath.Testing.Activities.Properties</x:String>
+      <x:String>UiPath.Testing.Activities.Orchestrator.Models</x:String>
+      <x:String>UiPath.Testing.Activities.Mocks</x:String>
+      <x:String>UiPath.Testing.Activities.Extensions</x:String>
+      <x:String>UiPath.Testing.Activities.Entitities</x:String>
+      <x:String>UiPath.Testing.Activities.Entities.Api</x:String>
+      <x:String>UiPath.Testing.Activities.Coverage</x:String>
+      <x:String>UiPath.Testing.Activities.Converters</x:String>
+      <x:String>UiPath.Testing.Activities.Api</x:String>
+      <x:String>System.Threading.Tasks</x:String>
+      <x:String>UiPath.Shared</x:String>
+      <x:String>UiPath.Shared.Text</x:String>
+      <x:String>UiPath.Testing.Activities.Design</x:String>
+      <x:String>UiPath.Testing.Activities.Design.Properties</x:String>
+      <x:String>UiPath.Testing.Activities.Design.Extensions</x:String>
+      <x:String>UiPath.Testing.Activities.Design.Editors</x:String>
+      <x:String>UiPath.Testing.Activities.Design.Designers</x:String>
+      <x:String>UiPath.Testing.Activities.Design.Converter</x:String>
+      <x:String>UiPath.Testing.Activities.Design.Controls</x:String>
+      <x:String>UiPath.Testing.RulesLibrary</x:String>
+      <x:String>UiPath.Testing.RulesLibrary.Services</x:String>
+      <x:String>UiPath.Testing.RulesLibrary.Interfaces</x:String>
+      <x:String>UiPath.Activities.System.Collections.ViewModels</x:String>
+      <x:String>UiPath.Activities.System.Statements.Factories</x:String>
+      <x:String>Markdown.Xaml</x:String>
+      <x:String>UiPath</x:String>
+      <x:String>UiPath.Obsolete.Activities.Design.Shared.Utils</x:String>
+      <x:String>UiPath.Obsolete.Activities.Design.Shared.Services</x:String>
+      <x:String>UiPath.Obsolete.Activities.Design.Shared.Services.Interfaces</x:String>
+      <x:String>UiPath.Obsolete.Activities.Design.Shared.Editors</x:String>
+      <x:String>UiPath.Obsolete.Activities.Design.Shared.Controls</x:String>
+      <x:String>UiPath.Obsolete.Activities.Design.Shared.Controls.PropertyEditors</x:String>
+      <x:String>UiPath.Obsolete.Activities.Design.Shared.Controls.Models</x:String>
+      <x:String>UiPath.Shared.Localization</x:String>
+      <x:String>UiPath.Shared.RegexBuilder</x:String>
+      <x:String>UiPath.Activities.System.Design.Telemetry.Events</x:String>
+      <x:String>UiPath.Activities.System.Design.Services</x:String>
+      <x:String>UiPath.Activities.System.Design.Properties</x:String>
+      <x:String>UiPath.Activities.System.Design.Editors.Encoding</x:String>
+      <x:String>UiPath.Activities.System.Design.Designers.Workflow</x:String>
+      <x:String>UiPath.Activities.System.Design.Converters</x:String>
+      <x:String>UiPath.Activities.System.Design.Business</x:String>
+      <x:String>UiPath.Core.Activities.Editors</x:String>
+      <x:String>UiPath.Core.Activities.Design.Extensions</x:String>
+      <x:String>UiPath.Core.Activities.Design.Business</x:String>
+      <x:String>Roboluze_Libre_Config.Tools</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>Roboluze_Libre_DataBase.System</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>UiPath.DataTableUtilities</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="160">
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Windows.Forms</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>UiPath.Cryptography</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.ViewModels</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Cryptography.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Database.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.PDF.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Cryptography.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Database.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.PDF.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.CV.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Semantic.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomation.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Wizards</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Core</AssemblyReference>
+      <AssemblyReference>UiPath.Vision.Core</AssemblyReference>
+      <AssemblyReference>System.Threading.Tasks.Parallel</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.RulesLibrary</AssemblyReference>
+      <AssemblyReference>UiPath.Interop</AssemblyReference>
+      <AssemblyReference>Roboluze.Libre.Config</AssemblyReference>
+      <AssemblyReference>Roboluze.Libre.DataBase</AssemblyReference>
+      <AssemblyReference>Roboluze.Libre.Dominio</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>Microsoft.Win32.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.Watcher</AssemblyReference>
+      <AssemblyReference>System.IO.Packaging</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.AccessControl</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Process" sap:VirtualizedContainerService.HintSize="559,405" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Default="[New Dictionary(Of String, Object) From {{&quot;chave1&quot;, &quot;&quot;}, {&quot;chave2&quot;, &quot;&quot;}}]" Name="tipos" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[io_Config(&quot;ToDo&quot;).ToString()]" sap:VirtualizedContainerService.HintSize="497,294" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+      <Switch.Default>
+        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\Acesso Cliente.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_14" UnSafe="False" WorkflowFileName="Process\Acesso Cliente.xaml">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[io_TransactionItem]</InOutArgument>
+            <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">[io_Config]</InOutArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+        </ui:InvokeWorkflowFile>
+      </Switch.Default>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="DownloadNFSaida" DisplayName="Process\Download.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="Process\Download.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[io_TransactionItem]</InOutArgument>
+          <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">[io_Config]</InOutArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_Tipo">Saida</InArgument>
+          <InArgument x:TypeArguments="x:Boolean" x:Key="in_Fechar">False</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="BreakTriggerScopeInArgument" />
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="DownloadNFEntrada" DisplayName="Process\Download.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="Process\Download.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[io_TransactionItem]</InOutArgument>
+          <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">[io_Config]</InOutArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_Tipo">Entrada</InArgument>
+          <InArgument x:TypeArguments="x:Boolean" x:Key="in_Fechar">False</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="BreakTriggerScopeInArgument" />
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="ProtocolarNFSaida" DisplayName="Process\Declaracao.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_13" UnSafe="False" WorkflowFileName="Process\Declaracao.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <InArgument x:TypeArguments="x:String" x:Key="in_Tipo">Saida</InArgument>
+          <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">[io_Config]</InOutArgument>
+          <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[io_TransactionItem]</InOutArgument>
+          <InArgument x:TypeArguments="x:Boolean" x:Key="in_Fechar">False</InArgument>
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="ProtocolarNFEntrada" DisplayName="Process\Declaracao.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_12" UnSafe="False" WorkflowFileName="Process\Declaracao.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <InArgument x:TypeArguments="x:String" x:Key="in_Tipo">Entrada</InArgument>
+          <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">[io_Config]</InOutArgument>
+          <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[io_TransactionItem]</InOutArgument>
+          <InArgument x:TypeArguments="x:Boolean" x:Key="in_Fechar">False</InArgument>
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="SimplesNacional" DisplayName="Process\Simples Nacional.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_10" UnSafe="False" WorkflowFileName="Process\Simples Nacional.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[io_Config]</InArgument>
+          <InArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[io_TransactionItem]</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="BreakTriggerScopeInArgument" />
+          <InArgument x:TypeArguments="x:Boolean" x:Key="in_Fechar">False</InArgument>
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="CertidaoNegativa" DisplayName="Certidao Negativa.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_18" UnSafe="False" WorkflowFileName="Process\Prefeitura\Certidao Negativa.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[io_Config]</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="BreakTriggerScopeInArgument" />
+          <InArgument x:TypeArguments="sd:DataRow" x:Key="in_TransactionItem">[io_TransactionItem]</InArgument>
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="DebitosIPM" DisplayName="Process\Prefeitura\Debito Cliente.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_15" UnSafe="False" WorkflowFileName="Process\Prefeitura\Debito Cliente.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[io_Config]</InArgument>
+          <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[io_TransactionItem]</InOutArgument>
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
+      <ui:ForEach x:TypeArguments="scg:KeyValuePair(x:String, x:Object)" CurrentIndex="{x:Null}" x:Key="PendenciaDownload" DisplayName="ForEach&lt;Object&gt;" sap:VirtualizedContainerService.HintSize="334,172" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[tipos]">
+        <ui:ForEach.Body>
+          <ActivityAction x:TypeArguments="scg:KeyValuePair(x:String, x:Object)">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="scg:KeyValuePair(x:String, x:Object)" Name="item" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="452,655" sap2010:WorkflowViewState.IdRef="Sequence_4">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="x:String" Name="var" />
+              </Sequence.Variables>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="410,52" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+                <ui:MultipleAssign.AssignOperations>
+                  <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+                      <ui:AssignOperation.To>
+                        <OutArgument x:TypeArguments="x:String">[var]</OutArgument>
+                      </ui:AssignOperation.To>
+                      <ui:AssignOperation.Value>
+                        <InArgument x:TypeArguments="x:String">[System.Text.RegularExpressions.Regex.Replace(io_TransactionItem("CNPJ").ToString,"[^0-9]+", "")+".pendente"]</InArgument>
+                      </ui:AssignOperation.Value>
+                    </ui:AssignOperation>
+                  </scg:List>
+                </ui:MultipleAssign.AssignOperations>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:MultipleAssign>
+              <rt:Arquivo BreakTriggerScopeInArgument="{x:Null}" sap:VirtualizedContainerService.HintSize="410,52" sap2010:WorkflowViewState.IdRef="Arquivo_2" in_Config="[io_Config]" in_Tipo="[&quot;XML\&quot;+item.Key]" io_FilePath="[var]" io_TransactionItem="[io_TransactionItem]">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </rt:Arquivo>
+              <If Condition="[File.Exists(var)]" DisplayName="Tem Pendencias" sap:VirtualizedContainerService.HintSize="410,383" sap2010:WorkflowViewState.IdRef="If_1">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <If.Then>
+                  <Sequence sap:VirtualizedContainerService.HintSize="376,201" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\Download Pendente.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_17" UnSafe="False" WorkflowFileName="Process\Download Pendente.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">[io_Config]</InOutArgument>
+                        <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[io_TransactionItem]</InOutArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                    </ui:InvokeWorkflowFile>
+                  </Sequence>
+                </If.Then>
+                <If.Else>
+                  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_6" />
+                </If.Else>
+              </If>
+            </Sequence>
+          </ActivityAction>
+        </ui:ForEach.Body>
+      </ui:ForEach>
+    </Switch>
+  </Sequence>
+</Activity>
