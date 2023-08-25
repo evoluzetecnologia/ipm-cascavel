@@ -172,16 +172,13 @@
 							option.text = item.PERFIL;
 						  perfilSelect.appendChild(option);
 						}
-					  
-					 
+						
 						var row = $('<tr>');
-						
-						
-						var codigoInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm').prop('id', 'ID_PERFIL').prop('name', 'ID_PERFIL').prop("value",item.ID_PERFIL).prop('readonly', true);
+						var codigoInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm').prop('id', 'ID_PERFIL_'+ item.ID_PERFIL).prop('name', 'ID_PERFIL_'+ item.ID_PERFIL).prop("value",item.ID_PERFIL).prop('readonly', true);
 						var codigoCell = $("<td>").prop('class', 'col-2 fw-normal').append(codigoInput);
 						row.append(codigoCell);
 										
-						var perfilInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm').prop('id', 'PERFIL').prop('name', 'PERFIL').prop("value",item.PERFIL);
+						var perfilInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm').prop('id', 'PERFIL_'+ item.ID_PERFIL).prop('name', 'PERFIL_'+ item.ID_PERFIL).prop("value",item.PERFIL);
 						var perfilCell = $("<td>").prop('class', 'col-10').append(perfilInput);
 						row.append(perfilCell);
 						
@@ -261,15 +258,16 @@
 			}
 		}
 		function atualizaPerfil(value){
-			
 			var jsonData = [];
-			$('table tr').each(function() {
-				var row = $(this);
-				var ID_PERFIL = row.find("#ID_PERFIL").val();
-				var PERFIL = row.find("#PERFIL").val();
-				var SITUACAO = row.find(".SITUACAO").is(":checked");
+			var tbody = document.getElementById('myTablePerfil');
+			var rows = tbody.getElementsByTagName('tr');
+			for (var i = 0; i < rows.length; i++) {
+			  var row = rows[i];
+			  var ID_PERFIL = row.querySelector('input[id^="ID_PERFIL_"]').value;
+			  var PERFIL = row.querySelector('input[id^="PERFIL_"]').value;
+			  var SITUACAO = row.querySelector('input[id^="SITUACAO_"]').checked;
 				
-				var rowValues = {
+			  var rowValues = {
 				  'ID_PERFIL': ID_PERFIL,
 				  'PERFIL': PERFIL,
 				  'SITUACAO': SITUACAO
@@ -277,17 +275,9 @@
 				if(ID_PERFIL){
 					jsonData.push(rowValues);
 				}
-			});
+			}
 			var jsonResult = JSON.stringify(jsonData);
 			uiPathApi.sendMessage("atualizarPerfil", jsonResult);
-			/*
-			var jsonData = {
-				"idPerfil": value
-			}
-			var jsonString = JSON.stringify(jsonData);
-			alert(perfil);
-			uiPathApi.sendMessage("excluirPerfil", jsonString );
-			*/
 		}
 		function closedClicked() {
 			uiPathApi.sendMessage("close");
