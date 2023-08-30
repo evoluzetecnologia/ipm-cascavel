@@ -6,7 +6,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1228,2070</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1223,2069</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Get_Transaction_Data_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -103,7 +103,7 @@
       <AssemblyReference>System.Data.SqlClient</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Get_Transaction_Data" sap:VirtualizedContainerService.HintSize="626,2005" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Get_Transaction_Data" sap:VirtualizedContainerService.HintSize="626,2004" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="querySql" />
     </Sequence.Variables>
@@ -126,6 +126,7 @@
             (PERIODO_DOWNLOAD_ENTRADA &lt;&gt; '{PERIODO}' AND DOWNLOAD_ENTRADA  &lt;&gt; 'Nenhum') OR
             (PERIODO_DECLARACAO_SAIDA &lt;&gt; '{PERIODO}' AND PROTOCOLAR_SAIDA  &lt;&gt; 'Nenhum') OR
             (PERIODO_DECLARACAO_ENTRADA &lt;&gt; '{PERIODO}' AND PROTOCOLAR_ENTRADA  &lt;&gt; 'Nenhum') OR
+            (PERIODO_CERTIDAO &lt;&gt; '{PERIODO}') OR
             (PERIODO_SIMPLES_NACIONAL &lt;&gt; '{PERIODO}' AND (REGIME_TRIBUTARIO = 'Microempresa' OR REGIME_TRIBUTARIO = 'Empresa de Pequeno Porte') AND DECLARAR_SIMPLES_NACIONAL)
          ) THEN 'True' ELSE 'False' END) AS EXECUTAR,
          
@@ -133,6 +134,7 @@
         (CASE WHEN (PERIODO_DOWNLOAD_ENTRADA &lt;&gt; '{PERIODO}' AND DOWNLOAD_ENTRADA  &lt;&gt; 'Nenhum') THEN 'True' ELSE 'False' END) AS FAZ_DOWNLOAD_ENTRADA,
         (CASE WHEN (PERIODO_DECLARACAO_SAIDA &lt;&gt; '{PERIODO}' AND PROTOCOLAR_SAIDA  &lt;&gt; 'Nenhum') THEN 'True' ELSE 'False' END) AS FAZ_DECLARACAO_SAIDA,
         (CASE WHEN (PERIODO_DECLARACAO_ENTRADA &lt;&gt; '{PERIODO}' AND PROTOCOLAR_ENTRADA &lt;&gt; 'Nenhum') THEN 'True' ELSE 'False' END) AS FAZ_DECLARACAO_ENTRADA,
+        (CASE WHEN (PERIODO_CERTIDAO &lt;&gt; '{PERIODO}') THEN 'True' ELSE 'False' END) AS FAZ_CERTIDAO,
         (CASE WHEN (PERIODO_SIMPLES_NACIONAL &lt;&gt; '{PERIODO}' AND (REGIME_TRIBUTARIO = 'Microempresa' OR REGIME_TRIBUTARIO = 'Empresa de Pequeno Porte') AND DECLARAR_SIMPLES_NACIONAL) THEN 'True' ELSE 'False' END) AS FAZ_SIMPLES_NACIONAL, 
         
         cli.ID_CLIENTE,
@@ -149,23 +151,26 @@
         PROTOCOLAR_SAIDA,
         PROTOCOLAR_ENTRADA,
         DECLARAR_SIMPLES_NACIONAL,
-        LANCAR_NOTA_ENTRADA, 
+        LANCAR_NOTA_ENTRADA,
         PERIODO_DOWNLOAD_SAIDA,
         PERIODO_DOWNLOAD_ENTRADA,
         PERIODO_DECLARACAO_SAIDA,
         PERIODO_DECLARACAO_ENTRADA,
         PERIODO_SIMPLES_NACIONAL,
-		
-        'Download Entradas: ' || 
+        PERIODO_CERTIDAO,
+        
+       'XML Entradas: ' || 
        (CASE WHEN (PERIODO_DOWNLOAD_SAIDA &lt;&gt; '{PERIODO}' AND DOWNLOAD_SAIDA &lt;&gt; 'Nenhum') THEN 'Sim' ELSE 'Não' END) || 
-       ' | Download Saidas: ' ||
+       ' | XML Saidas: ' ||
        (CASE WHEN (PERIODO_DOWNLOAD_ENTRADA &lt;&gt; '{PERIODO}' AND DOWNLOAD_ENTRADA  &lt;&gt; 'Nenhum') THEN 'Sim' ELSE 'Não' END) ||
        ' | Protocolar Saidas: ' ||
        (CASE WHEN (PERIODO_DECLARACAO_SAIDA &lt;&gt; '{PERIODO}' AND PROTOCOLAR_SAIDA  &lt;&gt; 'Nenhum') THEN 'Sim' ELSE 'Não' END) ||
        ' | Protocolar Entradas: ' ||
        (CASE WHEN (PERIODO_DECLARACAO_ENTRADA &lt;&gt; '{PERIODO}' AND PROTOCOLAR_ENTRADA  &lt;&gt; 'Nenhum') THEN 'Sim' ELSE 'Não' END) ||
-       ' | Declarar Simples Nacional: ' ||
-       (CASE WHEN (PERIODO_SIMPLES_NACIONAL &lt;&gt; '{PERIODO}' AND (REGIME_TRIBUTARIO = 'Microempresa' OR REGIME_TRIBUTARIO = 'Empresa de Pequeno Porte') AND DECLARAR_SIMPLES_NACIONAL) THEN 'Sim' ELSE 'Não' END) AS OBSERVACAO
+       ' | Simples Nacional: ' ||
+       (CASE WHEN (PERIODO_SIMPLES_NACIONAL &lt;&gt; '{PERIODO}' AND (REGIME_TRIBUTARIO = 'Microempresa' OR REGIME_TRIBUTARIO = 'Empresa de Pequeno Porte') AND DECLARAR_SIMPLES_NACIONAL) THEN 'Sim' ELSE 'Não' END) ||
+       ' | Certidão Negativa: ' || 
+       (CASE WHEN (PERIODO_CERTIDAO &lt;&gt; '{PERIODO}') THEN 'Sim' ELSE 'Não' END) AS OBSERVACAO
         
 FROM ipm
 INNER JOIN _perfil per on per.ID_PERFIL = ipm.ID_PERFIL
@@ -191,7 +196,7 @@ WHERE  (per.ID_PERFIL = {Perfil} AND cli.SITUACAO = True AND per.SITUACAO = True
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:MultipleAssign>
-    <If Condition="[in_Config.ContainsKey(&quot;FiltrarClientesPendentes&quot;)  And Not querySql.IsNullOrEmpty]" DisplayName="Contem Filtro Pendentes" sap:VirtualizedContainerService.HintSize="564,567" sap2010:WorkflowViewState.IdRef="If_2">
+    <If Condition="[in_Config.ContainsKey(&quot;FiltrarClientesPendentes&quot;)  And Not querySql.IsNullOrEmpty]" DisplayName="Contem Filtro Pendentes" sap:VirtualizedContainerService.HintSize="564,566" sap2010:WorkflowViewState.IdRef="If_2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -199,13 +204,13 @@ WHERE  (per.ID_PERFIL = {Perfil} AND cli.SITUACAO = True AND per.SITUACAO = True
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <Sequence sap:VirtualizedContainerService.HintSize="516,385" sap2010:WorkflowViewState.IdRef="Sequence_4">
+        <Sequence sap:VirtualizedContainerService.HintSize="516,384" sap2010:WorkflowViewState.IdRef="Sequence_4">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:IfElseIf DisplayName="Filtrar Pendentes" sap:VirtualizedContainerService.HintSize="474,297" sap2010:WorkflowViewState.IdRef="IfElseIf_1">
+          <ui:IfElseIf DisplayName="Filtrar Pendentes" sap:VirtualizedContainerService.HintSize="474,296" sap2010:WorkflowViewState.IdRef="IfElseIf_1">
             <ui:IfElseIf.ConditionBlocks>
               <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
                 <ui:IfElseIfBlock BlockType="If" Condition="[Convert.ToBoolean(in_Config(&quot;FiltrarClientesPendentes&quot;))]">

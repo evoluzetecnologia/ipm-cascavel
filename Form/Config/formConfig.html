@@ -339,9 +339,9 @@
 			//var certidaoExcel = fileInfoCertidaoExcelDiv.value;
 			
 			
-			var codigoServico = document.getElementById("CodigoServico").value;
-			var observacaoNFS = document.getElementById("ObservacaoNFS").value;
-			var observacaoFinanceira = document.getElementById("ObservacaoFinanceira").value;
+			//var codigoServico = document.getElementById("CodigoServico").value;
+			//var observacaoNFS = document.getElementById("ObservacaoNFS").value;
+			//var observacaoFinanceira = document.getElementById("ObservacaoFinanceira").value;
 			
 			// IPM Parametros
 			var ipmLogin = document.getElementById("IPMLogin").value;
@@ -350,7 +350,10 @@
 			var ProtocoloSaida = document.getElementById("ProtocoloSaida").value;
 			var ProtocoloEntrada = document.getElementById("ProtocoloEntrada").value;
 			
-			var radios = document.getElementsByName('ArquivoSaida');
+			var ArquivoSaida = document.getElementById("ArquivoSaida").value;
+			var ArquivoEntrada = document.getElementById("ArquivoEntrada").value;
+			
+			/*var radios = document.getElementsByName('ArquivoSaida');
 			var ArquivoSaida;
 			for (var i = 0; i < radios.length; i++) {
 				if (radios[i].checked) {
@@ -368,7 +371,7 @@
 					break;
 				}
 			}
-			/*
+			
 			var elPrestados = document.getElementById("ArquivoSaidaXML");
 			if (elPrestados.checked) {
 				var ArquivoSaida = "XML";
@@ -404,10 +407,6 @@
 				"EmitirCertidao": emitirCertidao,
 				"FinalidadeCertidao": FinalidadeCertidao,
 				"CertidaoExcel": certidaoExcel,
-				
-				"CodigoServico": codigoServico,
-				"ObservacaoNFS": observacaoNFS,
-				"ObservacaoFinanceira": observacaoFinanceira,
 				
 				"IPMLogin": ipmLogin,
 				"IPMPassword": ipmPassword,
@@ -624,7 +623,6 @@
 							</div>
 							<div class="col-9 d-flex align-items-center ">
 								<select class="form-select form-select-sm" id="FinalidadeCertidao">
-									<option value=""></option>
 									<option value="Financiamento - Contribuinte">Financiamento - Contribuinte</option>
 									<option value="Juridico - Contribuinte">Juridico - Contribuinte</option>
 									<option value="Licitação - Contribuinte">Licitação - Contribuinte</option>
@@ -632,7 +630,7 @@
 								</select>
 							</div>
 						</div>
-						<div class="row">
+						<div class="row" style="display: none;">
 							<div class="col-3 d-flex align-items-center">
 								<label class="col-form-label">Arquivo Excel com CNPJs</label>
 							</div>
@@ -688,10 +686,18 @@
 					</div>
 					
 					<div class="row">
-						<div class="col-3 d-flex align-items-center">
+						<div class="col-3 d-flex align-items-center ">
 							<label class="col-form-label">Tipo Download Saidas</label>
 						</div>
-						<div class="col-3 d-flex align-items-center ">
+						<div class="col-3 d-flex align-items-center">
+							<select class="form-select form-select-sm" id="ArquivoSaida" required>
+								<option value="XML">XML</option>
+								<option value="TXT">TXT</option>
+								<option value="Nenhum">Nenhum</option>
+							</select>
+						</div>
+						
+						<!--div class="col-3 d-flex align-items-center ">
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="radio" name="ArquivoSaida" id="ArquivoSaidaXML" value="XML" checked>
 								<label class="form-check-label" for="ArquivoSaidaXML">.xml</label>
@@ -705,11 +711,11 @@
 							  <label class="form-check-label" for="ArquivoSaidaNenhum">Nenhum</label>
 							</div>
 						</div>
-						<div class="col-1 d-flex align-items-center"></div>
-						<div class="col-3 d-flex align-items-center">
+						<div class="col-1 d-flex align-items-center"></div-->
+						<div class="col-3 d-flex align-items-center justify-content-center">
 							<label class="col-form-label">Protocolar Saidas</label>
 						</div>
-						<div class="col-2 d-flex align-items-center ">
+						<div class="col-3 d-flex align-items-center ">
 							<select class="form-select form-select-sm" id="ProtocoloSaida" required>
 								<option value="Todos">Todos</option>
 								<option value="ISS">Com Recolhimento</option>
@@ -722,7 +728,14 @@
 						<div class="col-3 d-flex align-items-center">
 							<label class="col-form-label">Tipo Download Entradas</label>
 						</div>
-						<div class="col-3 d-flex align-items-center ">
+						<div class="col-3 d-flex align-items-center">
+							<select class="form-select form-select-sm" id="ArquivoEntrada" required>
+								<option value="XML">XML</option>
+								<option value="TXT">TXT</option>
+								<option value="Nenhum">Nenhum</option>
+							</select>
+						</div>
+						<!--div class="col-3 d-flex align-items-center ">
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="radio" name="ArquivoEntrada" id="ArquivoEntradaXML" value="XML" checked>
 								<label class="form-check-label" for="ArquivoEntradaXML">.xml</label>
@@ -736,11 +749,11 @@
 							  <label class="form-check-label form-sm" for="ArquivoEntradaNenhum">Nenhum</label>
 							</div>
 						</div>
-						<div class="col-1 d-flex align-items-center"></div>
-						<div class="col-3 d-flex align-items-center">
+						<div class="col-1 d-flex align-items-center"></div-->
+						<div class="col-3 d-flex align-items-center justify-content-center">
 							<label class="col-form-label">Protocolar Entradas</label>
 						</div>
-						<div class="col-2 d-flex align-items-center ">
+						<div class="col-3 d-flex align-items-center ">
 							<select class="form-select form-select-sm" id="ProtocoloEntrada" required>
 								<option value="Todos">Todos</option>
 								<option value="ISS">Com Recolhimento</option>
@@ -749,7 +762,7 @@
 						</div>
 					</div>
 					
-					<div class="row mb-1">
+					<!--div class="row mb-1">
 						<div class="col-3 d-flex align-items-center">
 							<label class="col-form-label">Código Serviço Emissão NFS</label>
 						</div>
@@ -773,7 +786,7 @@
 						<div class="col-9 d-flex align-items-center">
 							  <textarea class="form-control form-control-sm" placeholder="Observação financeira na NFS" rows="5" id="ObservacaoFinanceira"></textarea>
 						</div>
-					</div>
+					</div-->
 				</div>
 			</div>
 			

@@ -7,7 +7,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1146,1733</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1223,1733</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Set_Cliente_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -155,7 +155,7 @@
                     <OutArgument x:TypeArguments="x:String">[querySql]</OutArgument>
                   </ui:AssignOperation.To>
                   <ui:AssignOperation.Value>
-                    <InArgument x:TypeArguments="x:String">[String.Format("DELETE FROM IPM WHERE ID_PERFIL = {0} AND ID_CLIENTE = {1}", in_Config("Perfil").ToString(), io_Cliente("ID_CLIENTE").ToString())]</InArgument>
+                    <InArgument x:TypeArguments="x:String">[String.Format("DELETE FROM ipm WHERE ID_PERFIL = {0} AND ID_CLIENTE = {1}", in_Config("Perfil").ToString(), io_Cliente("ID_CLIENTE").ToString())]</InArgument>
                   </ui:AssignOperation.Value>
                 </ui:AssignOperation>
               </scg:List>
@@ -190,7 +190,8 @@
                     <OutArgument x:TypeArguments="x:String">[querySql]</OutArgument>
                   </ui:AssignOperation.To>
                   <ui:AssignOperation.Value>
-                    <InArgument x:TypeArguments="x:String" xml:space="preserve">REPLACE INTO ipm (
+                    <InArgument x:TypeArguments="x:String" xml:space="preserve">DELETE FROM ipm WHERE ID_PERFIL = {0} AND ID_CLIENTE = {1};
+REPLACE INTO ipm (
                         ID_PERFIL,
                         ID_CLIENTE,
                         LOGIN,
@@ -207,7 +208,8 @@
                         PERIODO_DOWNLOAD_ENTRADA,
                         PERIODO_DECLARACAO_SAIDA,
                         PERIODO_DECLARACAO_ENTRADA,
-                        PERIODO_SIMPLES_NACIONAL
+                        PERIODO_SIMPLES_NACIONAL,
+                        PERIODO_CERTIDAO
                     )
                     VALUES (
                         {0},
@@ -226,7 +228,8 @@
                         '{13}',
                         '{14}',
                         '{15}',
-                        '{16}'
+                        '{16}',
+                        '{17}'
                     );</InArgument>
                   </ui:AssignOperation.Value>
                 </ui:AssignOperation>
@@ -252,7 +255,8 @@ io_Cliente("PERIODO_DOWNLOAD_SAIDA").ToString(),
 io_Cliente("PERIODO_DOWNLOAD_ENTRADA").ToString(),
 io_Cliente("PERIODO_DECLARACAO_SAIDA").ToString(),
 io_Cliente("PERIODO_DECLARACAO_ENTRADA").ToString(),
-io_Cliente("PERIODO_SIMPLES_NACIONAL").ToString())]</InArgument>
+io_Cliente("PERIODO_SIMPLES_NACIONAL").ToString(),
+io_Cliente("PERIODO_CERTIDAO").ToString())]</InArgument>
                   </ui:AssignOperation.Value>
                 </ui:AssignOperation>
               </scg:List>
