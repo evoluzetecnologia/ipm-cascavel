@@ -1,8 +1,8 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="Login_Alertas" this:Login_Alertas.in_Time="0" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="in_Time" Type="InArgument(x:Int32)" />
+    <x:Property Name="in_Time" Type="InArgument(x:Double)" />
   </x:Members>
-  <sap:VirtualizedContainerService.HintSize>1223,766</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1223,1612</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -109,7 +109,7 @@
       <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Mensagem Dashboard" sap:VirtualizedContainerService.HintSize="592,701" sap2010:WorkflowViewState.IdRef="Sequence_43">
+  <Sequence DisplayName="Mensagem Dashboard" sap:VirtualizedContainerService.HintSize="738,1507" sap2010:WorkflowViewState.IdRef="Sequence_43">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Boolean" Name="aberto" />
     </Sequence.Variables>
@@ -119,17 +119,17 @@
         <x:Boolean x:Key="IsPinned">False</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" Condition="[aberto]" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="530,590" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
+    <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" Condition="[aberto]" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="676,1396" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
       <ui:InterruptibleDoWhile.Body>
-        <uix:NCheckState DelayBefore="0" DisplayName="Fechar" EnableIfNotExists="False" Exists="[aberto]" sap:VirtualizedContainerService.HintSize="494,424" sap2010:WorkflowViewState.IdRef="NCheckState_9" Timeout="[in_Time]" Version="V3">
+        <uix:NCheckState DelayBefore="0" DisplayName="Fechar" EnableIfNotExists="False" Exists="[aberto]" sap:VirtualizedContainerService.HintSize="640,1230" sap2010:WorkflowViewState.IdRef="NCheckState_9" Timeout="[in_Time]" Version="V3">
           <uix:NCheckState.IfExists>
-            <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="450,167" sap2010:WorkflowViewState.IdRef="Sequence_41">
+            <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="596,1013" sap2010:WorkflowViewState.IdRef="Sequence_41">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Fechar Janelas" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="NApplicationCard_5" InteractionMode="DebuggerApi" OpenMode="Never" ScopeGuid="744f01ca-82c8-452d-80f9-af0c7e2f7881" Version="V2">
+              <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Fechar Janelas" sap:VirtualizedContainerService.HintSize="534,757" sap2010:WorkflowViewState.IdRef="NApplicationCard_5" InteractionMode="DebuggerApi" OpenMode="Never" ScopeGuid="744f01ca-82c8-452d-80f9-af0c7e2f7881" Version="V2">
                 <uix:NApplicationCard.Body>
                   <ActivityAction x:TypeArguments="x:Object">
                     <ActivityAction.Argument>
@@ -179,11 +179,25 @@
                 </uix:NApplicationCard.TargetApp>
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     <x:Boolean x:Key="IsPinned">False</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
               </uix:NApplicationCard>
+              <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="534,101" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+                <ui:MultipleAssign.AssignOperations>
+                  <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+                      <ui:AssignOperation.To>
+                        <OutArgument x:TypeArguments="x:Double">[in_Time]</OutArgument>
+                      </ui:AssignOperation.To>
+                      <ui:AssignOperation.Value>
+                        <InArgument x:TypeArguments="x:Double">0</InArgument>
+                      </ui:AssignOperation.Value>
+                    </ui:AssignOperation>
+                  </scg:List>
+                </ui:MultipleAssign.AssignOperations>
+              </ui:MultipleAssign>
             </Sequence>
           </uix:NCheckState.IfExists>
           <uix:NCheckState.IfNotExists>
