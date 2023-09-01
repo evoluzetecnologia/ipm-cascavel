@@ -9,7 +9,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1223,633</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1223,3905</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Login_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -123,11 +123,19 @@
       <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Login" sap:VirtualizedContainerService.HintSize="450,500" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Login" sap:VirtualizedContainerService.HintSize="874,3840" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="x:String" Default="&lt;html app='chrome.exe' title='Acesso Atende.Net - Cascavel/PR' /&gt;" Name="titleLogin" />
+      <Variable x:TypeArguments="x:String" Name="titleLogin">
+        <Variable.Default>
+          <Literal x:TypeArguments="x:String">&lt;html app='chrome.exe' title='Acesso Atende.Net*' /&gt;</Literal>
+        </Variable.Default>
+      </Variable>
       <Variable x:TypeArguments="x:String" Name="print" />
-      <Variable x:TypeArguments="x:String" Default="&lt;html app='chrome.exe' title='Atende.Net - IPM Sistemas Ltda - Cascavel / PR' /&gt;" Name="title" />
+      <Variable x:TypeArguments="x:String" Name="title">
+        <Variable.Default>
+          <Literal x:TypeArguments="x:String">&lt;html app='chrome.exe' title='Atende.Net - IPM Sistemas Ltda*' /&gt;</Literal>
+        </Variable.Default>
+      </Variable>
       <Variable x:TypeArguments="x:Boolean" Name="logado" />
       <Variable x:TypeArguments="x:Boolean" Name="aberto" />
     </Sequence.Variables>
@@ -136,7 +144,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <If Condition="[Not in_Password.Equals(&quot;&quot;)]" DisplayName="Senha" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="If_3">
+    <If Condition="[Not in_Password.Equals(&quot;&quot;)]" DisplayName="Senha" sap:VirtualizedContainerService.HintSize="812,52" sap2010:WorkflowViewState.IdRef="If_3">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -157,7 +165,7 @@
         <Sequence sap2010:WorkflowViewState.IdRef="Sequence_26" />
       </If.Else>
     </If>
-    <uix:NCheckState DelayBefore="0" DisplayName="Logado No Sistema" EnableIfExists="False" Exists="[logado]" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="NCheckState_4" Timeout="0" Version="V3">
+    <uix:NCheckState DelayBefore="0" DisplayName="Logado No Sistema" EnableIfExists="False" Exists="[logado]" sap:VirtualizedContainerService.HintSize="812,485" sap2010:WorkflowViewState.IdRef="NCheckState_4" Timeout="0" Version="V3">
       <uix:NCheckState.IfExists>
         <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="450,105" sap2010:WorkflowViewState.IdRef="Sequence_13">
           <sap:WorkflowViewStateService.ViewState>
@@ -168,7 +176,7 @@
         </Sequence>
       </uix:NCheckState.IfExists>
       <uix:NCheckState.IfNotExists>
-        <Sequence DisplayName="Target does not appear" sap:VirtualizedContainerService.HintSize="450,224" sap2010:WorkflowViewState.IdRef="Sequence_14">
+        <Sequence DisplayName="Target does not appear" sap:VirtualizedContainerService.HintSize="450,228" sap2010:WorkflowViewState.IdRef="Sequence_14">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -186,15 +194,15 @@
       </uix:NCheckState.Target>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </uix:NCheckState>
-    <If Condition="[Not logado]" DisplayName="Loga no IPM" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="If_1">
+    <If Condition="[Not logado]" DisplayName="Loga no IPM" sap:VirtualizedContainerService.HintSize="812,2959" sap2010:WorkflowViewState.IdRef="If_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
@@ -611,11 +619,9 @@
         <Sequence sap2010:WorkflowViewState.IdRef="Sequence_16" />
       </If.Else>
     </If>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\IPM\Login Alertas.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Process\IPM\Mensagem Dashboard.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\IPM\Login Alertas.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="812,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Process\IPM\Mensagem Dashboard.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:Double" x:Key="in_Time">
-          <Literal x:TypeArguments="x:Double" Value="2" />
-        </InArgument>
+        <InArgument x:TypeArguments="x:Double" x:Key="in_Time">2</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
   </Sequence>
