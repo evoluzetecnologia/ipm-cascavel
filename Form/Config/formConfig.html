@@ -391,7 +391,6 @@
 			//Dominio Parametros
 			var dominioLogin = document.getElementById("DominioLogin").value;
 			var dominioPassword = document.getElementById("DominioPassword").value;
-			var dominioWeb = document.getElementById("DominioWeb").checked;
 			var importarClientes = document.getElementById("ImportarClientes").checked;
 			
 			var jsonData = {
@@ -416,7 +415,6 @@
 				"ArquivoSaida": ArquivoSaida,
 				"ArquivoEntrada": ArquivoEntrada,
 				
-				"DominioWeb": dominioWeb,
 				"DominioLogin": dominioLogin,
 				"DominioPassword": dominioPassword,				
 				"ImportarClientes": importarClientes
@@ -478,10 +476,13 @@
 						  <button class="nav-link active" id="pills-iniciar-tab" data-bs-toggle="pill" data-bs-target="#pills-iniciar" type="button" role="tab" aria-controls="pills-iniciar" aria-selected="true" onclick="closeOffcanvas()">Home</button>
 						</li>
 						<li class="nav-item">
-						  <button class="nav-link" id="pills-automacao-tab" data-bs-toggle="pill" data-bs-target="#pills-automacao" type="button" role="tab" aria-controls="pills-automacao" aria-selected="true" onclick="closeOffcanvas()">IPM</button>
+						  <button class="nav-link" id="pills-automacao-tab" data-bs-toggle="pill" data-bs-target="#pills-automacao" type="button" role="tab" aria-controls="pills-automacao" aria-selected="true" onclick="closeOffcanvas()">Configurações</button>
+						</li>
+						<li class="nav-item">
+						  <button class="nav-link" id="pills-dominio-tab" data-bs-toggle="pill" data-bs-target="#pills-dominio" type="button" role="tab" aria-controls="pills-dominio" aria-selected="true" onclick="closeOffcanvas()">Domínio Sistema</button>
 						</li>
 						
-						<li class="nav-item dropdown" role="presentation">
+						<!--li class="nav-item dropdown" role="presentation">
 							<button class="nav-link dropdown-toggle" type="button" role="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
 								Domínio Sistema
 							</button>
@@ -494,7 +495,7 @@
 						<li class="nav-item">
 						  <a class="nav-link" href="#pills-automacao"></a>
 						   <hr class="dropdown-divider">
-						</li>
+						</li-->
 					</ul>
 					<button class="btn btn-outline-danger w-100" type="botton" onclick="closedClicked()">Sair da Automação</button>
 				</div>
@@ -810,17 +811,7 @@
 							<input type="password" class="form-control form-control-sm" id="DominioPassword" name="DominioPassword" placeholder="Senha do Domínio" value="">
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-2 d-flex align-items-center">
-							<label class="col-form-label">Domínio Web</label>
-						</div>
-						<div class="col-10 d-flex align-items-center ">
-							<div class="form-check form-switch form-check-inline">
-								<input class="form-check-input" type="checkbox" role="switch" id="DominioWeb" name="DominioWeb">
-								<label class="form-check-label" for="DominioWeb">Não</label>
-							</div>
-						</div>
-					</div>
+					
 					<hr class="my-3">
 					<div class="row">
 						<div class="col-2 d-flex align-items-center">
@@ -937,19 +928,7 @@
 	
 	<!-- Javascrit da pagina -->
     <script>
-		
 	
-	  var ckDominioWeb = document.getElementById('DominioWeb');
-	  var labelDominioWeb = document.querySelector('label[for="DominioWeb"]');
-
-	  ckDominioWeb.addEventListener('change', function() {
-		if (this.checked) {
-		  labelDominioWeb.textContent = 'Sim';
-		} else {
-		  labelDominioWeb.textContent = 'Não';
-		}
-	  });
-	  
 	  var ckImportarClientes = document.getElementById('ImportarClientes');
 	  var labelImportarClientes = document.querySelector('label[for="ImportarClientes"]');
 
