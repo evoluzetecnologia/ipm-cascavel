@@ -1,14 +1,14 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Simples_Nacional" this:Simples_Nacional.in_Fechar="True" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:rs="clr-namespace:Roboluze_Libre_Config.System;assembly=Roboluze.Libre.Config" xmlns:rt="clr-namespace:Roboluze_Libre_Config.Tools;assembly=Roboluze.Libre.Config" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.ComponentModel;assembly=System.ComponentModel.TypeConverter" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Simples_Nacional" this:Simples_Nacional.in_Fechar="True" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:rs="clr-namespace:Roboluze_Libre_Config.System;assembly=Roboluze.Libre.Config" xmlns:rt="clr-namespace:Roboluze_Libre_Config.Tools;assembly=Roboluze.Libre.Config" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.ComponentModel;assembly=System.ComponentModel.TypeConverter" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
-    <x:Property Name="io_TransactionItem" Type="InArgument(sd:DataRow)" />
     <x:Property Name="BreakTriggerScopeInArgument" Type="InArgument(x:String)" />
     <x:Property Name="in_Fechar" Type="InArgument(x:Boolean)" />
+    <x:Property Name="io_TransactionItem" Type="InOutArgument(sd:DataRow)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>702,1972</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1223,1934</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Simples_Nacional_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -59,6 +59,7 @@
       <x:String>Roboluze_Libre_Config.System</x:String>
       <x:String>System.Runtime.InteropServices</x:String>
       <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -135,13 +136,9 @@
       <AssemblyReference>System.Runtime.InteropServices.RuntimeInformation</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Simples_Nacional" sap:VirtualizedContainerService.HintSize="698,1907" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Simples_Nacional" sap:VirtualizedContainerService.HintSize="698,1869" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="x:Int32" Name="i">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:Int32" Value="3" />
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="x:Int32" Default="3" Name="i" />
       <Variable x:TypeArguments="x:String" Default="ReciboPrestados.pdf" Name="var" />
       <Variable x:TypeArguments="x:Boolean" Name="varBool" />
       <Variable x:TypeArguments="x:String" Default="0,00" Name="valor" />
@@ -768,15 +765,15 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
-    <uix:NCheckState DelayBefore="0" DisplayName="Incluir Simples" EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="636,1152" sap2010:WorkflowViewState.IdRef="NCheckState_9" Version="V3">
+    <uix:NCheckState DelayBefore="0" DisplayName="Incluir Simples" EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="636,1114" sap2010:WorkflowViewState.IdRef="NCheckState_9" Version="V3">
       <uix:NCheckState.IfExists>
-        <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="592,935" sap2010:WorkflowViewState.IdRef="Sequence_77">
+        <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="592,897" sap2010:WorkflowViewState.IdRef="Sequence_77">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Simples Nacional" sap:VirtualizedContainerService.HintSize="530,822" sap2010:WorkflowViewState.IdRef="NApplicationCard_7" InteractionMode="DebuggerApi" OpenMode="Never" ScopeGuid="47d85b80-cc96-43df-9308-f4ec8b18f0eb" Version="V2">
+          <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Simples Nacional" sap:VirtualizedContainerService.HintSize="530,782" sap2010:WorkflowViewState.IdRef="NApplicationCard_7" InteractionMode="DebuggerApi" OpenMode="Never" ScopeGuid="47d85b80-cc96-43df-9308-f4ec8b18f0eb" Version="V2">
             <uix:NApplicationCard.Body>
               <ActivityAction x:TypeArguments="x:Object">
                 <ActivityAction.Argument>
@@ -796,7 +793,7 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </uix:NKeyboardShortcuts>
-                  <If Condition="[io_TransactionItem(&quot;CADASTRO_ECONOMICO&quot;).ToString().IsNullOrEmpty]" DisplayName="Primeiro  Cadastro" sap:VirtualizedContainerService.HintSize="434,52" sap2010:WorkflowViewState.IdRef="If_17">
+                  <If Condition="[io_TransactionItem(&quot;CADASTRO_ECONOMICO&quot;).ToString().IsNullOrEmpty]" DisplayName="Primeiro  Cadastro" sap:VirtualizedContainerService.HintSize="691,2157" sap2010:WorkflowViewState.IdRef="If_17">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -804,13 +801,13 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                     <If.Then>
-                      <Sequence sap:VirtualizedContainerService.HintSize="552,1343" sap2010:WorkflowViewState.IdRef="Sequence_59">
+                      <Sequence sap:VirtualizedContainerService.HintSize="657,1975" sap2010:WorkflowViewState.IdRef="Sequence_59">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <uix:NGetAttributeGeneric x:TypeArguments="x:String" Attribute="class" DisplayName="campo bloqueado" sap:VirtualizedContainerService.HintSize="510,207" sap2010:WorkflowViewState.IdRef="NGetAttributeGeneric`1_8" Result="[var]" ScopeIdentifier="47d85b80-cc96-43df-9308-f4ec8b18f0eb" Timeout="5" Version="V3">
+                        <uix:NGetAttributeGeneric x:TypeArguments="x:String" Attribute="class" DisplayName="campo bloqueado" sap:VirtualizedContainerService.HintSize="615,207" sap2010:WorkflowViewState.IdRef="NGetAttributeGeneric`1_8" Result="[var]" ScopeIdentifier="47d85b80-cc96-43df-9308-f4ec8b18f0eb" Timeout="5" Version="V3">
                           <uix:NGetAttributeGeneric.Target>
                             <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/64" CvElementArea="476, 268, 121, 20" CvTextArea="544, 273, 50, 10" CvType="InputBox" DesignTimeRectangle="477, 269, 121, 18" DesignTimeScaleFactor="0.8999999761581421" ElementType="InputBox" FriendlyName="'630002768'" FullSelectorArgument="&lt;webctrl tag='SECTION' aria-label='Janela - Incluir' /&gt;&lt;webctrl tag='INPUT' name='*.cadastro' /&gt;" Guid="e7052dd1-b1df-4a1a-9790-b7b68fa16075" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAH0AAAAWCAYAAADts5O8AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIoSURBVGhD7ZqxThtBFEX5oHwVf8Ef5A9S0NPRkMZNlMbeWKLCNgVyLEWpLCFRoCgKC2bg2LnOZXYyEuWu30hXnp1988bvnpl1sT5q2zaFDksB/QD1BvpsNkuTySSNRqPQADWdTrefe+jz+Tw1TZOWy2VarVahAQrgfO6hc8ID+E4fPv4ZjLyuDnQNhAL6QapkXl/ldQX0ikrm9VVeV0CvCLOOz9q0vk/b1j6l9Gn8lM6vXjvWvv3YbGO5RwyNOcxl3OO/3z7vQdBXI4b46/W/sV8PKZ18bjvr0ZSntKbHK4fXFdArEhgHlQvT736ndNo8bk3XBmAOfQzHeEElhj4SEOWg/3W52W8W5fD1PIfnLt3nmvnI6wroFWEqMIAiU3NhLiafNjtwisVooDlQxgVS9xn73zol6FpPJ1p9j2Ee8k3hdQX0ioCAaYimxzvGAoMm03NwAnIx37yBLtgOPT+dPt+B5nHk4Lvlj3fBpmkNryugVyToDlomSor5crODm8dy/d6TDlRyao6U5yKHQGtDXP4sfw+vK6BXlMMQMEFA3AMQJ9pPoWI9h59UP8kO08d9Hc+pa4/VOvnmIyagv0OYhnl6fOr0Ybw3gfBYB4fxagBgDNFXI4bcrOGttDE0H/l3UW4f00+S1xXQK3Jz+y6vK6BXVDKvr/K6OtDH43G8cPmrknl9ldfVgb5YLOJN28DVgY54px5/ohiu+BNFB3po+AJ+QD84tekFQC87DZaLG7sAAAAASUVORK5CYII=" InformativeScreenshot="14551b1a40d34ca0e543d3fbb3e41ef8.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Atende.Net - IPM Sistemas Ltda - Cascavel / PR' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
                           </uix:NGetAttributeGeneric.Target>
@@ -821,7 +818,7 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                         </uix:NGetAttributeGeneric>
-                        <If Condition="[Not var.Contains(&quot;campo_leitura&quot;)]" DisplayName="pesquisar" sap:VirtualizedContainerService.HintSize="510,1008" sap2010:WorkflowViewState.IdRef="If_16">
+                        <If Condition="[Not var.Contains(&quot;campo_leitura&quot;)]" DisplayName="pesquisar" sap:VirtualizedContainerService.HintSize="615,1640" sap2010:WorkflowViewState.IdRef="If_16">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -829,35 +826,108 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                           <If.Then>
-                            <Sequence sap:VirtualizedContainerService.HintSize="376,459" sap2010:WorkflowViewState.IdRef="Sequence_57">
+                            <Sequence sap:VirtualizedContainerService.HintSize="581,1091" sap2010:WorkflowViewState.IdRef="Sequence_57">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
-                              <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DelayBefore="0" DisplayName="F2" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="334,218" sap2010:WorkflowViewState.IdRef="NTypeInto_9" ScopeIdentifier="47d85b80-cc96-43df-9308-f4ec8b18f0eb" Text="%[k(F2)]" Timeout="5" Version="V3">
+                              <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DelayBefore="0" DisplayName="F2" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="539,52" sap2010:WorkflowViewState.IdRef="NTypeInto_9" ScopeIdentifier="47d85b80-cc96-43df-9308-f4ec8b18f0eb" Text="%[k(F2)]" Timeout="5" Version="V3">
                                 <uix:NTypeInto.Target>
                                   <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/66" CvElementArea="165, 222, 137, 22" CvTextArea="240, 227, 59, 11" CvType="InputBox" DesignTimeRectangle="167, 223, 135, 20" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'630002474'" FullSelectorArgument="&lt;webctrl tag='SECTION' aria-label='Janela - Incluir' /&gt;&lt;webctrl tag='INPUT' name='*.cadastro' /&gt;" Guid="6c5f6579-da5d-412f-b174-cd294db559e5" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAIsAAAAYCAYAAADK6w4SAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHFSURBVGhD7ZXLsYMwDEVfJxTnkujD69TgPmiCjYMky5aFQzyPsLuLMwNG/gz3IP72fc8AzABZwDRVltfrBcAlnSx6DYBivYAs4BLIAqaBLGAayAKmgSw/IeV1WfLChBy3Yyyt5V5Zc9L6LeYwGh+tU55tMZTxgzWNx90cQdYMcTuutxyD1hrMeoSsac8lQJbb2DD68ZT0WkKygWl9WltY9poDCzFvNJ/lUhFkv5XXpusWKs/XOUyT43y+9lzWKlTJIcvvoZfbBTTCB2w6AItAwfjgTJ3bg0Vy3aCOD+pIoqEsLIbvbMeeSc9kag8gy00kiMgynL7I+pV6OUb3Viii3Q8lOAnad6wmoZ7Ry+LqbZ2Za+dAlptw668v9hyAYMYfkoXPUcdov7bHUBZ/DhJbuxVkeQYOyfwStPXbGqLVlVbfyULBiFD/+Q31opR67mgOP6fey97nOaHWE5DlLt1//1NnkS4h432NDdoGyELoul0XsGsNRBlANd2ZfFfxoLM8hwRbvsYSXDdGmK9aA5dnNhT7hbswbbfQtThUrVfOEnhZvgoGWcBdIAuYBrKAaSALmAaygGk+ygLAFVUWAL4BWcAke34D2BGy2JfSTCAAAAAASUVORK5CYII=" InformativeScreenshot="b7d23f52568fe64542fadcd1d3f01dbf.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Atende.Net - IPM Sistemas Ltda - Cascavel / PR' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
                                 </uix:NTypeInto.Target>
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                                     <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
                               </uix:NTypeInto>
-                              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Consultar CNPJ.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_13" UnSafe="False" WorkflowFileName="Process\IPM\Consultar CNPJ.xaml">
-                                <ui:InvokeWorkflowFile.Arguments>
-                                  <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[io_TransactionItem]</InOutArgument>
-                                  <InArgument x:TypeArguments="x:String" x:Key="in_Codigo">CADASTRO_ECONOMICO</InArgument>
-                                </ui:InvokeWorkflowFile.Arguments>
+                              <TryCatch DisplayName="Try Catch Não Localizado" sap:VirtualizedContainerService.HintSize="539,911" sap2010:WorkflowViewState.IdRef="TryCatch_2">
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                     <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
-                              </ui:InvokeWorkflowFile>
+                                <TryCatch.Try>
+                                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Consultar CNPJ.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_13" UnSafe="False" WorkflowFileName="Process\IPM\Consultar CNPJ.xaml">
+                                    <ui:InvokeWorkflowFile.Arguments>
+                                      <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[io_TransactionItem]</InOutArgument>
+                                      <InArgument x:TypeArguments="x:String" x:Key="in_Codigo">CADASTRO_ECONOMICO</InArgument>
+                                    </ui:InvokeWorkflowFile.Arguments>
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </ui:InvokeWorkflowFile>
+                                </TryCatch.Try>
+                                <TryCatch.Catches>
+                                  <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="505,748" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ActivityAction x:TypeArguments="s:Exception">
+                                      <ActivityAction.Argument>
+                                        <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                                      </ActivityAction.Argument>
+                                      <If Condition="[exception.Message.Contains(&quot;Não foi possível obter o código do cadastro economico do cliente&quot;)]" DisplayName="Desativar" sap:VirtualizedContainerService.HintSize="499,679" sap2010:WorkflowViewState.IdRef="If_23">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                        <If.Then>
+                                          <Sequence sap:VirtualizedContainerService.HintSize="465,319" sap2010:WorkflowViewState.IdRef="Sequence_81">
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                            <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="423,101" sap2010:WorkflowViewState.IdRef="MultipleAssign_12">
+                                              <ui:MultipleAssign.AssignOperations>
+                                                <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_14">
+                                                    <ui:AssignOperation.To>
+                                                      <OutArgument x:TypeArguments="x:Object">[io_TransactionItem("DECLARAR_SIMPLES_NACIONAL")]</OutArgument>
+                                                    </ui:AssignOperation.To>
+                                                    <ui:AssignOperation.Value>
+                                                      <InArgument x:TypeArguments="x:Object">[False]</InArgument>
+                                                    </ui:AssignOperation.Value>
+                                                  </ui:AssignOperation>
+                                                </scg:List>
+                                              </ui:MultipleAssign.AssignOperations>
+                                              <sap:WorkflowViewStateService.ViewState>
+                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                </scg:Dictionary>
+                                              </sap:WorkflowViewStateService.ViewState>
+                                            </ui:MultipleAssign>
+                                            <Throw Exception="[New BusinessRuleException(exception.Message)]" sap:VirtualizedContainerService.HintSize="423,90" sap2010:WorkflowViewState.IdRef="Throw_3" />
+                                          </Sequence>
+                                        </If.Then>
+                                        <If.Else>
+                                          <Sequence sap:VirtualizedContainerService.HintSize="376,178" sap2010:WorkflowViewState.IdRef="Sequence_82">
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                            <Throw Exception="[exception]" sap:VirtualizedContainerService.HintSize="334,90" sap2010:WorkflowViewState.IdRef="Throw_4" />
+                                          </Sequence>
+                                        </If.Else>
+                                      </If>
+                                    </ActivityAction>
+                                  </Catch>
+                                </TryCatch.Catches>
+                              </TryCatch>
                             </Sequence>
                           </If.Then>
                           <If.Else>
@@ -897,13 +967,13 @@
                   </If>
                   <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" Condition="[Not var.Trim.Equals(io_TransactionItem(&quot;CADASTRO_ECONOMICO&quot;).ToString())]" DisplayName="Do While Codigo" sap:VirtualizedContainerService.HintSize="434,52" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_4">
                     <ui:InterruptibleDoWhile.Body>
-                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="761,2324" sap2010:WorkflowViewState.IdRef="Sequence_66">
+                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="866,2613" sap2010:WorkflowViewState.IdRef="Sequence_66">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <uix:NGetText DelayAfter="0" DelayBefore="0" DisplayName="Get Text 'Codigo'" sap:VirtualizedContainerService.HintSize="699,157" sap2010:WorkflowViewState.IdRef="NGetText_7" ScopeIdentifier="47d85b80-cc96-43df-9308-f4ec8b18f0eb" TextString="[var]" Timeout="5" Version="V3">
+                        <uix:NGetText DelayAfter="0" DelayBefore="0" DisplayName="Get Text 'Codigo'" sap:VirtualizedContainerService.HintSize="804,157" sap2010:WorkflowViewState.IdRef="NGetText_7" ScopeIdentifier="47d85b80-cc96-43df-9308-f4ec8b18f0eb" TextString="[var]" Timeout="5" Version="V3">
                           <uix:NGetText.Target>
                             <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/66" CvElementArea="166, 222, 137, 22" CvTextArea="241, 227, 57, 11" CvType="InputBox" DesignTimeRectangle="167, 223, 135, 20" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'630002474'" FullSelectorArgument="&lt;webctrl tag='SECTION' aria-label='Janela - Incluir' /&gt;&lt;webctrl tag='INPUT' name='*.cadastro' /&gt;" Guid="91a42ef9-050c-4ab7-8414-3312b9ccd7f5" ImageBase64="" InformativeScreenshot="1413179f9dc235885bed4fc0dadd7df9.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Atende.Net - IPM Sistemas Ltda - Cascavel / PR' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" WaitForReadyArgument="Complete" />
                           </uix:NGetText.Target>
@@ -914,7 +984,7 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                         </uix:NGetText>
-                        <If Condition="[Not var.Trim.Equals(io_TransactionItem(&quot;CADASTRO_ECONOMICO&quot;).ToString())]" DisplayName="Cadastro Economico" sap:VirtualizedContainerService.HintSize="699,2016" sap2010:WorkflowViewState.IdRef="If_19">
+                        <If Condition="[Not var.Trim.Equals(io_TransactionItem(&quot;CADASTRO_ECONOMICO&quot;).ToString())]" DisplayName="Cadastro Economico" sap:VirtualizedContainerService.HintSize="804,2305" sap2010:WorkflowViewState.IdRef="If_19">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -922,13 +992,13 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                           <If.Then>
-                            <Sequence sap:VirtualizedContainerService.HintSize="665,1834" sap2010:WorkflowViewState.IdRef="Sequence_64">
+                            <Sequence sap:VirtualizedContainerService.HintSize="770,2123" sap2010:WorkflowViewState.IdRef="Sequence_64">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
-                              <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DelayAfter="1" DelayBefore="0" DisplayName="Type Into 'Codigo'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="623,218" sap2010:WorkflowViewState.IdRef="NTypeInto_10" ScopeIdentifier="47d85b80-cc96-43df-9308-f4ec8b18f0eb" Text="[io_TransactionItem(&quot;CADASTRO_ECONOMICO&quot;).ToString()+ &quot;[k(Tab)]&quot;]" Timeout="5" Version="V3">
+                              <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DelayAfter="1" DelayBefore="0" DisplayName="Type Into 'Codigo'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="728,218" sap2010:WorkflowViewState.IdRef="NTypeInto_10" ScopeIdentifier="47d85b80-cc96-43df-9308-f4ec8b18f0eb" Text="[io_TransactionItem(&quot;CADASTRO_ECONOMICO&quot;).ToString()+ &quot;[k(Tab)]&quot;]" Timeout="5" Version="V3">
                                 <uix:NTypeInto.Target>
                                   <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/66" CvElementArea="165, 222, 137, 22" CvTextArea="240, 227, 59, 11" CvType="InputBox" DesignTimeRectangle="167, 223, 135, 20" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'630002474'" FullSelectorArgument="&lt;webctrl tag='SECTION' aria-label='Janela - Incluir' /&gt;&lt;webctrl tag='INPUT' name='*.cadastro' /&gt;" Guid="680b9cb6-a8b5-41bc-a1ad-a990e11fcbea" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAIsAAAAYCAYAAADK6w4SAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHFSURBVGhD7ZXLsYMwDEVfJxTnkujD69TgPmiCjYMky5aFQzyPsLuLMwNG/gz3IP72fc8AzABZwDRVltfrBcAlnSx6DYBivYAs4BLIAqaBLGAayAKmgSw/IeV1WfLChBy3Yyyt5V5Zc9L6LeYwGh+tU55tMZTxgzWNx90cQdYMcTuutxyD1hrMeoSsac8lQJbb2DD68ZT0WkKygWl9WltY9poDCzFvNJ/lUhFkv5XXpusWKs/XOUyT43y+9lzWKlTJIcvvoZfbBTTCB2w6AItAwfjgTJ3bg0Vy3aCOD+pIoqEsLIbvbMeeSc9kag8gy00kiMgynL7I+pV6OUb3Viii3Q8lOAnad6wmoZ7Ry+LqbZ2Za+dAlptw668v9hyAYMYfkoXPUcdov7bHUBZ/DhJbuxVkeQYOyfwStPXbGqLVlVbfyULBiFD/+Q31opR67mgOP6fey97nOaHWE5DlLt1//1NnkS4h432NDdoGyELoul0XsGsNRBlANd2ZfFfxoLM8hwRbvsYSXDdGmK9aA5dnNhT7hbswbbfQtThUrVfOEnhZvgoGWcBdIAuYBrKAaSALmAaygGk+ygLAFVUWAL4BWcAke34D2BGy2JfSTCAAAAAASUVORK5CYII=" InformativeScreenshot="f9e5f33c331257dfdea0d89c0301a14b.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Atende.Net - IPM Sistemas Ltda - Cascavel / PR' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
                                 </uix:NTypeInto.Target>
@@ -939,23 +1009,23 @@
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
                               </uix:NTypeInto>
-                              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\IPM\Alertas.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="623,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_14" UnSafe="False" WorkflowFileName="Process\IPM\Alertas.xaml">
+                              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\IPM\Alertas.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="728,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_14" UnSafe="False" WorkflowFileName="Process\IPM\Alertas.xaml">
                                 <ui:InvokeWorkflowFile.Arguments>
                                   <OutArgument x:TypeArguments="x:String" x:Key="out_Mensagem">[var]</OutArgument>
                                 </ui:InvokeWorkflowFile.Arguments>
                               </ui:InvokeWorkflowFile>
-                              <ui:IfElseIf DisplayName="Codigo Errado" sap:VirtualizedContainerService.HintSize="623,1335" sap2010:WorkflowViewState.IdRef="IfElseIf_3">
+                              <ui:IfElseIf DisplayName="Codigo Errado" sap:VirtualizedContainerService.HintSize="728,1624" sap2010:WorkflowViewState.IdRef="IfElseIf_3">
                                 <ui:IfElseIf.ConditionBlocks>
                                   <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
                                     <ui:IfElseIfBlock BlockType="If" Condition="[var.Contains(&quot;EST-000049&quot;)]">
                                       <ui:IfElseIfBlock.Then>
-                                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="572,1139" sap2010:WorkflowViewState.IdRef="Sequence_63">
+                                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="576,1428" sap2010:WorkflowViewState.IdRef="Sequence_63">
                                           <sap:WorkflowViewStateService.ViewState>
                                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                             </scg:Dictionary>
                                           </sap:WorkflowViewStateService.ViewState>
-                                          <uix:NGetAttributeGeneric x:TypeArguments="x:String" Attribute="class" DisplayName="campo bloqueado" sap:VirtualizedContainerService.HintSize="510,207" sap2010:WorkflowViewState.IdRef="NGetAttributeGeneric`1_10" Result="[var]" ScopeIdentifier="47d85b80-cc96-43df-9308-f4ec8b18f0eb" Timeout="5" Version="V3">
+                                          <uix:NGetAttributeGeneric x:TypeArguments="x:String" Attribute="class" DisplayName="campo bloqueado" sap:VirtualizedContainerService.HintSize="514,207" sap2010:WorkflowViewState.IdRef="NGetAttributeGeneric`1_10" Result="[var]" ScopeIdentifier="47d85b80-cc96-43df-9308-f4ec8b18f0eb" Timeout="5" Version="V3">
                                             <uix:NGetAttributeGeneric.Target>
                                               <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/64" CvElementArea="476, 268, 121, 20" CvTextArea="544, 273, 50, 10" CvType="InputBox" DesignTimeRectangle="477, 269, 121, 18" DesignTimeScaleFactor="0.8999999761581421" ElementType="InputBox" FriendlyName="'630002768'" FullSelectorArgument="&lt;webctrl tag='SECTION' aria-label='Janela - Incluir' /&gt;&lt;webctrl tag='INPUT' name='*.cadastro' /&gt;" Guid="e7052dd1-b1df-4a1a-9790-b7b68fa16075" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAH0AAAAWCAYAAADts5O8AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIoSURBVGhD7ZqxThtBFEX5oHwVf8Ef5A9S0NPRkMZNlMbeWKLCNgVyLEWpLCFRoCgKC2bg2LnOZXYyEuWu30hXnp1988bvnpl1sT5q2zaFDksB/QD1BvpsNkuTySSNRqPQADWdTrefe+jz+Tw1TZOWy2VarVahAQrgfO6hc8ID+E4fPv4ZjLyuDnQNhAL6QapkXl/ldQX0ikrm9VVeV0CvCLOOz9q0vk/b1j6l9Gn8lM6vXjvWvv3YbGO5RwyNOcxl3OO/3z7vQdBXI4b46/W/sV8PKZ18bjvr0ZSntKbHK4fXFdArEhgHlQvT736ndNo8bk3XBmAOfQzHeEElhj4SEOWg/3W52W8W5fD1PIfnLt3nmvnI6wroFWEqMIAiU3NhLiafNjtwisVooDlQxgVS9xn73zol6FpPJ1p9j2Ee8k3hdQX0ioCAaYimxzvGAoMm03NwAnIx37yBLtgOPT+dPt+B5nHk4Lvlj3fBpmkNryugVyToDlomSor5crODm8dy/d6TDlRyao6U5yKHQGtDXP4sfw+vK6BXlMMQMEFA3AMQJ9pPoWI9h59UP8kO08d9Hc+pa4/VOvnmIyagv0OYhnl6fOr0Ybw3gfBYB4fxagBgDNFXI4bcrOGttDE0H/l3UW4f00+S1xXQK3Jz+y6vK6BXVDKvr/K6OtDH43G8cPmrknl9ldfVgb5YLOJN28DVgY54px5/ohiu+BNFB3po+AJ+QD84tekFQC87DZaLG7sAAAAASUVORK5CYII=" InformativeScreenshot="14551b1a40d34ca0e543d3fbb3e41ef8.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Atende.Net - IPM Sistemas Ltda - Cascavel / PR' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
                                             </uix:NGetAttributeGeneric.Target>
@@ -966,7 +1036,7 @@
                                               </scg:Dictionary>
                                             </sap:WorkflowViewStateService.ViewState>
                                           </uix:NGetAttributeGeneric>
-                                          <If Condition="[Not var.Contains(&quot;campo_leitura&quot;)]" DisplayName="pesquisar" sap:VirtualizedContainerService.HintSize="510,781" sap2010:WorkflowViewState.IdRef="If_18">
+                                          <If Condition="[Not var.Contains(&quot;campo_leitura&quot;)]" DisplayName="pesquisar" sap:VirtualizedContainerService.HintSize="514,1070" sap2010:WorkflowViewState.IdRef="If_18">
                                             <sap:WorkflowViewStateService.ViewState>
                                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -974,13 +1044,13 @@
                                               </scg:Dictionary>
                                             </sap:WorkflowViewStateService.ViewState>
                                             <If.Then>
-                                              <Sequence sap:VirtualizedContainerService.HintSize="300,232" sap2010:WorkflowViewState.IdRef="Sequence_61">
+                                              <Sequence sap:VirtualizedContainerService.HintSize="480,521" sap2010:WorkflowViewState.IdRef="Sequence_61">
                                                 <sap:WorkflowViewStateService.ViewState>
                                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                                   </scg:Dictionary>
                                                 </sap:WorkflowViewStateService.ViewState>
-                                                <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DelayBefore="0" DisplayName="F2" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="258,52" sap2010:WorkflowViewState.IdRef="NTypeInto_11" ScopeIdentifier="47d85b80-cc96-43df-9308-f4ec8b18f0eb" Text="%[k(F2)]" Timeout="5" Version="V3">
+                                                <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DelayBefore="0" DisplayName="F2" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="438,52" sap2010:WorkflowViewState.IdRef="NTypeInto_11" ScopeIdentifier="47d85b80-cc96-43df-9308-f4ec8b18f0eb" Text="%[k(F2)]" Timeout="5" Version="V3">
                                                   <uix:NTypeInto.Target>
                                                     <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/66" CvElementArea="165, 222, 137, 22" CvTextArea="240, 227, 59, 11" CvType="InputBox" DesignTimeRectangle="167, 223, 135, 20" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'630002474'" FullSelectorArgument="&lt;webctrl tag='SECTION' aria-label='Janela - Incluir' /&gt;&lt;webctrl tag='INPUT' name='*.cadastro' /&gt;" Guid="6c5f6579-da5d-412f-b174-cd294db559e5" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAIsAAAAYCAYAAADK6w4SAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHFSURBVGhD7ZXLsYMwDEVfJxTnkujD69TgPmiCjYMky5aFQzyPsLuLMwNG/gz3IP72fc8AzABZwDRVltfrBcAlnSx6DYBivYAs4BLIAqaBLGAayAKmgSw/IeV1WfLChBy3Yyyt5V5Zc9L6LeYwGh+tU55tMZTxgzWNx90cQdYMcTuutxyD1hrMeoSsac8lQJbb2DD68ZT0WkKygWl9WltY9poDCzFvNJ/lUhFkv5XXpusWKs/XOUyT43y+9lzWKlTJIcvvoZfbBTTCB2w6AItAwfjgTJ3bg0Vy3aCOD+pIoqEsLIbvbMeeSc9kag8gy00kiMgynL7I+pV6OUb3Viii3Q8lOAnad6wmoZ7Ry+LqbZ2Za+dAlptw668v9hyAYMYfkoXPUcdov7bHUBZ/DhJbuxVkeQYOyfwStPXbGqLVlVbfyULBiFD/+Q31opR67mgOP6fey97nOaHWE5DlLt1//1NnkS4h432NDdoGyELoul0XsGsNRBlANd2ZfFfxoLM8hwRbvsYSXDdGmK9aA5dnNhT7hbswbbfQtThUrVfOEnhZvgoGWcBdIAuYBrKAaSALmAaygGk+ygLAFVUWAL4BWcAke34D2BGy2JfSTCAAAAAASUVORK5CYII=" InformativeScreenshot="b7d23f52568fe64542fadcd1d3f01dbf.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Atende.Net - IPM Sistemas Ltda - Cascavel / PR' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
                                                   </uix:NTypeInto.Target>
@@ -991,18 +1061,91 @@
                                                     </scg:Dictionary>
                                                   </sap:WorkflowViewStateService.ViewState>
                                                 </uix:NTypeInto>
-                                                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Consultar CNPJ.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="258,52" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_15" UnSafe="False" WorkflowFileName="Process\IPM\Consultar CNPJ.xaml">
-                                                  <ui:InvokeWorkflowFile.Arguments>
-                                                    <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[io_TransactionItem]</InOutArgument>
-                                                    <InArgument x:TypeArguments="x:String" x:Key="in_Codigo">CADASTRO_ECONOMICO</InArgument>
-                                                  </ui:InvokeWorkflowFile.Arguments>
+                                                <TryCatch DisplayName="Try Catch Não Localizado" sap:VirtualizedContainerService.HintSize="438,341" sap2010:WorkflowViewState.IdRef="TryCatch_1">
                                                   <sap:WorkflowViewStateService.ViewState>
                                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                                     </scg:Dictionary>
                                                   </sap:WorkflowViewStateService.ViewState>
-                                                </ui:InvokeWorkflowFile>
+                                                  <TryCatch.Try>
+                                                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Consultar CNPJ.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_15" UnSafe="False" WorkflowFileName="Process\IPM\Consultar CNPJ.xaml">
+                                                      <ui:InvokeWorkflowFile.Arguments>
+                                                        <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[io_TransactionItem]</InOutArgument>
+                                                        <InArgument x:TypeArguments="x:String" x:Key="in_Codigo">CADASTRO_ECONOMICO</InArgument>
+                                                      </ui:InvokeWorkflowFile.Arguments>
+                                                      <sap:WorkflowViewStateService.ViewState>
+                                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                        </scg:Dictionary>
+                                                      </sap:WorkflowViewStateService.ViewState>
+                                                    </ui:InvokeWorkflowFile>
+                                                  </TryCatch.Try>
+                                                  <TryCatch.Catches>
+                                                    <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                                                      <sap:WorkflowViewStateService.ViewState>
+                                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                        </scg:Dictionary>
+                                                      </sap:WorkflowViewStateService.ViewState>
+                                                      <ActivityAction x:TypeArguments="s:Exception">
+                                                        <ActivityAction.Argument>
+                                                          <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                                                        </ActivityAction.Argument>
+                                                        <If Condition="[exception.Message.Contains(&quot;Não foi possível obter o código do cadastro economico do cliente&quot;)]" DisplayName="Desativar" sap:VirtualizedContainerService.HintSize="499,679" sap2010:WorkflowViewState.IdRef="If_22">
+                                                          <sap:WorkflowViewStateService.ViewState>
+                                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                            </scg:Dictionary>
+                                                          </sap:WorkflowViewStateService.ViewState>
+                                                          <If.Then>
+                                                            <Sequence sap:VirtualizedContainerService.HintSize="465,319" sap2010:WorkflowViewState.IdRef="Sequence_79">
+                                                              <sap:WorkflowViewStateService.ViewState>
+                                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                </scg:Dictionary>
+                                                              </sap:WorkflowViewStateService.ViewState>
+                                                              <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="423,101" sap2010:WorkflowViewState.IdRef="MultipleAssign_11">
+                                                                <ui:MultipleAssign.AssignOperations>
+                                                                  <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_12">
+                                                                      <ui:AssignOperation.To>
+                                                                        <OutArgument x:TypeArguments="x:Object">[io_TransactionItem("DECLARAR_SIMPLES_NACIONAL")]</OutArgument>
+                                                                      </ui:AssignOperation.To>
+                                                                      <ui:AssignOperation.Value>
+                                                                        <InArgument x:TypeArguments="x:Object">[False]</InArgument>
+                                                                      </ui:AssignOperation.Value>
+                                                                    </ui:AssignOperation>
+                                                                  </scg:List>
+                                                                </ui:MultipleAssign.AssignOperations>
+                                                                <sap:WorkflowViewStateService.ViewState>
+                                                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                                  </scg:Dictionary>
+                                                                </sap:WorkflowViewStateService.ViewState>
+                                                              </ui:MultipleAssign>
+                                                              <Throw Exception="[New BusinessRuleException(exception.Message)]" sap:VirtualizedContainerService.HintSize="423,90" sap2010:WorkflowViewState.IdRef="Throw_1" />
+                                                            </Sequence>
+                                                          </If.Then>
+                                                          <If.Else>
+                                                            <Sequence sap:VirtualizedContainerService.HintSize="376,178" sap2010:WorkflowViewState.IdRef="Sequence_80">
+                                                              <sap:WorkflowViewStateService.ViewState>
+                                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                </scg:Dictionary>
+                                                              </sap:WorkflowViewStateService.ViewState>
+                                                              <Throw Exception="[exception]" sap:VirtualizedContainerService.HintSize="334,90" sap2010:WorkflowViewState.IdRef="Throw_2" />
+                                                            </Sequence>
+                                                          </If.Else>
+                                                        </If>
+                                                      </ActivityAction>
+                                                    </Catch>
+                                                  </TryCatch.Catches>
+                                                </TryCatch>
                                               </Sequence>
                                             </If.Then>
                                             <If.Else>
