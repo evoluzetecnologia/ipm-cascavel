@@ -108,15 +108,6 @@
 								} else if (typeof data[key] === 'boolean') {
 									var label = document.querySelector('label[for="' + key + '"]');
 									el.checked = data[key];
-									
-									if (key === 'EmitirCertidao'){
-										if (data[key]){
-											document.getElementById("divCertidao").style.display = "block";
-										} else {
-											document.getElementById("divCertidao").style.display = "none";
-										}
-									}
-									
 									if (key === 'FiltrarClientesPendentes'){
 										label.textContent = data[key] ? 'Clientes Pendentes' : 'Todos os Clientes';
 									} else {
@@ -241,12 +232,6 @@
 		};
 	</script>
 	<script>
-		
-		function certidaoExcelClicked() {
-			var jsonString = JSON.stringify(jsonData());
-			uiPathApi.sendMessage("certidao", jsonString);
-		}
-	
 		function addNovoPerfilClicked(){
 			var perfilNome = document.getElementById("novoPerfil").value;
 			if (perfilNome !== null && perfilNome !== '') {
@@ -300,27 +285,7 @@
 		}
 		
 		function jsonData(){
-			var emitirCertidao = document.getElementById("EmitirCertidao").checked;
-			var certidaoExcel = '';
-			
-			if (emitirCertidao){
-				var fileInput = document.getElementById('fileInputCertidao');
-				var file = fileInput.files[0];
-				if(file){
-					var fileName = file.name;
-					var fileExtension = fileName.split('.').pop(); // Obtém a extensão do arquivo
-					var currentDate = new Date();
-					var formattedDate = currentDate.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' });
-					certidaoExcel = formattedDate.replace(/[^\d]/g, '') + '.' + fileExtension; // Novo nome do arquivo
-					
-					var downloadLink = document.createElement('a');
-					downloadLink.href = URL.createObjectURL(file);
-					downloadLink.download = certidaoExcel;
-					downloadLink.click();
-				}
-			}
-			
-			
+		
 			var perfil = document.getElementById("Perfil").value;
 			var periodo = document.getElementById("Periodo").value;
 			var exibirClientes = document.getElementById("ExibirClientes").checked;
@@ -331,18 +296,7 @@
 			var protocolarNFEntrada = document.getElementById("ProtocolarNFEntrada").checked;
 			var simplesNacional = document.getElementById("SimplesNacional").checked;
 			
-			var FinalidadeCertidao = document.getElementById("FinalidadeCertidao").value;
-			//var certidaoExcel = document.getElementById("CertidaoExcel").value;
-			//var input = document.getElementById("CertidaoExcel");
-			//var certidaoExcel = input.files[0].name;
-			//var fileInfoCertidaoExcelDiv = document.getElementById('fileInfoCertidaoExcel');
-			//var certidaoExcel = fileInfoCertidaoExcelDiv.value;
-			
-			
-			//var codigoServico = document.getElementById("CodigoServico").value;
-			//var observacaoNFS = document.getElementById("ObservacaoNFS").value;
-			//var observacaoFinanceira = document.getElementById("ObservacaoFinanceira").value;
-			
+
 			// IPM Parametros
 			var ipmLogin = document.getElementById("IPMLogin").value;
 			var ipmPassword = document.getElementById("IPMPassword").value;
@@ -353,40 +307,6 @@
 			var ArquivoSaida = document.getElementById("ArquivoSaida").value;
 			var ArquivoEntrada = document.getElementById("ArquivoEntrada").value;
 			
-			/*var radios = document.getElementsByName('ArquivoSaida');
-			var ArquivoSaida;
-			for (var i = 0; i < radios.length; i++) {
-				if (radios[i].checked) {
-					ArquivoSaida = radios[i].id.replace('ArquivoSaida', '');
-					//console.log(DOWNLOAD_SAIDA);
-					break;
-				}
-			}
-			radios = document.getElementsByName('ArquivoEntrada');
-			var ArquivoEntrada;
-			for (var i = 0; i < radios.length; i++) {
-				if (radios[i].checked) {
-					ArquivoEntrada = radios[i].id.replace('ArquivoEntrada', '');
-					//console.log(DOWNLOAD_SAIDA);
-					break;
-				}
-			}
-			
-			var elPrestados = document.getElementById("ArquivoSaidaXML");
-			if (elPrestados.checked) {
-				var ArquivoSaida = "XML";
-			} else {
-				var ArquivoSaida = "TXT";
-			}
-			
-			
-			var elTomados = document.getElementById("ArquivoEntradaXML");
-			if (elTomados.checked) {
-				var ArquivoEntrada = "XML";
-			} else {
-				var ArquivoEntrada = "TXT";
-			}
-			*/
 			
 			//Dominio Parametros
 			var dominioLogin = document.getElementById("DominioLogin").value;
@@ -403,9 +323,6 @@
 				"ProtocolarNFSaida": protocolarNFSaida,
 				"ProtocolarNFEntrada": protocolarNFEntrada,
 				"SimplesNacional": simplesNacional,
-				"EmitirCertidao": emitirCertidao,
-				"FinalidadeCertidao": FinalidadeCertidao,
-				"CertidaoExcel": certidaoExcel,
 				
 				"IPMLogin": ipmLogin,
 				"IPMPassword": ipmPassword,
@@ -604,55 +521,14 @@
 						</div>
 						<div class="col-1 d-flex align-items-center "></div>
 						<div class="col-2 d-flex align-items-center">
-							<label class="col-form-label">Certidão Negativa</label>
+							
 						</div>
 						<div class="col-4 d-flex align-items-center ">
 							<div class="form-check form-switch form-check-inline">
-								<input class="form-check-input" type="checkbox" role="switch" id="EmitirCertidao" name="EmitirCertidao">
-								<label class="form-check-label" for="EmitirCertidao">Sim</label>
+								<!--input class="form-check-input" type="checkbox" role="switch" id="EmitirCertidao" name="EmitirCertidao">
+								<label class="form-check-label" for="EmitirCertidao">Sim</label-->
 							</div>
 						</div>
-					</div>
-				</div>
-				<div id='divCertidao' style="display: none;">
-					<hr class="my-3">
-					<div class="container-fluid d-flex justify-content-center"><h6>Emissão da Certidão Negativa de Débitos - CND</h6></div>
-					<div>
-						<div class="row">
-							<div class="col-3 d-flex align-items-center">
-								<label class="col-form-label">Finalidade</label>
-							</div>
-							<div class="col-9 d-flex align-items-center ">
-								<select class="form-select form-select-sm" id="FinalidadeCertidao">
-									<option value="Financiamento - Contribuinte">Financiamento - Contribuinte</option>
-									<option value="Juridico - Contribuinte">Juridico - Contribuinte</option>
-									<option value="Licitação - Contribuinte">Licitação - Contribuinte</option>
-									<option value="Transmissão - Contribuinte">Transmissão - Contribuinte</option>
-								</select>
-							</div>
-						</div>
-						<div class="row" style="display: none;">
-							<div class="col-3 d-flex align-items-center">
-								<label class="col-form-label">Arquivo Excel com CNPJs</label>
-							</div>
-							<div class="col-9 d-flex align-items-center ">
-								<input class="form-control form-control-sm" id="fileInputCertidao" type="file" accept=".xlsx, .xls">
-							</div>
-						</div>	
-					</div>
-				</div>
-				<div id='divEmissaoNF' style="display: none;">
-					<hr class="my-3">
-					<div class="container-fluid d-flex justify-content-center"><h6>Emissão de Nota Fiscal de Serviço</h6></div>
-					<div>
-						<div class="row">
-							<div class="col-3 d-flex align-items-center">
-								<label class="col-form-label">Arquivo Notas</label>
-							</div>
-							<div class="col-9 d-flex align-items-center ">
-								<input class="form-control form-control-sm" id="fileInputEmissaoNFS" type="file" accept=".pdf, .xlsx, .xls">
-							</div>
-						</div>	
 					</div>
 				</div>
 			</div>
@@ -897,27 +773,6 @@
 	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 	
-	<!--script>
-		function downloadFile() {
-		  var fileInput = document.getElementById('fileInput');
-		  var file = fileInput.files[0];
-		  var fileName = file.name;
-		  var fileExtension = fileName.split('.').pop(); // Obtém a extensão do arquivo
-		  var currentDate = new Date();
-		  var formattedDate = currentDate.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' });
-		  var newFileName = formattedDate.replace(/[^\d]/g, '') + '.' + fileExtension; // Novo nome do arquivo
-		  
-		  var downloadLink = document.createElement('a');
-		  downloadLink.href = URL.createObjectURL(file);
-		  downloadLink.download = newFileName;
-		  downloadLink.click();
-
-		  var fileInfoCertidaoExcelDiv = document.getElementById('fileInfoCertidaoExcel');
-		  fileInfoCertidaoExcelDiv.value = newFileName; // Define o valor sem exibir para o usuário
-		  fileInfoCertidaoExcelDiv.style.display = 'block'; // Torna a div visível ao concluir o download
-		}
-	</script-->
-	
 	<script>
 	  function closeOffcanvas() {
 		var offcanvasElement = document.getElementById('menuButton');
@@ -1013,20 +868,6 @@
 		  labelSimplesNacional.textContent = 'Sim';
 		} else {
 		  labelSimplesNacional.textContent = 'Não';
-		}
-	  });
-	  
-	  var ckEmitirCertidao = document.getElementById('EmitirCertidao');
-	  var labelEmitirCertidao = document.querySelector('label[for="EmitirCertidao"]');
-	  var divCertidao = document.getElementById("divCertidao");
-
-	  ckEmitirCertidao.addEventListener('change', function() {
-		if (this.checked) {
-		  labelEmitirCertidao.textContent = 'Sim';
-		  divCertidao.style.display = "block";
-		} else {
-		  labelEmitirCertidao.textContent = 'Não';
-		  divCertidao.style.display = "none";
 		}
 	  });
 	  

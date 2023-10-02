@@ -6,7 +6,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1223,1265</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1234,1265</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Get_Transaction_Data_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -121,12 +121,11 @@
               <OutArgument x:TypeArguments="x:String">[querySql]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String" xml:space="preserve">SELECT  (CASE WHEN (
+              <InArgument x:TypeArguments="x:String" xml:space="preserve">["SELECT  (CASE WHEN (
             (PERIODO_DOWNLOAD_SAIDA &lt;&gt; '{PERIODO}' AND DOWNLOAD_SAIDA &lt;&gt; 'Nenhum') OR 
             (PERIODO_DOWNLOAD_ENTRADA &lt;&gt; '{PERIODO}' AND DOWNLOAD_ENTRADA  &lt;&gt; 'Nenhum') OR
             (PERIODO_DECLARACAO_SAIDA &lt;&gt; '{PERIODO}' AND PROTOCOLAR_SAIDA  &lt;&gt; 'Nenhum') OR
             (PERIODO_DECLARACAO_ENTRADA &lt;&gt; '{PERIODO}' AND PROTOCOLAR_ENTRADA  &lt;&gt; 'Nenhum') OR
-            (PERIODO_CERTIDAO &lt;&gt; '{PERIODO}') OR
             (PERIODO_SIMPLES_NACIONAL &lt;&gt; '{PERIODO}' AND (REGIME_TRIBUTARIO = 'Microempresa' OR REGIME_TRIBUTARIO = 'Empresa de Pequeno Porte') AND DECLARAR_SIMPLES_NACIONAL)
          ) THEN 'True' ELSE 'False' END) AS EXECUTAR,
          
@@ -134,7 +133,6 @@
         (CASE WHEN (PERIODO_DOWNLOAD_ENTRADA &lt;&gt; '{PERIODO}' AND DOWNLOAD_ENTRADA  &lt;&gt; 'Nenhum') THEN 'True' ELSE 'False' END) AS FAZ_DOWNLOAD_ENTRADA,
         (CASE WHEN (PERIODO_DECLARACAO_SAIDA &lt;&gt; '{PERIODO}' AND PROTOCOLAR_SAIDA  &lt;&gt; 'Nenhum') THEN 'True' ELSE 'False' END) AS FAZ_DECLARACAO_SAIDA,
         (CASE WHEN (PERIODO_DECLARACAO_ENTRADA &lt;&gt; '{PERIODO}' AND PROTOCOLAR_ENTRADA &lt;&gt; 'Nenhum') THEN 'True' ELSE 'False' END) AS FAZ_DECLARACAO_ENTRADA,
-        (CASE WHEN (PERIODO_CERTIDAO &lt;&gt; '{PERIODO}') THEN 'True' ELSE 'False' END) AS FAZ_CERTIDAO,
         (CASE WHEN (PERIODO_SIMPLES_NACIONAL &lt;&gt; '{PERIODO}' AND (REGIME_TRIBUTARIO = 'Microempresa' OR REGIME_TRIBUTARIO = 'Empresa de Pequeno Porte') AND DECLARAR_SIMPLES_NACIONAL) THEN 'True' ELSE 'False' END) AS FAZ_SIMPLES_NACIONAL, 
         
         cli.ID_CLIENTE,
@@ -157,7 +155,6 @@
         PERIODO_DECLARACAO_SAIDA,
         PERIODO_DECLARACAO_ENTRADA,
         PERIODO_SIMPLES_NACIONAL,
-        PERIODO_CERTIDAO,
         
        'XML Entradas: ' || 
        (CASE WHEN (PERIODO_DOWNLOAD_SAIDA &lt;&gt; '{PERIODO}' AND DOWNLOAD_SAIDA &lt;&gt; 'Nenhum') THEN 'Sim' ELSE 'Não' END) || 
@@ -168,15 +165,13 @@
        ' | Protocolar Entradas: ' ||
        (CASE WHEN (PERIODO_DECLARACAO_ENTRADA &lt;&gt; '{PERIODO}' AND PROTOCOLAR_ENTRADA  &lt;&gt; 'Nenhum') THEN 'Sim' ELSE 'Não' END) ||
        ' | Simples Nacional: ' ||
-       (CASE WHEN (PERIODO_SIMPLES_NACIONAL &lt;&gt; '{PERIODO}' AND (REGIME_TRIBUTARIO = 'Microempresa' OR REGIME_TRIBUTARIO = 'Empresa de Pequeno Porte') AND DECLARAR_SIMPLES_NACIONAL) THEN 'Sim' ELSE 'Não' END) ||
-       ' | Certidão Negativa: ' || 
-       (CASE WHEN (PERIODO_CERTIDAO &lt;&gt; '{PERIODO}') THEN 'Sim' ELSE 'Não' END) AS OBSERVACAO
+       (CASE WHEN (PERIODO_SIMPLES_NACIONAL &lt;&gt; '{PERIODO}' AND (REGIME_TRIBUTARIO = 'Microempresa' OR REGIME_TRIBUTARIO = 'Empresa de Pequeno Porte') AND DECLARAR_SIMPLES_NACIONAL) THEN 'Sim' ELSE 'Não' END) AS OBSERVACAO
         
 FROM ipm
 INNER JOIN _perfil per on per.ID_PERFIL = ipm.ID_PERFIL
 INNER JOIN cliente cli on cli.ID_CLIENTE = ipm.ID_CLIENTE
 
-WHERE  (per.ID_PERFIL = {Perfil} AND cli.SITUACAO = True AND per.SITUACAO = True) {QueryTransactionData}</InArgument>
+WHERE  (per.ID_PERFIL = {Perfil} AND cli.SITUACAO = True AND per.SITUACAO = True) {QueryTransactionData}"]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">

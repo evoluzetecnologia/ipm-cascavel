@@ -9,7 +9,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1223,958</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1244,2663</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Download_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -139,7 +139,7 @@
       <AssemblyReference>System.Runtime.InteropServices.RuntimeInformation</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Download" sap:VirtualizedContainerService.HintSize="450,893" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Download" sap:VirtualizedContainerService.HintSize="760,2598" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="Atende.Net - IPM Sistemas Ltda - Cascavel / PR" Name="title" />
       <Variable x:TypeArguments="x:String" Name="var">
@@ -155,14 +155,14 @@
       <Variable x:TypeArguments="x:String" Default="Nota Fiscal" Name="btnHover" />
       <Variable x:TypeArguments="x:String" Default="Gerenciamento de Notas" Name="btnClick" />
       <Variable x:TypeArguments="x:String" Default="CADASTRO_ECONOMICO" Name="codigo" />
-      <Variable x:TypeArguments="x:Boolean" Name="formularioAberto" />
+      <Variable x:TypeArguments="x:Boolean" Name="varBool" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:IfElseIf DisplayName="Tipo Download" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="IfElseIf_2">
+    <ui:IfElseIf DisplayName="Tipo Download" sap:VirtualizedContainerService.HintSize="698,52" sap2010:WorkflowViewState.IdRef="IfElseIf_2">
       <ui:IfElseIf.ConditionBlocks>
         <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
           <ui:IfElseIfBlock BlockType="If" Condition="[io_TransactionItem(&quot;DOWNLOAD_&quot;+in_Tipo.ToUpper).ToString().ToLower().Equals(&quot;nenhum&quot;)]">
@@ -230,7 +230,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:IfElseIf>
-    <ui:IfElseIf DisplayName="Mudar para Entrada" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="IfElseIf_3">
+    <ui:IfElseIf DisplayName="Mudar para Entrada" sap:VirtualizedContainerService.HintSize="698,52" sap2010:WorkflowViewState.IdRef="IfElseIf_3">
       <ui:IfElseIf.ConditionBlocks>
         <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
           <ui:IfElseIfBlock BlockType="If" Condition="[in_Tipo.ToUpper.Equals(&quot;ENTRADA&quot;)]">
@@ -292,23 +292,23 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:IfElseIf>
-    <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" Condition="[Not formularioAberto And i &gt; 0]" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_6">
+    <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" Condition="[Not varBool And i &gt; 0]" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="698,1757" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_6">
       <ui:InterruptibleDoWhile.Body>
-        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="572,725" sap2010:WorkflowViewState.IdRef="Sequence_61">
+        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="662,1551" sap2010:WorkflowViewState.IdRef="Sequence_61">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <uix:NCheckState DisplayName="Check App State 'Consultar Nota'" EnableIfExists="False" Exists="[formularioAberto]" sap:VirtualizedContainerService.HintSize="510,52" sap2010:WorkflowViewState.IdRef="NCheckState_1" Timeout="0.5" Version="V3">
+          <uix:NCheckState DisplayName="Trocar" EnableIfExists="False" Exists="[varBool]" sap:VirtualizedContainerService.HintSize="600,878" sap2010:WorkflowViewState.IdRef="NCheckState_1" Timeout="0" Version="V3">
             <uix:NCheckState.IfNotExists>
-              <Sequence DisplayName="Target not appears" sap:VirtualizedContainerService.HintSize="513,259" sap2010:WorkflowViewState.IdRef="Sequence_60">
+              <Sequence DisplayName="Target not appears" sap:VirtualizedContainerService.HintSize="556,621" sap2010:WorkflowViewState.IdRef="Sequence_60">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\IPM\Menu IPM.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="451,52" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="Process\IPM\Menu IPM.xaml">
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\IPM\Menu IPM.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="494,52" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="Process\IPM\Menu IPM.xaml">
                   <ui:InvokeWorkflowFile.Arguments>
                     <InArgument x:TypeArguments="x:String" x:Key="in_Menu">Nota Fiscal</InArgument>
                   </ui:InvokeWorkflowFile.Arguments>
@@ -319,7 +319,7 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </ui:InvokeWorkflowFile>
-                <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Browser Chrome: Atende.Net - IPM Sistemas Ltda - Cascavel / PR" sap:VirtualizedContainerService.HintSize="451,52" sap2010:WorkflowViewState.IdRef="NApplicationCard_6" InteractionMode="DebuggerApi" OpenMode="Never" ScopeGuid="31a36fb2-a6ab-436e-9169-a352cc35473c" Version="V2">
+                <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Browser Chrome: Atende.Net - IPM Sistemas Ltda - Cascavel / PR" sap:VirtualizedContainerService.HintSize="494,52" sap2010:WorkflowViewState.IdRef="NApplicationCard_6" InteractionMode="DebuggerApi" OpenMode="Never" ScopeGuid="31a36fb2-a6ab-436e-9169-a352cc35473c" Version="V2">
                   <uix:NApplicationCard.Body>
                     <ActivityAction x:TypeArguments="x:Object">
                       <ActivityAction.Argument>
@@ -366,6 +366,26 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </uix:NApplicationCard>
+                <uix:NCheckState DisplayName="Menu " EnableIfNotExists="False" Exists="[varBool]" sap:VirtualizedContainerService.HintSize="494,322" sap2010:WorkflowViewState.IdRef="NCheckState_11" Version="V3">
+                  <uix:NCheckState.IfExists>
+                    <Sequence sap:VirtualizedContainerService.HintSize="450,105" sap2010:WorkflowViewState.IdRef="Sequence_137">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </Sequence>
+                  </uix:NCheckState.IfExists>
+                  <uix:NCheckState.Target>
+                    <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/66" DesignTimeRectangle="140, 188, 216, 29" DesignTimeScaleFactor="1" ElementType="Text" FriendlyName="'Consultar Nota'" FullSelectorArgument="[string.Format(&quot;&lt;webctrl parentid='estrutura_area_janelas' tag='SECTION' aria-label='{0}' /&gt;&quot;, janela)]" Guid="3694c061-e0fc-4cf0-b502-4e6187e1d0a3" ImageBase64="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" InformativeScreenshot="e62a735ab735052e22cceca62de1f3da.png" ScopeSelectorArgument="[string.Format(&quot;&lt;html app='chrome.exe' title='{0}' /&gt;&quot;, title)]" SearchSteps="Selector" Version="V2" Visibility="Interactive" WaitForReadyArgument="Complete" />
+                  </uix:NCheckState.Target>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </uix:NCheckState>
               </Sequence>
             </uix:NCheckState.IfNotExists>
             <uix:NCheckState.Target>
@@ -373,12 +393,12 @@
             </uix:NCheckState.Target>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </uix:NCheckState>
-          <If Condition="[Not formularioAberto]" DisplayName="Nao Abriu o formulario" sap:VirtualizedContainerService.HintSize="510,522" sap2010:WorkflowViewState.IdRef="If_25">
+          <If Condition="[Not varBool]" DisplayName="Nao Abriu o formulario" sap:VirtualizedContainerService.HintSize="600,522" sap2010:WorkflowViewState.IdRef="If_25">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -424,12 +444,12 @@
       </ui:InterruptibleDoWhile.Body>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:InterruptibleDoWhile>
-    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Atende.Net" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" InteractionMode="DebuggerApi" ScopeGuid="3a581162-3a14-4bac-bb0f-067df293e283" Version="V2">
+    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Atende.Net" sap:VirtualizedContainerService.HintSize="698,52" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" InteractionMode="DebuggerApi" ScopeGuid="3a581162-3a14-4bac-bb0f-067df293e283" Version="V2">
       <uix:NApplicationCard.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
@@ -1442,7 +1462,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </uix:NApplicationCard>
-    <If Condition="[i &gt; 0]" DisplayName="Com Notas" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="If_8">
+    <If Condition="[i &gt; 0]" DisplayName="Com Notas" sap:VirtualizedContainerService.HintSize="698,52" sap2010:WorkflowViewState.IdRef="If_8">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -2355,7 +2375,7 @@
         <Sequence sap2010:WorkflowViewState.IdRef="Sequence_32" />
       </If.Else>
     </If>
-    <If Condition="[in_Fechar]" DisplayName="Fechar" sap:VirtualizedContainerService.HintSize="388,322" sap2010:WorkflowViewState.IdRef="If_16">
+    <If Condition="[in_Fechar]" DisplayName="Fechar" sap:VirtualizedContainerService.HintSize="698,322" sap2010:WorkflowViewState.IdRef="If_16">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
