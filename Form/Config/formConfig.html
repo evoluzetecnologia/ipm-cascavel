@@ -172,16 +172,13 @@
 							option.text = item.PERFIL;
 						  perfilSelect.appendChild(option);
 						}
-					  
-					 
+						
 						var row = $('<tr>');
-						
-						
-						var codigoInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm').prop('id', 'ID_PERFIL').prop('name', 'ID_PERFIL').prop("value",item.ID_PERFIL).prop('readonly', true);
+						var codigoInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm').prop('id', 'ID_PERFIL_'+ item.ID_PERFIL).prop('name', 'ID_PERFIL_'+ item.ID_PERFIL).prop("value",item.ID_PERFIL).prop('readonly', true);
 						var codigoCell = $("<td>").prop('class', 'col-2 fw-normal').append(codigoInput);
 						row.append(codigoCell);
 										
-						var perfilInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm').prop('id', 'PERFIL').prop('name', 'PERFIL').prop("value",item.PERFIL);
+						var perfilInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm').prop('id', 'PERFIL_'+ item.ID_PERFIL).prop('name', 'PERFIL_'+ item.ID_PERFIL).prop("value",item.PERFIL);
 						var perfilCell = $("<td>").prop('class', 'col-10').append(perfilInput);
 						row.append(perfilCell);
 						
@@ -261,15 +258,16 @@
 			}
 		}
 		function atualizaPerfil(value){
-			
 			var jsonData = [];
-			$('table tr').each(function() {
-				var row = $(this);
-				var ID_PERFIL = row.find("#ID_PERFIL").val();
-				var PERFIL = row.find("#PERFIL").val();
-				var SITUACAO = row.find(".SITUACAO").is(":checked");
+			var tbody = document.getElementById('myTablePerfil');
+			var rows = tbody.getElementsByTagName('tr');
+			for (var i = 0; i < rows.length; i++) {
+			  var row = rows[i];
+			  var ID_PERFIL = row.querySelector('input[id^="ID_PERFIL_"]').value;
+			  var PERFIL = row.querySelector('input[id^="PERFIL_"]').value;
+			  var SITUACAO = row.querySelector('input[id^="SITUACAO_"]').checked;
 				
-				var rowValues = {
+			  var rowValues = {
 				  'ID_PERFIL': ID_PERFIL,
 				  'PERFIL': PERFIL,
 				  'SITUACAO': SITUACAO
@@ -277,17 +275,9 @@
 				if(ID_PERFIL){
 					jsonData.push(rowValues);
 				}
-			});
+			}
 			var jsonResult = JSON.stringify(jsonData);
 			uiPathApi.sendMessage("atualizarPerfil", jsonResult);
-			/*
-			var jsonData = {
-				"idPerfil": value
-			}
-			var jsonString = JSON.stringify(jsonData);
-			alert(perfil);
-			uiPathApi.sendMessage("excluirPerfil", jsonString );
-			*/
 		}
 		function closedClicked() {
 			uiPathApi.sendMessage("close");
@@ -349,9 +339,9 @@
 			//var certidaoExcel = fileInfoCertidaoExcelDiv.value;
 			
 			
-			var codigoServico = document.getElementById("CodigoServico").value;
-			var observacaoNFS = document.getElementById("ObservacaoNFS").value;
-			var observacaoFinanceira = document.getElementById("ObservacaoFinanceira").value;
+			//var codigoServico = document.getElementById("CodigoServico").value;
+			//var observacaoNFS = document.getElementById("ObservacaoNFS").value;
+			//var observacaoFinanceira = document.getElementById("ObservacaoFinanceira").value;
 			
 			// IPM Parametros
 			var ipmLogin = document.getElementById("IPMLogin").value;
@@ -360,7 +350,10 @@
 			var ProtocoloSaida = document.getElementById("ProtocoloSaida").value;
 			var ProtocoloEntrada = document.getElementById("ProtocoloEntrada").value;
 			
-			var radios = document.getElementsByName('ArquivoSaida');
+			var ArquivoSaida = document.getElementById("ArquivoSaida").value;
+			var ArquivoEntrada = document.getElementById("ArquivoEntrada").value;
+			
+			/*var radios = document.getElementsByName('ArquivoSaida');
 			var ArquivoSaida;
 			for (var i = 0; i < radios.length; i++) {
 				if (radios[i].checked) {
@@ -378,7 +371,7 @@
 					break;
 				}
 			}
-			/*
+			
 			var elPrestados = document.getElementById("ArquivoSaidaXML");
 			if (elPrestados.checked) {
 				var ArquivoSaida = "XML";
@@ -398,7 +391,6 @@
 			//Dominio Parametros
 			var dominioLogin = document.getElementById("DominioLogin").value;
 			var dominioPassword = document.getElementById("DominioPassword").value;
-			var dominioWeb = document.getElementById("DominioWeb").checked;
 			var importarClientes = document.getElementById("ImportarClientes").checked;
 			
 			var jsonData = {
@@ -415,10 +407,6 @@
 				"FinalidadeCertidao": FinalidadeCertidao,
 				"CertidaoExcel": certidaoExcel,
 				
-				"CodigoServico": codigoServico,
-				"ObservacaoNFS": observacaoNFS,
-				"ObservacaoFinanceira": observacaoFinanceira,
-				
 				"IPMLogin": ipmLogin,
 				"IPMPassword": ipmPassword,
 				"IPMCodigoLogin": ipmCodigoLogin,
@@ -427,7 +415,6 @@
 				"ArquivoSaida": ArquivoSaida,
 				"ArquivoEntrada": ArquivoEntrada,
 				
-				"DominioWeb": dominioWeb,
 				"DominioLogin": dominioLogin,
 				"DominioPassword": dominioPassword,				
 				"ImportarClientes": importarClientes
@@ -489,10 +476,13 @@
 						  <button class="nav-link active" id="pills-iniciar-tab" data-bs-toggle="pill" data-bs-target="#pills-iniciar" type="button" role="tab" aria-controls="pills-iniciar" aria-selected="true" onclick="closeOffcanvas()">Home</button>
 						</li>
 						<li class="nav-item">
-						  <button class="nav-link" id="pills-automacao-tab" data-bs-toggle="pill" data-bs-target="#pills-automacao" type="button" role="tab" aria-controls="pills-automacao" aria-selected="true" onclick="closeOffcanvas()">IPM</button>
+						  <button class="nav-link" id="pills-automacao-tab" data-bs-toggle="pill" data-bs-target="#pills-automacao" type="button" role="tab" aria-controls="pills-automacao" aria-selected="true" onclick="closeOffcanvas()">Configurações</button>
+						</li>
+						<li class="nav-item">
+						  <button class="nav-link" id="pills-dominio-tab" data-bs-toggle="pill" data-bs-target="#pills-dominio" type="button" role="tab" aria-controls="pills-dominio" aria-selected="true" onclick="closeOffcanvas()">Domínio Sistema</button>
 						</li>
 						
-						<li class="nav-item dropdown" role="presentation">
+						<!--li class="nav-item dropdown" role="presentation">
 							<button class="nav-link dropdown-toggle" type="button" role="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
 								Domínio Sistema
 							</button>
@@ -505,7 +495,7 @@
 						<li class="nav-item">
 						  <a class="nav-link" href="#pills-automacao"></a>
 						   <hr class="dropdown-divider">
-						</li>
+						</li-->
 					</ul>
 					<button class="btn btn-outline-danger w-100" type="botton" onclick="closedClicked()">Sair da Automação</button>
 				</div>
@@ -634,7 +624,6 @@
 							</div>
 							<div class="col-9 d-flex align-items-center ">
 								<select class="form-select form-select-sm" id="FinalidadeCertidao">
-									<option value=""></option>
 									<option value="Financiamento - Contribuinte">Financiamento - Contribuinte</option>
 									<option value="Juridico - Contribuinte">Juridico - Contribuinte</option>
 									<option value="Licitação - Contribuinte">Licitação - Contribuinte</option>
@@ -642,7 +631,7 @@
 								</select>
 							</div>
 						</div>
-						<div class="row">
+						<div class="row" style="display: none;">
 							<div class="col-3 d-flex align-items-center">
 								<label class="col-form-label">Arquivo Excel com CNPJs</label>
 							</div>
@@ -698,10 +687,18 @@
 					</div>
 					
 					<div class="row">
-						<div class="col-3 d-flex align-items-center">
+						<div class="col-3 d-flex align-items-center ">
 							<label class="col-form-label">Tipo Download Saidas</label>
 						</div>
-						<div class="col-3 d-flex align-items-center ">
+						<div class="col-3 d-flex align-items-center">
+							<select class="form-select form-select-sm" id="ArquivoSaida" required>
+								<option value="XML">XML</option>
+								<option value="TXT">TXT</option>
+								<option value="Nenhum">Nenhum</option>
+							</select>
+						</div>
+						
+						<!--div class="col-3 d-flex align-items-center ">
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="radio" name="ArquivoSaida" id="ArquivoSaidaXML" value="XML" checked>
 								<label class="form-check-label" for="ArquivoSaidaXML">.xml</label>
@@ -715,11 +712,11 @@
 							  <label class="form-check-label" for="ArquivoSaidaNenhum">Nenhum</label>
 							</div>
 						</div>
-						<div class="col-1 d-flex align-items-center"></div>
-						<div class="col-3 d-flex align-items-center">
+						<div class="col-1 d-flex align-items-center"></div-->
+						<div class="col-3 d-flex align-items-center justify-content-center">
 							<label class="col-form-label">Protocolar Saidas</label>
 						</div>
-						<div class="col-2 d-flex align-items-center ">
+						<div class="col-3 d-flex align-items-center ">
 							<select class="form-select form-select-sm" id="ProtocoloSaida" required>
 								<option value="Todos">Todos</option>
 								<option value="ISS">Com Recolhimento</option>
@@ -732,7 +729,14 @@
 						<div class="col-3 d-flex align-items-center">
 							<label class="col-form-label">Tipo Download Entradas</label>
 						</div>
-						<div class="col-3 d-flex align-items-center ">
+						<div class="col-3 d-flex align-items-center">
+							<select class="form-select form-select-sm" id="ArquivoEntrada" required>
+								<option value="XML">XML</option>
+								<option value="TXT">TXT</option>
+								<option value="Nenhum">Nenhum</option>
+							</select>
+						</div>
+						<!--div class="col-3 d-flex align-items-center ">
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="radio" name="ArquivoEntrada" id="ArquivoEntradaXML" value="XML" checked>
 								<label class="form-check-label" for="ArquivoEntradaXML">.xml</label>
@@ -746,11 +750,11 @@
 							  <label class="form-check-label form-sm" for="ArquivoEntradaNenhum">Nenhum</label>
 							</div>
 						</div>
-						<div class="col-1 d-flex align-items-center"></div>
-						<div class="col-3 d-flex align-items-center">
+						<div class="col-1 d-flex align-items-center"></div-->
+						<div class="col-3 d-flex align-items-center justify-content-center">
 							<label class="col-form-label">Protocolar Entradas</label>
 						</div>
-						<div class="col-2 d-flex align-items-center ">
+						<div class="col-3 d-flex align-items-center ">
 							<select class="form-select form-select-sm" id="ProtocoloEntrada" required>
 								<option value="Todos">Todos</option>
 								<option value="ISS">Com Recolhimento</option>
@@ -759,7 +763,7 @@
 						</div>
 					</div>
 					
-					<div class="row mb-1">
+					<!--div class="row mb-1">
 						<div class="col-3 d-flex align-items-center">
 							<label class="col-form-label">Código Serviço Emissão NFS</label>
 						</div>
@@ -783,7 +787,7 @@
 						<div class="col-9 d-flex align-items-center">
 							  <textarea class="form-control form-control-sm" placeholder="Observação financeira na NFS" rows="5" id="ObservacaoFinanceira"></textarea>
 						</div>
-					</div>
+					</div-->
 				</div>
 			</div>
 			
@@ -807,17 +811,7 @@
 							<input type="password" class="form-control form-control-sm" id="DominioPassword" name="DominioPassword" placeholder="Senha do Domínio" value="">
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-2 d-flex align-items-center">
-							<label class="col-form-label">Domínio Web</label>
-						</div>
-						<div class="col-10 d-flex align-items-center ">
-							<div class="form-check form-switch form-check-inline">
-								<input class="form-check-input" type="checkbox" role="switch" id="DominioWeb" name="DominioWeb">
-								<label class="form-check-label" for="DominioWeb">Não</label>
-							</div>
-						</div>
-					</div>
+					
 					<hr class="my-3">
 					<div class="row">
 						<div class="col-2 d-flex align-items-center">
@@ -934,19 +928,7 @@
 	
 	<!-- Javascrit da pagina -->
     <script>
-		
 	
-	  var ckDominioWeb = document.getElementById('DominioWeb');
-	  var labelDominioWeb = document.querySelector('label[for="DominioWeb"]');
-
-	  ckDominioWeb.addEventListener('change', function() {
-		if (this.checked) {
-		  labelDominioWeb.textContent = 'Sim';
-		} else {
-		  labelDominioWeb.textContent = 'Não';
-		}
-	  });
-	  
 	  var ckImportarClientes = document.getElementById('ImportarClientes');
 	  var labelImportarClientes = document.querySelector('label[for="ImportarClientes"]');
 
