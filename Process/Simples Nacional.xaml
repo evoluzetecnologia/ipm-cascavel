@@ -8,7 +8,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1223,5592</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1234,5592</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Simples_Nacional_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -142,11 +142,7 @@
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="Simples_Nacional" sap:VirtualizedContainerService.HintSize="831,5527" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="x:Int32" Name="i">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:Int32" Value="3" />
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="x:Int32" Default="3" Name="i" />
       <Variable x:TypeArguments="x:String" Default="ReciboPrestados.pdf" Name="var" />
       <Variable x:TypeArguments="x:Boolean" Name="varBool" />
       <Variable x:TypeArguments="x:String" Default="0,00" Name="valor" />
@@ -237,10 +233,18 @@
           </uix:NCheckState>
           <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\Declaracao.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Process\Declaracao.xaml">
             <ui:InvokeWorkflowFile.Arguments>
-              <InArgument x:TypeArguments="x:String" x:Key="in_Tipo">Saida</InArgument>
-              <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">[in_Config]</InOutArgument>
-              <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[io_TransactionItem]</InOutArgument>
-              <InArgument x:TypeArguments="x:Boolean" x:Key="in_Fechar">True</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_Tipo">
+                <Literal x:TypeArguments="x:String">Saida</Literal>
+              </InArgument>
+              <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">
+                <VisualBasicReference x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="in_Config" />
+              </InOutArgument>
+              <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">
+                <VisualBasicReference x:TypeArguments="sd:DataRow" ExpressionText="io_TransactionItem" />
+              </InOutArgument>
+              <InArgument x:TypeArguments="x:Boolean" x:Key="in_Fechar">
+                <Literal x:TypeArguments="x:Boolean" Value="True" />
+              </InArgument>
             </ui:InvokeWorkflowFile.Arguments>
           </ui:InvokeWorkflowFile>
         </Sequence>
