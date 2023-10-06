@@ -7,7 +7,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1223,3234</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1095,3234</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Get_Transaction_Data_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -186,10 +186,11 @@
               <OutArgument x:TypeArguments="x:String">[querySql]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String" xml:space="preserve">SELECT  cli.ID_CLIENTE,
+              <InArgument x:TypeArguments="x:String" xml:space="preserve">["SELECT  cli.ID_CLIENTE,
         CNPJ,
         CODIGO,
         EMPRESA,
+		NOME,
         REGIME_TRIBUTARIO,
         SITUACAO,
 
@@ -215,7 +216,7 @@
 FROM cliente cli
 LEFT JOIN ipm on ipm.ID_CLIENTE = cli.ID_CLIENTE
 
-WHERE ID_PERFIL = {1} AND (cli.CODIGO = '{0}' OR cli.CNPJ = '{0}')</InArgument>
+WHERE ID_PERFIL = {1} AND (cli.CODIGO = '{0}' OR cli.CNPJ = '{0}')"]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
@@ -279,10 +280,11 @@ WHERE ID_PERFIL = {1} AND (cli.CODIGO = '{0}' OR cli.CNPJ = '{0}')</InArgument>
                           <OutArgument x:TypeArguments="x:String">[querySql]</OutArgument>
                         </ui:AssignOperation.To>
                         <ui:AssignOperation.Value>
-                          <InArgument x:TypeArguments="x:String" xml:space="preserve">SELECT  cli.ID_CLIENTE,
+                          <InArgument x:TypeArguments="x:String" xml:space="preserve">["SELECT  cli.ID_CLIENTE,
         CNPJ,
         CODIGO,
         EMPRESA,
+		NOME,
         REGIME_TRIBUTARIO,
         SITUACAO,
 
@@ -308,7 +310,7 @@ WHERE ID_PERFIL = {1} AND (cli.CODIGO = '{0}' OR cli.CNPJ = '{0}')</InArgument>
 FROM cliente cli
 LEFT JOIN ipm on ipm.ID_CLIENTE = cli.ID_CLIENTE
 
-WHERE cli.CODIGO = '{0}' OR cli.CNPJ = '{0}';</InArgument>
+WHERE cli.CODIGO = '{0}' OR cli.CNPJ = '{0}';"]</InArgument>
                         </ui:AssignOperation.Value>
                       </ui:AssignOperation>
                       <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_12">

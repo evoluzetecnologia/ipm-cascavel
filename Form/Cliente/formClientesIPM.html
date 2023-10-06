@@ -318,22 +318,6 @@
 		}
 
 		function jsonCliente(){
-			var ID_CLIENTE = document.getElementById("ID_CLIENTE").value;
-			var CNPJ = document.getElementById("CNPJ").value;
-			var CODIGO = document.getElementById("CODIGO").value;
-			var EMPRESA = document.getElementById("EMPRESA").value;
-			var REGIME_TRIBUTARIO = document.getElementById("REGIME_TRIBUTARIO").value;
-			var SITUACAO = document.getElementById("SITUACAO").checked;
-			
-			var LOGIN = document.getElementById("LOGIN").value;
-			var PASSWORD = document.getElementById("PASSWORD").value;
-			var CODIGO_LOGIN = document.getElementById("CODIGO_LOGIN").value;
-			var CADASTRO_ECONOMICO = document.getElementById("CADASTRO_ECONOMICO").value;
-			var PROTOCOLAR_SAIDA = document.getElementById("PROTOCOLAR_SAIDA").value;
-			var PROTOCOLAR_ENTRADA = document.getElementById("PROTOCOLAR_ENTRADA").value;
-			var LANCAR_NOTA_ENTRADA = document.getElementById("LANCAR_NOTA_ENTRADA").checked;
-			var DECLARAR_SIMPLES_NACIONAL = document.getElementById("DECLARAR_SIMPLES_NACIONAL").checked;
-			
 			var radios = document.getElementsByName('DOWNLOAD_SAIDA');
 			var DOWNLOAD_SAIDA;
 			for (var i = 0; i < radios.length; i++) {
@@ -356,23 +340,24 @@
 			}
 			
 			var jsonData = {
-				"ID_CLIENTE": ID_CLIENTE,
-				"CNPJ": CNPJ,
-				"CODIGO": CODIGO,
-				"EMPRESA": EMPRESA,
-				"REGIME_TRIBUTARIO": REGIME_TRIBUTARIO,
-				"SITUACAO": SITUACAO,
+				"ID_CLIENTE": document.getElementById("ID_CLIENTE").value,
+				"CNPJ": document.getElementById("CNPJ").value,
+				"CODIGO": document.getElementById("CODIGO").value,
+				"EMPRESA": document.getElementById("EMPRESA").value,
+				"NOME": document.getElementById("NOME").value,
+				"REGIME_TRIBUTARIO": document.getElementById("REGIME_TRIBUTARIO").value,
+				"SITUACAO": document.getElementById("SITUACAO").checked,
 				
-				"LOGIN": LOGIN,
-				"PASSWORD": PASSWORD,
-				"CODIGO_LOGIN": CODIGO_LOGIN,
-				"CADASTRO_ECONOMICO": CADASTRO_ECONOMICO,
+				"LOGIN": document.getElementById("LOGIN").value,
+				"PASSWORD": document.getElementById("PASSWORD").value,
+				"CODIGO_LOGIN": document.getElementById("CODIGO_LOGIN").value,
+				"CADASTRO_ECONOMICO": document.getElementById("CADASTRO_ECONOMICO").value,
 				"DOWNLOAD_SAIDA": DOWNLOAD_SAIDA,
 				"DOWNLOAD_ENTRADA": DOWNLOAD_ENTRADA,
-				"PROTOCOLAR_SAIDA": PROTOCOLAR_SAIDA,
-				"PROTOCOLAR_ENTRADA": PROTOCOLAR_ENTRADA,
-				"LANCAR_NOTA_ENTRADA": LANCAR_NOTA_ENTRADA,
-				"DECLARAR_SIMPLES_NACIONAL": DECLARAR_SIMPLES_NACIONAL
+				"PROTOCOLAR_SAIDA": document.getElementById("PROTOCOLAR_SAIDA").value,
+				"PROTOCOLAR_ENTRADA": document.getElementById("PROTOCOLAR_ENTRADA").value,
+				"LANCAR_NOTA_ENTRADA": document.getElementById("LANCAR_NOTA_ENTRADA").checked,
+				"DECLARAR_SIMPLES_NACIONAL": document.getElementById("DECLARAR_SIMPLES_NACIONAL").checked
 			};
 			jsonString = JSON.stringify(jsonData);
 			return jsonString;
@@ -475,10 +460,10 @@
 					Iniciar
 				</button>
 				<input type="text" class="form-control form-control-sm me-1" id="myInput" placeholder="Filtro">
-				<button class="btn btn-outline-success btn-sm me-1" type="botton" data-bs-toggle="modal" data-bs-target="#clienteModal" onclick="limparValoresModal()">
+				<button class="btn btn-success btn-sm me-1" type="botton" data-bs-toggle="modal" data-bs-target="#clienteModal" onclick="limparValoresModal()">
 					<i class="bi bi-person-plus-fill"></i>
 				</button>
-				<button class="btn btn-outline-danger btn-sm" type="botton" onclick="closedClicked()">
+				<button class="btn btn-danger btn-sm" type="botton" onclick="closedClicked()">
 					<i class="bi bi-x-lg"></i>
 				</button>
 			</div>
@@ -556,7 +541,7 @@
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-2 d-flex justify-content-start align-items-center">
-							<label class="col-form-label">Código Domínio</label>
+							<label class="col-form-label">Código Dominio</label>
 						</div>
 						<div class="col-2 d-flex align-items-center ">
 							<input type="text" class="form-control form-control-sm" id="CODIGO" name="CODIGO" placeholder="Código Cliente" value="">
@@ -583,10 +568,10 @@
 					</div>
 					<div class="row">
 						<div class="col-2 d-flex justify-content-start align-items-center">
-							<label class="col-form-label">Nome Emprea</label>
+							<label class="col-form-label">Apelido Empresa</label>
 						</div>
 						<div class="col-5 d-flex align-items-center ">
-							<input type="text" class="form-control form-control-sm" id="EMPRESA" name="EMPRESA" placeholder="Nome da Empresa" value="">
+							<input type="text" class="form-control form-control-sm" id="NOME" name="NOME" placeholder="Apelido da Empresa" value="">
 						</div>
 						<div class="col-2 d-flex justify-content-end align-items-end">
 							<label class="col-form-label">Regime Tributário</label>
@@ -603,6 +588,14 @@
 								<option value="Empresa de Pequeno Porte">Empresa de Pequeno Porte (Simples Nacional)</option>
 								<option value="RET - Regime Especial Trib.">RET - Regime Especial Trib.</option>
 							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-2 d-flex justify-content-start align-items-center">
+							<label class="col-form-label">Nome Empresa</label>
+						</div>
+						<div class="col-10 d-flex align-items-center ">
+							<input type="text" class="form-control form-control-sm" id="EMPRESA" name="EMPRESA" placeholder="Nome da Empresa" value="">
 						</div>
 					</div>
 					<hr class="md-5">
