@@ -320,7 +320,7 @@
 		function jsonCliente(){
 			var radios = document.getElementsByName('DOWNLOAD_SAIDA');
 			var DOWNLOAD_SAIDA;
-			for (var i = 0; i < radios.length; i++) {
+			/*for (var i = 0; i < radios.length; i++) {
 				if (radios[i].checked) {
 					DOWNLOAD_SAIDA = radios[i].id.replace('DOWNLOAD_SAIDA_', '');
 					//console.log(DOWNLOAD_SAIDA);
@@ -338,7 +338,7 @@
 				break;
 			  }
 			}
-			
+			*/
 			var jsonData = {
 				"ID_CLIENTE": document.getElementById("ID_CLIENTE").value,
 				"CNPJ": document.getElementById("CNPJ").value,
@@ -352,8 +352,8 @@
 				"PASSWORD": document.getElementById("PASSWORD").value,
 				"CODIGO_LOGIN": document.getElementById("CODIGO_LOGIN").value,
 				"CADASTRO_ECONOMICO": document.getElementById("CADASTRO_ECONOMICO").value,
-				"DOWNLOAD_SAIDA": DOWNLOAD_SAIDA,
-				"DOWNLOAD_ENTRADA": DOWNLOAD_ENTRADA,
+				"DOWNLOAD_SAIDA": document.getElementById("DOWNLOAD_SAIDA").value,
+				"DOWNLOAD_ENTRADA": document.getElementById("DOWNLOAD_ENTRADA").value,
 				"PROTOCOLAR_SAIDA": document.getElementById("PROTOCOLAR_SAIDA").value,
 				"PROTOCOLAR_ENTRADA": document.getElementById("PROTOCOLAR_ENTRADA").value,
 				"LANCAR_NOTA_ENTRADA": document.getElementById("LANCAR_NOTA_ENTRADA").checked,
@@ -614,23 +614,45 @@
 									<div class="col-2 d-flex align-items-center">
 										<label class="col-form-label">Login</label>
 									</div>
-									<div class="col-10 d-flex align-items-center ">
+									<div class="col-4 d-flex align-items-center ">
 										<input type="text" class="form-control form-control-sm" id="LOGIN" name="LOGIN" placeholder="Usuário de acesso do cliente no IPM" value="">
+									</div>
+									<div class="col-2 d-flex justify-content-end align-items-end">
+										<label class="col-form-label">Password</label>
+									</div>
+									<div class="col-4 d-flex align-items-center">
+										<input type="password" class="form-control form-control-sm" id="PASSWORD" name="PASSWORD" placeholder="Senha de acesso do cliente no IPM" value="">
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-2 d-flex justify-content-strat align-items-end">
-										<label class="col-form-label">Password</label>
-									</div>
-									<div class="col-10 d-flex align-items-center">
-										<input type="password" class="form-control form-control-sm" id="PASSWORD" name="PASSWORD" placeholder="Senha de acesso do cliente no IPM" value="">
-									</div>
+									
 								</div>
 								<div class="row">
 									<div class="col-2 d-flex align-items-center">
 										<label class="col-form-label">Download Saídas</label>
 									</div>
-									<div class="col-10 d-flex justify-content-start align-items-center">
+									<div class="col-4 d-flex align-items-center">
+										<select class="form-select form-select-sm" id="DOWNLOAD_SAIDA" required>
+											<option value="Default">Padrão Geral</option>
+											<option value="XML">XML</option>
+											<option value="TXT">TXT</option>
+											<option value="XML-PDF">XML e PDF</option>
+											<option value="TXT">TXT e PDF</option>
+											<option value="Nenhum">Nenhum</option>
+										</select>
+									</div>
+									<div class="col-2 d-flex justify-content-end align-items-center">
+										<label class="col-form-label">Protocolar Saídas</label>
+									</div>
+									<div class="col-4 d-flex align-items-center">
+										<select class="form-select form-select-sm" id="PROTOCOLAR_SAIDA">
+											<option value="Default">Padrão Geral</option>
+											<option value="Todos">Todos</option>
+											<option value="ISS">Com Recolhimento</option>
+											<option value="Nenhum">Nenhum</option>
+										</select>
+									</div>
+									<!--div class="col-10 d-flex justify-content-start align-items-center">
 										<div class="form-check form-check-inline">
 											<input class="form-check-input" type="radio" name="DOWNLOAD_SAIDA" id="DOWNLOAD_SAIDA_XML" value="XML">
 											<label class="form-check-label" for="DOWNLOAD_SAIDA_XML">.xml</label>
@@ -647,13 +669,34 @@
 										  <input class="form-check-input" type="radio" name="DOWNLOAD_SAIDA" id="DOWNLOAD_SAIDA_Default" value="Default" checked>
 										  <label class="form-check-label" for="DOWNLOAD_SAIDA_Default">Padrão Geral</label>
 										</div>
-									</div>
+									</div-->
 								</div>
 								<div class="row">
 									<div class="col-2 d-flex align-items-center">
 										<label class="col-form-label">Download Entradas</label>
 									</div>
-									<div class="col-10 d-flex justify-content-start align-items-center">
+									<div class="col-4 d-flex align-items-center">
+										<select class="form-select form-select-sm" id="DOWNLOAD_ENTRADA" required>
+											<option value="Default">Padrão Geral</option>
+											<option value="XML">XML</option>
+											<option value="TXT">TXT</option>
+											<option value="XML-PDF">XML e PDF</option>
+											<option value="TXT">TXT e PDF</option>
+											<option value="Nenhum">Nenhum</option>
+										</select>
+									</div>
+									<div class="col-2 d-flex justify-content-end align-items-center">
+										<label class="col-form-label">Protocolar Entradas</label>
+									</div>
+									<div class="col-4 d-flex align-items-center">
+										<select class="form-select form-select-sm" id="PROTOCOLAR_ENTRADA">
+											<option value="Default">Padrão Geral</option>
+											<option value="Todos">Todos</option>
+											<option value="ISS">Com Recolhimento</option>
+											<option value="Nenhum">Nenhum</option>
+										</select>
+									</div>
+									<!--div class="col-10 d-flex justify-content-start align-items-center">
 										<div class="form-check form-check-inline">
 											<input class="form-check-input" type="radio" name="DOWNLOAD_ENTRADA" id="DOWNLOAD_ENTRADA_XML" value="XML">
 											<label class="form-check-label" for="DOWNLOAD_ENTRADA_XML">.xml</label>
@@ -670,47 +713,22 @@
 										  <input class="form-check-input" type="radio" name="DOWNLOAD_ENTRADA" id="DOWNLOAD_ENTRADA_Default" value="Default" checked>
 										  <label class="form-check-label" for="DOWNLOAD_ENTRADA_Default">Padrão Geral</label>
 										</div>
-									</div>
+									</div-->
 								</div>
 								<div class="row">
-									<div class="col-2 d-flex justify-content-start align-items-center">
-										<label class="col-form-label">Protocolar Saídas</label>
-									</div>
-									<div class="col-3 d-flex align-items-center">
-										<select class="form-select form-select-sm" id="PROTOCOLAR_SAIDA">
-											<option value="Default">Padrão Geral</option>
-											<option value="Todos">Todos</option>
-											<option value="ISS">Com Recolhimento</option>
-											<option value="Nenhum">Nenhum</option>
-										</select>
-									</div>
-									<div class="col-4 d-flex justify-content-end align-items-center">
+									<div class="col-3 d-flex justify-content-end align-items-center">
 										<label class="col-form-label">Declarar Simples Nacional</label>
 									</div>
-									<div class="col-2 d-flex align-items-center ">
+									<div class="col-2 d-flex justify-content-start align-items-center ">
 										<div class="form-check form-switch form-check-inline">
 											<input class="form-check-input" type="checkbox" role="switch" id="DECLARAR_SIMPLES_NACIONAL" name="DECLARAR_SIMPLES_NACIONAL">
 											<label class="form-check-label" for="DECLARAR_SIMPLES_NACIONAL">Sim</label>
 										</div>
 									</div>
-								</div>
-								
-								<div class="row">
-									<div class="col-2 d-flex justify-content-start align-items-center">
-										<label class="col-form-label">Protocolar Entradas</label>
-									</div>
-									<div class="col-3 d-flex align-items-center">
-										<select class="form-select form-select-sm" id="PROTOCOLAR_ENTRADA">
-											<option value="Default">Padrão Geral</option>
-											<option value="Todos">Todos</option>
-											<option value="ISS">Com Recolhimento</option>
-											<option value="Nenhum">Nenhum</option>
-										</select>
-									</div>
 									<div class="col-4 d-flex justify-content-end align-items-center">
 										<label class="col-form-label">Lançar Notas de Entrada</label>
 									</div>
-									<div class="col-2 d-flex align-items-center ">
+									<div class="col-2 d-flex justify-content-start align-items-center ">
 										<div class="form-check form-switch form-check-inline">
 											<input class="form-check-input" type="checkbox" role="switch" id="LANCAR_NOTA_ENTRADA" name="LANCAR_NOTA_ENTRADA">
 											<label class="form-check-label" for="LANCAR_NOTA_ENTRADA">Sim</label>
@@ -718,7 +736,6 @@
 									</div>
 								</div>
 							</div>
-				
 						</div>
 						<div class="tab-pane fade" id="nav-codigo" role="tabpanel" aria-labelledby="nav-codigo-tab">
 							<div id="Codigos do IPM">
@@ -1015,8 +1032,10 @@
 		// Limpar Cliente
 		function limparValoresModal() {
 			
-			document.getElementById("DOWNLOAD_SAIDA_Default").checked = true;
-			document.getElementById("DOWNLOAD_ENTRADA_Default").checked = true;
+			//document.getElementById("DOWNLOAD_SAIDA_Default").checked = true;
+			//document.getElementById("DOWNLOAD_ENTRADA_Default").checked = true;
+			document.getElementById("DOWNLOAD_SAIDA").setValue = 'Default';
+			document.getElementById("DOWNLOAD_ENTRADA").setValue = 'Default';
 			document.getElementById("DECLARAR_SIMPLES_NACIONAL").checked = false;
 			document.querySelector('label[for="DECLARAR_SIMPLES_NACIONAL"]').textContent = "Não";
 			document.getElementById("LANCAR_NOTA_ENTRADA").checked = false;
