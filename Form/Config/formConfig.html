@@ -286,55 +286,41 @@
 		
 		function jsonData(){
 		
-			var perfil = document.getElementById("Perfil").value;
-			var periodo = document.getElementById("Periodo").value;
-			var exibirClientes = document.getElementById("ExibirClientes").checked;
-			var filtrarClientesPendentes = document.getElementById("FiltrarClientesPendentes").checked;
-			var downloadNFSaida = document.getElementById("DownloadNFSaida").checked;
-			var protocolarNFSaida = document.getElementById("ProtocolarNFSaida").checked;
-			var downloadNFEntrada = document.getElementById("DownloadNFEntrada").checked;
-			var protocolarNFEntrada = document.getElementById("ProtocolarNFEntrada").checked;
-			var simplesNacional = document.getElementById("SimplesNacional").checked;
-			
-
 			// IPM Parametros
-			var ipmLogin = document.getElementById("IPMLogin").value;
-			var ipmPassword = document.getElementById("IPMPassword").value;
-			var ipmCodigoLogin = document.getElementById("IPMCodigoLogin").value;
-			var ProtocoloSaida = document.getElementById("ProtocoloSaida").value;
-			var ProtocoloEntrada = document.getElementById("ProtocoloEntrada").value;
-			
-			var ArquivoSaida = document.getElementById("ArquivoSaida").value;
-			var ArquivoEntrada = document.getElementById("ArquivoEntrada").value;
+			var ipmLogin = ;
+			var ipmPassword = ;
+			var ipmCodigoLogin = ;
+			var ProtocoloSaida = ;
+			var ProtocoloEntrada = ;
 			
 			
 			//Dominio Parametros
-			var dominioLogin = document.getElementById("DominioLogin").value;
-			var dominioPassword = document.getElementById("DominioPassword").value;
-			var importarClientes = document.getElementById("ImportarClientes").checked;
+			var dominioLogin = ;
+			var dominioPassword = ;
+			var importarClientes = ;
+		
 			
 			var jsonData = {
-				"Perfil": perfil,
-				"Periodo": periodo,
-				"ExibirClientes": exibirClientes,
-				"FiltrarClientesPendentes": filtrarClientesPendentes,
-				"DownloadNFSaida": downloadNFSaida,
-				"DownloadNFEntrada": downloadNFEntrada,
-				"ProtocolarNFSaida": protocolarNFSaida,
-				"ProtocolarNFEntrada": protocolarNFEntrada,
-				"SimplesNacional": simplesNacional,
+				"Perfil": document.getElementById("Perfil").value,
+				"Periodo": document.getElementById("Periodo").value,
+				"ExibirClientes": document.getElementById("ExibirClientes").checked,
+				"FiltrarClientesPendentes": document.getElementById("FiltrarClientesPendentes").checked,
+				"DownloadNFSaida": document.getElementById("DownloadNFSaida").checked,
+				"DownloadNFEntrada": document.getElementById("DownloadNFEntrada").checked,
+				"ProtocolarNFSaida": document.getElementById("ProtocolarNFSaida").checked,
+				"ProtocolarNFEntrada": document.getElementById("ProtocolarNFEntrada").checked,
+				"SimplesNacional": document.getElementById("SimplesNacional").checked,
+				"Relatorio": document.getElementById("Relatorio").checked,
 				
-				"IPMLogin": ipmLogin,
-				"IPMPassword": ipmPassword,
-				"IPMCodigoLogin": ipmCodigoLogin,
-				"ProtocoloSaida": ProtocoloSaida,
-				"ProtocoloEntrada": ProtocoloEntrada,				
-				"ArquivoSaida": ArquivoSaida,
-				"ArquivoEntrada": ArquivoEntrada,
+				"IPMLogin": document.getElementById("IPMLogin").value,
+				"IPMPassword": document.getElementById("IPMPassword").value,
+				"IPMCodigoLogin": document.getElementById("IPMCodigoLogin").value,
+				"ProtocoloSaida": document.getElementById("ProtocoloSaida").value,
+				"ProtocoloEntrada": document.getElementById("ProtocoloEntrada").value,				
 				
-				"DominioLogin": dominioLogin,
-				"DominioPassword": dominioPassword,				
-				"ImportarClientes": importarClientes
+				"DominioLogin": document.getElementById("DominioLogin").value,
+				"DominioPassword": document.getElementById("DominioPassword").value,				
+				"ImportarClientes": document.getElementById("ImportarClientes").checked
 			};
 			return jsonData;
 		}
@@ -468,7 +454,7 @@
 				<div class="container-fluid d-flex justify-content-center"><h6>Tarefas da Automação</h6></div>
 				<div>
 					<div class="row">
-						<div class="col-3 d-flex align-items-center">
+						<div class="col-3 d-flex align-items-center justify-content-start">
 							<label class="col-form-label">Download NFs Saída</label>
 						</div>
 						<div class="col-2 d-flex align-items-center ">
@@ -477,19 +463,7 @@
 								<label class="form-check-label" for="DownloadNFSaida">Sim</label>
 							</div>
 						</div>
-						<div class="col-1 d-flex align-items-center "></div>
-						<div class="col-2 d-flex align-items-center">
-							<label class="col-form-label">Protocolar Saídas</label>
-						</div>
-						<div class="col-4 d-flex align-items-center ">
-							<div class="form-check form-switch form-check-inline">
-								<input class="form-check-input" type="checkbox" role="switch" id="ProtocolarNFSaida" name="ProtocolarNFSaida" checked>
-								<label class="form-check-label" for="ProtocolarNFSaida">Sim</label>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-3 d-flex align-items-center">
+						<div class="col-4 d-flex align-items-center justify-content-end">
 							<label class="col-form-label">Download NFs Entrada</label>
 						</div>
 						<div class="col-2 d-flex align-items-center ">
@@ -498,11 +472,21 @@
 								<label class="form-check-label" for="DownloadNFEntrada">Sim</label>
 							</div>
 						</div>
-						<div class="col-1 d-flex align-items-center "></div>
-						<div class="col-2 d-flex align-items-center">
+					</div>
+					<div class="row">
+						<div class="col-3 d-flex align-items-center justify-content-start">
+							<label class="col-form-label">Protocolar Saídas</label>
+						</div>
+						<div class="col-2 d-flex align-items-center ">
+							<div class="form-check form-switch form-check-inline">
+								<input class="form-check-input" type="checkbox" role="switch" id="ProtocolarNFSaida" name="ProtocolarNFSaida" checked>
+								<label class="form-check-label" for="ProtocolarNFSaida">Sim</label>
+							</div>
+						</div>
+						<div class="col-4 d-flex align-items-center justify-content-end">
 							<label for="periodo" class="col-form-label">Protocolar Entradas</label>
 						</div>
-						<div class="col-4 d-flex align-items-center ">
+						<div class="col-2 d-flex align-items-center ">
 							<div class="form-check form-switch form-check-inline">
 								<input class="form-check-input" type="checkbox" role="switch" id="ProtocolarNFEntrada" name="ProtocolarNFEntrada"checked>
 								<label class="form-check-label" for="ProtocolarNFEntrada">Sim</label>
@@ -510,7 +494,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-3 d-flex align-items-center">
+						<div class="col-3 d-flex align-items-center justify-content-start">
 							<label class="col-form-label">Informar Simples Nacional</label>
 						</div>
 						<div class="col-2 d-flex align-items-center ">
@@ -519,14 +503,13 @@
 								<label class="form-check-label" for="SimplesNacional">Sim</label>
 							</div>
 						</div>
-						<div class="col-1 d-flex align-items-center "></div>
-						<div class="col-2 d-flex align-items-center">
-							
+						<div class="col-4 d-flex align-items-center justify-content-end">
+							<label for="periodo" class="col-form-label">Gerar Relatório dos Impostos</label>
 						</div>
-						<div class="col-4 d-flex align-items-center ">
+						<div class="col-2 d-flex align-items-center ">
 							<div class="form-check form-switch form-check-inline">
-								<!--input class="form-check-input" type="checkbox" role="switch" id="EmitirCertidao" name="EmitirCertidao">
-								<label class="form-check-label" for="EmitirCertidao">Sim</label-->
+								<input class="form-check-input" type="checkbox" role="switch" id="Relatorio" name="Relatorio"checked>
+								<label class="form-check-label" for="Relatorio">Sim</label>
 							</div>
 						</div>
 					</div>
@@ -788,90 +771,81 @@
 	<!-- Javascrit da pagina -->
     <script>
 	
-	  var ckImportarClientes = document.getElementById('ImportarClientes');
-	  var labelImportarClientes = document.querySelector('label[for="ImportarClientes"]');
-
-	  ckImportarClientes.addEventListener('change', function() {
+	  document.getElementById('ImportarClientes').addEventListener('change', function() {
 		if (this.checked) {
-		  labelImportarClientes.textContent = 'Sim';
+		  document.querySelector('label[for="ImportarClientes"]').textContent = 'Sim';
 		} else {
-		  labelImportarClientes.textContent = 'Não';
+		  document.querySelector('label[for="ImportarClientes"]').textContent = 'Não';
+		}
+	  });
+
+	  document.getElementById('ExibirClientes').addEventListener('change', function() {
+		if (this.checked) {
+		  document.querySelector('label[for="ExibirClientes"]').textContent = 'Sim';
+		} else {
+		  document.querySelector('label[for="ExibirClientes"]').textContent = 'Não';
+		}
+	  });
+	 
+	  document.getElementById('FiltrarClientesPendentes');.addEventListener('change', function() {
+		if (this.checked) {
+		  document.querySelector('label[for="FiltrarClientesPendentes"]').textContent = 'Clientes pendentes';
+		} else {
+		  document.querySelector('label[for="FiltrarClientesPendentes"]').textContent = 'Todos os clientes';
 		}
 	  });
 	  
-	  var ckExibirClientes = document.getElementById('ExibirClientes');
-	  var labelExibirClientes = document.querySelector('label[for="ExibirClientes"]');
 
-	  ckExibirClientes.addEventListener('change', function() {
+	  document.getElementById('DownloadNFSaida').addEventListener('change', function() {
 		if (this.checked) {
-		  labelExibirClientes.textContent = 'Sim';
+		  document.querySelector('label[for="DownloadNFSaida"]').textContent = 'Sim';
 		} else {
-		  labelExibirClientes.textContent = 'Não';
-		}
-	  });
-	  var ckFiltroClientes = document.getElementById('FiltrarClientesPendentes');
-	  var labelFiltro = document.querySelector('label[for="FiltrarClientesPendentes"]');
-
-	  ckFiltroClientes.addEventListener('change', function() {
-		if (this.checked) {
-		  labelFiltro.textContent = 'Clientes pendentes';
-		} else {
-		  labelFiltro.textContent = 'Todos os clientes';
+		  document.querySelector('label[for="DownloadNFSaida"]').textContent = 'Não';
 		}
 	  });
 	  
-	  var ckDownloadNFSaida = document.getElementById('DownloadNFSaida');
-	  var labelDownloadNFSaida = document.querySelector('label[for="DownloadNFSaida"]');
 
-	  ckDownloadNFSaida.addEventListener('change', function() {
+	  document.getElementById('ProtocolarNFSaida').addEventListener('change', function() {
 		if (this.checked) {
-		  labelDownloadNFSaida.textContent = 'Sim';
+		  document.querySelector('label[for="ProtocolarNFSaida"]').textContent = 'Sim';
 		} else {
-		  labelDownloadNFSaida.textContent = 'Não';
+		  document.querySelector('label[for="ProtocolarNFSaida"]').textContent = 'Não';
+		}
+	  });
+
+
+	  document.getElementById('DownloadNFEntrada').addEventListener('change', function() {
+		if (this.checked) {
+		  document.querySelector('label[for="DownloadNFEntrada"]').textContent = 'Sim';
+		} else {
+		  document.querySelector('label[for="DownloadNFEntrada"]').textContent = 'Não';
 		}
 	  });
 	  
-	  var ckProtocolarNFSaida = document.getElementById('ProtocolarNFSaida');
-	  var labelProtocolarNFSaida = document.querySelector('label[for="ProtocolarNFSaida"]');
 
-	  ckProtocolarNFSaida.addEventListener('change', function() {
+	  document.getElementById('ProtocolarNFEntrada').addEventListener('change', function() {
 		if (this.checked) {
-		  labelProtocolarNFSaida.textContent = 'Sim';
+		  document.querySelector('label[for="ProtocolarNFEntrada"]').textContent = 'Sim';
 		} else {
-		  labelProtocolarNFSaida.textContent = 'Não';
+		  document.querySelector('label[for="ProtocolarNFEntrada"]').textContent = 'Não';
 		}
 	  });
 	  
-	  var ckDownloadNFEntrada = document.getElementById('DownloadNFEntrada');
-	  var labelDownloadNFEntrada = document.querySelector('label[for="DownloadNFEntrada"]');
 
-	  ckDownloadNFEntrada.addEventListener('change', function() {
+	  document.getElementById('SimplesNacional').addEventListener('change', function() {
 		if (this.checked) {
-		  labelDownloadNFEntrada.textContent = 'Sim';
+		  document.querySelector('label[for="SimplesNacional"]').textContent = 'Sim';
 		} else {
-		  labelDownloadNFEntrada.textContent = 'Não';
+		  document.querySelector('label[for="SimplesNacional"]').textContent = 'Não';
 		}
 	  });
 	  
-	  var ckProtocolarNFEntrada = document.getElementById('ProtocolarNFEntrada');
-	  var labelProtocolarNFEntrada = document.querySelector('label[for="ProtocolarNFEntrada"]');
 
-	  ckProtocolarNFEntrada.addEventListener('change', function() {
+	  document.getElementById('Relatorio').addEventListener('change', function() {
 		if (this.checked) {
-		  labelProtocolarNFEntrada.textContent = 'Sim';
+		  document.querySelector('label[for="Relatorio"]').textContent = 'Sim';
 		} else {
-		  labelProtocolarNFEntrada.textContent = 'Não';
-		}
-	  });
-	  
-	  var ckSimplesNacional = document.getElementById('SimplesNacional');
-	  var labelSimplesNacional = document.querySelector('label[for="SimplesNacional"]');
-
-	  ckSimplesNacional.addEventListener('change', function() {
-		if (this.checked) {
-		  labelSimplesNacional.textContent = 'Sim';
-		} else {
-		  labelSimplesNacional.textContent = 'Não';
+		  document.querySelector('label[for="Relatorio"]').textContent = 'Não';
 		}
 	  });
 	  
