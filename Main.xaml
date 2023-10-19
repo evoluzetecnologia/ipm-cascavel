@@ -5,7 +5,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1244,1064</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1110,1064</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Main2_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -754,9 +754,9 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                           <Transition.To>
-                            <State x:Name="__ReferenceID1" sap2010:Annotation.AnnotationText="End process and close all applications used." DisplayName="End Process" sap:VirtualizedContainerService.HintSize="1068,2869" sap2010:WorkflowViewState.IdRef="State_1" IsFinal="True">
+                            <State x:Name="__ReferenceID1" sap2010:Annotation.AnnotationText="End process and close all applications used." DisplayName="End Process" sap:VirtualizedContainerService.HintSize="1068,2376" sap2010:WorkflowViewState.IdRef="State_1" IsFinal="True">
                               <State.Entry>
-                                <TryCatch DisplayName="Try to close all aplications" sap:VirtualizedContainerService.HintSize="1022,2724" sap2010:WorkflowViewState.IdRef="TryCatch_4">
+                                <TryCatch DisplayName="Try to close all aplications" sap:VirtualizedContainerService.HintSize="1022,2231" sap2010:WorkflowViewState.IdRef="TryCatch_4">
                                   <sap:WorkflowViewStateService.ViewState>
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -764,18 +764,18 @@
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
                                   <TryCatch.Try>
-                                    <Sequence sap:VirtualizedContainerService.HintSize="984,2496" sap2010:WorkflowViewState.IdRef="Sequence_38">
+                                    <Sequence sap:VirtualizedContainerService.HintSize="617,2003" sap2010:WorkflowViewState.IdRef="Sequence_38">
                                       <sap:WorkflowViewStateService.ViewState>
                                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                         </scg:Dictionary>
                                       </sap:WorkflowViewStateService.ViewState>
-                                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke CloseAllApplications workflow" sap:VirtualizedContainerService.HintSize="922,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_21" UnSafe="False" WorkflowFileName="Framework\CloseAllApplications.xaml">
+                                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke CloseAllApplications workflow" sap:VirtualizedContainerService.HintSize="555,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_21" UnSafe="False" WorkflowFileName="Framework\CloseAllApplications.xaml">
                                         <ui:InvokeWorkflowFile.Arguments>
                                           <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[Config]</InArgument>
                                         </ui:InvokeWorkflowFile.Arguments>
                                       </ui:InvokeWorkflowFile>
-                                      <If Condition="[Config.ContainsKey(&quot;DataRelatorio&quot;)]" DisplayName="Data Relatório" sap:VirtualizedContainerService.HintSize="922,2000" sap2010:WorkflowViewState.IdRef="If_18">
+                                      <If Condition="[Config.ContainsKey(&quot;DataRelatorio&quot;)]" DisplayName="Data Relatório" sap:VirtualizedContainerService.HintSize="555,1507" sap2010:WorkflowViewState.IdRef="If_18">
                                         <sap:WorkflowViewStateService.ViewState>
                                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -783,7 +783,7 @@
                                           </scg:Dictionary>
                                         </sap:WorkflowViewStateService.ViewState>
                                         <If.Then>
-                                          <Sequence sap:VirtualizedContainerService.HintSize="888,1818" sap2010:WorkflowViewState.IdRef="Sequence_43">
+                                          <Sequence sap:VirtualizedContainerService.HintSize="521,1325" sap2010:WorkflowViewState.IdRef="Sequence_43">
                                             <Sequence.Variables>
                                               <Variable x:TypeArguments="sd:DataTable" Name="dt_Relatorio" />
                                               <Variable x:TypeArguments="x:String" Name="var" />
@@ -794,7 +794,7 @@
                                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                               </scg:Dictionary>
                                             </sap:WorkflowViewStateService.ViewState>
-                                            <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="846,147" sap2010:WorkflowViewState.IdRef="MultipleAssign_5">
+                                            <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,147" sap2010:WorkflowViewState.IdRef="MultipleAssign_5">
                                               <ui:MultipleAssign.AssignOperations>
                                                 <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
                                                   <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
@@ -810,7 +810,7 @@
                                                       <OutArgument x:TypeArguments="si:FileInfo">[relatorio]</OutArgument>
                                                     </ui:AssignOperation.To>
                                                     <ui:AssignOperation.Value>
-                                                      <InArgument x:TypeArguments="si:FileInfo">[New FileInfo("C:\Roboluze\Relatorios\"+Config("YYYYMM").ToString()+"\DebitosMunicipais.xlsx")]</InArgument>
+                                                      <InArgument x:TypeArguments="si:FileInfo">[New FileInfo("C:\Roboluze\Relatorios\"+Config("YYYYMM").ToString()+"\DadosXML"+DateTime.Now.ToString("yyyyMMddhhmm")+".xlsx")]</InArgument>
                                                     </ui:AssignOperation.Value>
                                                   </ui:AssignOperation>
                                                 </scg:List>
@@ -822,144 +822,84 @@
                                                 </scg:Dictionary>
                                               </sap:WorkflowViewStateService.ViewState>
                                             </ui:MultipleAssign>
-                                            <ui:IfElseIf DisplayName="Else If" sap:VirtualizedContainerService.HintSize="846,1259" sap2010:WorkflowViewState.IdRef="IfElseIf_3">
+                                            <ui:IfElseIf DisplayName="Else If" sap:VirtualizedContainerService.HintSize="479,52" sap2010:WorkflowViewState.IdRef="IfElseIf_3">
                                               <ui:IfElseIf.ConditionBlocks>
                                                 <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
-                                                  <ui:IfElseIfBlock BlockType="If" Condition="[relatorio.Exists]">
-                                                    <ui:IfElseIfBlock.Then>
-                                                      <Sequence DisplayName="Corpo" sap:VirtualizedContainerService.HintSize="655,857" sap2010:WorkflowViewState.IdRef="Sequence_44">
-                                                        <Sequence.Variables>
-                                                          <Variable x:TypeArguments="sd:DataTable" Name="dt_excel" />
-                                                        </Sequence.Variables>
-                                                        <sap:WorkflowViewStateService.ViewState>
-                                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                                          </scg:Dictionary>
-                                                        </sap:WorkflowViewStateService.ViewState>
-                                                        <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[dt_excel]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="593,88" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="Extrato" WorkbookPath="[relatorio.FullName]" />
-                                                        <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dt_excel]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="593,618" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
-                                                          <ui:ForEachRow.Body>
-                                                            <ActivityAction x:TypeArguments="sd:DataRow">
-                                                              <ActivityAction.Argument>
-                                                                <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
-                                                              </ActivityAction.Argument>
-                                                              <Sequence DisplayName="Corpo" sap:VirtualizedContainerService.HintSize="559,432" sap2010:WorkflowViewState.IdRef="Sequence_45">
-                                                                <Sequence.Variables>
-                                                                  <Variable x:TypeArguments="sd:DataRow" Name="row" />
-                                                                </Sequence.Variables>
-                                                                <sap:WorkflowViewStateService.ViewState>
-                                                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                                                  </scg:Dictionary>
-                                                                </sap:WorkflowViewStateService.ViewState>
-                                                                <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="517,344" sap2010:WorkflowViewState.IdRef="TryCatch_13">
-                                                                  <TryCatch.Try>
-                                                                    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,116" sap2010:WorkflowViewState.IdRef="MultipleAssign_6">
-                                                                      <ui:MultipleAssign.AssignOperations>
-                                                                        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
-                                                                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
-                                                                            <ui:AssignOperation.To>
-                                                                              <OutArgument x:TypeArguments="sd:DataRow">[row]</OutArgument>
-                                                                            </ui:AssignOperation.To>
-                                                                            <ui:AssignOperation.Value>
-                                                                              <InArgument x:TypeArguments="sd:DataRow">[dt_Relatorio.AsEnumerable().Where(function(r) r("CNPJ").ToString = CurrentRow("CNPJ").ToString() ).First()]</InArgument>
-                                                                            </ui:AssignOperation.Value>
-                                                                          </ui:AssignOperation>
-                                                                        </scg:List>
-                                                                      </ui:MultipleAssign.AssignOperations>
-                                                                    </ui:MultipleAssign>
-                                                                  </TryCatch.Try>
-                                                                  <TryCatch.Catches>
-                                                                    <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="483,21" sap2010:WorkflowViewState.IdRef="Catch`1_14">
-                                                                      <sap:WorkflowViewStateService.ViewState>
-                                                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                                                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                                                        </scg:Dictionary>
-                                                                      </sap:WorkflowViewStateService.ViewState>
-                                                                      <ActivityAction x:TypeArguments="s:Exception">
-                                                                        <ActivityAction.Argument>
-                                                                          <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
-                                                                        </ActivityAction.Argument>
-                                                                        <Sequence sap:VirtualizedContainerService.HintSize="617,883" sap2010:WorkflowViewState.IdRef="Sequence_47">
-                                                                          <sap:WorkflowViewStateService.ViewState>
-                                                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                                                            </scg:Dictionary>
-                                                                          </sap:WorkflowViewStateService.ViewState>
-                                                                          <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="555,116" sap2010:WorkflowViewState.IdRef="MultipleAssign_7">
-                                                                            <ui:MultipleAssign.AssignOperations>
-                                                                              <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
-                                                                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
-                                                                                  <ui:AssignOperation.To>
-                                                                                    <OutArgument x:TypeArguments="sd:DataRow">[row]</OutArgument>
-                                                                                  </ui:AssignOperation.To>
-                                                                                  <ui:AssignOperation.Value>
-                                                                                    <InArgument x:TypeArguments="sd:DataRow">[dt_Relatorio.NewRow]</InArgument>
-                                                                                  </ui:AssignOperation.Value>
-                                                                                </ui:AssignOperation>
-                                                                              </scg:List>
-                                                                            </ui:MultipleAssign.AssignOperations>
-                                                                          </ui:MultipleAssign>
-                                                                          <ui:ForEach x:TypeArguments="sd:DataColumn" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="555,390" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[CurrentRow.Table.Columns]">
-                                                                            <ui:ForEach.Body>
-                                                                              <ActivityAction x:TypeArguments="sd:DataColumn">
-                                                                                <ActivityAction.Argument>
-                                                                                  <DelegateInArgument x:TypeArguments="sd:DataColumn" Name="currentItem" />
-                                                                                </ActivityAction.Argument>
-                                                                                <Sequence DisplayName="Corpo" sap:VirtualizedContainerService.HintSize="521,204" sap2010:WorkflowViewState.IdRef="Sequence_46">
-                                                                                  <sap:WorkflowViewStateService.ViewState>
-                                                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                                                                    </scg:Dictionary>
-                                                                                  </sap:WorkflowViewStateService.ViewState>
-                                                                                  <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,116" sap2010:WorkflowViewState.IdRef="MultipleAssign_8">
-                                                                                    <ui:MultipleAssign.AssignOperations>
-                                                                                      <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
-                                                                                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_9">
-                                                                                          <ui:AssignOperation.To>
-                                                                                            <OutArgument x:TypeArguments="x:Object">[row(currentItem.ToString())]</OutArgument>
-                                                                                          </ui:AssignOperation.To>
-                                                                                          <ui:AssignOperation.Value>
-                                                                                            <InArgument x:TypeArguments="x:Object">[CurrentRow(currentItem.ToString()).ToString()]</InArgument>
-                                                                                          </ui:AssignOperation.Value>
-                                                                                        </ui:AssignOperation>
-                                                                                      </scg:List>
-                                                                                    </ui:MultipleAssign.AssignOperations>
-                                                                                  </ui:MultipleAssign>
-                                                                                </Sequence>
-                                                                              </ActivityAction>
-                                                                            </ui:ForEach.Body>
-                                                                            <sap:WorkflowViewStateService.ViewState>
-                                                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                                                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                                                              </scg:Dictionary>
-                                                                            </sap:WorkflowViewStateService.ViewState>
-                                                                          </ui:ForEach>
-                                                                          <ui:AddDataRow ArrayRow="{x:Null}" DataRow="[row]" DataTable="[dt_Relatorio]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="555,186" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
-                                                                        </Sequence>
-                                                                      </ActivityAction>
-                                                                    </Catch>
-                                                                  </TryCatch.Catches>
-                                                                </TryCatch>
-                                                              </Sequence>
-                                                            </ActivityAction>
-                                                          </ui:ForEachRow.Body>
-                                                        </ui:ForEachRow>
-                                                      </Sequence>
-                                                    </ui:IfElseIfBlock.Then>
-                                                  </ui:IfElseIfBlock>
-                                                  <ui:IfElseIfBlock BlockType="ElseIf" Condition="[Not relatorio.Directory.Exists]">
+                                                  <ui:IfElseIfBlock BlockType="If" Condition="[Not relatorio.Directory.Exists]">
                                                     <ui:IfElseIfBlock.Then>
                                                       <ui:CreateDirectory ContinueOnError="{x:Null}" Output="{x:Null}" sap:VirtualizedContainerService.HintSize="334,80" sap2010:WorkflowViewState.IdRef="CreateDirectory_1" Path="[relatorio.Directory.FullName]" />
                                                     </ui:IfElseIfBlock.Then>
                                                   </ui:IfElseIfBlock>
                                                 </sc:BindingList>
                                               </ui:IfElseIf.ConditionBlocks>
+                                              <sap:WorkflowViewStateService.ViewState>
+                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                </scg:Dictionary>
+                                              </sap:WorkflowViewStateService.ViewState>
                                             </ui:IfElseIf>
-                                            <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[dt_Relatorio]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="846,116" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Extrato" WorkbookPath="[relatorio.FullName]" />
-                                            <ui:StartProcess Arguments="{x:Null}" WorkingDirectory="{x:Null}" ContinueOnError="True" DisplayName="Start Process" FileName="[relatorio.FullName]" sap:VirtualizedContainerService.HintSize="846,88" sap2010:WorkflowViewState.IdRef="StartProcess_1" />
+                                            <ui:FilterDataTable DataTable="[dt_Relatorio]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="479,161" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[dt_Relatorio]" SelectColumnsMode="Remove">
+                                              <ui:FilterDataTable.Filters>
+                                                <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                                                  <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                                                    <ui:FilterOperationArgument.Column>
+                                                      <InArgument x:TypeArguments="x:String">["TIPO"]</InArgument>
+                                                    </ui:FilterOperationArgument.Column>
+                                                    <ui:FilterOperationArgument.Operand>
+                                                      <InArgument x:TypeArguments="x:String">["Saida"]</InArgument>
+                                                    </ui:FilterOperationArgument.Operand>
+                                                  </ui:FilterOperationArgument>
+                                                </scg:List>
+                                              </ui:FilterDataTable.Filters>
+                                              <ui:FilterDataTable.SelectColumns>
+                                                <scg:List x:TypeArguments="InArgument" Capacity="4">
+                                                  <InArgument x:TypeArguments="x:String">["TIPO"]</InArgument>
+                                                </scg:List>
+                                              </ui:FilterDataTable.SelectColumns>
+                                            </ui:FilterDataTable>
+                                            <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[dt_Relatorio]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="479,116" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Saidas" WorkbookPath="[relatorio.FullName]" />
+                                            <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,116" sap2010:WorkflowViewState.IdRef="MultipleAssign_9">
+                                              <ui:MultipleAssign.AssignOperations>
+                                                <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_10">
+                                                    <ui:AssignOperation.To>
+                                                      <OutArgument x:TypeArguments="sd:DataTable">[dt_Relatorio]</OutArgument>
+                                                    </ui:AssignOperation.To>
+                                                    <ui:AssignOperation.Value>
+                                                      <InArgument x:TypeArguments="sd:DataTable">[DirectCast(Config("DataRelatorio"), DataTable)]</InArgument>
+                                                    </ui:AssignOperation.Value>
+                                                  </ui:AssignOperation>
+                                                </scg:List>
+                                              </ui:MultipleAssign.AssignOperations>
+                                              <sap:WorkflowViewStateService.ViewState>
+                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                </scg:Dictionary>
+                                              </sap:WorkflowViewStateService.ViewState>
+                                            </ui:MultipleAssign>
+                                            <ui:FilterDataTable DataTable="[dt_Relatorio]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="479,161" sap2010:WorkflowViewState.IdRef="FilterDataTable_2" OutputDataTable="[dt_Relatorio]" SelectColumnsMode="Remove">
+                                              <ui:FilterDataTable.Filters>
+                                                <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                                                  <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                                                    <ui:FilterOperationArgument.Column>
+                                                      <InArgument x:TypeArguments="x:String">["TIPO"]</InArgument>
+                                                    </ui:FilterOperationArgument.Column>
+                                                    <ui:FilterOperationArgument.Operand>
+                                                      <InArgument x:TypeArguments="x:String">["Entrada"]</InArgument>
+                                                    </ui:FilterOperationArgument.Operand>
+                                                  </ui:FilterOperationArgument>
+                                                </scg:List>
+                                              </ui:FilterDataTable.Filters>
+                                              <ui:FilterDataTable.SelectColumns>
+                                                <scg:List x:TypeArguments="InArgument" Capacity="4">
+                                                  <InArgument x:TypeArguments="x:String">["TIPO"]</InArgument>
+                                                </scg:List>
+                                              </ui:FilterDataTable.SelectColumns>
+                                            </ui:FilterDataTable>
+                                            <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[dt_Relatorio]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="479,116" sap2010:WorkflowViewState.IdRef="WriteRange_2" SheetName="Entradas" WorkbookPath="[relatorio.FullName]" />
+                                            <ui:StartProcess Arguments="{x:Null}" WorkingDirectory="{x:Null}" ContinueOnError="True" DisplayName="Start Process" FileName="[relatorio.FullName]" sap:VirtualizedContainerService.HintSize="479,88" sap2010:WorkflowViewState.IdRef="StartProcess_1" />
                                           </Sequence>
                                         </If.Then>
                                         <If.Else>
@@ -972,7 +912,7 @@
                                           </Sequence>
                                         </If.Else>
                                       </If>
-                                      <rs:Relatorio_Erros in_TransactionItem="{x:Null}" DisplayName="Relatorio Erros" sap:VirtualizedContainerService.HintSize="922,192" sap2010:WorkflowViewState.IdRef="Relatorio_Erros_1" io_Config="[Config]">
+                                      <rs:Relatorio_Erros in_TransactionItem="{x:Null}" DisplayName="Relatorio Erros" sap:VirtualizedContainerService.HintSize="555,192" sap2010:WorkflowViewState.IdRef="Relatorio_Erros_1" io_Config="[Config]">
                                         <rs:Relatorio_Erros.in_Erro>
                                           <InArgument x:TypeArguments="x:String">
                                             <Literal x:TypeArguments="x:String" Value="" />

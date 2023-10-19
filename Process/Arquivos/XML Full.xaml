@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="XML_Dados" this:XML_Dados.in_XML="C:\Users\Valchak\Downloads\NFSe tomadas02_10_2023 09_36_13.xml" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.ComponentModel;assembly=System.ComponentModel.TypeConverter" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sx="clr-namespace:System.Xml;assembly=System.Private.Xml" xmlns:sxl="clr-namespace:System.Xml.Linq;assembly=System.Private.Xml.Linq" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="XML_Dados" this:XML_Dados.in_XML="C:\Roboluze\Arquivos\202309\XML\NFS_ENTRADA\10235545000130\NFSE_1151760_3881100_1_1.xml" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:rt="clr-namespace:Roboluze_Libre_Config.Tools;assembly=Roboluze.Libre.Config" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.ComponentModel;assembly=System.ComponentModel.TypeConverter" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sg="clr-namespace:System.Globalization;assembly=System.Private.CoreLib" xmlns:sxl="clr-namespace:System.Xml.Linq;assembly=System.Private.Xml.Linq" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_XML" Type="InArgument(x:String)" />
     <x:Property Name="out_Dados" Type="OutArgument(scg:Dictionary(x:String, x:Object))" />
@@ -6,7 +6,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1244,2912</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1110,633</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>XML_Dados_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -43,6 +43,9 @@
       <x:String>System.Text.RegularExpressions</x:String>
       <x:String>Roboluze</x:String>
       <x:String>System.ComponentModel</x:String>
+      <x:String>System.Globalization</x:String>
+      <x:String>Roboluze_Libre_Config.Tools</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -105,21 +108,29 @@
       <AssemblyReference>System.Collections.Immutable</AssemblyReference>
       <AssemblyReference>System.Linq.Queryable</AssemblyReference>
       <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.CodeDom</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>Roboluze.Libre.Config</AssemblyReference>
+      <AssemblyReference>System.Windows.Forms.Design</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices.RuntimeInformation</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="XML_Dados" sap:VirtualizedContainerService.HintSize="1056,2847" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="XML_Dados" sap:VirtualizedContainerService.HintSize="496,375" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="var" />
-      <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Default="[New Dictionary(Of String, Object)]" Name="lista" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Default="[New Dictionary(Of String, Object)]" Name="dadosNotas" />
       <Variable x:TypeArguments="sxl:XDocument" Name="notaXML" />
+      <Variable x:TypeArguments="sg:CultureInfo" Default="[New CultureInfo(&quot;pt-BR&quot;)]" Name="cultureInfo" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:ReadTextFile File="{x:Null}" Content="[var]" DisplayName="Read Text File" FileName="[in_XML]" sap:VirtualizedContainerService.HintSize="994,80" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
-    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="994,147" sap2010:WorkflowViewState.IdRef="MultipleAssign_5">
+    <ui:ReadTextFile File="{x:Null}" Content="[var]" DisplayName="Read Text File" FileName="[in_XML]" sap:VirtualizedContainerService.HintSize="434,80" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
+    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="434,52" sap2010:WorkflowViewState.IdRef="MultipleAssign_37">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_9">
@@ -140,33 +151,43 @@
           </ui:AssignOperation>
         </scg:List>
       </ui:MultipleAssign.AssignOperations>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </ui:MultipleAssign>
-    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="994,2429" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="434,52" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
       <TryCatch.Try>
-        <Sequence DisplayName="XML" sap:VirtualizedContainerService.HintSize="956,2201" sap2010:WorkflowViewState.IdRef="Sequence_8">
+        <Sequence DisplayName="XML" sap:VirtualizedContainerService.HintSize="450,163" sap2010:WorkflowViewState.IdRef="Sequence_8">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:IfElseIf DisplayName="Else If" sap:VirtualizedContainerService.HintSize="894,2090" sap2010:WorkflowViewState.IdRef="IfElseIf_4">
+          <ui:IfElseIf DisplayName="Tipo XML" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="IfElseIf_4">
             <ui:IfElseIf.ConditionBlocks>
               <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
                 <ui:IfElseIfBlock BlockType="If" Condition="[var.Contains(&quot;ListaNfse&quot;)]">
                   <ui:IfElseIfBlock.Then>
-                    <Sequence DisplayName="Corpo" sap:VirtualizedContainerService.HintSize="617,1131" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                    <Sequence DisplayName="ABRASF" sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_7">
                       <Sequence.Variables>
                         <Variable x:TypeArguments="sxl:XElement" Name="elemento" />
-                        <Variable x:TypeArguments="sx:XmlNameTable" Name="tabela" />
-                        <Variable x:TypeArguments="sx:XmlNamespaceManager" Name="xmlnsManager" />
                       </Sequence.Variables>
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                           <x:Boolean x:Key="IsPinned">False</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="555,116" sap2010:WorkflowViewState.IdRef="MultipleAssign_16">
+                      <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="555,117" sap2010:WorkflowViewState.IdRef="MultipleAssign_16">
                         <ui:MultipleAssign.AssignOperations>
                           <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
                             <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_104">
@@ -181,27 +202,163 @@
                         </ui:MultipleAssign.AssignOperations>
                       </ui:MultipleAssign>
                       <ui:DeserializeXml DisplayName="Deserialize XML" sap:VirtualizedContainerService.HintSize="555,60" sap2010:WorkflowViewState.IdRef="DeserializeXml_2" XMLDocument="[notaXML]" XMLString="[var]" />
-                      <ui:ForEach x:TypeArguments="sxl:XElement" CurrentIndex="{x:Null}" DisplayName="ForEach&lt;Object&gt;" sap:VirtualizedContainerService.HintSize="555,764" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[notaXML.Element(&quot;ListaNfse&quot;).Elements(&quot;CompNfse&quot;)]">
+                      <ui:ForEach x:TypeArguments="sxl:XElement" CurrentIndex="{x:Null}" DisplayName="ForEach&lt;Object&gt;" sap:VirtualizedContainerService.HintSize="555,1558" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[notaXML.Element(&quot;ListaNfse&quot;).Elements(&quot;CompNfse&quot;)]">
                         <ui:ForEach.Body>
                           <ActivityAction x:TypeArguments="sxl:XElement">
                             <ActivityAction.Argument>
                               <DelegateInArgument x:TypeArguments="sxl:XElement" Name="item" />
                             </ActivityAction.Argument>
-                            <Sequence DisplayName="Corpo" sap:VirtualizedContainerService.HintSize="521,578" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                            <Sequence DisplayName="Corpo" sap:VirtualizedContainerService.HintSize="521,1370" sap2010:WorkflowViewState.IdRef="Sequence_6">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
-                              <ui:MultipleAssign DisplayName="ABRASF" sap:VirtualizedContainerService.HintSize="479,116" sap2010:WorkflowViewState.IdRef="MultipleAssign_12">
+                              <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,644" sap2010:WorkflowViewState.IdRef="MultipleAssign_21">
                                 <ui:MultipleAssign.AssignOperations>
-                                  <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
-                                    <ui:AssignOperation sap:VirtualizedContainerService.HintSize="334,25" sap2010:WorkflowViewState.IdRef="AssignOperation_73">
+                                  <scg:List x:TypeArguments="ui:AssignOperation" Capacity="32">
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_110">
                                       <ui:AssignOperation.To>
-                                        <OutArgument x:TypeArguments="x:Object">[out_Dados("PrestadorCNPJ")]</OutArgument>
+                                        <OutArgument x:TypeArguments="x:Object">[dadosNotas("PrestadorCNPJ")]</OutArgument>
                                       </ui:AssignOperation.To>
                                       <ui:AssignOperation.Value>
-                                        <InArgument x:TypeArguments="x:String">[item.Element("CompNfse").Element("Nfse").Value]</InArgument>
+                                        <InArgument x:TypeArguments="x:Object">[Roboluze.Valida.isCnpjOrCpf(item.Descendants("PrestadorServico").First().Descendants("Cnpj").First().Value)]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_202">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:Object">[dadosNotas("PrestadorNome")]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:String">[item.Descendants("PrestadorServico").First().Descendants("RazaoSocial").First().Value.ToUpper()]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_111">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:Object">[dadosNotas("TomadorCNPJ")]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:Object">[Roboluze.Valida.isCnpjOrCpf(item.Descendants("TomadorServico").First().Descendants("Cnpj").First().Value)]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_112">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:Object">[dadosNotas("TomadorNome")]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:Object">[item.Descendants("TomadorServico").First().Descendants("RazaoSocial").First().Value.ToUpper()]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_113">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:Object">[dadosNotas("Valor Total")]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:Object">[Convert.ToDouble(item.Descendants("Servico").First().Descendants("ValorServicos").First().Value).ToString("N2",cultureInfo)]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_115">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:Object">[dadosNotas("Valor IR")]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:Object">[Convert.ToDouble(item.Descendants("Servico").First().Descendants("ValorIr").First().Value).ToString("N2",cultureInfo)]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_116">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:Object">[dadosNotas("Valor INSS")]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:Object">[Convert.ToDouble(item.Descendants("Servico").First().Descendants("ValorInss").First().Value).ToString("N2",cultureInfo)]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_117">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:Object">[dadosNotas("Valor Contribuição Social")]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:Object">[Convert.ToDouble(item.Descendants("Servico").First().Descendants("ValorCsll").First().Value).ToString("N2",cultureInfo)]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_119">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:Object">[dadosNotas("Valor PIS")]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:Object">[Convert.ToDouble(item.Descendants("Servico").First().Descendants("ValorPis").First().Value).ToString("N2",cultureInfo)]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_120">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:Object">[dadosNotas("Valor Cofins")]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:Object">[Convert.ToDouble(item.Descendants("Servico").First().Descendants("ValorCofins").First().Value).ToString("N2",cultureInfo)]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_114">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:Object">[dadosNotas("Valor Desconto")]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:Object">[(Convert.ToDouble(item.Descendants("Servico").First().Descendants("DescontoIncondicionado").First().Value) + Convert.ToDouble(item.Descendants("Servico").First().Descendants("DescontoCondicionado").First().Value)).ToString("N2",cultureInfo)]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_136">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:Object">[dadosNotas("Outras Retenções")]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:String">[Convert.ToDouble(item.Descendants("Servico").First().Descendants("OutrasRetencoes").First().Value).ToString("N2",cultureInfo)]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_134">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:Object">[dadosNotas("Valor Deduçao")]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:String">[Convert.ToDouble(item.Descendants("Servico").First().Descendants("ValorDeducoes").First().Value).ToString("N2",cultureInfo)]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_137">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:Object">[dadosNotas("Base de Cálculo")]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:String">[Convert.ToDouble(item.Descendants("Servico").First().Descendants("BaseCalculo").First().Value).ToString("N2",cultureInfo)]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_144">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:Object">[dadosNotas("Valor ISS")]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:String">[Convert.ToDouble(item.Descendants("Servico").First().Descendants("ValorIss").First().Value).ToString("N2",cultureInfo)]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_135">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:Object">[dadosNotas("Valor ISSRF")]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:String">[Convert.ToDouble(item.Descendants("Servico").First().Descendants("ValorIssRetido").First().Value).ToString("N2",cultureInfo)]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_158">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:Object">[dadosNotas("Arquivo XML")]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:Object">[in_XML]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_156">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:String">[var]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:String">[dadosNotas("PrestadorNome").ToString]</InArgument>
                                       </ui:AssignOperation.Value>
                                     </ui:AssignOperation>
                                   </scg:List>
@@ -213,51 +370,47 @@
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
                               </ui:MultipleAssign>
-                              <ui:MultipleAssign DisplayName="ABRASF" sap:VirtualizedContainerService.HintSize="479,147" sap2010:WorkflowViewState.IdRef="MultipleAssign_18">
+                              <rt:Remove_Special_Characters DisplayName="Remove Special Characters" sap:VirtualizedContainerService.HintSize="479,91" sap2010:WorkflowViewState.IdRef="Remove_Special_Characters_2" io_Texto="[var]" />
+                              <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,148" sap2010:WorkflowViewState.IdRef="MultipleAssign_35">
                                 <ui:MultipleAssign.AssignOperations>
-                                  <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
-                                    <ui:AssignOperation sap:VirtualizedContainerService.HintSize="334,25" sap2010:WorkflowViewState.IdRef="AssignOperation_108">
+                                  <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_205">
                                       <ui:AssignOperation.To>
-                                        <OutArgument x:TypeArguments="x:Object">[out_Dados("PrestadorCNPJ")]</OutArgument>
+                                        <OutArgument x:TypeArguments="x:Object">[dadosNotas("PrestadorNome")]</OutArgument>
                                       </ui:AssignOperation.To>
                                       <ui:AssignOperation.Value>
-                                        <InArgument x:TypeArguments="x:String">[item.Element("CompNfse").Element("Nfse").Element("InfNfse").Element("DeclaracaoPrestacaoServico").Element("InfDeclaracaoPrestacaoServico").Element("Prestador").Element("CpfCnpj").Element("Cnpj").Value]</InArgument>
+                                        <InArgument x:TypeArguments="x:Object">[var]</InArgument>
                                       </ui:AssignOperation.Value>
                                     </ui:AssignOperation>
-                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_109">
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_206">
                                       <ui:AssignOperation.To>
-                                        <OutArgument x:TypeArguments="x:Object">[out_Dados("TomadorCNPJ")]</OutArgument>
+                                        <OutArgument x:TypeArguments="x:String">[var]</OutArgument>
                                       </ui:AssignOperation.To>
                                       <ui:AssignOperation.Value>
-                                        <InArgument x:TypeArguments="x:String">[item.Element("CompNfse").Element("Nfse").Element("InfNfse").Element("DeclaracaoPrestacaoServico").Element("InfDeclaracaoPrestacaoServico").Element("Tomador").Element("IdentificacaoTomador").Element("CpfCnpj").Element("Cnpj").Value]</InArgument>
+                                        <InArgument x:TypeArguments="x:String">[dadosNotas("TomadorNome").ToString()]</InArgument>
                                       </ui:AssignOperation.Value>
                                     </ui:AssignOperation>
                                   </scg:List>
                                 </ui:MultipleAssign.AssignOperations>
-                                <sap:WorkflowViewStateService.ViewState>
-                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                  </scg:Dictionary>
-                                </sap:WorkflowViewStateService.ViewState>
                               </ui:MultipleAssign>
-                              <ui:MultipleAssign DisplayName="ABRASF" sap:VirtualizedContainerService.HintSize="479,147" sap2010:WorkflowViewState.IdRef="MultipleAssign_17">
+                              <rt:Remove_Special_Characters DisplayName="Remove Special Characters" sap:VirtualizedContainerService.HintSize="479,91" sap2010:WorkflowViewState.IdRef="Remove_Special_Characters_3" io_Texto="[var]" />
+                              <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,148" sap2010:WorkflowViewState.IdRef="MultipleAssign_34">
                                 <ui:MultipleAssign.AssignOperations>
-                                  <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
-                                    <ui:AssignOperation sap:VirtualizedContainerService.HintSize="334,25" sap2010:WorkflowViewState.IdRef="AssignOperation_106">
+                                  <scg:List x:TypeArguments="ui:AssignOperation" Capacity="32">
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_203">
                                       <ui:AssignOperation.To>
-                                        <OutArgument x:TypeArguments="x:Object">[out_Dados("PrestadorCNPJ")]</OutArgument>
+                                        <OutArgument x:TypeArguments="x:Object">[dadosNotas("TomadorNome")]</OutArgument>
                                       </ui:AssignOperation.To>
                                       <ui:AssignOperation.Value>
-                                        <InArgument x:TypeArguments="x:String">[item.Element("ListaNfse").Element("CompNfse").Element("Nfse").Element("InfNfse").Element("DeclaracaoPrestacaoServico").Element("InfDeclaracaoPrestacaoServico").Element("Prestador").Element("CpfCnpj").Element("Cnpj").Value]</InArgument>
+                                        <InArgument x:TypeArguments="x:Object">[var]</InArgument>
                                       </ui:AssignOperation.Value>
                                     </ui:AssignOperation>
-                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_107">
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_204">
                                       <ui:AssignOperation.To>
-                                        <OutArgument x:TypeArguments="x:Object">[out_Dados("TomadorCNPJ")]</OutArgument>
+                                        <OutArgument x:TypeArguments="x:Object">[out_Dados(item.Descendants("InfNfse").First().Descendants("Numero").First().Value)]</OutArgument>
                                       </ui:AssignOperation.To>
                                       <ui:AssignOperation.Value>
-                                        <InArgument x:TypeArguments="x:String">[item.Element("ListaNfse").Element("CompNfse").Element("Nfse").Element("InfNfse").Element("DeclaracaoPrestacaoServico").Element("InfDeclaracaoPrestacaoServico").Element("Tomador").Element("IdentificacaoTomador").Element("CpfCnpj").Element("Cnpj").Value]</InArgument>
+                                        <InArgument x:TypeArguments="x:Object">[dadosNotas]</InArgument>
                                       </ui:AssignOperation.Value>
                                     </ui:AssignOperation>
                                   </scg:List>
@@ -284,7 +437,13 @@
                 </ui:IfElseIfBlock>
                 <ui:IfElseIfBlock BlockType="ElseIf" Condition="[var.Contains(&quot;&lt;?xml version=&quot;)]">
                   <ui:IfElseIfBlock.Then>
-                    <Sequence DisplayName="Corpo" sap:VirtualizedContainerService.HintSize="541,637" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                    <Sequence DisplayName="IPM" sap:VirtualizedContainerService.HintSize="541,1709" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                      <Sequence.Variables>
+                        <Variable x:TypeArguments="x:Double" Name="valor_deducao" />
+                        <Variable x:TypeArguments="x:Double" Name="valor_issrf" />
+                        <Variable x:TypeArguments="x:Double" Name="valor_iss" />
+                        <Variable x:TypeArguments="x:Double" Name="valor_tributavel" />
+                      </Sequence.Variables>
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -292,95 +451,384 @@
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
                       <ui:DeserializeXml DisplayName="Deserialize XML" sap:VirtualizedContainerService.HintSize="479,60" sap2010:WorkflowViewState.IdRef="DeserializeXml_3" XMLDocument="[notaXML]" XMLString="[var]" />
-                      <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,426" sap2010:WorkflowViewState.IdRef="MultipleAssign_13">
+                      <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,612" sap2010:WorkflowViewState.IdRef="MultipleAssign_30">
+                        <ui:MultipleAssign.AssignOperations>
+                          <scg:List x:TypeArguments="ui:AssignOperation" Capacity="32">
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_176">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:Object">[dadosNotas("PrestadorCNPJ")]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:Object">[Roboluze.Valida.isCnpjOrCpf(notaXML.Element("nfse").Element("prestador").Element("cpfcnpj").Value)]</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_207">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:Object">[dadosNotas("PrestadorNome")]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:Object">[""]</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_177">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:Object">[dadosNotas("TomadorCNPJ")]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:Object">[Roboluze.Valida.isCnpjOrCpf(notaXML.Element("nfse").Element("tomador").Element("cpfcnpj").Value)]</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_178">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:Object">[dadosNotas("TomadorNome")]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:Object">[notaXML.Element("nfse").Element("tomador").Element("nome_razao_social").Value.ToUpper()]</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_179">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:Object">[dadosNotas("Valor Total")]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:Object">[notaXML.Element("nfse").Element("nf").Element("valor_total").Value]</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_180">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:Object">[dadosNotas("Valor IR")]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:Object">[notaXML.Element("nfse").Element("nf").Element("valor_ir").Value]</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_181">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:Object">[dadosNotas("Valor INSS")]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:Object">[notaXML.Element("nfse").Element("nf").Element("valor_inss").Value]</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_182">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:Object">[dadosNotas("Valor Contribuição Social")]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:Object">[notaXML.Element("nfse").Element("nf").Element("valor_contribuicao_social").Value]</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_183">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:Object">[dadosNotas("Valor PIS")]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:Object">[notaXML.Element("nfse").Element("nf").Element("valor_pis").Value]</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_184">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:Object">[dadosNotas("Valor Cofins")]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:Object">[notaXML.Element("nfse").Element("nf").Element("valor_cofins").Value]</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_185">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:Object">[dadosNotas("Valor Desconto")]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:Object">[notaXML.Element("nfse").Element("nf").Element("valor_desconto").Value]</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_186">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:Object">[dadosNotas("Outras Retenções")]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:Object">["0,00"]</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_187">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:Double">[valor_tributavel]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:Double">0</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_190">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:Double">[valor_deducao]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:Double">0</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_188">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:Double">[valor_iss]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:Double">0</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_189">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:Double">[valor_issrf]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:Double">0</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_200">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:String">[var]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:String">[dadosNotas("PrestadorNome").ToString]</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                          </scg:List>
+                        </ui:MultipleAssign.AssignOperations>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:MultipleAssign>
+                      <rt:Remove_Special_Characters DisplayName="Remove Special Characters" sap:VirtualizedContainerService.HintSize="479,91" sap2010:WorkflowViewState.IdRef="Remove_Special_Characters_1" io_Texto="[var]" />
+                      <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,148" sap2010:WorkflowViewState.IdRef="MultipleAssign_36">
                         <ui:MultipleAssign.AssignOperations>
                           <scg:List x:TypeArguments="ui:AssignOperation" Capacity="16">
-                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_75">
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_208">
                               <ui:AssignOperation.To>
-                                <OutArgument x:TypeArguments="x:Object">[out_Dados("PrestadorCNPJ")]</OutArgument>
+                                <OutArgument x:TypeArguments="x:Object">[dadosNotas("PrestadorNome")]</OutArgument>
                               </ui:AssignOperation.To>
                               <ui:AssignOperation.Value>
-                                <InArgument x:TypeArguments="x:String">[Roboluze.Valida.isCnpjOrCpf(notaXML.Element("nfse").Element("prestador").Element("cpfcnpj").Value)]</InArgument>
+                                <InArgument x:TypeArguments="x:Object">[var]</InArgument>
                               </ui:AssignOperation.Value>
                             </ui:AssignOperation>
-                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_76">
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_209">
                               <ui:AssignOperation.To>
-                                <OutArgument x:TypeArguments="x:Object">[out_Dados("TomadorCNPJ")]</OutArgument>
+                                <OutArgument x:TypeArguments="x:String">[var]</OutArgument>
                               </ui:AssignOperation.To>
                               <ui:AssignOperation.Value>
-                                <InArgument x:TypeArguments="x:String">[Roboluze.Valida.isCnpjOrCpf(notaXML.Element("nfse").Element("tomador").Element("cpfcnpj").Value)]</InArgument>
+                                <InArgument x:TypeArguments="x:String">[dadosNotas("TomadorNome").ToString]</InArgument>
                               </ui:AssignOperation.Value>
                             </ui:AssignOperation>
-                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_77">
+                          </scg:List>
+                        </ui:MultipleAssign.AssignOperations>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:MultipleAssign>
+                      <rt:Remove_Special_Characters DisplayName="Remove Special Characters" sap:VirtualizedContainerService.HintSize="479,91" sap2010:WorkflowViewState.IdRef="Remove_Special_Characters_4" io_Texto="[var]" />
+                      <ui:ForEach x:TypeArguments="sxl:XElement" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="479,53" sap2010:WorkflowViewState.IdRef="ForEach`1_4" Values="[notaXML.Element(&quot;nfse&quot;).Element(&quot;itens&quot;).Elements(&quot;lista&quot;)]">
+                        <ui:ForEach.Body>
+                          <ActivityAction x:TypeArguments="sxl:XElement">
+                            <ActivityAction.Argument>
+                              <DelegateInArgument x:TypeArguments="sxl:XElement" Name="item" />
+                            </ActivityAction.Argument>
+                            <Sequence DisplayName="Corpo" sap:VirtualizedContainerService.HintSize="521,329" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,148" sap2010:WorkflowViewState.IdRef="MultipleAssign_31">
+                                <ui:MultipleAssign.AssignOperations>
+                                  <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_195">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:Double">[valor_tributavel]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:Double">[Convert.ToDouble(item.Descendants("valor_tributavel").First().Value.Replace(".","").Replace(",","."))]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_192">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:Double">[valor_deducao]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:Double">[Convert.ToDouble(item.Descendants("valor_deducao").First().Value.Replace(".","").Replace(",","."))]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                  </scg:List>
+                                </ui:MultipleAssign.AssignOperations>
+                              </ui:MultipleAssign>
+                              <Switch x:TypeArguments="x:Int32" DisplayName="Switch" Expression="[Convert.ToInt32(item.Descendants(&quot;situacao_tributaria&quot;).First().Value)]" sap:VirtualizedContainerService.HintSize="479,53" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+                                <Switch.Default>
+                                  <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="334,76" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[&quot;XML FULL: &quot;+in_XML]" />
+                                </Switch.Default>
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <ui:MultipleAssign x:Key="0" DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,148" sap2010:WorkflowViewState.IdRef="MultipleAssign_25">
+                                  <ui:MultipleAssign.AssignOperations>
+                                    <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_142">
+                                        <ui:AssignOperation.To>
+                                          <OutArgument x:TypeArguments="x:Double">[valor_iss]</OutArgument>
+                                        </ui:AssignOperation.To>
+                                        <ui:AssignOperation.Value>
+                                          <InArgument x:TypeArguments="x:Double">[(Convert.ToDouble(item.Descendants("valor_tributavel").First().Value.Replace(".","").Replace(",","."))/100)*Convert.ToDouble(item.Descendants("aliquota_item_lista_servico").First().Value.Replace(".","").Replace(",","."))]</InArgument>
+                                        </ui:AssignOperation.Value>
+                                      </ui:AssignOperation>
+                                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_141">
+                                        <ui:AssignOperation.To>
+                                          <OutArgument x:TypeArguments="x:Double">[valor_issrf]</OutArgument>
+                                        </ui:AssignOperation.To>
+                                        <ui:AssignOperation.Value>
+                                          <InArgument x:TypeArguments="x:Double">[Convert.ToDouble(item.Descendants("valor_issrf").First().Value.Replace(".","").Replace(",","."))]</InArgument>
+                                        </ui:AssignOperation.Value>
+                                      </ui:AssignOperation>
+                                    </scg:List>
+                                  </ui:MultipleAssign.AssignOperations>
+                                </ui:MultipleAssign>
+                                <ui:MultipleAssign x:Key="1" DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,148" sap2010:WorkflowViewState.IdRef="MultipleAssign_22">
+                                  <ui:MultipleAssign.AssignOperations>
+                                    <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_139">
+                                        <ui:AssignOperation.To>
+                                          <OutArgument x:TypeArguments="x:Double">[valor_iss]</OutArgument>
+                                        </ui:AssignOperation.To>
+                                        <ui:AssignOperation.Value>
+                                          <InArgument x:TypeArguments="x:Double">0</InArgument>
+                                        </ui:AssignOperation.Value>
+                                      </ui:AssignOperation>
+                                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_127">
+                                        <ui:AssignOperation.To>
+                                          <OutArgument x:TypeArguments="x:Double">[valor_issrf]</OutArgument>
+                                        </ui:AssignOperation.To>
+                                        <ui:AssignOperation.Value>
+                                          <InArgument x:TypeArguments="x:Double">[Convert.ToDouble(item.Descendants("valor_issrf").First().Value.Replace(".","").Replace(",","."))]</InArgument>
+                                        </ui:AssignOperation.Value>
+                                      </ui:AssignOperation>
+                                    </scg:List>
+                                  </ui:MultipleAssign.AssignOperations>
+                                </ui:MultipleAssign>
+                                <ui:MultipleAssign x:Key="4" DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,148" sap2010:WorkflowViewState.IdRef="MultipleAssign_32">
+                                  <ui:MultipleAssign.AssignOperations>
+                                    <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_196">
+                                        <ui:AssignOperation.To>
+                                          <OutArgument x:TypeArguments="x:Double">[valor_iss]</OutArgument>
+                                        </ui:AssignOperation.To>
+                                        <ui:AssignOperation.Value>
+                                          <InArgument x:TypeArguments="x:Double">0</InArgument>
+                                        </ui:AssignOperation.Value>
+                                      </ui:AssignOperation>
+                                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_197">
+                                        <ui:AssignOperation.To>
+                                          <OutArgument x:TypeArguments="x:Double">[valor_issrf]</OutArgument>
+                                        </ui:AssignOperation.To>
+                                        <ui:AssignOperation.Value>
+                                          <InArgument x:TypeArguments="x:Double">[Convert.ToDouble(item.Descendants("valor_issrf").First().Value.Replace(".","").Replace(",","."))]</InArgument>
+                                        </ui:AssignOperation.Value>
+                                      </ui:AssignOperation>
+                                    </scg:List>
+                                  </ui:MultipleAssign.AssignOperations>
+                                </ui:MultipleAssign>
+                                <ui:MultipleAssign x:Key="15" DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,148" sap2010:WorkflowViewState.IdRef="MultipleAssign_33">
+                                  <ui:MultipleAssign.AssignOperations>
+                                    <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_198">
+                                        <ui:AssignOperation.To>
+                                          <OutArgument x:TypeArguments="x:Double">[valor_iss]</OutArgument>
+                                        </ui:AssignOperation.To>
+                                        <ui:AssignOperation.Value>
+                                          <InArgument x:TypeArguments="x:Double">0</InArgument>
+                                        </ui:AssignOperation.Value>
+                                      </ui:AssignOperation>
+                                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_199">
+                                        <ui:AssignOperation.To>
+                                          <OutArgument x:TypeArguments="x:Double">[valor_issrf]</OutArgument>
+                                        </ui:AssignOperation.To>
+                                        <ui:AssignOperation.Value>
+                                          <InArgument x:TypeArguments="x:Double">[Convert.ToDouble(item.Descendants("valor_issrf").First().Value.Replace(".","").Replace(",","."))]</InArgument>
+                                        </ui:AssignOperation.Value>
+                                      </ui:AssignOperation>
+                                    </scg:List>
+                                  </ui:MultipleAssign.AssignOperations>
+                                </ui:MultipleAssign>
+                              </Switch>
+                            </Sequence>
+                          </ActivityAction>
+                        </ui:ForEach.Body>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:ForEach>
+                      <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,303" sap2010:WorkflowViewState.IdRef="MultipleAssign_23">
+                        <ui:MultipleAssign.AssignOperations>
+                          <scg:List x:TypeArguments="ui:AssignOperation" Capacity="16">
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_201">
                               <ui:AssignOperation.To>
-                                <OutArgument x:TypeArguments="x:Object">[out_Dados("TomadorNome")]</OutArgument>
+                                <OutArgument x:TypeArguments="x:Object">[dadosNotas("TomadorNome")]</OutArgument>
                               </ui:AssignOperation.To>
                               <ui:AssignOperation.Value>
-                                <InArgument x:TypeArguments="x:String">[notaXML.Element("nfse").Element("tomador").Element("nome_razao_social").Value]</InArgument>
+                                <InArgument x:TypeArguments="x:Object">[var]</InArgument>
                               </ui:AssignOperation.Value>
                             </ui:AssignOperation>
-                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_78">
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_128">
                               <ui:AssignOperation.To>
-                                <OutArgument x:TypeArguments="x:Object">[out_Dados("Valor Total")]</OutArgument>
+                                <OutArgument x:TypeArguments="x:Object">[dadosNotas("Valor Deduçao")]</OutArgument>
                               </ui:AssignOperation.To>
                               <ui:AssignOperation.Value>
-                                <InArgument x:TypeArguments="x:String">[notaXML.Element("nfse").Element("nf").Element("valor_total").Value]</InArgument>
+                                <InArgument x:TypeArguments="x:Object">[valor_deducao.ToString("N2",cultureInfo)]</InArgument>
                               </ui:AssignOperation.Value>
                             </ui:AssignOperation>
-                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_79">
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_175">
                               <ui:AssignOperation.To>
-                                <OutArgument x:TypeArguments="x:Object">[out_Dados("Valor Desconto")]</OutArgument>
+                                <OutArgument x:TypeArguments="x:Object">[dadosNotas("Base de Cálculo")]</OutArgument>
                               </ui:AssignOperation.To>
                               <ui:AssignOperation.Value>
-                                <InArgument x:TypeArguments="x:String">[notaXML.Element("nfse").Element("nf").Element("valor_desconto").Value]</InArgument>
+                                <InArgument x:TypeArguments="x:Double">[valor_tributavel]</InArgument>
                               </ui:AssignOperation.Value>
                             </ui:AssignOperation>
-                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_80">
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_143">
                               <ui:AssignOperation.To>
-                                <OutArgument x:TypeArguments="x:Object">[out_Dados("Valor IR")]</OutArgument>
+                                <OutArgument x:TypeArguments="x:Object">[dadosNotas("Valor ISS")]</OutArgument>
                               </ui:AssignOperation.To>
                               <ui:AssignOperation.Value>
-                                <InArgument x:TypeArguments="x:String">[notaXML.Element("nfse").Element("nf").Element("valor_ir").Value]</InArgument>
+                                <InArgument x:TypeArguments="x:Object">[valor_iss.ToString("N2",cultureInfo)]</InArgument>
                               </ui:AssignOperation.Value>
                             </ui:AssignOperation>
-                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_81">
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_129">
                               <ui:AssignOperation.To>
-                                <OutArgument x:TypeArguments="x:Object">[out_Dados("Valor INSS")]</OutArgument>
+                                <OutArgument x:TypeArguments="x:Object">[dadosNotas("Valor ISSRF")]</OutArgument>
                               </ui:AssignOperation.To>
                               <ui:AssignOperation.Value>
-                                <InArgument x:TypeArguments="x:String">[notaXML.Element("nfse").Element("nf").Element("valor_inss").Value]</InArgument>
+                                <InArgument x:TypeArguments="x:Object">[valor_issrf.ToString("N2",cultureInfo)]</InArgument>
                               </ui:AssignOperation.Value>
                             </ui:AssignOperation>
-                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_82">
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_157">
                               <ui:AssignOperation.To>
-                                <OutArgument x:TypeArguments="x:Object">[out_Dados("Valor Contribuição Social")]</OutArgument>
+                                <OutArgument x:TypeArguments="x:Object">[dadosNotas("Arquivo XML")]</OutArgument>
                               </ui:AssignOperation.To>
                               <ui:AssignOperation.Value>
-                                <InArgument x:TypeArguments="x:String">[notaXML.Element("nfse").Element("nf").Element("valor_contribuicao_social").Value]</InArgument>
+                                <InArgument x:TypeArguments="x:Object">[in_XML]</InArgument>
                               </ui:AssignOperation.Value>
                             </ui:AssignOperation>
-                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_83">
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_131">
                               <ui:AssignOperation.To>
-                                <OutArgument x:TypeArguments="x:Object">[out_Dados("Valor RPS")]</OutArgument>
+                                <OutArgument x:TypeArguments="x:Object">[out_Dados(notaXML.Element("nfse").Element("nf").Element("numero_nfse").Value)]</OutArgument>
                               </ui:AssignOperation.To>
                               <ui:AssignOperation.Value>
-                                <InArgument x:TypeArguments="x:String">[notaXML.Element("nfse").Element("nf").Element("valor_rps").Value]</InArgument>
-                              </ui:AssignOperation.Value>
-                            </ui:AssignOperation>
-                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_84">
-                              <ui:AssignOperation.To>
-                                <OutArgument x:TypeArguments="x:Object">[out_Dados("Valor PIS")]</OutArgument>
-                              </ui:AssignOperation.To>
-                              <ui:AssignOperation.Value>
-                                <InArgument x:TypeArguments="x:String">[notaXML.Element("nfse").Element("nf").Element("valor_pis").Value]</InArgument>
-                              </ui:AssignOperation.Value>
-                            </ui:AssignOperation>
-                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_85">
-                              <ui:AssignOperation.To>
-                                <OutArgument x:TypeArguments="x:Object">[out_Dados("Valor Cofins")]</OutArgument>
-                              </ui:AssignOperation.To>
-                              <ui:AssignOperation.Value>
-                                <InArgument x:TypeArguments="x:String">[notaXML.Element("nfse").Element("nf").Element("valor_cofins").Value]</InArgument>
+                                <InArgument x:TypeArguments="x:Object">[dadosNotas]</InArgument>
                               </ui:AssignOperation.Value>
                             </ui:AssignOperation>
                           </scg:List>
@@ -399,7 +847,7 @@
             </ui:IfElseIf.ConditionBlocks>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
@@ -407,7 +855,7 @@
         </Sequence>
       </TryCatch.Try>
       <TryCatch.Catches>
-        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="960,21" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="454,21" sap2010:WorkflowViewState.IdRef="Catch`1_2">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -418,7 +866,7 @@
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
             </ActivityAction.Argument>
-            <ui:IfElseIf DisplayName="Else If" sap:VirtualizedContainerService.HintSize="745,1022" sap2010:WorkflowViewState.IdRef="IfElseIf_5">
+            <ui:IfElseIf DisplayName="Else If" sap:VirtualizedContainerService.HintSize="592,902" sap2010:WorkflowViewState.IdRef="IfElseIf_5">
               <ui:IfElseIf.ConditionBlocks>
                 <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
                   <ui:IfElseIfBlock BlockType="If" Condition="[var.Contains(&quot;&lt;Nfse versao=&quot;)]">
