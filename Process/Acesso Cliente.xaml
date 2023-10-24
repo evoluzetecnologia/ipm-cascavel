@@ -6,7 +6,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1095,1725</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1110,1740</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Acesso_Cliente_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -111,7 +111,7 @@
       <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Acesso_Cliente" sap:VirtualizedContainerService.HintSize="711,1660" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Acesso_Cliente" sap:VirtualizedContainerService.HintSize="711,1675" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="codigo" />
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="parametro" />
@@ -123,7 +123,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="649,163" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="649,178" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -178,21 +178,11 @@
           </sap:WorkflowViewStateService.ViewState>
           <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\IPM\Login.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="573,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Process\IPM\Login.xaml">
             <ui:InvokeWorkflowFile.Arguments>
-              <InArgument x:TypeArguments="x:String" x:Key="in_Login">
-                <VisualBasicValue x:TypeArguments="x:String" ExpressionText="io_TransactionItem(&quot;LOGIN&quot;).ToString()" />
-              </InArgument>
-              <InArgument x:TypeArguments="x:String" x:Key="in_Password">
-                <VisualBasicValue x:TypeArguments="x:String" ExpressionText="io_TransactionItem(&quot;PASSWORD&quot;).ToString()" />
-              </InArgument>
-              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
-                <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="io_Config" />
-              </InArgument>
-              <InOutArgument x:TypeArguments="x:String" x:Key="io_Codigo">
-                <VisualBasicReference x:TypeArguments="x:String" ExpressionText="codigo" />
-              </InOutArgument>
-              <InArgument x:TypeArguments="x:Int32" x:Key="in_Time">
-                <Literal x:TypeArguments="x:Int32" Value="5" />
-              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_Login">[io_TransactionItem("LOGIN").ToString()]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_Password">[io_TransactionItem("PASSWORD").ToString()]</InArgument>
+              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[io_Config]</InArgument>
+              <InOutArgument x:TypeArguments="x:String" x:Key="io_Codigo">[codigo]</InOutArgument>
+              <InArgument x:TypeArguments="x:Int32" x:Key="in_Time">5</InArgument>
               <InArgument x:TypeArguments="x:String" x:Key="BreakTriggerScopeInArgument" />
             </ui:InvokeWorkflowFile.Arguments>
             <sap:WorkflowViewStateService.ViewState>
@@ -458,9 +448,7 @@
           </ui:ForEach>
           <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\IPM\Logout.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="573,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Process\IPM\Logout.xaml">
             <ui:InvokeWorkflowFile.Arguments>
-              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
-                <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="io_Config" />
-              </InArgument>
+              <scg:Dictionary x:TypeArguments="x:String, Argument" />
             </ui:InvokeWorkflowFile.Arguments>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
