@@ -7,7 +7,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1244,3764</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1218,4387</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Salvar_PDF_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -126,22 +126,27 @@
       <AssemblyReference>UiPath.System.Activities.ViewModels</AssemblyReference>
       <AssemblyReference>System.Private.Xml</AssemblyReference>
       <AssemblyReference>UiPath.Web</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Salvar_Como" sap:VirtualizedContainerService.HintSize="756,3699" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Salvar_Como" sap:VirtualizedContainerService.HintSize="818,4322" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="si:FileInfo" Name="fileInfo" />
       <Variable x:TypeArguments="x:String" Name="var" />
       <Variable x:TypeArguments="si:DirectoryInfo" Default="[New DirectoryInfo(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), &quot;Downloads&quot;))]" Name="folderDownload" />
       <Variable x:TypeArguments="si:FileInfo" Default="[New FileInfo(&quot;C:\Roboluze\Config\Temp\&quot;+DateTime.Now.ToString(&quot;ddMMyyhhmmss&quot;)+&quot;.pdf&quot;)]" Name="fileDownload" />
-      <Variable x:TypeArguments="x:Int32" Default="0" Name="i" />
+      <Variable x:TypeArguments="x:Int32" Name="i">
+        <Variable.Default>
+          <Literal x:TypeArguments="x:Int32" />
+        </Variable.Default>
+      </Variable>
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="694,52" sap2010:WorkflowViewState.IdRef="MultipleAssign_10">
+    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="756,52" sap2010:WorkflowViewState.IdRef="MultipleAssign_10">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_13">
@@ -161,7 +166,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:MultipleAssign>
-    <If Condition="[Not in_Url.IsNullOrEmpty]" DisplayName="Download via URL" sap:VirtualizedContainerService.HintSize="694,52" sap2010:WorkflowViewState.IdRef="If_9">
+    <If Condition="[Not in_Url.IsNullOrEmpty]" DisplayName="Download via URL" sap:VirtualizedContainerService.HintSize="756,52" sap2010:WorkflowViewState.IdRef="If_9">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -305,7 +310,7 @@
         </Sequence>
       </If.Else>
     </If>
-    <If Condition="[in_Url.IsNullOrEmpty Or Not fileDownload.Exists]" DisplayName="Baixar?" sap:VirtualizedContainerService.HintSize="694,2723" sap2010:WorkflowViewState.IdRef="If_12">
+    <If Condition="[in_Url.IsNullOrEmpty Or Not fileDownload.Exists]" DisplayName="Baixar?" sap:VirtualizedContainerService.HintSize="756,3346" sap2010:WorkflowViewState.IdRef="If_12">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -313,13 +318,13 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <Sequence sap:VirtualizedContainerService.HintSize="660,2541" sap2010:WorkflowViewState.IdRef="Sequence_35">
+        <Sequence sap:VirtualizedContainerService.HintSize="722,3024" sap2010:WorkflowViewState.IdRef="Sequence_35">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <If Condition="[Not folderDownload.Exists]" DisplayName="Não Existe Pasta Download" sap:VirtualizedContainerService.HintSize="618,52" sap2010:WorkflowViewState.IdRef="If_2">
+          <If Condition="[Not folderDownload.Exists]" DisplayName="Não Existe Pasta Download" sap:VirtualizedContainerService.HintSize="680,52" sap2010:WorkflowViewState.IdRef="If_2">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -380,7 +385,7 @@
               <Sequence sap2010:WorkflowViewState.IdRef="Sequence_12" />
             </If.Else>
           </If>
-          <ui:IfElseIf DisplayName="Excluir arquivo" sap:VirtualizedContainerService.HintSize="618,52" sap2010:WorkflowViewState.IdRef="IfElseIf_1">
+          <ui:IfElseIf DisplayName="Excluir arquivo" sap:VirtualizedContainerService.HintSize="680,52" sap2010:WorkflowViewState.IdRef="IfElseIf_1">
             <ui:IfElseIf.ConditionBlocks>
               <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
                 <ui:IfElseIfBlock BlockType="If" Condition="[fileInfo.Exists]">
@@ -428,7 +433,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:IfElseIf>
-          <uix:NCheckState DisplayName="Check App State 'Salvar como'" EnableIfExists="False" sap:VirtualizedContainerService.HintSize="618,790" sap2010:WorkflowViewState.IdRef="NCheckState_2" Timeout="0" Version="V3">
+          <uix:NCheckState DisplayName="Check App State 'Salvar como'" EnableIfExists="False" sap:VirtualizedContainerService.HintSize="680,1258" sap2010:WorkflowViewState.IdRef="NCheckState_2" Timeout="0" Version="V3">
             <uix:NCheckState.IfExists>
               <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="450,105" sap2010:WorkflowViewState.IdRef="Sequence_26">
                 <sap:WorkflowViewStateService.ViewState>
@@ -439,33 +444,33 @@
               </Sequence>
             </uix:NCheckState.IfExists>
             <uix:NCheckState.IfNotExists>
-              <Sequence DisplayName="Target does not appear" sap:VirtualizedContainerService.HintSize="546,573" sap2010:WorkflowViewState.IdRef="Sequence_25">
+              <Sequence DisplayName="Target does not appear" sap:VirtualizedContainerService.HintSize="636,1041" sap2010:WorkflowViewState.IdRef="Sequence_25">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Download" sap:VirtualizedContainerService.HintSize="484,458" sap2010:WorkflowViewState.IdRef="NApplicationCard_5" OpenMode="Never" ScopeGuid="ec1c2c77-684d-417d-8eeb-f5a2036e555a" Version="V2">
+                <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Download" sap:VirtualizedContainerService.HintSize="574,926" sap2010:WorkflowViewState.IdRef="NApplicationCard_5" OpenMode="Never" ScopeGuid="ec1c2c77-684d-417d-8eeb-f5a2036e555a" Version="V2">
                   <uix:NApplicationCard.Body>
                     <ActivityAction x:TypeArguments="x:Object">
                       <ActivityAction.Argument>
                         <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
                       </ActivityAction.Argument>
-                      <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="450,167" sap2010:WorkflowViewState.IdRef="Sequence_27">
+                      <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="540,635" sap2010:WorkflowViewState.IdRef="Sequence_27">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="TryCatch_5">
+                        <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="478,520" sap2010:WorkflowViewState.IdRef="TryCatch_5">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                               <x:Boolean x:Key="IsPinned">False</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                           <TryCatch.Try>
-                            <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="0" DelayBefore="0" DisplayName="Download" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="NClick_7" InteractionMode="HardwareEvents" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ec1c2c77-684d-417d-8eeb-f5a2036e555a" Timeout="0" Version="V3">
+                            <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="0" DelayBefore="0" DisplayName="Download" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="NClick_7" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ec1c2c77-684d-417d-8eeb-f5a2036e555a" Timeout="0" Version="V3">
                               <uix:NClick.Target>
                                 <uix:TargetAnchorable DesignTimeRectangle="1316, 121, 36, 36" DesignTimeScaleFactor="1" FriendlyName="'grouping'" FullSelectorArgument="&lt;ctrl name='*' role='document' /&gt;&lt;ctrl name='Transferir' role='push button' /&gt;&lt;ctrl role='grouping' /&gt;" Guid="7ce90d1d-5b25-47f8-9fdb-1b5ea51c6fad" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD5SURBVFhH7dRdCoJAFIbh1tRFIBRFWwmiImot/biItC2EaFRUN+lOXMHEEYzUQ4zzTRF1Lp6bmXF8YRwbzZajvpkEoiQQJYEoCURJIOo/AgfDkVqu3QIa49bWZSVwsXJVmqYFNMatrUsCUb8bOJnOHxcijPaVQBrL58fTGbuHDuPAdrevzpdrJazscDxla7k9dEBHTC+mAC6M0JzT6bHP6oK/QQrgIsMoguOIlUtCIRT0HMetM2ElMEdhuyBg50xZDbRxpGVWA9/BODBOksKleOUWJ+weOowDPX+b/Yx1bDyf3UPH7x7xp0ggSgJREoiSQJQEor480FF3DQTV2A75LtcAAAAASUVORK5CYII=" InformativeScreenshot="1490dafa7f64620709e565c08c967707.png" ScopeSelectorArgument="&lt;wnd app='chrome.exe' cls='Chrome_WidgetWin_1' title='*' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
                               </uix:NClick.Target>
@@ -478,10 +483,10 @@
                             </uix:NClick>
                           </TryCatch.Try>
                           <TryCatch.Catches>
-                            <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_5">
+                            <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="444,357" sap2010:WorkflowViewState.IdRef="Catch`1_5">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
@@ -489,9 +494,9 @@
                                 <ActivityAction.Argument>
                                   <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
                                 </ActivityAction.Argument>
-                                <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="438,369" sap2010:WorkflowViewState.IdRef="TryCatch_6">
+                                <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="438,288" sap2010:WorkflowViewState.IdRef="TryCatch_6">
                                   <TryCatch.Try>
-                                    <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="0" DelayBefore="0" DisplayName="Download" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="NClick_9" InteractionMode="HardwareEvents" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ec1c2c77-684d-417d-8eeb-f5a2036e555a" Timeout="0" Version="V3">
+                                    <uix:NClick ActivateBefore="True" ClickType="Single" DelayAfter="0" DelayBefore="0" DisplayName="Download" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="NClick_9" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="ec1c2c77-684d-417d-8eeb-f5a2036e555a" Timeout="0" Version="V3">
                                       <uix:NClick.Target>
                                         <uix:TargetAnchorable DesignTimeRectangle="1316, 121, 36, 36" DesignTimeScaleFactor="1" FriendlyName="'grouping'" FullSelectorArgument="&lt;ctrl name='*' role='document' /&gt;&lt;ctrl name='Fazer o download' role='push button' /&gt;&lt;ctrl role='grouping' /&gt;" Guid="7ce90d1d-5b25-47f8-9fdb-1b5ea51c6fad" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD5SURBVFhH7dRdCoJAFIbh1tRFIBRFWwmiImot/biItC2EaFRUN+lOXMHEEYzUQ4zzTRF1Lp6bmXF8YRwbzZajvpkEoiQQJYEoCURJIOo/AgfDkVqu3QIa49bWZSVwsXJVmqYFNMatrUsCUb8bOJnOHxcijPaVQBrL58fTGbuHDuPAdrevzpdrJazscDxla7k9dEBHTC+mAC6M0JzT6bHP6oK/QQrgIsMoguOIlUtCIRT0HMetM2ElMEdhuyBg50xZDbRxpGVWA9/BODBOksKleOUWJ+weOowDPX+b/Yx1bDyf3UPH7x7xp0ggSgJREoiSQJQEor480FF3DQTV2A75LtcAAAAASUVORK5CYII=" InformativeScreenshot="1490dafa7f64620709e565c08c967707.png" ScopeSelectorArgument="&lt;wnd app='chrome.exe' cls='Chrome_WidgetWin_1' title='*' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
                                       </uix:NClick.Target>
@@ -559,13 +564,13 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </uix:NCheckState>
-          <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Application: Salvar como" sap:VirtualizedContainerService.HintSize="618,1347" sap2010:WorkflowViewState.IdRef="NApplicationCard_3" InteractionMode="Simulate" OpenMode="Never" ScopeGuid="eb579aa8-35a6-439a-9ee6-05076738be32" Version="V2">
+          <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Application: Salvar como" sap:VirtualizedContainerService.HintSize="680,1362" sap2010:WorkflowViewState.IdRef="NApplicationCard_3" InteractionMode="Simulate" OpenMode="Never" ScopeGuid="eb579aa8-35a6-439a-9ee6-05076738be32" Version="V2">
             <uix:NApplicationCard.Body>
               <ActivityAction x:TypeArguments="x:Object">
                 <ActivityAction.Argument>
                   <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
                 </ActivityAction.Argument>
-                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="584,1056" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="584,1071" sap2010:WorkflowViewState.IdRef="Sequence_8">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -573,7 +578,7 @@
                   </sap:WorkflowViewStateService.ViewState>
                   <uix:NGetAttributeGeneric x:TypeArguments="x:String" Attribute="text" DelayAfter="0" DelayBefore="0" DisplayName="Nome Arquivo" sap:VirtualizedContainerService.HintSize="522,52" sap2010:WorkflowViewState.IdRef="NGetAttributeGeneric`1_3" Result="[var]" ScopeIdentifier="eb579aa8-35a6-439a-9ee6-05076738be32" Version="V3">
                     <uix:NGetAttributeGeneric.Target>
-                      <uix:TargetAnchorable CvElementArea="131, 536, 747, 22" CvTextArea="136, 540, 251, 15" CvTextArgument="e12cb3fc-3db1-4d5c-88ea-6ffda00f56c4 (1).pdf" CvType="InputBox" DesignTimeRectangle="136, 539, 721, 17" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'e12cb3fc-3db1-4d5c-88ea…'" FullSelectorArgument="&lt;wnd aaname='Nome:' cls='ComboBox' /&gt;&lt;wnd ctrlid='1001' /&gt;" FuzzySelectorArgument="&lt;wnd aaname='Nome:' cls='ComboBox' /&gt;&lt;wnd ctrlid='1001' /&gt;" Guid="951d06b0-15e2-4c8d-853a-c428d519dc4d" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAtUAAAAVCAYAAACJxBL2AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAVASURBVHhe7ZsNjuo6DEZZFwvqelgNm5klsAhe3aaJ7dqmQOdqnnSOVF3qpP5LpHy3MJfH4/EEAAAAAIDPubR/AQAAAADgQxDVAAAAAABfgqgGAAAAAPgSRDUAAAAAwJd8Jqrv0/NymZ73divcp8tsW6/r7adZM+7P6XJ9xtN+nrfr8DXZIKv9eptnvUPh06DzqnJsBH2o+Lldi9xtvGVuy/edGIatX/Nl1iSzn8TYC6p/fu3KtTzQe+Hd+lzMqsdhDS+o17eN68235DPiSsxz1sP1r+w1AAAAnMGborqJ02maD20lQn5uz1u/OSKIqjn3533zNfu99jjyTCWIKzKfHp1XlWPSh5I1/1zY2HgisD6rdSOrJft8DrEwlDi6Hn/vOZKXzNF7Q9eU2W3MrMefidvVf7q+su/6WLZ/xH7GetR1AwAAwPl8+PMPOagzMXlEGOhDv0LHOfrMK6rcdYwj8SpfFnlLOd20sPLYePfpy1qNiBN/TVhl9lOYawjr87181dtX4zPy9lUlLv1dhHBmD3zGPc5qqHm1viMPjeTk9o/L/zN0rQd6CQAAAF+Ti+rlje6lfQXuhWMgBjp+rL2Va75WvdAO+vuIEb4Z7AJD5g8fY27k+wVetKg6r7Mo2omRMseqDwqJITGdoM1j27ps3KM16//c6Dwz+0yy5iK8t3il4Ft6K29f29ylVr92Uqe+b7WlvYjj70RqW9fYrnJa/Mt40uOwho2k99n6dnTPNcH+SX3I3NlHth/D/vne770CAADAOSSiuh3g2xk8Cw17IAdioGG/Ol9FyP4wb4f9Jh4WQTDiiTBahIARcC6n1HdM7nOIo3XOFqPOcSXvw0AJKiOYqtgaXfd7Na85r4LKlB3adRy59WsuuDkeEaRqfOwF/1x0/14vZI7JbxHDmagWx1XuaiytIet9tr4a8R/tk8hezc324zoW90/GRj0AAADwO8SiWomufg31NRMd/IHoWPxkAsEe9CJeTAjBCBz3TObb5B6Ma58y14ggHeNIjq4PQWwj8nS8MralC7vF/8Ganf+ee2XvPtq1Fbv0bLOr3nVbi9kFbKPf+9rcvctpNx7EP1dUy7TW46yGpd5979P1NUjsYN1CuxLphn3+2ZrauXXdAAAAcA6FqI5EwIYXA4kQSP34g34V5FrLbHTh4J95mWPOZ2IkytH3wSPjmxhUl8QsY1us8D1W89uiM/Nt7Jnga2SCdFebu696kcV3sXpdmX2Xg6X3OKsh7I/4TNa3zViRedG6RfZqrs5f7ceqf7vnAAAA4Dcofv4RfdW94Q5+L0Q668G/9+P8a8Fyvw+/y7xMHGS+A0qfQyiLALNvxpMcOzInEkAJRvxUsRVL3M3+Ts3zmiihJaJxeS6z+3o39HyTS4T4sLmu9Wm7EN0nvcjim/VQ/jK7+ewwdel5uoYDvRc/qrcDeTaKLbHc/jE+fP4q/q7Oah9HsQEAAOBMDv6h4nxtJ/aCFQPrIa7mztcQH+uBv9m1yJqm8Vx37+KOsJE4iHwHpD5nRLQ1e/SHimGOHZnjRFGFEUwzZewk36M1z5h1URMzu+/TOraKyeX+Oj2n6k21oH1032svx3P+fibtRRFfPWP6ENqjHJpf/3xYg/Ci9359FdLzvSAXf27/SO7dsc55/Zzux3Iv6boBAADgN8hFNQCcRyG4B9kbbQFxDAAA8JdBVAP8I5ZvCHavtwfyU5x8HFENAADwl0FUA/wvQFQDAAD8ZRDVAAAAAABfgqgGAAAAAPgSRDUAAAAAwJdcHo9H+wgAAAAAAO/zfP4HiK7mv1IxEfkAAAAASUVORK5CYII=" InformativeScreenshot="6f84935382e2c39443ffa58c6b1d9172.png" ScopeSelectorArgument="&lt;wnd app='chrome.exe' title='Salvar como' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
+                      <uix:TargetAnchorable CvElementArea="131, 536, 747, 22" CvTextArea="136, 540, 251, 15" CvType="InputBox" DesignTimeRectangle="136, 539, 721, 17" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'e12cb3fc-3db1-4d5c-88ea…'" FullSelectorArgument="&lt;wnd aaname='Nome:' cls='ComboBox' /&gt;" Guid="951d06b0-15e2-4c8d-853a-c428d519dc4d" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAtUAAAAVCAYAAACJxBL2AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAVASURBVHhe7ZsNjuo6DEZZFwvqelgNm5klsAhe3aaJ7dqmQOdqnnSOVF3qpP5LpHy3MJfH4/EEAAAAAIDPubR/AQAAAADgQxDVAAAAAABfgqgGAAAAAPgSRDUAAAAAwJd8Jqrv0/NymZ73divcp8tsW6/r7adZM+7P6XJ9xtN+nrfr8DXZIKv9eptnvUPh06DzqnJsBH2o+Lldi9xtvGVuy/edGIatX/Nl1iSzn8TYC6p/fu3KtTzQe+Hd+lzMqsdhDS+o17eN68235DPiSsxz1sP1r+w1AAAAnMGborqJ02maD20lQn5uz1u/OSKIqjn3533zNfu99jjyTCWIKzKfHp1XlWPSh5I1/1zY2HgisD6rdSOrJft8DrEwlDi6Hn/vOZKXzNF7Q9eU2W3MrMefidvVf7q+su/6WLZ/xH7GetR1AwAAwPl8+PMPOagzMXlEGOhDv0LHOfrMK6rcdYwj8SpfFnlLOd20sPLYePfpy1qNiBN/TVhl9lOYawjr87181dtX4zPy9lUlLv1dhHBmD3zGPc5qqHm1viMPjeTk9o/L/zN0rQd6CQAAAF+Ti+rlje6lfQXuhWMgBjp+rL2Va75WvdAO+vuIEb4Z7AJD5g8fY27k+wVetKg6r7Mo2omRMseqDwqJITGdoM1j27ps3KM16//c6Dwz+0yy5iK8t3il4Ft6K29f29ylVr92Uqe+b7WlvYjj70RqW9fYrnJa/Mt40uOwho2k99n6dnTPNcH+SX3I3NlHth/D/vne770CAADAOSSiuh3g2xk8Cw17IAdioGG/Ol9FyP4wb4f9Jh4WQTDiiTBahIARcC6n1HdM7nOIo3XOFqPOcSXvw0AJKiOYqtgaXfd7Na85r4LKlB3adRy59WsuuDkeEaRqfOwF/1x0/14vZI7JbxHDmagWx1XuaiytIet9tr4a8R/tk8hezc324zoW90/GRj0AAADwO8SiWomufg31NRMd/IHoWPxkAsEe9CJeTAjBCBz3TObb5B6Ma58y14ggHeNIjq4PQWwj8nS8MralC7vF/8Ganf+ee2XvPtq1Fbv0bLOr3nVbi9kFbKPf+9rcvctpNx7EP1dUy7TW46yGpd5979P1NUjsYN1CuxLphn3+2ZrauXXdAAAAcA6FqI5EwIYXA4kQSP34g34V5FrLbHTh4J95mWPOZ2IkytH3wSPjmxhUl8QsY1us8D1W89uiM/Nt7Jnga2SCdFebu696kcV3sXpdmX2Xg6X3OKsh7I/4TNa3zViRedG6RfZqrs5f7ceqf7vnAAAA4Dcofv4RfdW94Q5+L0Q668G/9+P8a8Fyvw+/y7xMHGS+A0qfQyiLALNvxpMcOzInEkAJRvxUsRVL3M3+Ts3zmiihJaJxeS6z+3o39HyTS4T4sLmu9Wm7EN0nvcjim/VQ/jK7+ewwdel5uoYDvRc/qrcDeTaKLbHc/jE+fP4q/q7Oah9HsQEAAOBMDv6h4nxtJ/aCFQPrIa7mztcQH+uBv9m1yJqm8Vx37+KOsJE4iHwHpD5nRLQ1e/SHimGOHZnjRFGFEUwzZewk36M1z5h1URMzu+/TOraKyeX+Oj2n6k21oH1032svx3P+fibtRRFfPWP6ENqjHJpf/3xYg/Ci9359FdLzvSAXf27/SO7dsc55/Zzux3Iv6boBAADgN8hFNQCcRyG4B9kbbQFxDAAA8JdBVAP8I5ZvCHavtwfyU5x8HFENAADwl0FUA/wvQFQDAAD8ZRDVAAAAAABfgqgGAAAAAPgSRDUAAAAAwJdcHo9H+wgAAAAAAO/zfP4HiK7mv1IxEfkAAAAASUVORK5CYII=" InformativeScreenshot="6f84935382e2c39443ffa58c6b1d9172.png" ScopeSelectorArgument="&lt;wnd app='chrome.exe' title='Salvar como' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
                     </uix:NGetAttributeGeneric.Target>
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -582,7 +587,7 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </uix:NGetAttributeGeneric>
-                  <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="522,101" sap2010:WorkflowViewState.IdRef="MultipleAssign_4">
+                  <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="522,116" sap2010:WorkflowViewState.IdRef="MultipleAssign_4">
                     <ui:MultipleAssign.AssignOperations>
                       <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
                         <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
@@ -621,9 +626,7 @@
                               </sap:WorkflowViewStateService.ViewState>
                               <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Salvar Download.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Process\Salvar Download.xaml">
                                 <ui:InvokeWorkflowFile.Arguments>
-                                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
-                                    <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="in_Config" />
-                                  </InArgument>
+                                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
                                 </ui:InvokeWorkflowFile.Arguments>
                               </ui:InvokeWorkflowFile>
                             </Sequence>
