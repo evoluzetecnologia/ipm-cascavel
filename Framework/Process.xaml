@@ -6,7 +6,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1218,1524</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1218,1339</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="200">
@@ -206,6 +206,8 @@
       <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
       <x:String>UiPath.DataTableUtilities</x:String>
       <x:String>Roboluze</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+      <x:String>Newtonsoft.Json</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -296,18 +298,35 @@
       <AssemblyReference>System.IO.FileSystem.AccessControl</AssemblyReference>
       <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
       <AssemblyReference>Roboluze.UiPath</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Linq.Parallel</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Linq.Queryable</AssemblyReference>
+      <AssemblyReference>System.CodeDom</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Process" sap:VirtualizedContainerService.HintSize="559,1459" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Process" sap:VirtualizedContainerService.HintSize="559,1274" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Default="[New Dictionary(Of String, Object) From {{&quot;chave1&quot;, &quot;&quot;}, {&quot;chave2&quot;, &quot;&quot;}}]" Name="tipos" />
+      <Variable x:TypeArguments="scg:List(x:String)" Name="tipos">
+        <Variable.Default>
+          <VisualBasicValue x:TypeArguments="scg:List(x:String)" ExpressionText="New List(Of String) From {{&quot;Saida&quot;}, {&quot;Entrada&quot;}}" />
+        </Variable.Default>
+      </Variable>
+      <Variable x:TypeArguments="x:String" Name="var" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <If Condition="[Roboluze.Valida.isCnpjOrCpf(io_TransactionItem(&quot;CNPJ&quot;).ToString()).Equals(&quot;&quot;)]" DisplayName="Validar CNPJ" sap:VirtualizedContainerService.HintSize="497,360" sap2010:WorkflowViewState.IdRef="If_2">
+    <If Condition="[Roboluze.Valida.isCnpjOrCpf(io_TransactionItem(&quot;CNPJ&quot;).ToString()).Equals(&quot;&quot;)]" DisplayName="Validar CNPJ" sap:VirtualizedContainerService.HintSize="497,52" sap2010:WorkflowViewState.IdRef="If_2">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
       <If.Then>
         <Sequence sap:VirtualizedContainerService.HintSize="376,178" sap2010:WorkflowViewState.IdRef="Sequence_7">
           <sap:WorkflowViewStateService.ViewState>
@@ -322,7 +341,7 @@
         <Sequence sap2010:WorkflowViewState.IdRef="Sequence_8" />
       </If.Else>
     </If>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="497,456" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="497,52" sap2010:WorkflowViewState.IdRef="CommentOut_1">
       <ui:CommentOut.Body>
         <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,377" sap2010:WorkflowViewState.IdRef="Sequence_9">
           <sap:WorkflowViewStateService.ViewState>
@@ -350,10 +369,16 @@
           </ui:InvokeWorkflowFile>
         </Sequence>
       </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
-    <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[io_Config(&quot;ToDo&quot;).ToString()]" sap:VirtualizedContainerService.HintSize="497,452" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+    <Switch x:TypeArguments="x:String" DisplayName="Switch Filtro" Expression="[io_Config(&quot;ToDo&quot;).ToString()]" sap:VirtualizedContainerService.HintSize="497,539" sap2010:WorkflowViewState.IdRef="Switch`1_2">
       <Switch.Default>
-        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\Acesso Cliente.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_14" UnSafe="False" WorkflowFileName="Process\Acesso Cliente.xaml">
+        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\Acesso Cliente.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_21" UnSafe="False" WorkflowFileName="Process\Acesso Cliente.xaml">
           <ui:InvokeWorkflowFile.Arguments>
             <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[io_TransactionItem]</InOutArgument>
             <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">[io_Config]</InOutArgument>
@@ -366,7 +391,7 @@
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="DownloadNFSaida" DisplayName="Process\Download Periodo.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_19" UnSafe="False" WorkflowFileName="Process\Download Periodo.xaml">
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="DownloadSaidaXML" DisplayName="Process\Download Periodo.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_22" UnSafe="False" WorkflowFileName="Process\Download Periodo.xaml">
         <ui:InvokeWorkflowFile.Arguments>
           <InArgument x:TypeArguments="x:String" x:Key="BreakTriggerScopeInArgument" />
           <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">
@@ -383,7 +408,25 @@
           </InArgument>
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
-      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="DownloadNFEntrada" DisplayName="Process\Download Periodo.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_20" UnSafe="False" WorkflowFileName="Process\Download Periodo.xaml">
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="DownloadSaidaTXT" DisplayName="Process\Download Periodo.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_23" UnSafe="False" WorkflowFileName="Process\Download Periodo.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <InArgument x:TypeArguments="x:String" x:Key="BreakTriggerScopeInArgument" />
+          <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[io_TransactionItem]</InOutArgument>
+          <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">[io_Config]</InOutArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_Tipo">Saida</InArgument>
+          <InArgument x:TypeArguments="x:Boolean" x:Key="in_Fechar">False</InArgument>
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="DownloadSaidaPDF" DisplayName="Process\Download Periodo.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_24" UnSafe="False" WorkflowFileName="Process\Download Periodo.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <InArgument x:TypeArguments="x:String" x:Key="BreakTriggerScopeInArgument" />
+          <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[io_TransactionItem]</InOutArgument>
+          <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">[io_Config]</InOutArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_Tipo">Saida</InArgument>
+          <InArgument x:TypeArguments="x:Boolean" x:Key="in_Fechar">False</InArgument>
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="DownloadEntradaXML" DisplayName="Process\Download Periodo.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_25" UnSafe="False" WorkflowFileName="Process\Download Periodo.xaml">
         <ui:InvokeWorkflowFile.Arguments>
           <InArgument x:TypeArguments="x:String" x:Key="BreakTriggerScopeInArgument" />
           <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">
@@ -400,23 +443,51 @@
           </InArgument>
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
-      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="ProtocolarNFSaida" DisplayName="Process\Declaracao.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_13" UnSafe="False" WorkflowFileName="Process\Declaracao.xaml">
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="DownloadEntradaTXT" DisplayName="Process\Download Periodo.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_26" UnSafe="False" WorkflowFileName="Process\Download Periodo.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <InArgument x:TypeArguments="x:String" x:Key="BreakTriggerScopeInArgument" />
+          <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[io_TransactionItem]</InOutArgument>
+          <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">[io_Config]</InOutArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_Tipo">Entrada</InArgument>
+          <InArgument x:TypeArguments="x:Boolean" x:Key="in_Fechar">False</InArgument>
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="DownloadEntradaPDF" DisplayName="Process\Download Periodo.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_27" UnSafe="False" WorkflowFileName="Process\Download Periodo.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <InArgument x:TypeArguments="x:String" x:Key="BreakTriggerScopeInArgument" />
+          <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">
+            <VisualBasicReference x:TypeArguments="sd:DataRow" ExpressionText="io_TransactionItem" />
+          </InOutArgument>
+          <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">
+            <VisualBasicReference x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="io_Config" />
+          </InOutArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_Tipo">
+            <Literal x:TypeArguments="x:String">Entrada</Literal>
+          </InArgument>
+          <InArgument x:TypeArguments="x:Boolean" x:Key="in_Fechar">
+            <Literal x:TypeArguments="x:Boolean" />
+          </InArgument>
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="ProtocolarNFSaida" DisplayName="Process\Declaracao.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_28" UnSafe="False" WorkflowFileName="Process\Declaracao.xaml">
         <ui:InvokeWorkflowFile.Arguments>
           <InArgument x:TypeArguments="x:String" x:Key="in_Tipo">Saida</InArgument>
           <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">[io_Config]</InOutArgument>
           <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[io_TransactionItem]</InOutArgument>
           <InArgument x:TypeArguments="x:Boolean" x:Key="in_Fechar">False</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="BreakTriggerScopeInArgument" />
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
-      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="ProtocolarNFEntrada" DisplayName="Process\Declaracao.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_12" UnSafe="False" WorkflowFileName="Process\Declaracao.xaml">
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="ProtocolarNFEntrada" DisplayName="Process\Declaracao.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_29" UnSafe="False" WorkflowFileName="Process\Declaracao.xaml">
         <ui:InvokeWorkflowFile.Arguments>
           <InArgument x:TypeArguments="x:String" x:Key="in_Tipo">Entrada</InArgument>
           <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">[io_Config]</InOutArgument>
           <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[io_TransactionItem]</InOutArgument>
           <InArgument x:TypeArguments="x:Boolean" x:Key="in_Fechar">False</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="BreakTriggerScopeInArgument" />
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
-      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="SimplesNacional" DisplayName="Process\Simples Nacional.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_10" UnSafe="False" WorkflowFileName="Process\Simples Nacional.xaml">
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="SimplesNacional" DisplayName="Process\Simples Nacional.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_30" UnSafe="False" WorkflowFileName="Process\Simples Nacional.xaml">
         <ui:InvokeWorkflowFile.Arguments>
           <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[io_Config]</InArgument>
           <InArgument x:TypeArguments="x:String" x:Key="BreakTriggerScopeInArgument" />
@@ -430,78 +501,106 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </ui:InvokeWorkflowFile>
-      <ui:ForEach x:TypeArguments="scg:KeyValuePair(x:String, x:Object)" CurrentIndex="{x:Null}" x:Key="PendenciaDownload" DisplayName="ForEach&lt;Object&gt;" sap:VirtualizedContainerService.HintSize="334,186" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[tipos]">
+      <ui:ForEach x:TypeArguments="scg:KeyValuePair(x:String, x:Object)" CurrentIndex="{x:Null}" x:Key="PendenciaDownload" DisplayName="ForEach&lt;Object&gt;" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[tipos]">
         <ui:ForEach.Body>
           <ActivityAction x:TypeArguments="scg:KeyValuePair(x:String, x:Object)">
             <ActivityAction.Argument>
-              <DelegateInArgument x:TypeArguments="scg:KeyValuePair(x:String, x:Object)" Name="item" />
+              <DelegateInArgument x:TypeArguments="scg:KeyValuePair(x:String, x:Object)" Name="tipo" />
             </ActivityAction.Argument>
-            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="452,655" sap2010:WorkflowViewState.IdRef="Sequence_4">
-              <Sequence.Variables>
-                <Variable x:TypeArguments="x:String" Name="var" />
-              </Sequence.Variables>
+            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="597,904" sap2010:WorkflowViewState.IdRef="Sequence_10">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="410,52" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
-                <ui:MultipleAssign.AssignOperations>
-                  <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
-                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
-                      <ui:AssignOperation.To>
-                        <OutArgument x:TypeArguments="x:String">[var]</OutArgument>
-                      </ui:AssignOperation.To>
-                      <ui:AssignOperation.Value>
-                        <InArgument x:TypeArguments="x:String">[System.Text.RegularExpressions.Regex.Replace(io_TransactionItem("CNPJ").ToString,"[^0-9]+", "")+".pendente"]</InArgument>
-                      </ui:AssignOperation.Value>
-                    </ui:AssignOperation>
-                  </scg:List>
-                </ui:MultipleAssign.AssignOperations>
-                <sap:WorkflowViewStateService.ViewState>
-                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                  </scg:Dictionary>
-                </sap:WorkflowViewStateService.ViewState>
-              </ui:MultipleAssign>
-              <rt:Arquivo BreakTriggerScopeInArgument="{x:Null}" sap:VirtualizedContainerService.HintSize="410,52" sap2010:WorkflowViewState.IdRef="Arquivo_2" in_Config="[io_Config]" in_Tipo="[&quot;XML\&quot;+item.Key]" io_FilePath="[var]" io_TransactionItem="[io_TransactionItem]">
-                <sap:WorkflowViewStateService.ViewState>
-                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                  </scg:Dictionary>
-                </sap:WorkflowViewStateService.ViewState>
-              </rt:Arquivo>
-              <If Condition="[File.Exists(var)]" DisplayName="Tem Pendencias" sap:VirtualizedContainerService.HintSize="410,383" sap2010:WorkflowViewState.IdRef="If_1">
+              <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="555,816" sap2010:WorkflowViewState.IdRef="ForEach`1_6" Values="[Split(io_Config(&quot;Arquivo&quot;+tipo.ToString()).ToString().ToUpper(),&quot;-&quot;).ToList()]">
+                <ui:ForEach.Body>
+                  <ActivityAction x:TypeArguments="x:String">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="x:String" Name="item" />
+                    </ActivityAction.Argument>
+                    <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="521,630" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,116" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+                        <ui:MultipleAssign.AssignOperations>
+                          <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+                              <ui:AssignOperation.To>
+                                <OutArgument x:TypeArguments="x:String">[var]</OutArgument>
+                              </ui:AssignOperation.To>
+                              <ui:AssignOperation.Value>
+                                <InArgument x:TypeArguments="x:String">[item.ToUpper.ToString()+".pendente"]</InArgument>
+                              </ui:AssignOperation.Value>
+                            </ui:AssignOperation>
+                          </scg:List>
+                        </ui:MultipleAssign.AssignOperations>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:MultipleAssign>
+                      <rt:Arquivo BreakTriggerScopeInArgument="{x:Null}" sap:VirtualizedContainerService.HintSize="479,294" sap2010:WorkflowViewState.IdRef="Arquivo_4" in_Config="[io_Config]" in_Tipo="[item.ToString()+&quot;\&quot;+tipo.ToString().ToUpper()]" io_FilePath="[var]" io_TransactionItem="[io_TransactionItem]">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </rt:Arquivo>
+                      <If Condition="[File.Exists(var)]" DisplayName="Tem Pendencias" sap:VirtualizedContainerService.HintSize="479,52" sap2010:WorkflowViewState.IdRef="If_4">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <If.Then>
+                          <Sequence sap:VirtualizedContainerService.HintSize="376,201" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\Download Pendente.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_31" UnSafe="False" WorkflowFileName="Process\Download Pendente.xaml">
+                              <ui:InvokeWorkflowFile.Arguments>
+                                <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">
+                                  <VisualBasicReference x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="io_Config" />
+                                </InOutArgument>
+                                <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem" />
+                                <InArgument x:TypeArguments="x:String" x:Key="BreakTriggerScopeInArgument" />
+                              </ui:InvokeWorkflowFile.Arguments>
+                            </ui:InvokeWorkflowFile>
+                          </Sequence>
+                        </If.Then>
+                        <If.Else>
+                          <Sequence sap2010:WorkflowViewState.IdRef="Sequence_13" />
+                        </If.Else>
+                      </If>
+                    </Sequence>
+                  </ActivityAction>
+                </ui:ForEach.Body>
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     <x:Boolean x:Key="IsPinned">False</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <If.Then>
-                  <Sequence sap:VirtualizedContainerService.HintSize="376,201" sap2010:WorkflowViewState.IdRef="Sequence_5">
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\Download Pendente.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_17" UnSafe="False" WorkflowFileName="Process\Download Pendente.xaml">
-                      <ui:InvokeWorkflowFile.Arguments>
-                        <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">[io_Config]</InOutArgument>
-                        <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[io_TransactionItem]</InOutArgument>
-                      </ui:InvokeWorkflowFile.Arguments>
-                    </ui:InvokeWorkflowFile>
-                  </Sequence>
-                </If.Then>
-                <If.Else>
-                  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_6" />
-                </If.Else>
-              </If>
+              </ui:ForEach>
             </Sequence>
           </ActivityAction>
         </ui:ForEach.Body>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
       </ui:ForEach>
       <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="Relatorio" DisplayName="Process\Relatorio.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_18" UnSafe="False" WorkflowFileName="Process\Relatorio.xaml">
         <ui:InvokeWorkflowFile.Arguments>
@@ -509,6 +608,30 @@
           <InArgument x:TypeArguments="sd:DataRow" x:Key="in_TransactionItem">[io_TransactionItem]</InArgument>
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
+      <x:Null x:Key="" />
+    </Switch>
+    <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[io_Config(&quot;ToDo&quot;).ToString()]" sap:VirtualizedContainerService.HintSize="497,400" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <x:Null x:Key="DownloadNFSaida" />
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="DownloadNFEntrada" DisplayName="Process\Download Periodo.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_20" UnSafe="False" WorkflowFileName="Process\Download Periodo.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <InArgument x:TypeArguments="x:String" x:Key="BreakTriggerScopeInArgument" />
+          <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[io_TransactionItem]</InOutArgument>
+          <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">[io_Config]</InOutArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_Tipo">Entrada</InArgument>
+          <InArgument x:TypeArguments="x:Boolean" x:Key="in_Fechar">False</InArgument>
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
+      <x:Null x:Key="ProtocolarNFSaida" />
+      <x:Null x:Key="ProtocolarNFEntrada" />
+      <x:Null x:Key="SimplesNacional" />
+      <x:Null x:Key="PendenciaDownload" />
+      <x:Null x:Key="Relatorio" />
       <x:Null x:Key="" />
     </Switch>
   </Sequence>

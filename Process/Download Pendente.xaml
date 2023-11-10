@@ -2,6 +2,7 @@
   <x:Members>
     <x:Property Name="io_Config" Type="InOutArgument(scg:Dictionary(x:String, x:Object))" />
     <x:Property Name="io_TransactionItem" Type="InOutArgument(sd:DataRow)" />
+    <x:Property Name="BreakTriggerScopeInArgument" Type="InArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -152,7 +153,7 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <Flowchart.StartNode>
-      <x:Reference>__ReferenceID3</x:Reference>
+      <x:Reference>__ReferenceID4</x:Reference>
     </Flowchart.StartNode>
     <FlowStep>
       <sap:WorkflowViewStateService.ViewState>
@@ -478,11 +479,12 @@
         </sap:WorkflowViewStateService.ViewState>
       </uix:NApplicationCard>
     </FlowStep>
-    <FlowStep x:Name="__ReferenceID0">
+    <FlowStep x:Name="__ReferenceID1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <av:Point x:Key="ShapeLocation">90,433.5</av:Point>
           <av:Size x:Key="ShapeSize">200,52</av:Size>
+          <av:PointCollection x:Key="ConnectorLocation">190,485.5 190,630 250,630</av:PointCollection>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[downloads]">
@@ -491,7 +493,7 @@
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="x:String" Name="item" />
             </ActivityAction.Argument>
-            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="521,2116" sap2010:WorkflowViewState.IdRef="Sequence_38">
+            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="521,2147" sap2010:WorkflowViewState.IdRef="Sequence_38">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -508,7 +510,7 @@
                         <InArgument x:TypeArguments="x:String">C:\Roboluze\Config\Temp\xml\</InArgument>
                       </ui:AssignOperation.Value>
                     </ui:AssignOperation>
-                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_9">
+                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_20">
                       <ui:AssignOperation.To>
                         <OutArgument x:TypeArguments="sd:DataRow">[io_TransactionItem]</OutArgument>
                       </ui:AssignOperation.To>
@@ -519,14 +521,6 @@
                   </scg:List>
                 </ui:MultipleAssign.AssignOperations>
               </ui:MultipleAssign>
-              <Assign sap:VirtualizedContainerService.HintSize="479,82" sap2010:WorkflowViewState.IdRef="Assign_3">
-                <Assign.To>
-                  <OutArgument x:TypeArguments="x:String">[var]</OutArgument>
-                </Assign.To>
-                <Assign.Value>
-                  <InArgument x:TypeArguments="x:String">C:\Roboluze\Config\Temp\xml\</InArgument>
-                </Assign.Value>
-              </Assign>
               <If Condition="[Not Directory.Exists(var)]" DisplayName="Folder XML Temp" sap:VirtualizedContainerService.HintSize="479,350" sap2010:WorkflowViewState.IdRef="If_5">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -564,9 +558,15 @@
               </uascw:ExtractFiles>
               <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\Conferencia XML.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="479,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="Process\IPM\Conferencia XML.xaml">
                 <ui:InvokeWorkflowFile.Arguments>
-                  <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[io_TransactionItem]</InOutArgument>
-                  <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">[io_Config]</InOutArgument>
-                  <InArgument x:TypeArguments="x:String" x:Key="in_Folder">[var]</InArgument>
+                  <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">
+                    <VisualBasicReference x:TypeArguments="sd:DataRow" ExpressionText="io_TransactionItem" />
+                  </InOutArgument>
+                  <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">
+                    <VisualBasicReference x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="io_Config" />
+                  </InOutArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_Folder">
+                    <VisualBasicValue x:TypeArguments="x:String" ExpressionText="var" />
+                  </InArgument>
                 </ui:InvokeWorkflowFile.Arguments>
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -574,6 +574,14 @@
                     <x:Boolean x:Key="IsPinned">False</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
+              </ui:InvokeWorkflowFile>
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\IPM\Conferencia XML - Novo.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="479,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_23" UnSafe="False" WorkflowFileName="Process\IPM\Conferencia XML - Novo.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[io_TransactionItem]</InOutArgument>
+                  <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">[io_Config]</InOutArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_Folder">[var]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="BreakTriggerScopeInArgument" />
+                </ui:InvokeWorkflowFile.Arguments>
               </ui:InvokeWorkflowFile>
               <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\IPM\Conferencia PDF.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="479,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_21" UnSafe="False" WorkflowFileName="Process\IPM\Conferencia PDF.xaml">
                 <ui:InvokeWorkflowFile.Arguments>
@@ -628,27 +636,103 @@
           </ActivityAction>
         </ui:ForEach.Body>
       </ui:ForEach>
+      <FlowStep.Next>
+        <FlowStep x:Name="__ReferenceID0">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <av:Point x:Key="ShapeLocation">250,604</av:Point>
+              <av:Size x:Key="ShapeSize">200,52</av:Size>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <uix:NCheckState DelayBefore="0" DisplayName="Janela Aberta" EnableIfNotExists="False" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="NCheckState_28" Timeout="0" Version="V3">
+            <uix:NCheckState.IfExists>
+              <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="450,167" sap2010:WorkflowViewState.IdRef="Sequence_113">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" ContinueOnError="True" DisplayName="Notificacoes" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="NApplicationCard_24" InteractionMode="DebuggerApi" OpenMode="Never" ScopeGuid="7d5aa3aa-f777-477b-adcb-63036f0783fd" Timeout="0" Version="V2">
+                  <uix:NApplicationCard.Body>
+                    <ActivityAction x:TypeArguments="x:Object">
+                      <ActivityAction.Argument>
+                        <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+                      </ActivityAction.Argument>
+                      <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="450,272" sap2010:WorkflowViewState.IdRef="Sequence_116">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <uix:NClick ActivateBefore="True" ClickType="Single" ContinueOnError="True" DelayAfter="0" DelayBefore="0" DisplayName="Click Notificacoes" sap:VirtualizedContainerService.HintSize="388,157" sap2010:WorkflowViewState.IdRef="NClick_31" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="7d5aa3aa-f777-477b-adcb-63036f0783fd" Timeout="0" Version="V3">
+                          <uix:NClick.Target>
+                            <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/66" DesignTimeRectangle="1575, 161, 24, 24" DesignTimeScaleFactor="1" ElementType="Button" FriendlyName="'BUTTON'" FullSelectorArgument="&lt;webctrl parentid='estrutura_area_janelas' aria-label='Notificações' /&gt;&lt;webctrl aria-label='Fechar*' /&gt;" Guid="3b0b328a-01bb-4eb7-9768-b86fa8f4eeef" InformativeScreenshot="2730cf32e8594558fba0751027ef2600.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Atende.Net*' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
+                          </uix:NClick.Target>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </uix:NClick>
+                      </Sequence>
+                    </ActivityAction>
+                  </uix:NApplicationCard.Body>
+                  <uix:NApplicationCard.TargetApp>
+                    <uix:TargetApp Area="-1448, -8, 1456, 868" BrowserType="Chrome" IconBase64="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAABQ0lEQVQ4T6XTPyiFURzG8XuVbvmXDHfypzuwKCULg5QSGQzuIBMjpdgMJgMGk9EgFmWRUlI3d1EGWZSSwSRkcBWTRMf34Zw673mPyfAZ7nme3+l07nkzxph/iS46jWPrtejCMIoYxyDakVUnOigUJnGGZxjPF+5wgP6/hhdsUQP3OMQWdlDGO5RVYsMdeLGFTbQEeRYDuEVy2BZ0dA2rkA9zh2xDvViQRzdaI1k1mtCDcyQLPsI66KizWMM2jnCBV+iU0cEq6BKv4S7S+cQTdnGitdgGSwqsU/t7An1oRs72VpAabsCNAuyj3s99ZHvqhYtteFSART/zkQ3hDR9hUINLaIMr9AZ5AXN4gDrLiQ1sacaGUoFuXpd2DD1hl60il9rAbjIP3UX4L+iFljDquqlhh5Ie1AimMA19iZ34+Qp/mcw3oXI0Am7zY1EAAAAASUVORK5CYII=" InformativeScreenshot="60e06e177acffed083268680e5b12c7b.jpg" Selector="&lt;html app='chrome.exe' title='Atende.Net - IPM Sistemas Ltda - Cascavel / PR' /&gt;" Title="Atende.Net - IPM Sistemas Ltda - Cascavel / PR" />
+                  </uix:NApplicationCard.TargetApp>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </uix:NApplicationCard>
+              </Sequence>
+            </uix:NCheckState.IfExists>
+            <uix:NCheckState.IfNotExists>
+              <Sequence DisplayName="Target does not appear" sap:VirtualizedContainerService.HintSize="450,105" sap2010:WorkflowViewState.IdRef="Sequence_115">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </Sequence>
+            </uix:NCheckState.IfNotExists>
+            <uix:NCheckState.Target>
+              <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/66" DesignTimeRectangle="1320, 144, 434, 546" DesignTimeScaleFactor="0.8999999761581421" ElementType="Button" FriendlyName="'Notificaçõescomponente[…'" FullSelectorArgument="&lt;webctrl parentid='estrutura_area_janelas' aria-label='Notificações' /&gt;" Guid="6c336f5b-708c-4065-8a70-4fc988f8888c" ImageBase64="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hWADAJhCsAEATCHYAACmEGwAAFMINgCAKQQbAMAUgg0AYArBBgAwhWADAJhCsAEATCHYAACmEGwAAFMINgCAKQQbAMAUgg0AYArBBgAwhWADAJhCsAEATCHYAACmEGwAAFMINgCAKQQbAMAUgg0AYArBBgAwhWADAJhCsAEATCHYAACmEGwAAFMINgCAKQQbAMAUgg0AYArBBgAwhWADAJhCsAEATCHYAACmEGwAAFMINgCAKQQbAMAUgg0AYArBBgAwhWADAJhCsAEATCHYAACmEGwAAFMINgCAKQQbAMAUgg0AYArBBgAwhWADAJhCsAEATCHYAACmEGwAAFMINgCAKQQbAMAUgg0AYArBBgAwhWADAJhCsAEATCHYAACmEGwAAFMINgCAKQQbAMAUgg0AYArBBgAwhWADAJhCsAEATCHYAACmEGwAAFMINgCAKQQbAMAUgg0AYArBBgAwhWADAJhCsAEATCHYAACmEGwAAFMINgCAKQQbAMAUgg0AYArBBgAwhWADAJhCsAEATCHYAACmEGwAAFMINgCAKQQbAMAUgg0AYArBBgAwhWADAJhCsAEATCHYAACmEGwAAFMINgCAKQQbAMAUgg0AYArBBgAwhWADAJhCsAEATCHYAACmEGwAAFMINgCAKQQbAMAUgg0AYArBBgAwhWADAJhCsAEATCHYAACmEGwAAFMINgCAKQQbAMAUgg0AYArBBgAwhWADAJhCsAEATCHYAACmEGwAAFMINgCAKQQbAMAUgg0AYArBBgAwhWADAJhCsAEATCHYAACmEGwAAFMINgCAKQQbAMAUgg0AYArBBgAwhWADAJhCsAEATCHYAACmEGwAAFMINgCAKQQbAMAUgg0AYArBBgAwhWADAJhCsAEATCHYAACmEGwAAFMINgCAKQQbAMAUgg0AYArBBgAwhWADAJhCsAEATCHYAACmEGwAAFMINgCAKQQbAMAUgg0AYArBBgAwhWADAJhCsAEATCHYAACmEGwAAFMINgCAKQQbAMAUgg0AYArBBgAwhWADAJhCsAEATCHYAACmEGwAAFMINgCAKQQbAMAUgg0AYArBBgAwhWADAJhCsAEATCHYAACmEGwAAFMINgCAKQQbAMAUgg0AYArBBgAwhWADAJhCsAEATCHYAACmEGwAAFMINgCAKQQbAMAUgg0AYArBBgAwhWAD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" InformativeScreenshot="834fc72240ca39c926a87453564d542f.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Atende.Net*' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
+            </uix:NCheckState.Target>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </uix:NCheckState>
+        </FlowStep>
+      </FlowStep.Next>
     </FlowStep>
-    <FlowStep x:Name="__ReferenceID1">
+    <FlowStep x:Name="__ReferenceID2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <av:Point x:Key="ShapeLocation">380,433.5</av:Point>
           <av:Size x:Key="ShapeSize">200,52</av:Size>
+          <av:PointCollection x:Key="ConnectorLocation">480,485.5 480,630 450,630</av:PointCollection>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[downloads]">
+      <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="555,1273" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[downloads]">
         <ui:ForEach.Body>
           <ActivityAction x:TypeArguments="x:String">
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="x:String" Name="item" />
             </ActivityAction.Argument>
-            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="465,1372" sap2010:WorkflowViewState.IdRef="Sequence_43">
+            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="521,1087" sap2010:WorkflowViewState.IdRef="Sequence_43">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="423,101" sap2010:WorkflowViewState.IdRef="MultipleAssign_5">
+              <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,116" sap2010:WorkflowViewState.IdRef="MultipleAssign_5">
                 <ui:MultipleAssign.AssignOperations>
                   <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
                     <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_10">
@@ -668,11 +752,11 @@
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
               </ui:MultipleAssign>
-              <If Condition="[Not Directory.Exists(var)]" DisplayName="Folder XML Temp" sap:VirtualizedContainerService.HintSize="423,350" sap2010:WorkflowViewState.IdRef="If_7">
+              <If Condition="[Not Directory.Exists(var)]" DisplayName="Folder XML Temp" sap:VirtualizedContainerService.HintSize="479,52" sap2010:WorkflowViewState.IdRef="If_7">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
                 <If.Then>
@@ -695,35 +779,43 @@
                   </Sequence>
                 </If.Else>
               </If>
-              <uascw:ExtractFiles Content="{x:Null}" DestinationFolderInfo="{x:Null}" File="{x:Null}" Password="{x:Null}" CodePage="Default" DestinationFolder="[var]" DisplayName="Extract/Unzip Files" ExtractToADedicatedFolder="False" FileToExtract="[item]" sap:VirtualizedContainerService.HintSize="423,207" sap2010:WorkflowViewState.IdRef="ExtractFiles_4" SkipUnsupportedFiles="False">
+              <uascw:ExtractFiles Content="{x:Null}" DestinationFolderInfo="{x:Null}" File="{x:Null}" Password="{x:Null}" CodePage="Default" DestinationFolder="[var]" DisplayName="Extract/Unzip Files" ExtractToADedicatedFolder="False" FileToExtract="[item]" sap:VirtualizedContainerService.HintSize="479,52" sap2010:WorkflowViewState.IdRef="ExtractFiles_4" SkipUnsupportedFiles="False">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
               </uascw:ExtractFiles>
-              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\Conferencia XML.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="423,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="Process\IPM\Conferencia XML.xaml">
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\IPM\Conferencia XML - Novo.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="479,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_22" UnSafe="False" WorkflowFileName="Process\IPM\Conferencia XML - Novo.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">
+                    <VisualBasicReference x:TypeArguments="sd:DataRow" ExpressionText="io_TransactionItem" />
+                  </InOutArgument>
+                  <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">
+                    <VisualBasicReference x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="io_Config" />
+                  </InOutArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_Folder">
+                    <VisualBasicValue x:TypeArguments="x:String" ExpressionText="var" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="BreakTriggerScopeInArgument" />
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\IPM\Conferencia PDF.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="479,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_24" UnSafe="False" WorkflowFileName="Process\IPM\Conferencia PDF.xaml">
                 <ui:InvokeWorkflowFile.Arguments>
                   <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[io_TransactionItem]</InOutArgument>
                   <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">[io_Config]</InOutArgument>
                   <InArgument x:TypeArguments="x:String" x:Key="in_Folder">[var]</InArgument>
                 </ui:InvokeWorkflowFile.Arguments>
-                <sap:WorkflowViewStateService.ViewState>
-                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                  </scg:Dictionary>
-                </sap:WorkflowViewStateService.ViewState>
               </ui:InvokeWorkflowFile>
-              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\IPM\Conferenica TXT.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="423,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_18" UnSafe="False" WorkflowFileName="Process\IPM\Conferenica TXT.xaml">
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\IPM\Conferenica TXT.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="479,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_18" UnSafe="False" WorkflowFileName="Process\IPM\Conferenica TXT.xaml">
                 <ui:InvokeWorkflowFile.Arguments>
                   <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_TransactionItem">[io_TransactionItem]</InOutArgument>
                   <InArgument x:TypeArguments="x:String" x:Key="in_Folder">[var]</InArgument>
                   <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">[io_Config]</InOutArgument>
                 </ui:InvokeWorkflowFile.Arguments>
               </ui:InvokeWorkflowFile>
-              <ui:DeleteFolderX DisplayName="Delete Folder" sap:VirtualizedContainerService.HintSize="423,80" sap2010:WorkflowViewState.IdRef="DeleteFolderX_4" Path="[var]" Recursive="True">
+              <ui:DeleteFolderX DisplayName="Delete Folder" sap:VirtualizedContainerService.HintSize="479,80" sap2010:WorkflowViewState.IdRef="DeleteFolderX_4" Path="[var]" Recursive="True">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -731,13 +823,16 @@
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
               </ui:DeleteFolderX>
-              <ui:DeleteFileX DisplayName="Delete File" sap:VirtualizedContainerService.HintSize="423,80" sap2010:WorkflowViewState.IdRef="DeleteFileX_2" Path="[item]" />
+              <ui:DeleteFileX DisplayName="Delete File" sap:VirtualizedContainerService.HintSize="479,80" sap2010:WorkflowViewState.IdRef="DeleteFileX_2" Path="[item]" />
             </Sequence>
           </ActivityAction>
         </ui:ForEach.Body>
       </ui:ForEach>
+      <FlowStep.Next>
+        <x:Reference>__ReferenceID0</x:Reference>
+      </FlowStep.Next>
     </FlowStep>
-    <FlowDecision x:Name="__ReferenceID2" Condition="[io_TransactionItem Is Nothing]" DisplayName="Todos Pendentes" sap:VirtualizedContainerService.HintSize="95,87" sap2010:WorkflowViewState.IdRef="FlowDecision_1" True="{x:Reference __ReferenceID0}" False="{x:Reference __ReferenceID1}">
+    <FlowDecision x:Name="__ReferenceID3" Condition="[io_TransactionItem Is Nothing]" DisplayName="Todos Pendentes" sap:VirtualizedContainerService.HintSize="95,87" sap2010:WorkflowViewState.IdRef="FlowDecision_1" True="{x:Reference __ReferenceID1}" False="{x:Reference __ReferenceID2}">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -1073,7 +1168,7 @@
         </sap:WorkflowViewStateService.ViewState>
       </uix:NApplicationCard>
     </FlowStep>
-    <FlowStep x:Name="__ReferenceID3">
+    <FlowStep x:Name="__ReferenceID4">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <av:Point x:Key="ShapeLocation">240,153.5</av:Point>
@@ -1083,7 +1178,7 @@
       </sap:WorkflowViewStateService.ViewState>
       <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" Condition="[downloads.Count = 0 And i &gt; 0]" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_3">
         <ui:InterruptibleDoWhile.Body>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="476,446" sap2010:WorkflowViewState.IdRef="Sequence_84">
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="476,781" sap2010:WorkflowViewState.IdRef="Sequence_84">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -1566,14 +1661,14 @@
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
                   </ActivityAction.Argument>
-                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="472,879" sap2010:WorkflowViewState.IdRef="Sequence_108">
+                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="472,770" sap2010:WorkflowViewState.IdRef="Sequence_108">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         <x:Boolean x:Key="IsPinned">False</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <If Condition="[downloads.Count = 0]" DisplayName="Atualizar" sap:VirtualizedContainerService.HintSize="410,764" sap2010:WorkflowViewState.IdRef="If_13">
+                    <If Condition="[downloads.Count = 0]" DisplayName="Atualizar" sap:VirtualizedContainerService.HintSize="410,659" sap2010:WorkflowViewState.IdRef="If_13">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -1581,24 +1676,24 @@
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
                       <If.Then>
-                        <Sequence sap:VirtualizedContainerService.HintSize="376,337" sap2010:WorkflowViewState.IdRef="Sequence_109">
+                        <Sequence sap:VirtualizedContainerService.HintSize="300,232" sap2010:WorkflowViewState.IdRef="Sequence_109">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <uix:NClick ActivateBefore="True" ClickType="Single" DelayBefore="2.5" DisplayName="Click Notificacoes" sap:VirtualizedContainerService.HintSize="334,157" sap2010:WorkflowViewState.IdRef="NClick_28" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="7d5aa3aa-f777-477b-adcb-63036f0783fd" Version="V3">
+                          <uix:NClick ActivateBefore="True" ClickType="Single" DelayBefore="2.5" DisplayName="Click Notificacoes" sap:VirtualizedContainerService.HintSize="258,52" sap2010:WorkflowViewState.IdRef="NClick_28" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="7d5aa3aa-f777-477b-adcb-63036f0783fd" Version="V3">
                             <uix:NClick.Target>
                               <uix:TargetAnchorable BrowserURL="https://nfse-cascavel.atende.net/?rot=1&amp;aca=1#!/sistema/66" CvType="Button" DesignTimeRectangle="1324, 664, 22, 22" DesignTimeScaleFactor="0.8999999761581421" ElementType="Button" FriendlyName="'BUTTON'" FullSelectorArgument="&lt;webctrl tag='ARTICLE' aria-label='Notificações' /&gt;&lt;webctrl aria-label='Atualizar Gadget' aria-role='img' tag='BUTTON' /&gt;" Guid="e83db7df-233f-44db-b734-a0c1a60c5b0a" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAF0SURBVEhL7ZOxisJAEIbvTawtLHwBIUXSWNgGCws7m4AWNmnSmoitrSBYCSktQgpJFLtUEkSMgoqgb5DmP2Yhx23urlhvL1xh8RGY3ZlvZ3fylqYpiqB4URRF0vlR9Hg8pPESPY100e12w+l0wv1+5+JPiahIGIYwDAO1Wg2apsG2bex2O3ieB13Xsd/vuRxhEUmm0ymq1Sp6vR5c18VkMmHF6/U6xuOxHNFyuYSiKEyQXQ994zhGv99HqVSSIxoOh6zg5XL5iNFe6oYkRLPZxOFw4PKERdfrFefzmYtRR0mSsC4IGobP64SQiAS+72OxWDDye2ji1uv1l4MQQiKaqOx6CMuyWIfZ+mq1QqPRwGaz4fIIYVG5XGYTNxgMuHfabrdotVowTZOLZwiLaKLm8zlUVWX/ULfbRbvdRqVSQafTYf9SPo8QEgVBwIrSRB2PR8xmMziOg9FoxA5Bb5TPyRAS/YaX6Gn+h0g234r+moJEKd4Bw02aZlxQZYUAAAAASUVORK5CYII=" InformativeScreenshot="b3ee0e2da069d23d6b3189e8ac733e9c.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Atende.Net - IPM Sistemas Ltda - Cascavel / PR' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
                             </uix:NClick.Target>
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">True</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
                           </uix:NClick>
-                          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\IPM\Aguardar.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,52" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_19" UnSafe="False" WorkflowFileName="Process\IPM\Aguardar.xaml">
+                          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\IPM\Aguardar.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="258,52" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_19" UnSafe="False" WorkflowFileName="Process\IPM\Aguardar.xaml">
                             <ui:InvokeWorkflowFile.Arguments>
                               <scg:Dictionary x:TypeArguments="x:String, Argument" />
                             </ui:InvokeWorkflowFile.Arguments>
@@ -1647,6 +1742,21 @@
                 <InArgument x:TypeArguments="x:Int32">[i-1]</InArgument>
               </Assign.Value>
             </Assign>
+            <If Condition="[io_Config.ContainsKey(&quot;DownloadPendente&quot;) And i = 20]" DisplayName="Download Cliente" sap:VirtualizedContainerService.HintSize="434,295" sap2010:WorkflowViewState.IdRef="If_14">
+              <If.Then>
+                <Sequence sap:VirtualizedContainerService.HintSize="376,113" sap2010:WorkflowViewState.IdRef="Sequence_117">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:Break sap:VirtualizedContainerService.HintSize="334,25" sap2010:WorkflowViewState.IdRef="Break_1" />
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <Sequence sap2010:WorkflowViewState.IdRef="Sequence_118" />
+              </If.Else>
+            </If>
           </Sequence>
         </ui:InterruptibleDoWhile.Body>
         <sap:WorkflowViewStateService.ViewState>
@@ -1657,8 +1767,9 @@
         </sap:WorkflowViewStateService.ViewState>
       </ui:InterruptibleDoWhile>
       <FlowStep.Next>
-        <x:Reference>__ReferenceID2</x:Reference>
+        <x:Reference>__ReferenceID3</x:Reference>
       </FlowStep.Next>
     </FlowStep>
+    <x:Reference>__ReferenceID0</x:Reference>
   </Flowchart>
 </Activity>
