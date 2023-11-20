@@ -8,893 +8,1091 @@
 -->
 <!DOCTYPE html>
 <html lang="pt-BR" data-bs-theme="auto">
-  <head>
-	<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Roboluze</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
-	<script src="https://roboluze.com.br/_roboluze/www/js/ajax.jquery.3.2.0.min.js"></script>
-	
-	
-	<style>
-		body {
-			padding-top: 4.5rem;
-		}
-		#fileInfoCertidaoExcel {
-			display: none;
-		}
-	</style>
-	
-	<script type="text/javascript">
-		var uiPathApi = {
-			getValue: function (elementId) {
-				// this is a callback, being called from the workflow
-				// enter your own code to get element values
-				var el = document.getElementById(elementId);
-				if (el.value == undefined) {
-					return el.innerHTML;
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>truNaN</title>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+ <link rel="stylesheet" href="styles.css">
+ <!--link rel="stylesheet" href="https://trunan.com.br/_trunan/www/css/styles.css"-->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+ 
+ <script type="text/javascript">
+	var uiPathApi = {
+		getValue: function (elementId) {
+			// this is a callback, being called from the workflow
+			// enter your own code to get element values
+			var el = document.getElementById(elementId);
+			if (el.value == undefined) {
+				return el.innerHTML;
+			} else {
+				if (el.checked == undefined) {
+					return el.value;
 				} else {
-					if (el.checked == undefined) {
-						return el.value;
-					} else {
-						return el.checked;
+					return el.checked;
+				}
+			}
+		},
+
+		setValue: function (elementId, value) {
+			
+			if (elementId === 'financeiro'){
+				if (value === 'Fatura'){
+					var divElement = document.createElement('div');
+					  divElement.classList.add('row');
+					  var linkElement = document.createElement('a');
+					  linkElement.classList.add('btn', 'btn-full', 'btn-warning');
+					  linkElement.href = '#';
+					  linkElement.textContent = 'Sua fatura já está disponível aqui!';
+
+					  divElement.appendChild(linkElement);
+					  var containerElement = document.getElementById('financeiro');
+					  containerElement.appendChild(divElement);
+					
+				
+				} else if (value === 'Atencao' || value === 'Bloqueado')  {
+				  
+				  var texto = 'Atenção! Sua licença está expirada, efetue o pagamento da fatura para liberar todas as funções da automação.'
+				  if (value === 'Bloqueado'){
+					var texto = 'Atenção! O seu sistema está bloqueado no momento, efetue o pagamento para continuar usando as automações'
+				  }
+				  
+				  var spanElement = document.createElement('span');
+				  spanElement.classList.add('d-block', 'p-1', 'text-bg-danger');
+				  spanElement.textContent = texto;
+
+				  var linkElement = document.createElement('a');
+				  linkElement.classList.add('btn', 'btn-light', 'btn-sm');
+				  linkElement.href = '#';
+				  linkElement.textContent = 'Gerar Fatura Online';
+
+				  spanElement.appendChild(linkElement);
+				  var containerElement = document.getElementById('financeiro');
+				  containerElement.appendChild(spanElement);
+				}
+				
+				
+			} else if (elementId === 'parametros') {
+				var jsonData = value;
+				var data = JSON.parse(jsonData);
+				
+				for (var key in data) {
+					if (data.hasOwnProperty(key)) {
+						var el = document.getElementById(key);
+						if (el == null) {
+							var elements = document.querySelectorAll('[name="' + key + '"]');
+							el = elements[0];
+						}
+						if (el) {
+							if (el.tagName === 'INPUT' && el.type === 'radio') {
+								var radioButtonXML = document.getElementById(key + 'XML');
+								var radioButtonTXT = document.getElementById(key + 'TXT');
+								if (data[key] === 'XML') {
+									radioButtonXML.checked = true;
+									radioButtonTXT.checked = false;
+								} else {
+									radioButtonXML.checked = false;
+									radioButtonTXT.checked = true;
+								}
+							} else if (typeof data[key] === 'boolean') {
+								var label = document.querySelector('label[for="' + key + '"]');
+								el.checked = data[key];
+								if (key === 'FiltrarClientesPendentes'){
+									//label.textContent = data[key] ? 'Clientes Pendentes' : 'Todos os Clientes';
+								} else {
+									//label.textContent = data[key] ? 'Sim' : 'Não';
+								}
+							}  else {
+								el.value = data[key];
+							}
+						}
 					}
 				}
-			},
-	
-			setValue: function (elementId, value) {
+			} else if (elementId === 'dominio') {
+				var jsonData = value;
+				var data = JSON.parse(jsonData);
 				
-				if (elementId === 'financeiro'){
-					if (value === 'Fatura'){
-						var divElement = document.createElement('div');
-						  divElement.classList.add('row');
-						  var linkElement = document.createElement('a');
-						  linkElement.classList.add('btn', 'btn-full', 'btn-warning');
-						  linkElement.href = '#';
-						  linkElement.textContent = 'Sua fatura já está disponível aqui!';
-
-						  divElement.appendChild(linkElement);
-						  var containerElement = document.getElementById('financeiro');
-						  containerElement.appendChild(divElement);
-						
-					
-					} else if (value === 'Atencao' || value === 'Bloqueado')  {
-					  
-					  var texto = 'Atenção! Sua licença está expirada, efetue o pagamento da fatura para liberar todas as funções da automação.'
-					  if (value === 'Bloqueado'){
-						var texto = 'Atenção! O seu sistema está bloqueado no momento, efetue o pagamento para continuar usando as automações'
-					  }
-					  
-					  var spanElement = document.createElement('span');
-					  spanElement.classList.add('d-block', 'p-1', 'text-bg-danger');
-					  spanElement.textContent = texto;
-
-					  var linkElement = document.createElement('a');
-					  linkElement.classList.add('btn', 'btn-light', 'btn-sm');
-					  linkElement.href = '#';
-					  linkElement.textContent = 'Gerar Fatura Online';
-
-					  spanElement.appendChild(linkElement);
-					  var containerElement = document.getElementById('financeiro');
-					  containerElement.appendChild(spanElement);
-					}
-					
-					
-				} else if (elementId === 'parametros') {
-					var jsonData = value;
-					var data = JSON.parse(jsonData);
-					
-					for (var key in data) {
-						if (data.hasOwnProperty(key)) {
-							var el = document.getElementById(key);
-							if (el == null) {
-								var elements = document.querySelectorAll('[name="' + key + '"]');
-								el = elements[0];
-							}
-							if (el) {
-								if (el.tagName === 'INPUT' && el.type === 'radio') {
-									var radioButtonXML = document.getElementById(key + 'XML');
-									var radioButtonTXT = document.getElementById(key + 'TXT');
-									if (data[key] === 'XML') {
-										radioButtonXML.checked = true;
-										radioButtonTXT.checked = false;
-									} else {
-										radioButtonXML.checked = false;
-										radioButtonTXT.checked = true;
-									}
-								} else if (typeof data[key] === 'boolean') {
-									var label = document.querySelector('label[for="' + key + '"]');
-									el.checked = data[key];
-									if (key === 'FiltrarClientesPendentes'){
-										label.textContent = data[key] ? 'Clientes Pendentes' : 'Todos os Clientes';
-									} else {
-										label.textContent = data[key] ? 'Sim' : 'Não';
-									}
-								}  else {
-									el.value = data[key];
-								}
-							}
+				for (var key in data) {
+					if (data.hasOwnProperty(key)) {
+						var el = document.getElementById(key);
+						if (el) {
+							el.value = data[key];
 						}
 					}
-				} else if (elementId === 'dominio') {
-					var jsonData = value;
-					var data = JSON.parse(jsonData);
+				}
+			} else if (elementId === 'listaPerfil') {
+				var jsonData = value;
+				var data = JSON.parse(jsonData);
+				var perfilSelect  = document.getElementById('Perfil');
+				
+				while (perfilSelect.options.length > 0) {
+				  perfilSelect.remove(0);
+				}
+				perfilSelect.innerHTML = '';
+				
+				var tabela = document.getElementById('myTablePerfil');
+				
+				while (tabela.rows.length > 0) {
+					tabela.deleteRow(0);
+				}
+				
+				var tableBody = $("#myTablePerfil");
+				
+				data.forEach(function(item) {
 					
-					for (var key in data) {
-						if (data.hasOwnProperty(key)) {
-							var el = document.getElementById(key);
-							if (el) {
-								if (typeof data[key] === 'boolean') {
-									var label = document.querySelector('label[for="' + key + '"]');
-									el.checked = data[key];
-									label.textContent = data[key] ? 'Sim' : 'Não';
-								} else {
-									el.value = data[key];
-								}
-							}
-						}
-					}
-				} else if (elementId === 'listaPerfil') {
-					var jsonData = value;
-					var data = JSON.parse(jsonData);
-					var perfilSelect  = document.getElementById('Perfil');
-					
-					while (perfilSelect.options.length > 0) {
-					  perfilSelect.remove(0);
-					}
-					perfilSelect.innerHTML = '';
-					
-					var tabela = document.getElementById('myTablePerfil');
-					
-					while (tabela.rows.length > 0) {
-						tabela.deleteRow(0);
+					if (item.SITUACAO) {
+						var option = document.createElement('option');
+						option.value = item.ID_PERFIL;
+						option.text = item.PERFIL;
+					  perfilSelect.appendChild(option);
 					}
 					
-					var tableBody = $("#myTablePerfil");
+					var row = $('<tr>');
+					var codigoInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-extra-sm').prop('id', 'ID_PERFIL_'+ item.ID_PERFIL).prop('name', 'ID_PERFIL_'+ item.ID_PERFIL).prop("value",item.ID_PERFIL).prop('readonly', true);
+					var codigoCell = $("<td>").prop('class', 'col-2 fw-normal').append(codigoInput);
+					row.append(codigoCell);
+									
+					var perfilInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-extra-sm').prop('id', 'PERFIL_'+ item.ID_PERFIL).prop('name', 'PERFIL_'+ item.ID_PERFIL).prop("value",item.PERFIL);
+					var perfilCell = $("<td>").prop('class', 'col-10').append(perfilInput);
+					row.append(perfilCell);
 					
-					data.forEach(function(item) {
-						
-						if (item.SITUACAO) {
-							var option = document.createElement('option');
-							option.value = item.ID_PERFIL;
-							option.text = item.PERFIL;
-						  perfilSelect.appendChild(option);
-						}
-						
-						var row = $('<tr>');
-						var codigoInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm').prop('id', 'ID_PERFIL_'+ item.ID_PERFIL).prop('name', 'ID_PERFIL_'+ item.ID_PERFIL).prop("value",item.ID_PERFIL).prop('readonly', true);
-						var codigoCell = $("<td>").prop('class', 'col-2 fw-normal').append(codigoInput);
-						row.append(codigoCell);
-										
-						var perfilInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-sm').prop('id', 'PERFIL_'+ item.ID_PERFIL).prop('name', 'PERFIL_'+ item.ID_PERFIL).prop("value",item.PERFIL);
-						var perfilCell = $("<td>").prop('class', 'col-10').append(perfilInput);
-						row.append(perfilCell);
-						
-						//Ativou ou Inativo
-						var td = $('<td>').prop('class', 'col-2 fw-normal');
-						var div = $('<div>').prop('class', 'd-flex justify-content-center');
-						var formCheck = $('<div>').prop('class', 'form-check form-switch form-check-inline');
-						var input = $('<input>').prop('class', 'form-check-input SITUACAO').attr('type', 'checkbox').attr('role', 'switch').attr('id', 'SITUACAO_'+ item.ID_PERFIL).attr('name', 'SITUACAO_'+ item.ID_PERFIL);
-						if (item.SITUACAO) {
-						  input.prop('checked', true);
-						}
-						var label = $('<label>').prop('class', 'form-check-label').attr('for', 'SITUACAO_'+ item.ID_PERFIL).text(item.SITUACAO ? 'Ativo' : 'Inativo');
-						formCheck.append(input, label);
-						div.append(formCheck);
-						td.append(div);
-						row.append(td);
-						
-						tableBody.append(row);
-						
-						$('.btn-excluir-perfil').click(function() {
-						  var id = $(this).attr('id');
-						  excluirPerfil(id);
-						});
-						
-					  
+					//Ativou ou Inativo
+					var td = $('<td>').prop('class', 'col-2 fw-normal');
+					var div = $('<div>').prop('class', 'd-flex justify-content-center align-items-center');
+					var formCheck = $('<div>').prop('class', 'form-check form-switch form-check-inline');
+					var input = $('<input>').prop('class', 'form-check-input SITUACAO').attr('type', 'checkbox').attr('role', 'switch').attr('id', 'SITUACAO_'+ item.ID_PERFIL).attr('name', 'SITUACAO_'+ item.ID_PERFIL);
+					if (item.SITUACAO) {
+					  input.prop('checked', true);
+					}
+					var label = $('<label>').prop('class', 'form-check-label').attr('for', 'SITUACAO_'+ item.ID_PERFIL).text(item.SITUACAO ? 'Ativo' : 'Inativo');
+					formCheck.append(input, label);
+					div.append(formCheck);
+					td.append(div);
+					row.append(td);
+					
+					tableBody.append(row);
+					
+					$('.btn-excluir-perfil').click(function() {
+					  var id = $(this).attr('id');
+					  excluirPerfil(id);
 					});
 					
-					var ckPerfilSituacao = document.querySelectorAll('input[id^="SITUACAO_"]');
-						ckPerfilSituacao.forEach(function(checkbox) {
-						  var labelPerfil = document.querySelector('label[for="' + checkbox.id + '"]');
+				  
+				});
+				
+				var ckPerfilSituacao = document.querySelectorAll('input[id^="SITUACAO_"]');
+					ckPerfilSituacao.forEach(function(checkbox) {
+					  var labelPerfil = document.querySelector('label[for="' + checkbox.id + '"]');
 
-						  checkbox.addEventListener('change', function() {
-							if (this.checked) {
-							  labelPerfil.textContent = 'Sim';
-							} else {
-							  labelPerfil.textContent = 'Não';
+					  checkbox.addEventListener('change', function() {
+						if (this.checked) {
+						  labelPerfil.textContent = 'Sim';
+						} else {
+						  labelPerfil.textContent = 'Não';
+						}
+					  });
+					});
+				
+			} else if (elementId === 'listaClientes') {
+				var tabela = document.getElementById('myTable');
+						while (tabela.rows.length > 0) {
+							tabela.deleteRow(0);
+						}
+						var jsonData = value;
+						var data = JSON.parse(jsonData);
+						var tableBody = $("#myTable");
+						var nItem = 0;
+						var altura = window.innerHeight;
+						var nPag = 23;
+						if (window.innerHeight > 900){
+							nPag = 30;
+						} else if (window.innerHeight > 768){
+							nPag = 25;
+						}
+						data.forEach(function(item) {
+							var row = $('<tr>');
+							nItem++;
+							if(nItem > nPag){
+								row.css('display', 'none');
 							}
-						  });
-						});
-					
-				} else {
-					var el = document.getElementById(elementId);
-					if (el == null) {
-						var el = document.getElementById(value);
-					} 
-					if ((el.tagName === 'INPUT' && el.type === 'text') || el.type === 'email') {
-						el.value = value;
-					} else if (el.tagName === 'INPUT' && el.type === 'file') {
-						el.value = value;
-					} else if (el.tagName === 'SELECT') {
-						el.value = value;
-					}  else {
-						el.innerHTML = value;
-					}			
-				}
-				
-			},
-			
-			sendMessage: function (id, value) { },
-		};
-	</script>
-	<script>
-		function addNovoPerfilClicked(){
-			var perfilNome = document.getElementById("novoPerfil").value;
-			if (perfilNome !== null && perfilNome !== '') {
-				var jsonData = {
-					"Perfil": perfilNome
-				}
-				var jsonString = JSON.stringify(jsonData);
-				uiPathApi.sendMessage("addPerfil", jsonString );
-			}
-		}
-		function atualizaPerfil(value){
-			var jsonData = [];
-			var tbody = document.getElementById('myTablePerfil');
-			var rows = tbody.getElementsByTagName('tr');
-			for (var i = 0; i < rows.length; i++) {
-			  var row = rows[i];
-			  var ID_PERFIL = row.querySelector('input[id^="ID_PERFIL_"]').value;
-			  var PERFIL = row.querySelector('input[id^="PERFIL_"]').value;
-			  var SITUACAO = row.querySelector('input[id^="SITUACAO_"]').checked;
-				
-			  var rowValues = {
-				  'ID_PERFIL': ID_PERFIL,
-				  'PERFIL': PERFIL,
-				  'SITUACAO': SITUACAO
-				};
-				if(ID_PERFIL){
-					jsonData.push(rowValues);
-				}
-			}
-			var jsonResult = JSON.stringify(jsonData);
-			uiPathApi.sendMessage("atualizarPerfil", jsonResult);
-		}
-		function closedClicked() {
-			uiPathApi.sendMessage("close");
-		}
-		function changedPerfil(perfil) {
-			var jsonDataObj = jsonData();
-			
-			jsonDataObj['Perfil'] = perfil;
-			var jsonString = JSON.stringify(jsonDataObj);
-			uiPathApi.sendMessage("perfil", jsonString );
-		}
-		
-		function excelClicked(){
-			uiPathApi.sendMessage("clientesExcel");
-		}
-		
-		function startClicked() {
-			var jsonString = JSON.stringify(jsonData());
-			uiPathApi.sendMessage("start", jsonString);
-		}
-		
-		function jsonData(){
-			
-			var jsonData = {
-				"Perfil": document.getElementById("Perfil").value,
-				"Periodo": document.getElementById("Periodo").value,
-				"ExibirClientes": document.getElementById("ExibirClientes").checked,
-				"FiltrarClientesPendentes": document.getElementById("FiltrarClientesPendentes").checked,
-				"DownloadNFSaida": document.getElementById("DownloadNFSaida").checked,
-				"DownloadNFEntrada": document.getElementById("DownloadNFEntrada").checked,
-				"ProtocolarNFSaida": document.getElementById("ProtocolarNFSaida").checked,
-				"ProtocolarNFEntrada": document.getElementById("ProtocolarNFEntrada").checked,
-				"SimplesNacional": document.getElementById("SimplesNacional").checked,
-				"Relatorio": document.getElementById("Relatorio").checked,
-				
-				"IPMLogin": document.getElementById("IPMLogin").value,
-				"IPMPassword": document.getElementById("IPMPassword").value,
-				"IPMCodigoLogin": document.getElementById("IPMCodigoLogin").value,
-				"ArquivoSaida": document.getElementById("ArquivoSaida").value,
-				"ArquivoEntrada": document.getElementById("ArquivoEntrada").value,
-				"ProtocoloSaida": document.getElementById("ProtocoloSaida").value,
-				"ProtocoloEntrada": document.getElementById("ProtocoloEntrada").value,				
-				
-				"DominioLogin": document.getElementById("DominioLogin").value,
-				"DominioPassword": document.getElementById("DominioPassword").value,				
-				"ImportarClientes": document.getElementById("ImportarClientes").checked
-			};
-			return jsonData;
-		}
-		
-		
-		
-	</script>
-</head>
-<body >
-	<div id="financeiro"></div>
-	
-	<!--span class="d-block p-1 text-bg-danger">
-		Atenção! sua lisença está expirada, efetue o pagamento da fatura para liberar todas as função da automação.
-		<a class="btn btn-light btn-sm" href="#" role="button">Gerar Fatura Online</a>
-	</span>
-	
-	<div class="row"> 
-		<a class="btn btn-full btn-warning" href="#" role="button">
-			Sua fatura já está dispinível aqui!	
-		</a>
-	</div-->
-	
-	<!--Menu automação -->
-	<nav class="navbar navbar-dark fixed-top bg-primary ">
-    	<div class="container-fluid">
-			<div class="col-7">
-				<div class="d-flex justify-content-strat align-items-center">
-					<img src="https://roboluze.com.br/img/evoluze_logo_white_ligth.png" width="35" height="35" class="me-2" alt="Roboluze">
-					 <a class="navbar-brand" href="#pills-iniciar"><h5 class="mb-0"  id="title">Roboluze</h5></a>
-				</div>
-			</div>
-			<div class="col-4 d-flex me-0">
-				<select class="form-select me-2" id="Perfil"></select>
-				<div class="d-flex align-items-center justify-content-end">
-					<div class="d-grid">
-						<button id="addPerfil" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#perfilModal">
-							<i class="bi bi-person-plus-fill"></i>
-						</button>
-					</div>
-				</div>
-			</div>
-			<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuButton" aria-controls="menuButton" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>		
-		 
-			<!-- Item do Menu -->
-			<div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="menuButton" aria-labelledby="menuButtonLabel">
-				<div class="offcanvas-header">
-					<img src="https://roboluze.com.br/img/evoluze_logo_white_ligth.png" width="20" height="20" class="me-2" alt="Roboluze">
-					<h5 class="offcanvas-title" id="menuButtonLabel">Configurações</h5>
-					<button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-				</div>
-				<div class="offcanvas-body" id="pills-iniciar-tab">
-					<ul class="navbar-nav justify-content-end flex-grow-1 pe-3" id="pills-tab" role="tablist">
-						<li class="nav-item">
-						  <button class="nav-link active" id="pills-iniciar-tab" data-bs-toggle="pill" data-bs-target="#pills-iniciar" type="button" role="tab" aria-controls="pills-iniciar" aria-selected="true" onclick="closeOffcanvas()">Home</button>
-						</li>
-						<li class="nav-item">
-						  <button class="nav-link" id="pills-automacao-tab" data-bs-toggle="pill" data-bs-target="#pills-automacao" type="button" role="tab" aria-controls="pills-automacao" aria-selected="true" onclick="closeOffcanvas()">Configurações</button>
-						</li>
-						<li class="nav-item">
-						  <button class="nav-link" id="pills-dominio-tab" data-bs-toggle="pill" data-bs-target="#pills-dominio" type="button" role="tab" aria-controls="pills-dominio" aria-selected="true" onclick="closeOffcanvas()">Domínio Sistema</button>
-						</li>
-						
-						<!--li class="nav-item dropdown" role="presentation">
-							<button class="nav-link dropdown-toggle" type="button" role="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-								Domínio Sistema
-							</button>
-						  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" data-bs-theme="dark">
+							// TD 1
+							var td = $('<td>').prop('class', 'col-8 fw-normal small-text');
+							var div = $('<div>').prop('class', 'd-flex justify-content-start align-items-center me-2');
+							var col = $('<div>').prop('class', 'col-1').prop('id','ID_EXECUTAR').prop('value', item.ID_CLIENTE).text(item.CODIGO);
+							div.append(col);
+							col = $('<div>').prop('class', 'col-3 me-3').text(item.CNPJ);
+							div.append(col);
+							col = $('<div>').prop('class', 'col-8').text(item.EMPRESA);
+							div.append(col);
 							
-							<li><a class="dropdown-item" id="pills-dominio-tab" data-bs-target="#pills-dominio" role="tab" aria-controls="pills-dominio" aria-selected="false" onclick="closeOffcanvas()">Geral</a></li>
-							<li><hr class="dropdown-divider"></li>
-						  </ul>
-						</li>
-						<li class="nav-item">
-						  <a class="nav-link" href="#pills-automacao"></a>
-						   <hr class="dropdown-divider">
-						</li-->
-					</ul>
-					<button class="btn btn-outline-danger w-100" type="botton" onclick="closedClicked()">Sair da Automação</button>
-				</div>
-			</div>
+							td.append(div);
+							row.append(td);
+							
+							// TD 2
+							var td = $('<td>').prop('class', 'col-4 fw-normal small-text');
+							var div = $('<div>').prop('class', 'd-flex justify-content-start align-items-center');
+							var col = $('<div>').prop('class', 'col-11').text(item.OBSERVACAO);
+							div.append(col);
+							
+							
+							col = $('<div>').prop('class', 'col-1');
+							var divF = $('<div>').prop('class', 'd-flex justify-content-end align-items-center');
+							var ico = $('<i>').prop('class', 'bi bi-pencil-square');
+							var btn = $('<button>').attr('type', 'button').prop('class', 'btn btn-warning custom-btn-extra-small me-2').attr('data-bs-theme', 'dark' ).attr('data-bs-toggle', 'modal' ).attr('data-bs-target', '#clienteModal').attr('onclick', 'buscarCliente('+item.CODIGO+')').prop('name', item.ID_CLIENTE).prop("value",item.ID_CLIENTE).append(ico);
+							divF.append(btn)
+							
+							
+							var checkbox = $('<input>').attr('type', 'checkbox').prop('class','ProcessCheckbox form-check-input').prop('id','EXECUTAR');
+							if (item.EXECUTAR === 'True') {
+								checkbox.prop('checked', true);
+							} else {
+								checkbox.prop("disabled", true)
+							}
+							divF.append(checkbox);
+							
+							col.append(divF);
+							div.append(col);
+							td.append(div);
+							row.append(td);
+							
+							tableBody.append(row);
+						});
+						
+						initializePagination(data, nPag);
+						
+						var processCheckboxAll = document.querySelector('.ProcessCheckboxAll');
+						var processCheckboxes = document.querySelectorAll('.ProcessCheckbox');
+
+						processCheckboxAll.addEventListener('change', function() {
+
+							if (processCheckboxAll.checked) {
+							  // Marca todos os checkboxes "ProcessCheckbox"
+							  processCheckboxes.forEach(function(processCheckbox) {
+								if (!processCheckbox.disabled) {
+									processCheckbox.checked = true;
+								}
+							  });
+							} else {
+							  // Desmarca todos os checkboxes "ProcessCheckbox"
+							  processCheckboxes.forEach(function(processCheckbox) {
+								processCheckbox.checked = false;
+							  });
+							}
+						});
+				
+			} else {
+				var el = document.getElementById(elementId);
+				if (el == null) {
+					var el = document.getElementById(value);
+				}
+				el.value = value;
+			}
+		},
+		sendMessage: function (id, value) { },
+	};
+ </script>
+ <script>
+	function addNovoPerfilClicked(){
+		var perfilNome = document.getElementById("novoPerfil").value;
+		if (perfilNome !== null && perfilNome !== '') {
+			var jsonData = {
+				"Perfil": perfilNome
+			}
+			var jsonString = JSON.stringify(jsonData);
+			uiPathApi.sendMessage("addPerfil", jsonString );
+		}
+	}
+	function atualizaPerfil(value){
+		var jsonData = [];
+		var tbody = document.getElementById('myTablePerfil');
+		var rows = tbody.getElementsByTagName('tr');
+		for (var i = 0; i < rows.length; i++) {
+		  var row = rows[i];
+		  var ID_PERFIL = row.querySelector('input[id^="ID_PERFIL_"]').value;
+		  var PERFIL = row.querySelector('input[id^="PERFIL_"]').value;
+		  var SITUACAO = row.querySelector('input[id^="SITUACAO_"]').checked;
+			
+		  var rowValues = {
+			  'ID_PERFIL': ID_PERFIL,
+			  'PERFIL': PERFIL,
+			  'SITUACAO': SITUACAO
+			};
+			if(ID_PERFIL){
+				jsonData.push(rowValues);
+			}
+		}
+		var jsonResult = JSON.stringify(jsonData);
+		uiPathApi.sendMessage("atualizarPerfil", jsonResult);
+	}
+	function closedClicked() {
+		uiPathApi.sendMessage("close");
+	}
+	function changedPerfil(perfil) {
+		var jsonDataObj = jsonData();
+		
+		jsonDataObj['Perfil'] = perfil;
+		var jsonString = JSON.stringify(jsonDataObj);
+		uiPathApi.sendMessage("perfil", jsonString );
+	}
+	function excelClicked(){
+		uiPathApi.sendMessage("clientesExcel");
+	}
+	function startClicked() {
+		var jsonString = JSON.stringify(jsonData());
+		uiPathApi.sendMessage("start", jsonString);
+	}
+	function jsonData(){
+		
+		var jsonData = {
+			"Perfil": document.getElementById("Perfil").value,
+			"Periodo": document.getElementById("Periodo").value,
+			"ExibirClientes": document.getElementById("ExibirClientes").checked,
+			"FiltrarClientesPendentes": document.getElementById("FiltrarClientesPendentes").checked,
+			"DownloadNFSaida": document.getElementById("DownloadNFSaida").checked,
+			"DownloadNFEntrada": document.getElementById("DownloadNFEntrada").checked,
+			"ProtocolarNFSaida": document.getElementById("ProtocolarNFSaida").checked,
+			"ProtocolarNFEntrada": document.getElementById("ProtocolarNFEntrada").checked,
+			"SimplesNacional": document.getElementById("SimplesNacional").checked,
+			"Relatorio": document.getElementById("Relatorio").checked,
+			
+			"IPMLogin": document.getElementById("IPMLogin").value,
+			"IPMPassword": document.getElementById("IPMPassword").value,
+			"IPMCodigoLogin": document.getElementById("IPMCodigoLogin").value,
+			"ArquivoSaida": document.getElementById("ArquivoSaida").value,
+			"ArquivoEntrada": document.getElementById("ArquivoEntrada").value,
+			"ProtocoloSaida": document.getElementById("ProtocoloSaida").value,
+			"ProtocoloEntrada": document.getElementById("ProtocoloEntrada").value,				
+			
+			"DominioLogin": document.getElementById("DominioLogin").value,
+			"DominioPassword": document.getElementById("DominioPassword").value,				
+			"ImportarClientes": document.getElementById("ImportarClientes").checked
+		};
+		return jsonData;
+	}
+ </script>
+ 	
+</head>
+<body>
+	
+	<header>
+	  <div class="logo d-flex justify-content-center align-items-center">
+		 <img src="https://trunan.com.br/_trunan/img/rpa.png" alt="truNaN" width="150" height="auto">
+	  </div>
+
+	  <div class="search d-flex align-items-center " >
+		<div class="col-4 d-flex justify-content-start align-items-center">
+			<input type="text" class="form-control form-control-extra-sm m-2" id="Periodo" name="Periodo" data-inputmask="'mask': '99/9999'" placeholder="" value="" style="width: 75px;">
+			<select class="form-select select-control-extra-sm me-2" id="Perfil" style="width: 250px;"></select>
+			<button id="addPerfil" type="button" class="btn btn-warning custom-btn-extra-small" data-bs-toggle="modal" data-bs-target="#perfilModal" style="width: 25px; height: 25px">
+				<i class="bi bi-person-plus-fill"></i>
+			</button>
 		</div>
-	</nav>
+		<div class="col-4 d-flex justify-content-center">
+			<input type="text" class="form-control form-control-extra-sm" id="campo" placeholder="Pesquisar..." style="width: 250px;">
+		</div>
+		<div class="col-4 d-flex justify-content-end">
+			<button id="addPerfil" type="button" class="btn btn-warning custom-btn-extra-small" data-bs-toggle="modal" data-bs-target="#clienteModal" style="width: 25px; height: 25px">
+				<i class="bi bi-person-plus-fill"></i>
+			</button>
+		<div class="dropdown">
+		  <button class="btn btn-warning custom-btn-extra-small" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width: 25px; height: 25px">
+			<i class="bi bi-gear"></i> 
+		  </button>
+		  <ul class="dropdown-menu dropdown-menu-dark  small-text">
+			<li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#parametrosModal">Parâmetros</a></li>
+			<li><hr class="dropdown-divider"></li>
+			<li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#dominioModal">Sistema Domínio</a></li>
+		  </ul>
+		</div>
+		</div>
+	  </div>
+	</header>
+  <main>
+    
+      <!-- Conteúdo da barra lateral direita -->
+      <aside>
+		  <!--div >
+			<label for="customSelect" class="custom-label">Escolha uma opção:</label>
+			<input type="text" class="form-control form-control-extra-sm" id="campo2" placeholder="Digite algo...">
+		  </div-->
+		  <div class="container mt-3">
+			<label for="customSelect" class="custom-label">Download NFSe Saída:</label>
+			<select class="form-select select-control-extra-sm" id="DownloadNFSaida" required>
+			  <option value="XML">XML</option>
+				<option value="TXT">TXT</option>
+				<option value="XML-PDF">XML e PDF</option>
+				<option value="TXT">TXT e PDF</option>
+				<option value="Nenhum">Nenhum</option>
+			</select>
+		  </div>
+		  <div class="container">
+			<label for="customSelect" class="custom-label">Download NFSe Entrada:</label>
+			<select class="form-select select-control-extra-sm" id="DownloadNFEntrada" required>
+			  <option value="XML">XML</option>
+				<option value="TXT">TXT</option>
+				<option value="XML-PDF">XML e PDF</option>
+				<option value="TXT">TXT e PDF</option>
+				<option value="Nenhum">Nenhum</option>
+			</select>
+		  </div>
+		  <div class="container">
+			<label for="customSelect" class="custom-label">Protocolar Saídas:</label>
+			<select class="form-select select-control-extra-sm" id="ProtocolarNFSaida" required>
+				<option value="Todos">Todos</option>
+				<option value="ISS">Com Recolhimento</option>
+				<option value="Nenhum">Nenhum</option>
+			</select>
+		  </div>
+		  <div class="container">
+			<label for="customSelect" class="custom-label">Protocolar Entrada:</label>
+			<select class="form-select select-control-extra-sm" id="ProtocolarNFEntrada" required>
+				<option value="Todos">Todos</option>
+				<option value="ISS">Com Recolhimento</option>
+				<option value="Nenhum">Nenhum</option>
+			</select>
+		  </div>
+		  <div class="container">
+			<label for="customSelect" class="custom-label">Lançar Simples Nacional:</label>
+			<select class="form-select select-control-extra-sm" id="SimplesNacional" required>
+				<option value="True">Sim</option>
+				<option value="False">Não</option>
+			</select>
+		  </div>
+	  </aside>
 	
-	
-	<!--Corpo Automação-->
-	<div class="container overflow-auto" style="max-height: 600px;">
-        <div class="card tab-content" id="pills-tabContent" >
-			<div class="card-body tab-pane show active" id="pills-iniciar" role="tabpanel" aria-labelledby="pills-iniciar-tab" tabindex="0">
-				<div class="container-fluid d-flex justify-content-center"><h5>Filtros</h5></div>
-				<div class="row align-items-center">
-					<div class="col-6">
-						<div class="row">
-							<div class="col-2 d-flex align-items-center">
-								<label class="col-form-label">Período</label>
+      <!-- Conteúdo principal com barra de rolagem -->
+      <div class="scrollable-content">
+		<div class="table-responsive-sm ">
+			<table class="table table-sm table-dark caption-top table-striped table-hover" >
+				<thead class="table-dark">
+					<tr class="align-items-center">
+						<th class="col-8 fw-normal small-text">
+							<div class="d-flex justify-content-start align-items-center me-2">
+								<div class="col-1" >Cód</div>
+								<div class="col-3 me-3" ><div class="d-flex justify-content-center">CNPJ/CPF</div></div>
+								<div class="col-8" >Empresa</div>
 							</div>
-							<div class="col-3 d-flex align-items-center">
-								<input type="text" class="form-control form-control-sm" id="Periodo" name="Periodo" data-inputmask="'mask': '99/9999'" placeholder="" value="">
+						</th>
+						<!--th class="col-1 fw-normal small-text"><div class="d-flex justify-content-center me-3">CNPJ/CPF</div></th>
+						<th class="col-3 fw-normal small-text">Empresa</th-->
+						<th class="col-4 fw-normal small-text">
+							<div class="d-flex justify-content-start">
+								<div class="col-11" >Observação</div>
+								<div class="col-1" >
+									<div class="d-flex justify-content-end align-items-center">
+										<button type="button" class="btn btn-out-light custom-btn-extra-small me-2" disabled><i class="bi bi-pencil-square"></i></button>
+										<input type="checkbox" class="ProcessCheckboxAll form-check-input" value="" id="FitroCheckbox">
+									</div>
+								</div>
 								
 							</div>
-						</div>
-					</div>
-					<div class="col-6" >
-						<div class="row">
-							<div class="col-3 d-flex align-items-center">
-								<label class="col-form-label">Exibir clientes</label>
+						</th>
+					</tr>
+				</thead>
+				<tbody id="myTable" class="small-text">
+					<tr class="align-items-center">
+						<td class="col-8 fw-normal">
+							<div class="d-flex justify-content-start me-2">
+								<div class="col-1" >9999</div>
+								<div class="col-3 me-3" ><div class="d-flex justify-content-center">00.795.877/0001-16</div></div>
+								<div class="col-8" >Evoluze softwares de gestao ltda 123</div>
 							</div>
-							<div class="col-8 d-flex align-items-center">
-								<div class="form-check form-switch form-check-inline">
-									<input class="form-check-input" type="checkbox" role="switch" id="ExibirClientes" name="ExibirClientes" checked>
-									<label class="form-check-label" for="ExibirClientes">Sim</label>
+						</td>
+						<!--td class="col-1 fw-normal small-text"><div class="d-flex justify-content-center me-2">00.795.877/0001-16</div></td>
+						<td class="col-3 fw-normal small-text">Empresa</td-->
+						<td class="col-4 fw-normal">
+							<div class="d-flex justify-content-start">
+								<div class="col-11" >Observação</div>
+								<div class="col-1" >
+									<div class="d-flex justify-content-end align-items-center">
+										
+										<input type="checkbox" class="ProcessCheckbox form-check-input" id='EXECUTAR'>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="col-3 d-flex align-items-center">
-								<label class="col-form-label">Automatizar</label>
-							</div>
-							<div class="col-8 d-flex align-items-center">
-								<div class="form-check form-switch form-check-inline">
-									<input class="form-check-input" type="checkbox" role="switch" id="FiltrarClientesPendentes" name="FiltrarClientesPendentes" checked>
-									<label class="form-check-label" for="FiltrarClientesPendentes">Clientes pendentes</label>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-				</div>
-				<hr class="my-3">
-				<div class="container-fluid d-flex justify-content-center"><h6>Tarefas da Automação</h6></div>
-				<div>
-					<div class="row">
-						<div class="col-3 d-flex align-items-center justify-content-start">
-							<label class="col-form-label">Download NFs Saída</label>
-						</div>
-						<div class="col-2 d-flex align-items-center ">
-							<div class="form-check form-switch form-check-inline">
-								<input class="form-check-input" type="checkbox" role="switch" id="DownloadNFSaida" name="DownloadNFSaida" checked>
-								<label class="form-check-label" for="DownloadNFSaida">Sim</label>
-							</div>
-						</div>
-						<div class="col-4 d-flex align-items-center justify-content-end">
-							<label class="col-form-label">Download NFs Entrada</label>
-						</div>
-						<div class="col-2 d-flex align-items-center ">
-							<div class="form-check form-switch form-check-inline">
-								<input class="form-check-input" type="checkbox" role="switch" id="DownloadNFEntrada" name="DownloadNFEntrada"checked>
-								<label class="form-check-label" for="DownloadNFEntrada">Sim</label>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-3 d-flex align-items-center justify-content-start">
-							<label class="col-form-label">Protocolar Saídas</label>
-						</div>
-						<div class="col-2 d-flex align-items-center ">
-							<div class="form-check form-switch form-check-inline">
-								<input class="form-check-input" type="checkbox" role="switch" id="ProtocolarNFSaida" name="ProtocolarNFSaida" checked>
-								<label class="form-check-label" for="ProtocolarNFSaida">Sim</label>
-							</div>
-						</div>
-						<div class="col-4 d-flex align-items-center justify-content-end">
-							<label for="periodo" class="col-form-label">Protocolar Entradas</label>
-						</div>
-						<div class="col-2 d-flex align-items-center ">
-							<div class="form-check form-switch form-check-inline">
-								<input class="form-check-input" type="checkbox" role="switch" id="ProtocolarNFEntrada" name="ProtocolarNFEntrada"checked>
-								<label class="form-check-label" for="ProtocolarNFEntrada">Sim</label>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-3 d-flex align-items-center justify-content-start">
-							<label class="col-form-label">Informar Simples Nacional</label>
-						</div>
-						<div class="col-2 d-flex align-items-center ">
-							<div class="form-check form-switch form-check-inline">
-								<input class="form-check-input" type="checkbox" role="switch" id="SimplesNacional" name="SimplesNacional">
-								<label class="form-check-label" for="SimplesNacional">Sim</label>
-							</div>
-						</div>
-						<div class="col-4 d-flex align-items-center justify-content-end">
-							<label for="periodo" class="col-form-label">Gerar Relatório dos Impostos</label>
-						</div>
-						<div class="col-2 d-flex align-items-center ">
-							<div class="form-check form-switch form-check-inline">
-								<input class="form-check-input" type="checkbox" role="switch" id="Relatorio" name="Relatorio"checked>
-								<label class="form-check-label" for="Relatorio">Sim</label>
-							</div>
-						</div>
-					</div>
-				</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+        <!-- Seu conteúdo aqui -->
+        <!-- ... -->
+      </div>
+    
+  </main>
+	
+  <footer>
+    <div class="position-fixed d-flex align-items-center bottom-0 start-0 mb-0 ms-0 bd-mode-toggle" style="width: 250px; height: 30px">
+	  <button class="btn btn-warning py-1 rounded-0 border-0 w-100" type="button" onclick="startClicked()" >
+		<div class="d-flex justify-content-center align-items-center">
+			Iniciar
+		</div>
+	  </button>
+	</div>
+	
+	<div class="d-flex justify-content-center align-items-end">
+		<div class="pagination pagination-sm small-text" data-bs-theme="dark" id="pagination" style="height: 25px"></div>
+	</div>
+	
+	<div class="position-fixed d-flex align-items-center bottom-0 end-0 mb-1 me-2 bd-mode-toggle">
+		Total: <span>358</span>
+	</div>
+  </footer>
+
+
+<div class="modal" data-bs-theme="dark" id="parametrosModal" tabindex="-1" aria-labelledby="parametrosModalTitle" aria-hidden="true">
+	<!--div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable"-->
+	<div class="modal-dialog modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="perfilModalTitle">Parâmetros Automação</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
-			
-			<div class="card-body tab-pane" id="pills-automacao" role="tabpanel" aria-labelledby="pills-automacao-tab" tabindex="0">
-				<div class="container-fluid d-flex justify-content-center"><h5>Configurações IPM</h5></div>
+			<div class="modal-body">
 				<div>
 					<div class="row">
-						<div class="col-3 d-flex align-items-center">
+						<div class="col-4 d-flex align-items-center">
 							<label class="col-form-label">IPM Login</label>
 						</div>
-						<div class="col-9 d-flex align-items-center ">
-							<input type="text" class="form-control form-control-sm" id="IPMLogin" name="IPMLogin" placeholder="Usuário de acesso do contado no IPM" value="">
+						<div class="col-8 d-flex align-items-center ">
+							<input class="form-control form-control-extra-sm" type="text" id="IPMLogin" name="IPMLogin" placeholder="Usuário IPM Contador" value="">
 						</div>
+						
 					</div>
-					
 					<div class="row">
-						<div class="col-3 d-flex align-items-center">
+						<div class="col-4 d-flex align-items-center">
 							<label class="col-form-label">IPM Password</label>
 						</div>
-						<div class="col-9 d-flex align-items-center ">
-							<input type="password" class="form-control form-control-sm" id="IPMPassword" name="IPMPassword" placeholder="Senha de acesso do contador no IPM" value="">
+						<div class="col-8 d-flex align-items-center ">
+							<input class="form-control form-control-extra-sm" type="password" id="IPMPassword" name="IPMPassword" placeholder="Senha IPM Contador" value="">
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-3 d-flex align-items-center">
+						<div class="col-4 d-flex align-items-center">
 							<label class="col-form-label">IPM Código Empresa</label>
 						</div>
-						<div class="col-9 d-flex align-items-center ">
-							<input type="text" class="form-control form-control-sm" id="IPMCodigoLogin" name="IPMCodigoLogin" placeholder="Código de acesso IPM" value="">
+						<div class="col-8 d-flex align-items-center ">
+							<input class="form-control form-control-extra-sm" type="password" id="IPMCodigoLogin" name="IPMCodigoLogin" placeholder="Código Automático" value="" disabled>
 						</div>
 					</div>
-					
-					<div class="row">
-						<div class="col-3 d-flex align-items-center ">
-							<label class="col-form-label">Tipo Download Saidas</label>
-						</div>
-						<div class="col-3 d-flex align-items-center">
-							<select class="form-select form-select-sm" id="ArquivoSaida" required>
-								<option value="XML">XML</option>
-								<option value="TXT">TXT</option>
-								<option value="XML-PDF">XML e PDF</option>
-								<option value="TXT">TXT e PDF</option>
-								<option value="Nenhum">Nenhum</option>
-							</select>
-						</div>
-						
-						<!--div class="col-3 d-flex align-items-center ">
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio" name="ArquivoSaida" id="ArquivoSaidaXML" value="XML" checked>
-								<label class="form-check-label" for="ArquivoSaidaXML">.xml</label>
-							</div>
-							<div class="form-check form-check-inline">
-							  <input class="form-check-input" type="radio" name="ArquivoSaida" id="ArquivoSaidaTXT" value="TXT">
-							  <label class="form-check-label" for="ArquivoSaidaTXT">.txt</label>
-							</div>
-							<div class="form-check form-check-inline">
-							  <input class="form-check-input" type="radio" name="ArquivoSaida" id="ArquivoSaidaNenhum" value="Nenhum">
-							  <label class="form-check-label" for="ArquivoSaidaNenhum">Nenhum</label>
-							</div>
-						</div>
-						<div class="col-1 d-flex align-items-center"></div-->
-						<div class="col-3 d-flex align-items-center justify-content-center">
-							<label class="col-form-label">Protocolar Saidas</label>
-						</div>
-						<div class="col-3 d-flex align-items-center ">
-							<select class="form-select form-select-sm" id="ProtocoloSaida" required>
-								<option value="Todos">Todos</option>
-								<option value="ISS">Com Recolhimento</option>
-								<option value="Nenhum">Nenhum</option>
-							</select>
-						</div>
-
-					</div>
-					<div class="row">
-						<div class="col-3 d-flex align-items-center">
-							<label class="col-form-label">Tipo Download Entradas</label>
-						</div>
-						<div class="col-3 d-flex align-items-center">
-							<select class="form-select form-select-sm" id="ArquivoEntrada" required>
-								<option value="XML">XML</option>
-								<option value="TXT">TXT</option>
-								<option value="XML-PDF">XML e PDF</option>
-								<option value="TXT">TXT e PDF</option>
-								<option value="Nenhum">Nenhum</option>
-							</select>
-						</div>
-						<!--div class="col-3 d-flex align-items-center ">
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio" name="ArquivoEntrada" id="ArquivoEntradaXML" value="XML" checked>
-								<label class="form-check-label" for="ArquivoEntradaXML">.xml</label>
-							</div>
-							<div class="form-check form-check-inline">
-							  <input class="form-check-input form-sm" type="radio" name="ArquivoEntrada" id="ArquivoEntradaTXT" value="TXT">
-							  <label class="form-check-label form-sm" for="ArquivoEntradaTXT">.txt</label>
-							</div>
-							<div class="form-check form-check-inline">
-							  <input class="form-check-input form-sm" type="radio" name="ArquivoEntrada" id="ArquivoEntradaNenhum" value="Nenhum">
-							  <label class="form-check-label form-sm" for="ArquivoEntradaNenhum">Nenhum</label>
-							</div>
-						</div>
-						<div class="col-1 d-flex align-items-center"></div-->
-						<div class="col-3 d-flex align-items-center justify-content-center">
-							<label class="col-form-label">Protocolar Entradas</label>
-						</div>
-						<div class="col-3 d-flex align-items-center ">
-							<select class="form-select form-select-sm" id="ProtocoloEntrada" required>
-								<option value="Todos">Todos</option>
-								<option value="ISS">Com Recolhimento</option>
-								<option value="Nenhum">Nenhum</option>
-							</select>
-						</div>
-					</div>
-					
-					<!--div class="row mb-1">
-						<div class="col-3 d-flex align-items-center">
-							<label class="col-form-label">Código Serviço Emissão NFS</label>
-						</div>
-						<div class="col-9 d-flex align-items-center ">
-							<input type="text" class="form-control form-control-sm" id="CodigoServico" name="CodigoServico" placeholder="Código de serviço para emissão da Nota Fiscal" value="">
-						</div>
-					</div>
-					
-					<div class="row mb-1">
-						<div class="col-3 d-flex align-items-start">
-							<label class="col-form-label">Observação na Emissao NFS</label>
-						</div>
-						<div class="col-9 d-flex align-items-center">
-							  <textarea class="form-control form-control-sm" placeholder="Observação para emissão de NFS" rows="6" id="ObservacaoNFS"></textarea>
-						</div>
-					</div>
-					<div class="row mb-1">
-						<div class="col-3 d-flex align-items-start">
-							<label class="col-form-label">Observação Financeira na NFS</label>
-						</div>
-						<div class="col-9 d-flex align-items-center">
-							  <textarea class="form-control form-control-sm" placeholder="Observação financeira na NFS" rows="5" id="ObservacaoFinanceira"></textarea>
-						</div>
-					</div-->
 				</div>
 			</div>
-			
-			<div class="card-body tab-pane" id="pills-dominio" role="tabpanel" aria-labelledby="pills-dominio-tab" tabindex="0">
-				<div class="container-fluid d-flex justify-content-center"><h5>Configurações Dominio</h5></div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary custom-btn-extra-small" style="width: 85px; height: 29px" data-bs-dismiss="modal">Cancelar</button>
+				<button type="button" class="btn btn-primary custom-btn-extra-small" style="width: 85px; height: 29px" data-bs-dismiss="modal" onclick="salvarParametros()">Salvar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal" data-bs-theme="dark" id="dominioModal" tabindex="-1" aria-labelledby="dominioModalTitle" aria-hidden="true">
+	<!--div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable"-->
+	<div class="modal-dialog modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="perfilModalTitle">Parâmetros Domínio</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
 				<div>
 					<div class="row">
-						<div class="col-2 d-flex align-items-center">
-							<label class="col-form-label">Login</label>
+						<div class="col-4 d-flex align-items-center">
+							<label class="col-form-label">Domínio Login</label>
 						</div>
-						<div class="col-10 d-flex align-items-center ">
-							<input type="text" class="form-control form-control-sm" id="DominioLogin" name="DominioLogin" placeholder="Usuário do Domínio" value="">
+						<div class="col-8 d-flex align-items-center ">
+							<input class="form-control form-control-extra-sm" type="text" id="DominioLogin" name="DominioLogin" placeholder="Usuário do Domínio" value="">
 						</div>
 						
 					</div>
 					<div class="row">
-						<div class="col-2 d-flex align-items-center">
-							<label class="col-form-label">Password</label>
+						<div class="col-4 d-flex align-items-center">
+							<label class="col-form-label">Dominio Password</label>
 						</div>
-						<div class="col-10 d-flex align-items-center ">
-							<input type="password" class="form-control form-control-sm" id="DominioPassword" name="DominioPassword" placeholder="Senha do Domínio" value="">
+						<div class="col-8 d-flex align-items-center ">
+							<input class="form-control form-control-extra-sm" type="password" id="DominioPassword" name="DominioPassword" placeholder="Senha do Domínio" value="">
 						</div>
 					</div>
-					
-					<hr class="my-3">
-					<div class="row">
-						<div class="col-2 d-flex align-items-center">
-							<label class="col-form-label">Importar Clientes</label>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary custom-btn-extra-small" style="width: 85px; height: 29px" data-bs-dismiss="modal">Cancelar</button>
+				<button type="button" class="btn btn-primary custom-btn-extra-small" style="width: 85px; height: 29px" data-bs-dismiss="modal" onclick="salvarParametros()">Salvar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal" data-bs-theme="dark" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalTitle" aria-hidden="true">
+	<!--div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable"-->
+	<div class="modal-dialog modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="perfilModalTitle">Cadastro de Perfil</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<form class="d-flex text-align-center" id="myFormModalPerfil">
+						<input class="form-control form-control-extra-sm me-2" type="text" id="novoPerfil" placeholder="Nome do novo perfil">
+						<button id="addPerfil" type="button" class="btn btn-warning custom-btn-extra-small" style="width: 85px; height: 29px" id="addPerfillLista" onclick="addNovoPerfilClicked()">Adicionar</button>
+					</form>
+				</div>
+				<hr>
+				<div class="row">
+					<table class="table table-sm table-dark caption-top table-striped table-hover" >
+						<thead class="table-dark">
+							<tr>
+								<th scope="col-2">#</th>
+								<th scope="col-8">Perfil</th>
+								<th scope="col-2"><div class="d-flex justify-content-center">Situaçao</div></th>
+							</tr>
+						</thead>
+						<tbody id="myTablePerfil">
+							<tr>
+								<th class="col-2" scope="row">1</th>
+								<td class="col-8">Perfil A</td>
+								<td class="col-2"><div class="d-flex justify-content-center"><button type="button" class="btn btn-danger btn-sm "><i class="bi bi-trash"></i></button></div></td>
+							</tr>
+							<tr>
+								<th class="col-2" scope="row">5</th>
+								<td class="col-8">Perfil B</td>
+								<td class="col-2"><div class="d-flex justify-content-center"><button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button></div></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary custom-btn-extra-small" style="width: 85px; height: 29px" data-bs-dismiss="modal">Cancelar</button>
+				<button type="button" class="btn btn-primary custom-btn-extra-small" style="width: 85px; height: 29px" data-bs-dismiss="modal" onclick="atualizaPerfil()">Salvar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal" data-bs-theme="dark" id="clienteModal"  tabindex="-1" aria-labelledby="clienteModalTitle" aria-hidden="true"  >
+	<!--div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable"-->
+	<div class="modal-dialog modal-xl modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="clienteModalTitle">Cadastro de Cliente</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body small-text">
+				<div class="row">
+					<div class="col-2 d-flex justify-content-start align-items-center">
+						<label class="col-form-label me-5">Código Dominio</label>
+					</div>
+					<div class="col-2 d-flex align-items-center ">
+						<input class="form-control form-control-extra-sm me-2" type="text" id="CODIGO" name="CODIGO" placeholder="Código Cliente" value="">
+					</div>
+					<div class="col-1 d-flex justify-content-end align-items-end ">
+						<label class="col-form-label">CNPJ/CPF</label>
+					</div>
+					<div class="col-2 d-flex align-items-center ">
+						<input class="form-control form-control-extra-sm me-2" type="text" id="CNPJ" name="CNPJ" placeholder="CNPJ ou CPF" value="">
+					</div>
+					<div class="col-2 d-flex justify-content-end align-items-end">
+						<label class="col-form-label">Situação</label>
+					</div>
+					<div class="col-1 d-flex justify-content-start align-items-center">
+						<div class="form-check form-switch form-check-inline">
+							<input class="form-check-input" type="checkbox" role="switch" id="SITUACAO" name="SITUACAO" checked>
+							<label class="form-check-label" for="SITUACAO">Ativa</label>
 						</div>
-						<div class="col-10 d-flex align-items-center ">
-							<div class="form-check form-switch form-check-inline">
-								<input class="form-check-input" type="checkbox" role="switch" id="ImportarClientes" name="ImportarClientes">
-								<label class="form-check-label" for="ImportarClientes">Não</label>
+					</div>
+					<div class="col-2 d-flex justify-content-end align-items-center">
+						<label class="col-form-label me-2">#ID:</label>
+						<input class="form-control form-control-extra-sm me-2" type="text" id="ID_CLIENTE" name="ID_CLIENTE" placeholder="" value="" disabled>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-2 d-flex justify-content-start align-items-center">
+						<label class="col-form-label">Apelido Empresa</label>
+					</div>
+					<div class="col-5 d-flex align-items-center ">
+						<input class="form-control form-control-extra-sm me-2" type="text" id="NOME" name="NOME" placeholder="Apelido da Empresa" value="">
+						
+					</div>
+					<div class="col-2 d-flex justify-content-end align-items-end">
+						<label class="col-form-label">Regime Tributário</label>
+					</div>
+					<div class="col-3 d-flex justify-content-start align-items-center ">
+						<select class="form-select select-control-extra-sm" id="REGIME_TRIBUTARIO" style="width: 251px;">
+							<option value=""></option>
+							<option value="Lucro Real">Lucro Real</option>
+							<option value="Lucro Presumido">Lucro Presumido</option>
+							<option value="Lucro Arbitrado">Lucro Arbitrado</option>
+							<option value="Imune do IRPJ">Imune do IRPJ</option>
+							<option value="Isenta do IRPJ">Isenta do IRPJ</option>
+							<option value="Microempresa">Microempresa (Simples Nacional)</option>
+							<option value="Empresa de Pequeno Porte">Empresa de Pequeno Porte (Simples Nacional)</option>
+							<option value="RET - Regime Especial Trib.">RET - Regime Especial Trib.</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-2 d-flex justify-content-start align-items-center">
+						<label class="col-form-label">Nome Empresa</label>
+					</div>
+					<div class="col-10 d-flex align-items-center ">
+						<input class="form-control form-control-extra-sm me-2" type="text" id="EMPRESA" name="EMPRESA" placeholder="Nome da Empresa" value="">
+					</div>
+				</div>
+			
+				<nav>
+				  <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+					<button class="nav-link active" id="nav-config-tab" data-bs-toggle="tab" data-bs-target="#nav-config" type="button" role="tab" aria-controls="nav-config" aria-selected="true">Configurações IPM</button>
+					<!--button class="nav-link" id="nav-codigo-tab" data-bs-toggle="tab" data-bs-target="#nav-codigo" type="button" role="tab" aria-controls="nav-codigo" aria-selected="false">Códigos IPM</button>
+					<button class="nav-link" id="nav-nota-tab" data-bs-toggle="tab" data-bs-target="#nav-nota" type="button" role="tab" aria-controls="nav-nota" aria-selected="false">Emissão de Nota</button-->
+				  </div>
+				</nav>
+				<div class="tab-content" id="nav-tabContent">
+					<div class="tab-pane fade show active" id="nav-config" role="tabpanel" aria-labelledby="nav-config-tab">
+						<div id="Configurações do IPM">
+							<div class="row">
+								<div class="col-2 d-flex align-items-center">
+									<label class="col-form-label">IPM Login Cliente</label>
+								</div>
+								<div class="col-4 d-flex align-items-center ">
+									<input class="form-control form-control-extra-sm me-2" type="text" id="LOGIN" name="LOGIN" placeholder="Usuário de acesso do cliente no IPM" value="">
+								</div>
+								<div class="col-2 d-flex justify-content-end align-items-end">
+									<label class="col-form-label">Código Login</label>
+								</div>
+								<div class="col-4 d-flex align-items-center">
+									<input class="form-control form-control-extra-sm me-2" type="text" id="CODIGO_LOGIN" name="CODIGO_LOGIN" placeholder="Cadastro Automatico" value="">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-2 d-flex align-items-center">
+									<label class="col-form-label">IPM Senha Cliente</label>
+								</div>
+								<div class="col-4 d-flex align-items-center ">
+									<input class="form-control form-control-extra-sm me-2" type="text" id="PASSWORD" name="PASSWORD" placeholder="Senha de acesso do cliente no IPM" value="">
+								</div>
+								<div class="col-2 d-flex justify-content-end align-items-end">
+									<label class="col-form-label">Cadastro Ecônomico</label>
+								</div>
+								<div class="col-4 d-flex align-items-center">
+									<input class="form-control form-control-extra-sm me-2" type="text" id="CADASTRO_ECONOMICO" name="CADASTRO_ECONOMICO" placeholder="Cadastro Automatico" value="">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-2 d-flex justify-content-start align-items-center">
+									<label class="col-form-label">Declarar Simples Nacional</label>
+								</div>
+								<div class="col-4 d-flex justify-content-start align-items-center ">
+									<div class="form-check form-switch form-check-inline">
+										<input class="form-check-input" type="checkbox" role="switch" id="DECLARAR_SIMPLES_NACIONAL" name="DECLARAR_SIMPLES_NACIONAL">
+										<label class="form-check-label" for="DECLARAR_SIMPLES_NACIONAL">Sim</label>
+									</div>
+								</div>
+								<div class="col-4 d-flex justify-content-end align-items-center">
+									<label class="col-form-label">Lançar Notas de Entrada</label>
+								</div>
+								<div class="col-2 d-flex justify-content-start align-items-center ">
+									<div class="form-check form-switch form-check-inline">
+										<input class="form-check-input" type="checkbox" role="switch" id="LANCAR_NOTA_ENTRADA" name="LANCAR_NOTA_ENTRADA">
+										<label class="form-check-label" for="LANCAR_NOTA_ENTRADA">Sim</label>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-2 d-flex align-items-center">
-							<label class="col-form-label">Arquivo clientes</label>
+					<!-- Notas -->
+					<div class="tab-pane fade" id="nav-nota" role="tabpanel" aria-labelledby="nav-nota-tab">
+						<div class="row">
+							<form id="myFormModalPerfil">
+								<div class="row">
+									<div class="col-1 d-flex justify-content-start align-items-start">
+										<label class="col-form-label">Observação</label>
+									</div>
+									<div class="col-8 d-flex align-items-center">
+										<textarea class="form-control form-control-sm" placeholder="Observação para emissão de NFS" rows="3" id="ObservacaoNota"></textarea>
+									</div>
+									<div class="col-3">
+										<div class="row">
+											<div class="col-3 d-flex justify-content-start align-items-center">
+												<label class="col-form-label">Valor</label>
+											</div>
+											<div class="col-9 d-flex justify-content-center align-items-center">
+												<input class="form-control form-control-sm me-2" type="text" id="ValorNota" placeholder="Valor Nota" style="text-align: right;">
+											</div>
+										</div>
+										<div class="row">
+											<div class="d-flex justify-content-center">
+												<button class="btn btn-primary btn-sm w-100" type="button" id="addNotaBtn" onclick="addNotaBtn()">adicionar</button>
+											</div>
+										</div>
+										
+									</div>
+								</div>
+							</form>
 						</div>
-						<div class="col-10 d-flex align-items-center ">
-							<button class="btn btn-outline-success w-100" type="botton" onclick="excelClicked()">Gerar arquivo Excel dos Clientes Ativos</button>
+						<br>
+						<div class="row">
+							<div class="card">
+								<table class="card-body table table-sm">
+									<thead>
+										<tr>
+											<th class="col-1" scope="row" id="IdNota">#</th>
+											<th class="col-7">Observacao</th>
+											<th class="col-2"><div class="d-flex justify-content-end">Valor</div></th>
+											<th class="col-2"><div class="d-flex justify-content-center">Ação</div></th>
+										</tr>
+									</thead>
+									<tbody id="myTableNotas">
+										<tr>
+											<td class="col-1" scope="row">1</th>
+											<td class="col-7">Perfil A</td>
+											<td class="col-2"><div class="d-flex justify-content-end">512,00</div></th>
+											<td class="col-2">
+												<div class="d-flex justify-content-center">
+													<button type="button" class="btn btn-success btn-sm me-1"><i class="bi bi-pencil-square"></i>
+													</button><button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td class="col-1" scope="row">2</th>
+											<td class="col-7">Perfil B</td>
+											<td class="col-2"><div class="d-flex justify-content-end">12.512,00</div></th>
+											<td class="col-2">
+												<div class="d-flex justify-content-center">
+													<button type="button" class="btn btn-success btn-sm me-1"><i class="bi bi-pencil-square"></i>
+													</button><button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			
-			
-		</div>
-		<div class="position-fixed d-flex align-items-center bottom-0 end-0 mb-1 me-1 bd-mode-toggle">
-		  <button class="btn btn-primary  py-2 rounded-0 " type="button" onclick="startClicked()">
-			Iniciar  <i class="bi bi-play-fill"></i>
-		  </button>
-		</div>
-	</div>
-	
-	
-	
-	
-	<div class="modal" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalTitle" aria-hidden="true">
-		<!--div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable"-->
-		<div class="modal-dialog modal-dialog-scrollable">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="perfilModalTitle">Cadastro de Perfil</h1>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<div class="row">
-						<form class="d-flex" id="myFormModalPerfil">
-							<input class="form-control form-control-sm me-2" type="text" id="novoPerfil" placeholder="Nome do novo perfil">
-							<button class="btn btn-primary btn-sm" type="button" id="addPerfillLista" onclick="addNovoPerfilClicked()">adicionar</button>
-						</form>
-					</div>
-					<hr>
-					<div class="row">
-						<table class="table table-sm table-striped">
-							<thead>
-								<tr>
-									<th scope="col-2">#</th>
-									<th scope="col-8">Perfil</th>
-									<th scope="col-2"><div class="d-flex justify-content-center">Ação</div></th>
-								</tr>
-							</thead>
-							<tbody id="myTablePerfil" class="table-group-divider">
-								<tr>
-									<th class="col-2" scope="row">1</th>
-									<td class="col-8">Perfil A</td>
-									<td class="col-2"><div class="d-flex justify-content-center"><button type="button" class="btn btn-danger btn-sm "><i class="bi bi-trash"></i></button></div></td>
-								</tr>
-								<tr>
-									<th class="col-2" scope="row">5</th>
-									<td class="col-8">Perfil B</td>
-									<td class="col-2"><div class="d-flex justify-content-center"><button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button></div></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
-					<button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal" onclick="atualizaPerfil()">Salvar</button>
+			<div class="modal-footer">
+				<div class="col-sm-12 d-flex me-0">
+					<button type="button" class="btn btn-danger custom-btn-extra-small w-25 me-2" style="height: 29px" id="ExcluirCliente" onclick="excluirCliente()">Excluir</button>
+					<button type="button" class="btn btn-secondary custom-btn-extra-small w-25 me-2" style="height: 29px" onclick="limparValoresModal()">Limpar</button>
+					<!--button type="button" class="btn btn-danger btn-sm w-25 me-2" data-bs-toggle="modal" data-bs-target="#modalExcluir" data-bs-dismiss="modal" onclick="excluirClientex()">Excluir</button-->
+					<button type="button" class="btn btn-primary custom-btn-extra-small w-50" style="height: 29px" id="SalvarCliente" onclick="salvarCliente()">Salvar</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-	
-	<script>
-	  function closeOffcanvas() {
-		var offcanvasElement = document.getElementById('menuButton');
-		var offcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
-		offcanvas.hide();
+</div>
+
+
+<!-- CNPJ Validação -->
+<script>
+	var cnpjCpfInput = document.getElementById('CNPJ');
+
+	cnpjCpfInput.addEventListener('input', function() {
+	  var valor = this.value.replace(/\D/g, '');
+
+	  if (valor.length === 11) {
+		// CPF
+		if (validarCpf(valor)) {
+		  this.value = aplicarMascaraCpf(valor);
+		}
+	  } else if (valor.length === 14) {
+		// CNPJ
+		if (validarCnpj(valor)) {
+		  this.value = aplicarMascaraCnpj(valor);
+		}else {
+			this.value = 'CNPJ Inválido';
+		}
 	  }
-	</script>
-	
-	<!-- Javascrit da pagina -->
-    <script>
-	
-	  document.getElementById('ImportarClientes').addEventListener('change', function() {
-		if (this.checked) {
-		  document.querySelector('label[for="ImportarClientes"]').textContent = 'Sim';
-		} else {
-		  document.querySelector('label[for="ImportarClientes"]').textContent = 'Não';
-		}
-	  });
+	});
 
-	  document.getElementById('ExibirClientes').addEventListener('change', function() {
-		if (this.checked) {
-		  document.querySelector('label[for="ExibirClientes"]').textContent = 'Sim';
-		} else {
-		  document.querySelector('label[for="ExibirClientes"]').textContent = 'Não';
-		}
-	  });
-	 
-	  document.getElementById('FiltrarClientesPendentes').addEventListener('change', function() {
-		if (this.checked) {
-		  document.querySelector('label[for="FiltrarClientesPendentes"]').textContent = 'Clientes pendentes';
-		} else {
-		  document.querySelector('label[for="FiltrarClientesPendentes"]').textContent = 'Todos os clientes';
-		}
-	  });
+	function validarCpf(cpf) {
+	  cpf = cpf.replace(/\D/g, ''); // Remove caracteres não numéricos
+	  if (cpf.length !== 11 || /^(.)\1+$/.test(cpf)) {
+		return false;
+	  }
 	  
-
-	  document.getElementById('DownloadNFSaida').addEventListener('change', function() {
-		if (this.checked) {
-		  document.querySelector('label[for="DownloadNFSaida"]').textContent = 'Sim';
-		} else {
-		  document.querySelector('label[for="DownloadNFSaida"]').textContent = 'Não';
-		}
-	  });
+	  var sum = 0;
+	  var mod;
 	  
-
-	  document.getElementById('ProtocolarNFSaida').addEventListener('change', function() {
-		if (this.checked) {
-		  document.querySelector('label[for="ProtocolarNFSaida"]').textContent = 'Sim';
-		} else {
-		  document.querySelector('label[for="ProtocolarNFSaida"]').textContent = 'Não';
-		}
-	  });
-
-
-	  document.getElementById('DownloadNFEntrada').addEventListener('change', function() {
-		if (this.checked) {
-		  document.querySelector('label[for="DownloadNFEntrada"]').textContent = 'Sim';
-		} else {
-		  document.querySelector('label[for="DownloadNFEntrada"]').textContent = 'Não';
-		}
-	  });
+	  for (var i = 1; i <= 9; i++) {
+		sum += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+	  }
 	  
-
-	  document.getElementById('ProtocolarNFEntrada').addEventListener('change', function() {
-		if (this.checked) {
-		  document.querySelector('label[for="ProtocolarNFEntrada"]').textContent = 'Sim';
-		} else {
-		  document.querySelector('label[for="ProtocolarNFEntrada"]').textContent = 'Não';
-		}
-	  });
+	  mod = (sum * 10) % 11;
 	  
-
-	  document.getElementById('SimplesNacional').addEventListener('change', function() {
-		if (this.checked) {
-		  document.querySelector('label[for="SimplesNacional"]').textContent = 'Sim';
-		} else {
-		  document.querySelector('label[for="SimplesNacional"]').textContent = 'Não';
-		}
-	  });
+	  if (mod === 10 || mod === 11) {
+		mod = 0;
+	  }
 	  
-
-	  document.getElementById('Relatorio').addEventListener('change', function() {
-		if (this.checked) {
-		  document.querySelector('label[for="Relatorio"]').textContent = 'Sim';
-		} else {
-		  document.querySelector('label[for="Relatorio"]').textContent = 'Não';
-		}
-	  });
+	  if (mod !== parseInt(cpf.substring(9, 10))) {
+		return false;
+	  }
 	  
+	  sum = 0;
 	  
-	var selectPerfil = document.getElementById('Perfil');
-
-	// Define a função que será executada quando o valor selecionado for alterado
-	function perfilChanged() {
-	  var selectedValue = selectPerfil.value;
-	  //alert(selectedValue);
-	  changedPerfil(selectedValue);
+	  for (var j = 1; j <= 10; j++) {
+		sum += parseInt(cpf.substring(j - 1, j)) * (12 - j);
+	  }
+	  
+	  mod = (sum * 10) % 11;
+	  
+	  if (mod === 10 || mod === 11) {
+		mod = 0;
+	  }
+	  
+	  if (mod !== parseInt(cpf.substring(10, 11))) {
+		return false;
+	  }
+	  
+	  return true;
 	}
 
-	// Adiciona um ouvinte de evento para o evento 'change' do <select>
+	function aplicarMascaraCpf(cpf) {
+	  cpf = cpf.replace(/\D/g, ''); // Remove caracteres não numéricos
+	  cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+	  cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+	  cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+	  return cpf;
+	}
+
+
+	function validarCnpj(cnpj) {
+	  cnpj = cnpj.replace(/[^\d]+/g, ''); // Remove caracteres não numéricos
+
+	  if (cnpj.length !== 14) {
+		return false;
+	  }
+
+	  // Verifica se todos os dígitos são iguais (caso de CNPJs inválidos)
+	  if (/^(\d)\1+$/.test(cnpj)) {
+		return false;
+	  }
+
+	  // Validação do primeiro dígito verificador
+	  var tamanho = cnpj.length - 2;
+	  var numeros = cnpj.substring(0, tamanho);
+	  var digitos = cnpj.substring(tamanho);
+	  var soma = 0;
+	  var pos = tamanho - 7;
+
+	  for (var i = tamanho; i >= 1; i--) {
+		soma += parseInt(numeros.charAt(tamanho - i), 10) * pos--;
+		if (pos < 2) {
+		  pos = 9;
+		}
+	  }
+
+	  var resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+	  if (resultado !== parseInt(digitos.charAt(0), 10)) {
+		return false;
+	  }
+
+	  // Validação do segundo dígito verificador
+	  tamanho += 1;
+	  numeros = cnpj.substring(0, tamanho);
+	  digitos = cnpj.substring(tamanho);
+	  soma = 0;
+	  pos = tamanho - 7;
+
+	  for (i = tamanho; i >= 1; i--) {
+		soma += parseInt(numeros.charAt(tamanho - i), 10) * pos--;
+		if (pos < 2) {
+		  pos = 9;
+		}
+	  }
+
+	  resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+	  if (resultado !== parseInt(digitos.charAt(0), 10)) {
+		return false;
+	  }
+
+	  return true;
+	}
+
+	function aplicarMascaraCnpj(cnpj) {
+	  cnpj = cnpj.replace(/\D/g, ''); // Remove caracteres não numéricos
+	  return cnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+	}
+
+</script>
+
+<!-- Perfil -->
+<script>
+	var selectPerfil = document.getElementById('Perfil');
+	function perfilChanged() {
+	  var selectedValue = selectPerfil.value;
+	  changedPerfil(selectedValue);
+	}
 	selectPerfil.addEventListener('change', perfilChanged);
+</script>
+	
+<!-- Tabela -->	
+<script>
+	// Adicionando evento de duplo clique às linhas da tabela
+	let table = document.getElementById('myTable');
+	let rows = table.getElementsByTagName('tr');
+
+	for (let i = 0; i < rows.length; i++) {
+		rows[i].ondblclick = function() {
+		  // Executa uma ação ao dar duplo clique na linha
+		  console.log('Você deu dois cliques na linha:', i + 1);
+		  // Aqui você pode adicionar a lógica que deseja executar ao dar duplo clique na linha
+		};
+	}
+
+	function initializePagination(data, nItems) {
+	  var itemsPerPage = nItems; // Number of items to display per page
+	  var totalPages = Math.ceil(data.length / itemsPerPage);
+	  var container = $('#myTable');
 	  
-	
+	  // Initialize the bootpag plugin
+	  var pagination = $('#pagination').bootpag({
+		total: totalPages,
+		page: 1,
+		maxVisible: 10, // Maximum number of visible pages
+		leaps: true, // Enable/disable next/previous leaps through maxVisible
+		firstLastUse: true, // Enable/disable first/last buttons
+		href: "#pro-page-{{number}}",
 		
-	//  document.addEventListener("DOMContentLoaded", function () {
-	//	  var cpf = formatarInput('Periodo','00/0000');
-	//	});
 		
-		
-	</script>
-	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/inputmask.min.js"></script>	  
-	<script>
-		$(document).ready(function() {
-			Inputmask("99999-999").mask("#Periodo");
-		});
-	</script>
-	
-	<!-- Contrata o Menu do cabeçalho -->
-	<script>
-		document.querySelectorAll('.dropdown-item').forEach(function(item) {
-		item.addEventListener('click', function(event) {
-			event.preventDefault();
-			var target = document.querySelector(this.getAttribute('data-bs-target'));
-			var dropdown = document.querySelector('.dropdown');
-			var dropdownMenu = document.querySelector('.dropdown-menu');
-			if (target) {
-				var tabTrigger = new bootstrap.Tab(target);
-				tabTrigger.show();
-			}
+	  }).on("page", function(event, num) {
+		var startIndex = (num - 1) * itemsPerPage;
+		var endIndex = startIndex + itemsPerPage;
 
-			  dropdown.classList.remove('show');
-			  dropdownMenu.classList.remove('show');
-			});
-		});
-	
-		var triggerTabList = [].slice.call(document.querySelectorAll('#pills-tab a'))
-		triggerTabList.forEach(function (triggerEl) {
-		  var tabTrigger = new bootstrap.Tab(triggerEl)
+		// Hide all rows
+		container.find('tr').hide();
 
-		  triggerEl.addEventListener('click', function (event) {
-			event.preventDefault()
-			tabTrigger.show()
-		  })
-		})
+		// Show rows for the current page
+		container.find('tr').slice(startIndex, endIndex).show();
+	  });
+
+  // Click on the first page after loading
+		container.find('tr').slice(0, itemsPerPage).show();
+	}
+</script>
+
+<!-- Mascara -->
+<script>
+	$(document).ready(function(){
+	  $("#myInput").on("keyup", function() {
+		var value = $(this).val().toLowerCase();
+		$("#myTable tr").filter(function() {
+		  $(this).toggle( $(this).text().toLowerCase().indexOf(value) > -1 );
+		});
+	  });
+	});
+	$(document).ready(function() {
+		Inputmask("99999-999").mask("#Periodo");
+	});
+</script>
 	
-	</script>
-    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://trunan.com.br/_trunan/www/js/bootpag.js"></script>
+  
 </body>
 </html>
