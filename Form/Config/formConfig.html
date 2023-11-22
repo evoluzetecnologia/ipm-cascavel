@@ -131,7 +131,8 @@
 				} else if (value =='Nenhum'){
 					document.getElementById(elementId).checked = false;
 				} else {
-					$('#FitroCheckbox').prop('indeterminate', true);
+					document.getElementById(elementId).indeterminate = true;
+					//$('#FitroCheckbox').prop('indeterminate', true);
 				} 
 			} else if (elementId === 'parametros') {
 				var jsonData = value;
@@ -268,10 +269,12 @@
 						var nItem = 0;
 						var altura = window.innerHeight;
 						var nPag = 22;
-						if (window.innerHeight > 900){
-							nPag = 30;
-						} else if (window.innerHeight > 768){
-							nPag = 25;
+						if (window.innerHeight > 1080) {
+						  nPag = 40;
+						} else if (window.innerHeight > 900 ) {
+						  nPag = 35;
+						} else if (window.innerHeight > 720) {
+						  nPag = 25;
 						}
 						data.forEach(function(item) {
 							var row = $('<tr>').prop('class', 'align-items-center');
@@ -320,6 +323,13 @@
 							div.append(col);
 							td.append(div);
 							row.append(td);
+							
+							row.on('dblclick', function () {
+								const checkbox = $(this).find('input[type="checkbox"]');
+								if (checkbox) {
+								  checkbox.prop('checked', !checkbox.prop('checked'));
+								}
+							});
 							
 							tableBody.append(row);
 						});
@@ -647,7 +657,7 @@
 				<thead class="table-dark">
 					<tr class="align-items-center">
 						<th class="col-8 fw-normal small-text">
-							<div class="d-flex justify-content-start align-items-center me-2">
+							<div class="d-flex justify-content-start align-items-center">
 								<div class="col-1" >Cód</div>
 								<div class="col-3 me-3" ><div class="d-flex justify-content-center">CNPJ/CPF</div></div>
 								<div class="col-8" >Empresa</div>
@@ -656,11 +666,11 @@
 						<!--th class="col-1 fw-normal small-text"><div class="d-flex justify-content-center me-3">CNPJ/CPF</div></th>
 						<th class="col-3 fw-normal small-text">Empresa</th-->
 						<th class="col-4 fw-normal small-text">
-							<div class="d-flex justify-content-start">
+							<div class="d-flex justify-content-start align-items-center">
 								<div class="col-11" >Observação</div>
 								<div class="col-1" >
 									<div class="d-flex justify-content-end align-items-center">
-										<button id="addPerfil" type="button" class="btn btn-primary custom-btn-extra-small me-2" data-bs-toggle="modal" data-bs-target="#clienteModal"><i class="bi bi-person-plus-fill"></i></button>
+										<button id="addPerfil" type="button" class="btn btn-primary custom-btn-extra-small me-2" data-bs-toggle="modal" data-bs-target="#clienteModal" onclick="limparModalCliente()"><i class="bi bi-person-plus-fill"></i></button>
 										<input type="checkbox" class="ProcessCheckboxAll form-check-input" value="" id="FiltroCheckbox">
 									</div>
 								</div>
@@ -843,7 +853,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h6 class="modal-title" id="clienteModalTitle">Cadastro de Cliente</h6>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="limparModalCliente()"></button>
 				</div>
 				<div class="modal-body small-text">
 					<div class="row">
@@ -1170,6 +1180,28 @@
 	
 <!-- Tabela -->	
 <script>
+	
+	document.addEventListener('DOMContentLoaded', function () {
+	  const linhasTabela = document.querySelectorAll('#myTable tr');
+
+	  linhasTabela.forEach((linha) => {
+		let clicado = false;
+
+		linha.addEventListener('click', function () {
+		  if (clicado) {
+			const checkbox = this.querySelector('input[type="checkbox"]');
+			if (checkbox) {
+			  checkbox.checked = !checkbox.checked;
+			}
+			clicado = false;
+		  } else {
+			clicado = true;
+			setTimeout(() => clicado = false, 300); // Definindo o limite de tempo para o segundo clique
+		  }
+		});
+	  });
+	});
+	
 	// Adicionando evento de duplo clique às linhas da tabela
 	let table = document.getElementById('myTable');
 	let rows = table.getElementsByTagName('tr');
@@ -1211,6 +1243,8 @@
   // Click on the first page after loading
 		container.find('tr').slice(0, itemsPerPage).show();
 	}
+	
+	
 </script>
 
 <!-- Mascara -->
