@@ -124,19 +124,13 @@
               <OutArgument x:TypeArguments="x:String">[querySql]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String" xml:space="preserve">SELECT  (CASE WHEN (
+              <InArgument x:TypeArguments="x:String" xml:space="preserve">["SELECT  (CASE WHEN (
             (PERIODO_DOWNLOAD_SAIDA &lt;&gt; '{PERIODO}' AND DOWNLOAD_SAIDA &lt;&gt; 'Nenhum') OR 
             (PERIODO_DOWNLOAD_ENTRADA &lt;&gt; '{PERIODO}' AND DOWNLOAD_ENTRADA  &lt;&gt; 'Nenhum') OR
             (PERIODO_DECLARACAO_SAIDA &lt;&gt; '{PERIODO}' AND PROTOCOLAR_SAIDA  &lt;&gt; 'Nenhum') OR
             (PERIODO_DECLARACAO_ENTRADA &lt;&gt; '{PERIODO}' AND PROTOCOLAR_ENTRADA  &lt;&gt; 'Nenhum') OR
             (PERIODO_SIMPLES_NACIONAL &lt;&gt; '{PERIODO}' AND (REGIME_TRIBUTARIO = 'Microempresa' OR REGIME_TRIBUTARIO = 'Empresa de Pequeno Porte') AND DECLARAR_SIMPLES_NACIONAL)
          ) THEN 'True' ELSE 'False' END) AS EXECUTAR,
-         
-        (CASE WHEN (PERIODO_DOWNLOAD_SAIDA &lt;&gt; '{PERIODO}' AND DOWNLOAD_SAIDA &lt;&gt; 'Nenhum') THEN 'True' ELSE 'False' END) AS FAZ_DOWNLOAD_SAIDA,
-        (CASE WHEN (PERIODO_DOWNLOAD_ENTRADA &lt;&gt; '{PERIODO}' AND DOWNLOAD_ENTRADA  &lt;&gt; 'Nenhum') THEN 'True' ELSE 'False' END) AS FAZ_DOWNLOAD_ENTRADA,
-        (CASE WHEN (PERIODO_DECLARACAO_SAIDA &lt;&gt; '{PERIODO}' AND PROTOCOLAR_SAIDA  &lt;&gt; 'Nenhum') THEN 'True' ELSE 'False' END) AS FAZ_DECLARACAO_SAIDA,
-        (CASE WHEN (PERIODO_DECLARACAO_ENTRADA &lt;&gt; '{PERIODO}' AND PROTOCOLAR_ENTRADA &lt;&gt; 'Nenhum') THEN 'True' ELSE 'False' END) AS FAZ_DECLARACAO_ENTRADA,
-        (CASE WHEN (PERIODO_SIMPLES_NACIONAL &lt;&gt; '{PERIODO}' AND (REGIME_TRIBUTARIO = 'Microempresa' OR REGIME_TRIBUTARIO = 'Empresa de Pequeno Porte') AND DECLARAR_SIMPLES_NACIONAL) THEN 'True' ELSE 'False' END) AS FAZ_SIMPLES_NACIONAL, 
         
         cli.ID_CLIENTE,
         CNPJ,
@@ -165,7 +159,7 @@ FROM ipm
 INNER JOIN _perfil per on per.ID_PERFIL = ipm.ID_PERFIL
 INNER JOIN cliente cli on cli.ID_CLIENTE = ipm.ID_CLIENTE
 
-WHERE  (per.ID_PERFIL = {Perfil} AND cli.SITUACAO = True AND per.SITUACAO = True) {QueryTransactionData}</InArgument>
+WHERE  (per.ID_PERFIL = {Perfil} AND cli.SITUACAO = True AND per.SITUACAO = True) {QueryTransactionData}"]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
