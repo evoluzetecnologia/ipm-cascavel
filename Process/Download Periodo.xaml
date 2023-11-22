@@ -317,7 +317,7 @@
                   <av:PointCollection x:Key="ConnectorLocation">820,586 820,646</av:PointCollection>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="IPM" sap:VirtualizedContainerService.HintSize="729,2856" sap2010:WorkflowViewState.IdRef="NApplicationCard_6" InteractionMode="Simulate" OpenMode="Never" ScopeGuid="d0e7da45-231b-43b8-85f1-58b9c03b5bdc" Version="V2">
+              <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="IPM" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="NApplicationCard_6" InteractionMode="Simulate" OpenMode="Never" ScopeGuid="d0e7da45-231b-43b8-85f1-58b9c03b5bdc" Version="V2">
                 <uix:NApplicationCard.Body>
                   <ActivityAction x:TypeArguments="x:Object">
                     <ActivityAction.Argument>
@@ -1771,7 +1771,7 @@
           <av:PointCollection x:Key="ConnectorLocation">430,159.5 430,189.5</av:PointCollection>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Sequence DisplayName="Dados" sap:VirtualizedContainerService.HintSize="200,81" sap2010:WorkflowViewState.IdRef="Sequence_11">
+      <Sequence DisplayName="Dados" sap:VirtualizedContainerService.HintSize="963,4400" sap2010:WorkflowViewState.IdRef="Sequence_11">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -1860,7 +1860,7 @@
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
         </ui:IfElseIf>
-        <ui:IfElseIf DisplayName="Tipo Download" sap:VirtualizedContainerService.HintSize="901,52" sap2010:WorkflowViewState.IdRef="IfElseIf_1">
+        <ui:IfElseIf DisplayName="Tipo Download" sap:VirtualizedContainerService.HintSize="901,285" sap2010:WorkflowViewState.IdRef="IfElseIf_1">
           <ui:IfElseIf.ConditionBlocks>
             <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
               <ui:IfElseIfBlock BlockType="If" Condition="[io_TransactionItem(&quot;DOWNLOAD_&quot;+in_Tipo.ToUpper).ToString().ToLower().Equals(&quot;nenhum&quot;)]">
@@ -1868,54 +1868,11 @@
                   <Throw Exception="[New BusinessRuleException(&quot;Cliente parametrizado para não fazer download das NFS de &quot;+in_Tipo)]" sap:VirtualizedContainerService.HintSize="334,90" sap2010:WorkflowViewState.IdRef="Throw_1" />
                 </ui:IfElseIfBlock.Then>
               </ui:IfElseIfBlock>
-              <ui:IfElseIfBlock BlockType="ElseIf" Condition="[io_TransactionItem(&quot;DOWNLOAD_&quot;+in_Tipo.ToUpper).ToString().ToLower().Equals(&quot;default&quot;)]">
-                <ui:IfElseIfBlock.Then>
-                  <If Condition="[io_Config(&quot;Arquivo&quot;+in_Tipo).ToString().ToLower().Equals(&quot;nenhum&quot;)]" DisplayName="Não baixar nenhum arquivo" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="If_3">
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                    <If.Then>
-                      <Sequence sap:VirtualizedContainerService.HintSize="376,178" sap2010:WorkflowViewState.IdRef="Sequence_21">
-                        <sap:WorkflowViewStateService.ViewState>
-                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                          </scg:Dictionary>
-                        </sap:WorkflowViewStateService.ViewState>
-                        <Throw Exception="[New BusinessRuleException(&quot;Parametrizado para não fazer download de NFS de &quot;+in_Tipo)]" sap:VirtualizedContainerService.HintSize="334,90" sap2010:WorkflowViewState.IdRef="Throw_2" />
-                      </Sequence>
-                    </If.Then>
-                    <If.Else>
-                      <Sequence sap:VirtualizedContainerService.HintSize="300,80" sap2010:WorkflowViewState.IdRef="Sequence_20">
-                        <sap:WorkflowViewStateService.ViewState>
-                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                          </scg:Dictionary>
-                        </sap:WorkflowViewStateService.ViewState>
-                      </Sequence>
-                    </If.Else>
-                  </If>
-                </ui:IfElseIfBlock.Then>
-              </ui:IfElseIfBlock>
-              <ui:IfElseIfBlock BlockType="Else">
-                <ui:IfElseIfBlock.Then>
-                  <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_2">
-                    <Assign.To>
-                      <OutArgument x:TypeArguments="x:String">[in_Tipo]</OutArgument>
-                    </Assign.To>
-                    <Assign.Value>
-                      <InArgument x:TypeArguments="x:String">[io_TransactionItem("DOWNLOAD_"+in_Tipo.ToUpper).ToString().ToUpper()]</InArgument>
-                    </Assign.Value>
-                  </Assign>
-                </ui:IfElseIfBlock.Then>
-              </ui:IfElseIfBlock>
             </sc:BindingList>
           </ui:IfElseIf.ConditionBlocks>
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
