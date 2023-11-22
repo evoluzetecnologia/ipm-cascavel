@@ -14,8 +14,8 @@
  <title>truNaN</title>
  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
- <link rel="stylesheet" href="styles.css">
- <!--link rel="stylesheet" href="https://trunan.com.br/_trunan/www/css/styles.css"-->
+ <!--link rel="stylesheet" href="styles.css"-->
+ <link rel="stylesheet" href="https://trunan.com.br/_trunan/www/css/styles.css">
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
  
@@ -284,10 +284,13 @@
 							}
 							// TD 1
 							var td = $('<td>').prop('class', 'col-8 fw-normal');
-							var div = $('<div>').prop('class', 'd-flex justify-content-start align-items-center me-2');
+							var div = $('<div>').prop('class', 'd-flex justify-content-start align-items-center');
 							var col = $('<div>').prop('class', 'col-1').prop('id','ID_EXECUTAR').prop('value', item.ID_CLIENTE).text(item.CODIGO);
+							var ico = $('<i>').prop('class', 'bi bi-pencil-square');
+							var btn = $('<button>').attr('type', 'button').prop('class', 'btn btn-warning custom-btn-extra-small me-2').attr('data-bs-theme', 'dark' ).attr('data-bs-toggle', 'modal' ).attr('data-bs-target', '#clienteModal').attr('onclick', 'buscarCliente('+item.CODIGO+')').prop('name', item.ID_CLIENTE).prop("value",item.ID_CLIENTE).append(ico);
+							div.append(btn)
 							div.append(col);
-							col = $('<div>').prop('class', 'col-3 me-3 d-flex justify-content-center').text(item.CNPJ);
+							col = $('<div>').prop('class', 'col-3 d-flex justify-content-center').text(item.CNPJ);
 							div.append(col);
 							col = $('<div>').prop('class', 'col-8').text(item.EMPRESA);
 							div.append(col);
@@ -304,10 +307,11 @@
 							
 							col = $('<div>').prop('class', 'col-1');
 							var divF = $('<div>').prop('class', 'd-flex justify-content-end align-items-center');
+							/*
 							var ico = $('<i>').prop('class', 'bi bi-pencil-square');
 							var btn = $('<button>').attr('type', 'button').prop('class', 'btn btn-warning custom-btn-extra-small me-2').attr('data-bs-theme', 'dark' ).attr('data-bs-toggle', 'modal' ).attr('data-bs-target', '#clienteModal').attr('onclick', 'buscarCliente('+item.CODIGO+')').prop('name', item.ID_CLIENTE).prop("value",item.ID_CLIENTE).append(ico);
 							divF.append(btn)
-							
+							*/
 							
 							var checkbox = $('<input>').attr('type', 'checkbox').prop('class','ProcessCheckbox form-check-input').prop('id','EXECUTAR');
 							
@@ -658,8 +662,9 @@
 					<tr class="align-items-center">
 						<th class="col-8 fw-normal small-text">
 							<div class="d-flex justify-content-start align-items-center">
-								<div class="col-1" >Cód</div>
-								<div class="col-3 me-3" ><div class="d-flex justify-content-center">CNPJ/CPF</div></div>
+								<button id="addPerfil" type="button" class="btn btn-primary custom-btn-extra-small me-2" data-bs-toggle="modal" data-bs-target="#clienteModal" onclick="limparModalCliente()"><i class="bi bi-person-plus-fill"></i></button>
+								<div class="col-1" >Cod</div>
+								<div class="col-3 d-flex justify-content-center" ><div class="d-flex justify-content-center">CNPJ/CPF</div></div>
 								<div class="col-8" >Empresa</div>
 							</div>
 						</th>
@@ -670,7 +675,6 @@
 								<div class="col-11" >Observação</div>
 								<div class="col-1" >
 									<div class="d-flex justify-content-end align-items-center">
-										<button id="addPerfil" type="button" class="btn btn-primary custom-btn-extra-small me-2" data-bs-toggle="modal" data-bs-target="#clienteModal" onclick="limparModalCliente()"><i class="bi bi-person-plus-fill"></i></button>
 										<input type="checkbox" class="ProcessCheckboxAll form-check-input" value="" id="FiltroCheckbox">
 									</div>
 								</div>
@@ -682,20 +686,20 @@
 				<tbody id="myTable" class="small-text">
 					<tr class="align-items-center">
 						<td class="col-8 fw-normal">
-							<div class="d-flex justify-content-start me-2">
+							<div class="d-flex justify-content-start align-items-center">
+								<button id="addPerfil" type="button" class="btn btn-primary custom-btn-extra-small me-2" data-bs-toggle="modal" data-bs-target="#clienteModal" onclick="limparModalCliente()"><i class="bi bi-person-plus-fill"></i></button>
 								<div class="col-1" >9999</div>
-								<div class="col-3 me-3 d-flex justify-content-center" >00.795.877/0001-16</div>
+								<div class="col-3 d-flex justify-content-center" >00.795.877/0001-16</div>
 								<div class="col-8" >Evoluze softwares de gestao ltda 123</div>
 							</div>
 						</td>
 						<!--td class="col-1 fw-normal small-text"><div class="d-flex justify-content-center me-2">00.795.877/0001-16</div></td>
 						<td class="col-3 fw-normal small-text">Empresa</td-->
 						<td class="col-4 fw-normal">
-							<div class="d-flex justify-content-start">
+							<div class="d-flex justify-content-start align-items-center">
 								<div class="col-11" >Observação</div>
 								<div class="col-1" >
 									<div class="d-flex justify-content-end align-items-center">
-										
 										<input type="checkbox" class="ProcessCheckbox form-check-input" id='EXECUTAR'>
 									</div>
 								</div>
