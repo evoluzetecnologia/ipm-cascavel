@@ -161,7 +161,10 @@
 								if (key === 'FiltrarClientesPendentes'){
 									//label.textContent = data[key] ? 'Clientes Pendentes' : 'Todos os Clientes';
 								} else {
-									label.textContent = data[key] ? 'Sim' : 'Não';
+									try {
+									  label.textContent = data[key] ? 'Sim' : 'Não';
+									} catch (error) {
+									}
 								}
 							}  else {
 								el.value = data[key];
@@ -304,12 +307,14 @@
 							
 							
 							var checkbox = $('<input>').attr('type', 'checkbox').prop('class','ProcessCheckbox form-check-input').prop('id','EXECUTAR');
+							
 							if (item.EXECUTAR === 'True') {
 								checkbox.prop('checked', true);
 							} else {
-								checkbox.prop("disabled", true)
+								//checkbox.prop("disabled", true)
 							}
 							divF.append(checkbox);
+							
 							
 							col.append(divF);
 							div.append(col);
@@ -347,13 +352,13 @@
 					var el = document.getElementById(value);
 				} 
 				if ((el.tagName === 'INPUT' && el.type === 'text') || el.type === 'email') {
-					//el.value = value;
+					el.value = value;
 				} else if (el.tagName === 'INPUT' && el.type === 'file') {
-					//el.value = value;
+					el.value = value;
 				} else if (el.tagName === 'SELECT') {
-					//el.value = value;
+					el.value = value;
 				}  else {
-					//el.innerHTML = value;
+					el.innerHTML = value;
 				}
 			}
 		},
@@ -746,7 +751,7 @@
 								<label class="col-form-label">IPM Código Empresa</label>
 							</div>
 							<div class="col-8 d-flex align-items-center ">
-								<input class="form-control form-control-extra-sm" type="password" id="IPMCodigoLogin" name="IPMCodigoLogin" placeholder="Código Automático" value="">
+								<input class="form-control form-control-extra-sm" type="text" id="IPMCodigoLogin" name="IPMCodigoLogin" placeholder="Código Automático" value="">
 							</div>
 						</div>
 					</div>
@@ -931,7 +936,7 @@
 										<label class="col-form-label">IPM Senha Cliente</label>
 									</div>
 									<div class="col-4 d-flex align-items-center ">
-										<input class="form-control form-control-extra-sm me-2" type="text" id="PASSWORD" name="PASSWORD" placeholder="Senha de acesso do cliente no IPM" value="">
+										<input class="form-control form-control-extra-sm me-2" type="password" id="PASSWORD" name="PASSWORD" placeholder="Senha de acesso do cliente no IPM" value="">
 									</div>
 									<div class="col-2 d-flex justify-content-end align-items-end">
 										<label class="col-form-label">Cadastro Ecônomico</label>
@@ -1110,6 +1115,41 @@
 
 <!-- Perfil -->
 <script>
+	
+	var codigoInput = document.getElementById('CODIGO');
+	var cnpjInput = document.getElementById('CNPJ');
+
+	codigoInput.addEventListener('blur', capturarInformacoes);
+	cnpjInput.addEventListener('blur', capturarInformacoes);
+
+	function capturarInformacoes() {
+		var codigo = codigoInput.value;
+		var cnpj = cnpjInput.value;		  
+		var inputElement = event.target;
+		var inputValue = inputElement.value;
+		var cnpjCpf = inputValue.replace(/\D/g, '');
+		if (inputValue !== ''){
+			//console.log(inputValue);
+			if (inputValue === codigo){
+				buscarCliente(codigo);
+			} else if (inputValue === cnpj){
+				inputValue = cnpj.replace(/\D/g, ''); 
+				if (inputValue.length === 11) {
+					if (validarCpf(inputValue)) {
+						//console.log(cnpj);
+						buscarCliente(cnpj);
+					}
+				} else if (inputValue.length === 14) {
+					if (validarCnpj(inputValue)) {
+						//console.log(cnpj);
+						buscarCliente(cnpj);
+					}
+				}
+			}
+		}
+		return;
+	}
+	
 	var selectPerfil = document.getElementById('Perfil');
 	function perfilChanged() {
 	  var selectedValue = selectPerfil.value;
