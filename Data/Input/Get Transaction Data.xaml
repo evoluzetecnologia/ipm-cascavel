@@ -6,7 +6,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1218,2627</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1138,2627</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Get_Transaction_Data_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -153,7 +153,9 @@
         PERIODO_DECLARACAO_SAIDA,
         PERIODO_DECLARACAO_ENTRADA,
         PERIODO_SIMPLES_NACIONAL,
-        '' AS OBSERVACAO
+         (CASE WHEN ( 
+          LOGIN &lt;&gt; '' AND PASSWORD &lt;&gt; ''
+         ) THEN 'Login do Cliente' ELSE '' END) AS OBSERVACAO
         
 FROM ipm
 INNER JOIN _perfil per on per.ID_PERFIL = ipm.ID_PERFIL
