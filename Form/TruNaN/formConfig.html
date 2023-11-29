@@ -120,6 +120,12 @@
 									} else {
 										el.disabled = false;
 									}
+								} else if (key === 'CODIGO_LOGIN' || key === 'CADASTRO_ECONOMICO') {
+									if (data[key] === ''){
+										el.disabled = true;
+									} else {
+										el.disabled = false;
+									}
 								}
 							}
 						}
@@ -167,8 +173,15 @@
 									} catch (error) {
 									}
 								}
-							}  else {
+							} else {
 								el.value = data[key];
+								if (key === 'IPMCodigoLogin') {
+									if (data[key].trim === ''){
+										el.disabled = true;
+									} else {
+										el.disabled = false;
+									}
+								}
 							}
 						}
 					}
@@ -769,7 +782,7 @@
 								<label class="col-form-label">IPM Código Empresa</label>
 							</div>
 							<div class="col-8 d-flex align-items-center ">
-								<input class="form-control form-control-extra-sm" type="text" id="IPMCodigoLogin" name="IPMCodigoLogin" placeholder="Código Automático" value="">
+								<input class="form-control form-control-extra-sm" type="text" id="IPMCodigoLogin" name="IPMCodigoLogin" placeholder="Código Automático" value="" disabled>
 							</div>
 						</div>
 					</div>
@@ -1125,8 +1138,12 @@
 		document.getElementById("REGIME_TRIBUTARIO").value = '';
 		document.getElementById("LOGIN").value = '';
 		document.getElementById("PASSWORD").value = '';
-		document.getElementById("CODIGO_LOGIN").value = '';
-		document.getElementById("CADASTRO_ECONOMICO").value = '';
+		var codigoLogin = document.getElementById("CODIGO_LOGIN");
+		var cadastroEconomico = document.getElementById("CADASTRO_ECONOMICO");
+		codigoLogin.value = '';
+		cadastroEconomico.value = '';
+		codigoLogin.disabled = true;
+		cadastroEconomico.disabled = true;
 	}
 
 </script>
