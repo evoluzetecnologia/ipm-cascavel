@@ -114,17 +114,18 @@
 								el.value = data[key];
 								if (key === 'ID_CLIENTE'){
 									document.getElementById('SalvarCliente').disabled = false;
-									el = document.getElementById('ExcluirCliente');
-									if (data[key] === 0){
-										el.disabled = true;
+									if (data[key] === 0 || data[key] === '' ){
+										document.getElementById('ExcluirCliente').disabled = true;
 									} else {
-										el.disabled = false;
+										document.getElementById('ExcluirCliente').disabled = false;
 									}
 								} else if (key === 'CODIGO_LOGIN' || key === 'CADASTRO_ECONOMICO') {
-									if (data[key] === ''){
-										el.disabled = true;
+									if (data[key] === '' || data[key] === null){
+										document.getElementById(key).disabled = true;
+										console.log(key+"-"+data[key]+"- true")
 									} else {
-										el.disabled = false;
+										document.getElementById(key).disabled = false;
+										console.log(key+"-"+data[key]+"- false")
 									}
 								}
 							}
@@ -177,9 +178,9 @@
 								el.value = data[key];
 								if (key === 'IPMCodigoLogin') {
 									if (data[key].trim === ''){
-										el.disabled = true;
+										document.getElementById('IPMCodigoLogin').disabled = true;
 									} else {
-										el.disabled = false;
+										document.getElementById('IPMCodigoLogin').disabled = false;
 									}
 								}
 							}
@@ -530,7 +531,7 @@
 			"LOGIN": document.getElementById("LOGIN").value,
 			"PASSWORD": document.getElementById("PASSWORD").value,
 			"CODIGO_LOGIN": document.getElementById("CODIGO_LOGIN").value,
-			"CADASTRO_ECONOMICO": document.getElementById("CADASTRO_ECONOMICO").value,
+			"CADASTRO_ECONOMICO": document.getElementById("CADASTRO_ECONOMICO").value
 		};
 		jsonString = JSON.stringify(jsonData);
 		return jsonString;
@@ -752,7 +753,7 @@
   <div name="ModalRobo">
 	<div class="modal" data-bs-theme="dark" id="parametrosModal" tabindex="-1" aria-labelledby="parametrosModalTitle" aria-hidden="true">
 		<!--div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable"-->
-		<div class="modal-dialog modal-dialog-scrollable">
+		<div class="modal-dialog modal-lg modal-dialog-scrollable">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h6 class="modal-title" id="perfilModalTitle">Parâmetros Automação</h6>
@@ -982,7 +983,7 @@
 				</div>
 				<div class="modal-footer">
 					<div class="col-sm-12 d-flex me-0">
-						<button type="button" class="btn btn-danger custom-btn-extra-small w-25 me-2" style="height: 29px" id="ExcluirCliente" onclick="excluirCliente()">Excluir</button>
+						<button type="button" class="btn btn-danger custom-btn-extra-small w-25 me-2" style="height: 29px" id="ExcluirCliente" onclick="excluirCliente()" disabled>Excluir</button>
 						<button type="button" class="btn btn-secondary custom-btn-extra-small w-25 me-2" style="height: 29px" onclick="limparModalCliente()">Limpar</button>
 						<button type="button" class="btn btn-success custom-btn-extra-small w-25 me-2" style="height: 29px" id="ImportarCliente" onclick="importarClientes()" data-bs-dismiss="modal">Importar</button>
 						<!--button type="button" class="btn btn-danger btn-sm w-25 me-2" data-bs-toggle="modal" data-bs-target="#modalExcluir" data-bs-dismiss="modal" onclick="excluirClientex()">Excluir</button-->
@@ -1144,6 +1145,10 @@
 		cadastroEconomico.value = '';
 		codigoLogin.disabled = true;
 		cadastroEconomico.disabled = true;
+		
+		document.getElementById("ExcluirCliente").disabled = true;
+		document.getElementById("SalvarCliente").disabled = true;
+		
 	}
 
 </script>
@@ -1172,15 +1177,23 @@
 				if (inputValue.length === 11) {
 					if (validarCpf(inputValue)) {
 						//console.log(cnpj);
+						document.getElementById("SalvarCliente").disabled = false;
 						buscarCliente(cnpj);
+					} else {
+						document.getElementById("SalvarCliente").disabled = true;
 					}
 				} else if (inputValue.length === 14) {
 					if (validarCnpj(inputValue)) {
 						//console.log(cnpj);
+						document.getElementById("SalvarCliente").disabled = false;
 						buscarCliente(cnpj);
+					} else {
+						document.getElementById("SalvarCliente").disabled = true;
 					}
 				}
 			}
+		} else {
+			document.getElementById("SalvarCliente").disabled = true;
 		}
 		return;
 	}
