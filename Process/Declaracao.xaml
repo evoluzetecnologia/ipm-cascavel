@@ -4279,7 +4279,7 @@
                 </ui:MultipleAssign>
               </ui:IfElseIfBlock.Then>
             </ui:IfElseIfBlock>
-            <ui:IfElseIfBlock BlockType="ElseIf" Condition="[(Convert.ToBoolean(io_Config(&quot;ExecutarPendentes&quot;)) And Not io_TransactionItem(&quot;PERIODO_DECLARACAO_&quot;+in_Tipo.ToUpper).Equals(io_Config(&quot;PERIODO&quot;).ToString())) Or Not Convert.ToBoolean(io_Config(&quot;ExecutarPendentes&quot;))]">
+            <ui:IfElseIfBlock BlockType="ElseIf" Condition="[Not io_TransactionItem(&quot;PERIODO_DECLARACAO_&quot;+in_Tipo.ToUpper).Equals(io_Config(&quot;PERIODO&quot;).ToString()) Or Convert.ToBoolean(io_Config(&quot;RepetirAutomacao&quot;).ToString())]">
               <ui:IfElseIfBlock.Then>
                 <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,116" sap2010:WorkflowViewState.IdRef="MultipleAssign_57">
                   <ui:MultipleAssign.AssignOperations>
