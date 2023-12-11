@@ -2328,7 +2328,7 @@
                                               </scg:Dictionary>
                                             </sap:WorkflowViewStateService.ViewState>
                                           </ui:CommentOut>
-                                          <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="719,2783" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_8">
+                                          <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" Condition="[Not varBool And i &gt; 0]" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="719,2783" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_8">
                                             <ui:InterruptibleDoWhile.Body>
                                               <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="685,2647" sap2010:WorkflowViewState.IdRef="Sequence_185">
                                                 <sap:WorkflowViewStateService.ViewState>
@@ -2769,9 +2769,6 @@
                                                 </ui:IfElseIf>
                                               </Sequence>
                                             </ui:InterruptibleDoWhile.Body>
-                                            <ui:InterruptibleDoWhile.Condition>
-                                              <VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="Not varBool And i &gt; 0" />
-                                            </ui:InterruptibleDoWhile.Condition>
                                             <sap:WorkflowViewStateService.ViewState>
                                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -4626,10 +4623,10 @@
           <av:PointCollection x:Key="ConnectorLocation">310,126 310,177</av:PointCollection>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:IfElseIf DisplayName="Tipo Download" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="IfElseIf_23">
+      <ui:IfElseIf DisplayName="Tipo Download" sap:VirtualizedContainerService.HintSize="592,848" sap2010:WorkflowViewState.IdRef="IfElseIf_23">
         <ui:IfElseIf.ConditionBlocks>
           <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
-            <ui:IfElseIfBlock BlockType="If" Condition="[io_TransactionItem(&quot;PROTOCOLAR_&quot;+in_Tipo.ToUpper).ToString().ToLower().Equals(&quot;nenhum&quot;)]">
+            <ui:IfElseIfBlock BlockType="If" Condition="[io_TransactionItem(&quot;PROTOCOLAR_&quot;+in_Tipo.ToUpper).ToString().ToLower().Equals(&quot;nenhum&quot;) And Not io_TransactionItem(&quot;PENDENCIA&quot;).ToString().Equals(&quot;Todos&quot;)]">
               <ui:IfElseIfBlock.Then>
                 <ui:MultipleAssign sap:VirtualizedContainerService.HintSize="479,147" sap2010:WorkflowViewState.IdRef="MultipleAssign_56">
                   <ui:MultipleAssign.AssignOperations>
@@ -4656,7 +4653,7 @@
                 </ui:MultipleAssign>
               </ui:IfElseIfBlock.Then>
             </ui:IfElseIfBlock>
-            <ui:IfElseIfBlock BlockType="ElseIf" Condition="[Not io_TransactionItem(&quot;PERIODO_DECLARACAO_&quot;+in_Tipo.ToUpper).Equals(io_Config(&quot;PERIODO&quot;).ToString()) Or Convert.ToBoolean(io_Config(&quot;RepetirAutomacao&quot;).ToString())]">
+            <ui:IfElseIfBlock BlockType="ElseIf" Condition="[Not io_TransactionItem(&quot;PERIODO_DECLARACAO_&quot;+in_Tipo.ToUpper).Equals(io_Config(&quot;PERIODO&quot;).ToString()) Or Convert.ToBoolean(io_Config(&quot;RepetirAutomacao&quot;).ToString()) Or io_TransactionItem(&quot;PENDENCIA&quot;).ToString().Equals(&quot;Todos&quot;)]">
               <ui:IfElseIfBlock.Then>
                 <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,116" sap2010:WorkflowViewState.IdRef="MultipleAssign_57">
                   <ui:MultipleAssign.AssignOperations>

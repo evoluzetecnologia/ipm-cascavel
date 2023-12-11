@@ -122,10 +122,8 @@
 								} else if (key === 'CODIGO_LOGIN' || key === 'CADASTRO_ECONOMICO') {
 									if (data[key].trim() === '' || data[key] === null || data[key] === undefined){
 										document.getElementById(key).disabled = true;
-										console.log(key+"-"+data[key]+"- true")
 									} else {
 										document.getElementById(key).disabled = false;
-										console.log(key+"-"+data[key]+"- false")
 									}
 								}
 							}
@@ -177,7 +175,7 @@
 							} else {
 								el.value = data[key];
 								if (key === 'IPMCodigoLogin') {
-									if (data[key].trim === ''){
+									if (data[key].trim() === '' || data[key] === null || data[key] === undefined){
 										document.getElementById('IPMCodigoLogin').disabled = true;
 									} else {
 										document.getElementById('IPMCodigoLogin').disabled = false;
@@ -327,7 +325,7 @@
 							divF.append(btn)
 							*/
 							
-							var checkbox = $('<input>').attr('type', 'checkbox').prop('class','ProcessCheckbox form-check-input').prop('id','EXECUTAR').prop('name',item.ID_CLIENTE+item.PENDENCIA).attr('onclick', 'repetirAutomacaoCliente('+item.ID_CLIENTE+')');
+							var checkbox = $('<input>').attr('type', 'checkbox').prop('class','ProcessCheckbox PendenciaInput form-check-input').prop('id','EXECUTAR').prop('name',item.ID_CLIENTE+item.PENDENCIA).attr('onclick', 'repetirAutomacaoCliente('+item.ID_CLIENTE+')');
 							
 							if (item.PENDENCIA == 'Todos') {
 								checkbox.prop('checked', true);

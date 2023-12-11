@@ -1792,7 +1792,7 @@
           <av:PointCollection x:Key="ConnectorLocation">430,159.5 430,189.5</av:PointCollection>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Sequence DisplayName="Dados" sap:VirtualizedContainerService.HintSize="1076,4748" sap2010:WorkflowViewState.IdRef="Sequence_11">
+      <Sequence DisplayName="Dados" sap:VirtualizedContainerService.HintSize="1076,1298" sap2010:WorkflowViewState.IdRef="Sequence_11">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -1881,10 +1881,10 @@
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
         </ui:IfElseIf>
-        <ui:IfElseIf DisplayName="Tipo Download" sap:VirtualizedContainerService.HintSize="1014,4197" sap2010:WorkflowViewState.IdRef="IfElseIf_32">
+        <ui:IfElseIf DisplayName="Tipo Download" sap:VirtualizedContainerService.HintSize="1014,747" sap2010:WorkflowViewState.IdRef="IfElseIf_32">
           <ui:IfElseIf.ConditionBlocks>
             <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
-              <ui:IfElseIfBlock BlockType="If" Condition="[io_TransactionItem(&quot;DOWNLOAD_&quot;+in_Tipo.ToUpper).ToString().ToLower().Equals(&quot;nenhum&quot;)]">
+              <ui:IfElseIfBlock BlockType="If" Condition="[io_TransactionItem(&quot;DOWNLOAD_&quot;+in_Tipo.ToUpper).ToString().ToLower().Equals(&quot;nenhum&quot;) And Not io_TransactionItem(&quot;PENDENCIA&quot;).ToString().Equals(&quot;Todos&quot;)]">
                 <ui:IfElseIfBlock.Then>
                   <Sequence DisplayName="Cancelar" sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_187">
                     <sap:WorkflowViewStateService.ViewState>
@@ -1932,12 +1932,12 @@
                   </Sequence>
                 </ui:IfElseIfBlock.Then>
               </ui:IfElseIfBlock>
-              <ui:IfElseIfBlock BlockType="ElseIf" Condition="[Not io_TransactionItem(&quot;PERIODO_DOWNLOAD_&quot;+in_Tipo.ToUpper()).ToString().Equals(io_Config(&quot;PERIODO&quot;).ToString()) Or Convert.ToBoolean(io_Config(&quot;RepetirAutomacao&quot;).ToString())]">
+              <ui:IfElseIfBlock BlockType="ElseIf" Condition="[Not io_TransactionItem(&quot;PERIODO_DOWNLOAD_&quot;+in_Tipo.ToUpper()).ToString().Equals(io_Config(&quot;PERIODO&quot;).ToString()) Or Convert.ToBoolean(io_Config(&quot;RepetirAutomacao&quot;).ToString()) Or io_TransactionItem(&quot;PENDENCIA&quot;).ToString().Equals(&quot;Todos&quot;)]">
                 <ui:IfElseIfBlock.Then>
-                  <Sequence DisplayName="Rodar" sap:VirtualizedContainerService.HintSize="963,3531" sap2010:WorkflowViewState.IdRef="Sequence_186">
+                  <Sequence DisplayName="Rodar" sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_186">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                         <x:Boolean x:Key="IsPinned">False</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
