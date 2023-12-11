@@ -114,13 +114,13 @@
 								el.value = data[key];
 								if (key === 'ID_CLIENTE'){
 									document.getElementById('SalvarCliente').disabled = false;
-									if (data[key] === 0 || data[key] === '' ){
+									if (data[key] === 0 || data[key] === '' || data[key] === null || data[key] === undefined ){
 										document.getElementById('ExcluirCliente').disabled = true;
 									} else {
 										document.getElementById('ExcluirCliente').disabled = false;
 									}
 								} else if (key === 'CODIGO_LOGIN' || key === 'CADASTRO_ECONOMICO') {
-									if (data[key].trim() === '' || data[key] === null || data[key] === undefined){
+									if (data[key] === '' || data[key] === null || data[key] === undefined ){
 										document.getElementById(key).disabled = true;
 									} else {
 										document.getElementById(key).disabled = false;
@@ -388,42 +388,42 @@
 				
 			} else if (elementId === 'listaImportacao') {
 				var tabela = document.getElementById('myTableImportacao');
-						while (tabela.rows.length > 0) {
-							tabela.deleteRow(0);
-						}
-						var jsonData = value;
-						var data = JSON.parse(jsonData);
-						var tableBody = $("#myTableImportacao");
-						var nItem = 0;
-						var altura = window.innerHeight;
-						var nPag = 15;
-						data.forEach(function(item) {
-							var row = $('<tr>');
-							nItem++;
-							if(nItem > nPag){
-								row.css('display', 'none');
-							}
-							var td = $('<td>').prop('class', 'col-1').prop('id','IMP_CODIGO').prop('value', item.CODIGO).text(item.CODIGO);
-							row.append(td);
-							
-							td = $('<td>').prop('class', 'col-2 me-2');
-							var div = $('<div>').prop('class', 'd-flex justify-content-center').text(item.CNPJ);
-							td.append(div);
-							row.append(td);
-							
-							td = $('<td>').prop('class', 'col-8').text(item.EMPRESA);
-							row.append(td);
-							
-							td = $('<td>').prop('class', 'col-1');
-							var btn = $('<button>').attr('type', 'button').prop('class', 'btn btn-warning custom-btn-extra-small').attr('onclick', 'adicionarCliente('+item.CODIGO+')').prop('name', item.CODIGO).prop("value",item.CODIGO).text('Importar');
-							div = $('<div>').prop('class', 'd-flex justify-content-end');
-							div.append(btn);
-							td.append(div);
-							row.append(td);
-							
-							tableBody.append(row);
-						});
-						initializePagination(data, nPag, 'myTableImportacao', 'paginationImportacao');
+				while (tabela.rows.length > 0) {
+					tabela.deleteRow(0);
+				}
+				var jsonData = value;
+				var data = JSON.parse(jsonData);
+				var tableBody = $("#myTableImportacao");
+				var nItem = 0;
+				var altura = window.innerHeight;
+				var nPag = 15;
+				data.forEach(function(item) {
+					var row = $('<tr>');
+					nItem++;
+					if(nItem > nPag){
+						row.css('display', 'none');
+					}
+					var td = $('<td>').prop('class', 'col-1').prop('id','IMP_CODIGO').prop('value', item.CODIGO).text(item.CODIGO);
+					row.append(td);
+					
+					td = $('<td>').prop('class', 'col-2 me-2');
+					var div = $('<div>').prop('class', 'd-flex justify-content-center').text(item.CNPJ);
+					td.append(div);
+					row.append(td);
+					
+					td = $('<td>').prop('class', 'col-8').text(item.EMPRESA);
+					row.append(td);
+					
+					td = $('<td>').prop('class', 'col-1');
+					var btn = $('<button>').attr('type', 'button').prop('class', 'btn btn-warning custom-btn-extra-small').attr('onclick', 'adicionarCliente('+item.CODIGO+')').prop('name', item.CODIGO).prop("value",item.CODIGO).text('Importar');
+					div = $('<div>').prop('class', 'd-flex justify-content-end');
+					div.append(btn);
+					td.append(div);
+					row.append(td);
+					
+					tableBody.append(row);
+				});
+				initializePagination(data, nPag, 'myTableImportacao', 'paginationImportacao');
 						//initializePagination(data, nPag);
 			} else {
 				var el = document.getElementById(elementId);
@@ -790,22 +790,22 @@
   </main>
 	
    <footer>
-    <div class="position-fixed d-flex align-items-center bottom-0 start-0 mb-0 ms-0 bd-mode-toggle" style="width: 250px; height: 30px">
-	  <button class="btn btn-warning py-1 rounded-0 border-0 w-100" type="button" onclick="iniciarAutomacao()" >
-		<div class="d-flex justify-content-center align-items-center">
-			Iniciar
+		<div class="position-fixed d-flex align-items-center bottom-0 start-0 mb-0 ms-0 bd-mode-toggle" style="width: 250px; height: 30px">
+		  <button class="btn btn-warning py-1 rounded-0 border-0 w-100" type="button" onclick="iniciarAutomacao()" >
+			<div class="d-flex justify-content-center align-items-center">
+				Iniciar
+			</div>
+		  </button>
 		</div>
-	  </button>
-	</div>
-	<div class="d-flex justify-content-center align-items-end">
-		<div class="pagination pagination-sm small-text" data-bs-theme="dark" id="pagination" style="height: 25px"></div>
-	</div>
-	<div class="position-fixed d-flex align-items-center bottom-0 end-0 mb-1 me-2 bd-mode-toggle">
-		<label class="col-form-label" id="easterEgg" style="color: transparent;">Parcial</label>
-		<label class="col-form-label" id="RepetirAutomacao" style="color: transparent;">False</label>
-		<label class="col-form-label">Total Clientes: </label><label class="col-form-label" id="TotalClientes"></label>
-	</div>
-  </footer>
+		<div class="d-flex justify-content-center align-items-end">
+			<div class="pagination pagination-sm small-text" data-bs-theme="dark" id="pagination" style="height: 25px"></div>
+		</div>
+		<div class="position-fixed d-flex align-items-center bottom-0 end-0 mb-1 me-2 bd-mode-toggle">
+			<label class="col-form-label" id="easterEgg" style="color: transparent;">Parcial</label>
+			<label class="col-form-label" id="RepetirAutomacao" style="color: transparent;">False</label>
+			<label class="col-form-label">Total Clientes: </label><label class="col-form-label" id="TotalClientes"></label>
+		</div>
+	</footer>
 
   <div name="ModalRobo">
   
