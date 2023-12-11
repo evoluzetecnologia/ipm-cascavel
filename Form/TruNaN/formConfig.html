@@ -53,7 +53,7 @@
 					
 				
 				} else if (value === 'Atencao' || value === 'Bloqueado')  {
-				  
+				 
 				  var texto = 'Atenção! Sua licença está expirada, efetue o pagamento da fatura para liberar todas as funções da automação.'
 				  if (value === 'Bloqueado'){
 					var texto = 'Atenção! O seu sistema está bloqueado no momento, efetue o pagamento para continuar usando as automações'
@@ -120,7 +120,7 @@
 										document.getElementById('ExcluirCliente').disabled = false;
 									}
 								} else if (key === 'CODIGO_LOGIN' || key === 'CADASTRO_ECONOMICO') {
-									if (data[key] === '' || data[key] === null){
+									if (data[key].trim() === '' || data[key] === null || data[key] === undefined){
 										document.getElementById(key).disabled = true;
 										console.log(key+"-"+data[key]+"- true")
 									} else {
