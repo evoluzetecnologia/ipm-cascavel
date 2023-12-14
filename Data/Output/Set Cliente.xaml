@@ -7,7 +7,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1218,1763</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1174,1763</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Set_Cliente_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -191,7 +191,7 @@
                     <OutArgument x:TypeArguments="x:String">[querySql]</OutArgument>
                   </ui:AssignOperation.To>
                   <ui:AssignOperation.Value>
-                    <InArgument x:TypeArguments="x:String" xml:space="preserve">DELETE FROM ipm WHERE ID_PERFIL = {0} AND ID_CLIENTE = {1};
+                    <InArgument x:TypeArguments="x:String" xml:space="preserve">["DELETE FROM ipm WHERE ID_PERFIL = {0} AND ID_CLIENTE = {1};
 REPLACE INTO ipm (
                         ID_PERFIL,
                         ID_CLIENTE,
@@ -206,7 +206,9 @@ REPLACE INTO ipm (
                         DECLARAR_SIMPLES_NACIONAL,
                         LANCAR_NOTA_ENTRADA,
                         PERIODO_DOWNLOAD_SAIDA,
+						PERIODO_PDF_SAIDA,
                         PERIODO_DOWNLOAD_ENTRADA,
+						PERIODO_PDF_ENTRADA,
                         PERIODO_DECLARACAO_SAIDA,
                         PERIODO_DECLARACAO_ENTRADA,
                         PERIODO_SIMPLES_NACIONAL,
@@ -230,8 +232,9 @@ REPLACE INTO ipm (
                         '{14}',
                         '{15}',
                         '{16}',
-                        '{17}'
-                    );</InArgument>
+                        '{17}',
+						'{18}'
+                    );"]</InArgument>
                   </ui:AssignOperation.Value>
                 </ui:AssignOperation>
                 <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
@@ -253,11 +256,12 @@ io_Cliente("CADASTRO_ECONOMICO").ToString(),
 "True",
 "False",
 io_Cliente("PERIODO_DOWNLOAD_SAIDA").ToString(),
+io_Cliente("PERIODO_PDF_SAIDA").ToString(),
 io_Cliente("PERIODO_DOWNLOAD_ENTRADA").ToString(),
+io_Cliente("PERIODO_PDF_ENTRADA").ToString(),
 io_Cliente("PERIODO_DECLARACAO_SAIDA").ToString(),
 io_Cliente("PERIODO_DECLARACAO_ENTRADA").ToString(),
-io_Cliente("PERIODO_SIMPLES_NACIONAL").ToString(),
-io_Cliente("PERIODO_CERTIDAO").ToString())]</InArgument>
+io_Cliente("PERIODO_SIMPLES_NACIONAL").ToString())]</InArgument>
                   </ui:AssignOperation.Value>
                 </ui:AssignOperation>
               </scg:List>

@@ -18,7 +18,11 @@
  <link rel="stylesheet" href="https://trunan.com.br/_trunan/www/css/style.css">
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
- 
+ <style>
+    .small-text-sm {
+      font-size: 9px;
+    }
+  </style>
  <script type="text/javascript">
 	var uiPathApi = {
 		getValue: function (elementId) {
@@ -175,7 +179,7 @@
 							} else {
 								el.value = data[key];
 								if (key === 'IPMCodigoLogin') {
-									if (data[key].trim() === '' || data[key] === null || data[key] === undefined){
+									if (data[key] === '' || data[key] === null || data[key] === undefined){
 										document.getElementById('IPMCodigoLogin').disabled = true;
 									} else {
 										document.getElementById('IPMCodigoLogin').disabled = false;
@@ -270,121 +274,158 @@
 					  });
 					});
 				
+			} else if (elementId === 'rowCliente') {
+				
+				var jsonData = value;
+				var data = JSON.parse(jsonData);
+				
+				console.log(jsonData);
+				
+				$('table tr').each(function() {
+					var row = $(this);
+					var ID_CLIENTE = row.find("#ID_EXECUTAR").val();
+					console.log(ID_CLIENTE);
+					if(ID_CLIENTE === data['ID_CLIENTE']){
+						row.find('.observacao').text(data['OBSERVACAO']);
+						return false;
+					}
+				});
+			
 			} else if (elementId === 'listaClientes') {
+				var altura = window.innerHeight;
+				var nPag = 22;
+				var fontSize = 9;
+				if (window.innerHeight > 1080) {
+				  nPag = 40;
+				  fontSize = 11;
+				} else if (window.innerHeight > 900 ) {
+				  nPag = 35;
+				  fontSize = 10;
+				} else if (window.innerHeight > 720) {
+				  nPag = 25;
+				}
+				var myTableHead  = document.getElementById('myTableHead');
+				myTableHead.style.fontSize = ''+fontSize+'px';
+				
 				var tabela = document.getElementById('myTable');
-						while (tabela.rows.length > 0) {
-							tabela.deleteRow(0);
+				while (tabela.rows.length > 0) {
+					tabela.deleteRow(0);
+				}
+				var jsonData = value;
+				var data = JSON.parse(jsonData);
+				var tableBody = $("#myTable");
+				var nItem = 0;
+					
+				data.forEach(function(item) {
+					var row = $('<tr>').prop('class', 'align-items-center').prop('style', 'font-size: '+fontSize+'px;');
+					nItem++;
+					if(nItem > nPag){
+						row.css('display', 'none');
+					}
+					// TD 1
+					var td = $('<td>').prop('class', 'col-6 fw-normal');
+					var div = $('<div>').prop('class', 'd-flex justify-content-start align-items-center');
+					var col = $('<div>').prop('class', 'col-1 executar').prop('id','ID_EXECUTAR').prop('value', item.ID_CLIENTE).text(item.CODIGO);
+					var ico = $('<i>').prop('class', 'bi bi-pencil-square');
+					var btn = $('<button>').attr('type', 'button').prop('class', 'btn btn-warning custom-btn-extra-small me-2').attr('data-bs-theme', 'dark' ).attr('data-bs-toggle', 'modal' ).attr('data-bs-target', '#clienteModal').attr('onclick', 'buscarCliente('+item.CODIGO+')').prop('name', item.ID_CLIENTE).prop("value",item.ID_CLIENTE).append(ico);
+					div.append(btn)
+					div.append(col);
+					col = $('<div>').prop('class', 'col-2 d-flex justify-content-center').text(item.CNPJ);
+					div.append(col);
+					col = $('<div>').prop('class', 'col-9').text(item.EMPRESA);
+					div.append(col);
+					
+					td.append(div);
+					row.append(td);
+					
+					// TD 2
+					var td = $('<td>').prop('class', 'col-6 fw-normal');
+					var div = $('<div>').prop('class', 'd-flex justify-content-start align-items-center');
+					var col = $('<div>').prop('class', 'col-11');
+					var obs = $('<div>').prop('class', 'observacao').text(item.OBSERVACAO);
+					col.append(obs);
+					div.append(col);
+					
+					
+					col = $('<div>').prop('class', 'col-1');
+					var divF = $('<div>').prop('class', 'd-flex justify-content-end align-items-center');
+					/*
+					var ico = $('<i>').prop('class', 'bi bi-pencil-square');
+					var btn = $('<button>').attr('type', 'button').prop('class', 'btn btn-warning custom-btn-extra-small me-2').attr('data-bs-theme', 'dark' ).attr('data-bs-toggle', 'modal' ).attr('data-bs-target', '#clienteModal').attr('onclick', 'buscarCliente('+item.CODIGO+')').prop('name', item.ID_CLIENTE).prop("value",item.ID_CLIENTE).append(ico);
+					divF.append(btn)
+					*/
+					
+					var checkbox = $('<input>').attr('type', 'checkbox').prop('class','ProcessCheckbox PendenciaInput form-check-input').prop('id','EXECUTAR').prop('name',item.ID_CLIENTE+item.PENDENCIA).attr('onclick', 'repetirCliente('+item.ID_CLIENTE+', null)');
+					
+					if (item.PENDENCIA == 'Todos') {
+						checkbox.prop('checked', true);
+					} else if (item.PENDENCIA =='Nenhum'){
+						checkbox.prop('checked', false);
+					} else {
+						checkbox.prop('indeterminate', true);
+					} 
+					/*
+					if (item.EXECUTAR === 'True') {
+						checkbox.prop('checked', true);
+					} else {
+						//checkbox.prop("disabled", true)
+					}
+					*/
+					divF.append(checkbox);
+					
+					
+					col.append(divF);
+					div.append(col);
+					td.append(div);
+					row.append(td);
+					
+					row.on('dblclick', function () {
+						const checkbox = $(this).find('input[type="checkbox"]');
+						if (checkbox.prop('indeterminate')){
+							checkbox.prop('indeterminate', false);
+							checkbox.prop('checked', false);
+						} else if (checkbox) {
+							checkbox.prop('checked', !checkbox.prop('checked'));
 						}
-						var jsonData = value;
-						var data = JSON.parse(jsonData);
-						var tableBody = $("#myTable");
-						var nItem = 0;
-						var altura = window.innerHeight;
-						var nPag = 22;
-						if (window.innerHeight > 1080) {
-						  nPag = 40;
-						} else if (window.innerHeight > 900 ) {
-						  nPag = 35;
-						} else if (window.innerHeight > 720) {
-						  nPag = 25;
-						}
-						data.forEach(function(item) {
-							var row = $('<tr>').prop('class', 'align-items-center');
-							nItem++;
-							if(nItem > nPag){
-								row.css('display', 'none');
-							}
-							// TD 1
-							var td = $('<td>').prop('class', 'col-8 fw-normal');
-							var div = $('<div>').prop('class', 'd-flex justify-content-start align-items-center');
-							var col = $('<div>').prop('class', 'col-1').prop('id','ID_EXECUTAR').prop('value', item.ID_CLIENTE).text(item.CODIGO);
-							var ico = $('<i>').prop('class', 'bi bi-pencil-square');
-							var btn = $('<button>').attr('type', 'button').prop('class', 'btn btn-warning custom-btn-extra-small me-2').attr('data-bs-theme', 'dark' ).attr('data-bs-toggle', 'modal' ).attr('data-bs-target', '#clienteModal').attr('onclick', 'buscarCliente('+item.CODIGO+')').prop('name', item.ID_CLIENTE).prop("value",item.ID_CLIENTE).append(ico);
-							div.append(btn)
-							div.append(col);
-							col = $('<div>').prop('class', 'col-3 d-flex justify-content-center').text(item.CNPJ);
-							div.append(col);
-							col = $('<div>').prop('class', 'col-8').text(item.EMPRESA);
-							div.append(col);
-							
-							td.append(div);
-							row.append(td);
-							
-							// TD 2
-							var td = $('<td>').prop('class', 'col-4 fw-normal');
-							var div = $('<div>').prop('class', 'd-flex justify-content-start align-items-center');
-							var col = $('<div>').prop('class', 'col-11').text(item.OBSERVACAO);
-							div.append(col);
-							
-							
-							col = $('<div>').prop('class', 'col-1');
-							var divF = $('<div>').prop('class', 'd-flex justify-content-end align-items-center');
-							/*
-							var ico = $('<i>').prop('class', 'bi bi-pencil-square');
-							var btn = $('<button>').attr('type', 'button').prop('class', 'btn btn-warning custom-btn-extra-small me-2').attr('data-bs-theme', 'dark' ).attr('data-bs-toggle', 'modal' ).attr('data-bs-target', '#clienteModal').attr('onclick', 'buscarCliente('+item.CODIGO+')').prop('name', item.ID_CLIENTE).prop("value",item.ID_CLIENTE).append(ico);
-							divF.append(btn)
-							*/
-							
-							var checkbox = $('<input>').attr('type', 'checkbox').prop('class','ProcessCheckbox PendenciaInput form-check-input').prop('id','EXECUTAR').prop('name',item.ID_CLIENTE+item.PENDENCIA).attr('onclick', 'repetirAutomacaoCliente('+item.ID_CLIENTE+')');
-							
-							if (item.PENDENCIA == 'Todos') {
-								checkbox.prop('checked', true);
-							} else if (item.PENDENCIA =='Nenhum'){
-								checkbox.prop('checked', false);
-							} else {
-								checkbox.prop('indeterminate', true);
-							} 
-							/*
-							if (item.EXECUTAR === 'True') {
-								checkbox.prop('checked', true);
-							} else {
-								//checkbox.prop("disabled", true)
-							}
-							*/
-							divF.append(checkbox);
-							
-							
-							col.append(divF);
-							div.append(col);
-							td.append(div);
-							row.append(td);
-							
-							row.on('dblclick', function () {
-								const checkbox = $(this).find('input[type="checkbox"]');
-								if (checkbox.prop('indeterminate')){
-									checkbox.prop('indeterminate', false);
-									checkbox.prop('checked', false);
-								} else if (checkbox) {
-									checkbox.prop('checked', !checkbox.prop('checked'));
-								}
-							});
-							
-							tableBody.append(row);
-						});
-						
-						initializePagination(data, nPag, 'myTable', 'pagination' );
-						
-						var processCheckboxAll = document.querySelector('.ProcessCheckboxAll');
-						var processCheckboxes = document.querySelectorAll('.ProcessCheckbox');
+						repetirCliente(item.ID_CLIENTE, null);
+					});
+					
+					tableBody.append(row);
+				});
+				
+				initializePagination(data, nPag, 'myTable', 'pagination' );
+				
+				var processCheckboxAll = document.querySelector('.ProcessCheckboxAll');
+				var processCheckboxes = document.querySelectorAll('.ProcessCheckbox');
+				var observacaoCheckboxes = document.querySelectorAll('.observacao');
+				var executarCheckboxes = document.querySelectorAll('.executar');
+				
 
-						processCheckboxAll.addEventListener('change', function() {
-							if (processCheckboxAll.checked) {
-							  // Marca todos os checkboxes "ProcessCheckbox"
-							  processCheckboxes.forEach(function(processCheckbox) {
-								if (!processCheckbox.disabled) {
-									repetirAutomacao(null);
-									processCheckbox.indeterminate = false;
-									processCheckbox.checked = true;
-								}
-							  });
-							} else {
-							  // Desmarca todos os checkboxes "ProcessCheckbox"
-							  processCheckboxes.forEach(function(processCheckbox) {
+				processCheckboxAll.addEventListener('change', function() {
+					
+					if (processCheckboxAll.checked) {
+						repetirAutomacao(null);
+					  // Marca todos os checkboxes "ProcessCheckbox"
+						processCheckboxes.forEach(function(processCheckbox, index) {
+							if (!processCheckbox.disabled) {
 								processCheckbox.indeterminate = false;
-								processCheckbox.checked = false;
-							  });
+								processCheckbox.checked = true;
+								observacaoCheckboxes[index].style.display = 'block';
+								if (observacaoCheckboxes[index].textContent  === '' || observacaoCheckboxes[index].textContent  === null || observacaoCheckboxes[index].textContent  === undefined){
+									repetirCliente(executarCheckboxes[index].value,'Todos')
+								}
+								
 							}
 						});
+					} else {
+						// Desmarca todos os checkboxes "ProcessCheckbox"
+						processCheckboxes.forEach(function(processCheckbox, index) {
+							processCheckbox.indeterminate = false;
+							processCheckbox.checked = false;
+							observacaoCheckboxes[index].style.display = 'none';
+						});
+					}
+				});
 				
 			} else if (elementId === 'listaImportacao') {
 				var tabela = document.getElementById('myTableImportacao');
@@ -519,10 +560,10 @@
 			"IPMPassword": document.getElementById("IPMPassword").value,
 			"IPMCodigoLogin": document.getElementById("IPMCodigoLogin").value,
 			
-			"DownloadNFSaida": document.getElementById("DownloadNFSaida").value,
-			"DownloadNFEntrada": document.getElementById("DownloadNFEntrada").value,
-			"ProtocolarNFSaida": document.getElementById("ProtocolarNFSaida").value,
-			"ProtocolarNFEntrada": document.getElementById("ProtocolarNFEntrada").value,
+			"DownloadSaida": document.getElementById("DownloadSaida").value,
+			"DownloadEntrada": document.getElementById("DownloadEntrada").value,
+			"ProtocolarSaida": document.getElementById("ProtocolarSaida").value,
+			"ProtocolarEntrada": document.getElementById("ProtocolarEntrada").value,
 			"SimplesNacional": document.getElementById("SimplesNacional").value,
 			"Relatorio": document.getElementById("Relatorio").value
 		};
@@ -562,10 +603,10 @@
 			"IPMPassword": document.getElementById("IPMPassword").value,
 			"IPMCodigoLogin": document.getElementById("IPMCodigoLogin").value,
 			
-			"DownloadNFSaida": document.getElementById("DownloadNFSaida").value,
-			"DownloadNFEntrada": document.getElementById("DownloadNFEntrada").value,
-			"ProtocolarNFSaida": document.getElementById("ProtocolarNFSaida").value,
-			"ProtocolarNFEntrada": document.getElementById("ProtocolarNFEntrada").value,
+			"DownloadSaida": document.getElementById("DownloadSaida").value,
+			"DownloadEntrada": document.getElementById("DownloadEntrada").value,
+			"ProtocolarSaida": document.getElementById("ProtocolarSaida").value,
+			"ProtocolarEntrada": document.getElementById("ProtocolarEntrada").value,
 			"SimplesNacional": document.getElementById("SimplesNacional").value,
 			"Relatorio": document.getElementById("Relatorio").value
 		};
@@ -633,7 +674,36 @@
 		var jsonString = JSON.stringify(jsonData);
 		//alert(jsonString);
 		uiPathApi.sendMessage("adicionarCliente", jsonString );
-	} 
+	}
+
+	function repetirCliente(id, tipo) {
+		var tipos = ['Parcial', 'Todos', 'Nenhum'];
+		if (tipo === null){
+			for (var i = 0; i < tipos.length; i++) {
+				var checkboxes = document.getElementsByName(id + tipos[i]);
+				if (checkboxes.length > 0) {
+					var checkbox = checkboxes[0];
+					checkbox.indeterminate = false;
+					if (checkbox.checked) {
+						tipo = 'Todos';
+						checkbox.name = id + 'Todos';
+					} else {
+						tipo = 'Nenhum';
+						checkbox.name = id + 'Nenhum';
+					}
+					break;
+				}
+			}
+		}
+		
+		var jsonData = {
+			"ID_CLIENTE": id,
+			"PENDENCIA": tipo
+		}
+		var jsonString = JSON.stringify(jsonData);
+		//alert(jsonString);
+		uiPathApi.sendMessage("repetirCliente", jsonString );
+	}
  
  </script>
  	
@@ -678,27 +748,29 @@
       <aside>
 		  <div class="container mt-3">
 			<label for="customSelect" class="custom-label">Download NFSe Saída:</label>
-			<select class="form-select select-control-extra-sm" id="DownloadNFSaida" required>
-			  <option value="XML">XML</option>
+			<select class="form-select select-control-extra-sm" id="DownloadSaida" required>
+				<option value="XML">XML</option>
 				<option value="TXT">TXT</option>
+				<option value="PDF">PDF</option>
 				<option value="XML-PDF">XML e PDF</option>
-				<option value="TXT">TXT e PDF</option>
+				<option value="TXT-PDF">TXT e PDF</option>
 				<option value="Nenhum">Nenhum</option>
 			</select>
 		  </div>
 		  <div class="container">
 			<label for="customSelect" class="custom-label">Download NFSe Entrada:</label>
-			<select class="form-select select-control-extra-sm" id="DownloadNFEntrada" required>
-			  <option value="XML">XML</option>
+			<select class="form-select select-control-extra-sm" id="DownloadEntrada" required>
+				<option value="XML">XML</option>
 				<option value="TXT">TXT</option>
+				<option value="PDF">PDF</option>
 				<option value="XML-PDF">XML e PDF</option>
-				<option value="TXT">TXT e PDF</option>
+				<option value="TXT-PDF">TXT e PDF</option>
 				<option value="Nenhum">Nenhum</option>
 			</select>
 		  </div>
 		  <div class="container">
 			<label for="customSelect" class="custom-label">Protocolar Saídas:</label>
-			<select class="form-select select-control-extra-sm" id="ProtocolarNFSaida" required>
+			<select class="form-select select-control-extra-sm" id="ProtocolarSaida" required>
 				<option value="Todos">Todos</option>
 				<option value="ISS">Com Recolhimento</option>
 				<option value="Nenhum">Nenhum</option>
@@ -706,7 +778,7 @@
 		  </div>
 		  <div class="container">
 			<label for="customSelect" class="custom-label">Protocolar Entrada:</label>
-			<select class="form-select select-control-extra-sm" id="ProtocolarNFEntrada" required>
+			<select class="form-select select-control-extra-sm" id="ProtocolarEntrada" required>
 				<option value="Todos">Todos</option>
 				<option value="ISS">Com Recolhimento</option>
 				<option value="Nenhum">Nenhum</option>
@@ -733,18 +805,16 @@
 		<div class="table-responsive-sm ">
 			<table class="table table-sm table-dark caption-top table-striped table-hover" >
 				<thead class="table-dark">
-					<tr class="align-items-center">
-						<th class="col-8 fw-normal small-text">
+					<tr class="align-items-center small-text" id="myTableHead">
+						<th class="col-6 fw-normal">
 							<div class="d-flex justify-content-start align-items-center">
 								<button id="addPerfil" type="button" class="btn btn-primary custom-btn-extra-small me-2" data-bs-toggle="modal" data-bs-target="#clienteModal" onclick="limparModalCliente()"><i class="bi bi-person-plus-fill"></i></button>
 								<div class="col-1" >Cod</div>
-								<div class="col-3 d-flex justify-content-center" ><div class="d-flex justify-content-center">CNPJ/CPF</div></div>
-								<div class="col-8" >Empresa</div>
+								<div class="col-2 d-flex justify-content-center" ><div class="d-flex justify-content-center">CNPJ/CPF</div></div>
+								<div class="col-9 " >Empresa</div>
 							</div>
 						</th>
-						<!--th class="col-1 fw-normal small-text"><div class="d-flex justify-content-center me-3">CNPJ/CPF</div></th>
-						<th class="col-3 fw-normal small-text">Empresa</th-->
-						<th class="col-4 fw-normal small-text">
+						<th class="col-6 fw-normal">
 							<div class="d-flex justify-content-start align-items-center">
 								<div class="col-11" >Observação</div>
 								<div class="col-1" >
@@ -759,19 +829,19 @@
 				</thead>
 				<tbody id="myTable" class="small-text">
 					<tr class="align-items-center">
-						<td class="col-8 fw-normal">
+						<td class="col-6 fw-normal">
 							<div class="d-flex justify-content-start align-items-center">
 								<button id="addPerfil" type="button" class="btn btn-primary custom-btn-extra-small me-2" data-bs-toggle="modal" data-bs-target="#clienteModal" onclick="limparModalCliente()"><i class="bi bi-person-plus-fill"></i></button>
 								<div class="col-1" >9999</div>
-								<div class="col-3 d-flex justify-content-center" >00.795.877/0001-16</div>
-								<div class="col-8" >Evoluze softwares de gestao ltda 123</div>
+								<div class="col-2 d-flex justify-content-center" >00.795.877/0001-16</div>
+								<div class="col-9" >Evoluze softwares de gestao ltda 123</div>
 							</div>
 						</td>
 						<!--td class="col-1 fw-normal small-text"><div class="d-flex justify-content-center me-2">00.795.877/0001-16</div></td>
 						<td class="col-3 fw-normal small-text">Empresa</td-->
-						<td class="col-4 fw-normal">
+						<td class="col-6 fw-normal">
 							<div class="d-flex justify-content-start align-items-center">
-								<div class="col-11" >Observação</div>
+								<div class="col-11" >XML-PDF Saida XML-PDF Entrada Protocolar Saida Protocolar Entrada SimplesNacional | Login Cliente</div>
 								<div class="col-1" >
 									<div class="d-flex justify-content-end align-items-center">
 										<input type="checkbox" class="ProcessCheckbox form-check-input" id='EXECUTAR'>
@@ -1285,22 +1355,6 @@
 			}
 		}
 	}
-	function repetirAutomacaoCliente(id) {
-		var tipos = ['Parcial', 'Todos', 'Nenhum'];
-		
-		for (var i = 0; i < tipos.length; i++) {
-			var checkboxes = document.getElementsByName(id + tipos[i]);
-			if (checkboxes.length > 0) {
-				var checkbox = checkboxes[0];
-				if (checkbox.checked) {
-					checkbox.name = id + 'Todos';
-				} else {
-					checkbox.name = id + 'Nenhum';
-				}
-				break;
-			}
-		}
-	}
 
 </script>
 
@@ -1364,6 +1418,17 @@
 		  document.querySelector('label[for="SITUACAO"]').textContent = 'Inativo';
 		}
 	});
+	
+	function todoChanged() {
+	  changedPerfil(document.getElementById('Perfil').value);
+	}
+
+	document.getElementById('DownloadSaida').addEventListener('change', perfilChanged);
+	document.getElementById('DownloadEntrada').addEventListener('change', perfilChanged);
+	document.getElementById('ProtocolarSaida').addEventListener('change', perfilChanged);
+	document.getElementById('ProtocolarEntrada').addEventListener('change', perfilChanged);
+	document.getElementById('SimplesNacional').addEventListener('change', perfilChanged);
+	
 
 </script>
 	
