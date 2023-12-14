@@ -330,7 +330,7 @@
 					var btn = $('<button>').attr('type', 'button').prop('class', 'btn btn-warning custom-btn-extra-small me-2').attr('data-bs-theme', 'dark' ).attr('data-bs-toggle', 'modal' ).attr('data-bs-target', '#clienteModal').attr('onclick', 'buscarCliente('+item.CODIGO+')').prop('name', item.ID_CLIENTE).prop("value",item.ID_CLIENTE).append(ico);
 					div.append(btn)
 					div.append(col);
-					col = $('<div>').prop('class', 'col-2 d-flex justify-content-center').text(item.CNPJ);
+					col = $('<div>').prop('class', 'col-2 d-flex justify-content-center  me-2').text(item.CNPJ);
 					div.append(col);
 					col = $('<div>').prop('class', 'col-9').text(item.EMPRESA);
 					div.append(col);
@@ -342,7 +342,7 @@
 					var td = $('<td>').prop('class', 'col-6 fw-normal');
 					var div = $('<div>').prop('class', 'd-flex justify-content-start align-items-center');
 					var col = $('<div>').prop('class', 'col-11');
-					var obs = $('<div>').prop('class', 'observacao').text(item.OBSERVACAO);
+					var obs = $('<div>').prop('class', 'observacao').prop('id','ID_OBSERVACAO_'+item.ID_CLIENTE).text(item.OBSERVACAO);
 					col.append(obs);
 					div.append(col);
 					
@@ -681,15 +681,18 @@
 		if (tipo === null){
 			for (var i = 0; i < tipos.length; i++) {
 				var checkboxes = document.getElementsByName(id + tipos[i]);
+				var observacao= document.getElementById('ID_OBSERVACAO_'+id);
 				if (checkboxes.length > 0) {
 					var checkbox = checkboxes[0];
 					checkbox.indeterminate = false;
 					if (checkbox.checked) {
 						tipo = 'Todos';
 						checkbox.name = id + 'Todos';
+						observacao.style.display = 'block';
 					} else {
 						tipo = 'Nenhum';
 						checkbox.name = id + 'Nenhum';
+						observacao.style.display = 'none';
 					}
 					break;
 				}
@@ -810,8 +813,8 @@
 							<div class="d-flex justify-content-start align-items-center">
 								<button id="addPerfil" type="button" class="btn btn-primary custom-btn-extra-small me-2" data-bs-toggle="modal" data-bs-target="#clienteModal" onclick="limparModalCliente()"><i class="bi bi-person-plus-fill"></i></button>
 								<div class="col-1" >Cod</div>
-								<div class="col-2 d-flex justify-content-center" ><div class="d-flex justify-content-center">CNPJ/CPF</div></div>
-								<div class="col-9 " >Empresa</div>
+								<div class="col-2 d-flex justify-content-center  me-2" ><div class="d-flex justify-content-center">CNPJ/CPF</div></div>
+								<div class="col-9" >Empresa</div>
 							</div>
 						</th>
 						<th class="col-6 fw-normal">
