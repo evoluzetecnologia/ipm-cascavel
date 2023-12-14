@@ -6,7 +6,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1174,642</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1174,1029</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Set_Transaction_Data_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -103,7 +103,7 @@
       <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Set_Transaction_Data" sap:VirtualizedContainerService.HintSize="541,577" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Set_Transaction_Data" sap:VirtualizedContainerService.HintSize="551,964" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="querySql" />
     </Sequence.Variables>
@@ -112,7 +112,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,178" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="489,147" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
@@ -121,21 +121,23 @@
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
               <InArgument x:TypeArguments="x:String" xml:space="preserve">["UPDATE ipm SET 
-    CODIGO_LOGIN = '{1}',
-    CADASTRO_ECONOMICO = '{2}',
-	CODIGO_TOMADOR = '{3}',
-	DOWNLOAD_SAIDA = '{4}',
-    DOWNLOAD_ENTRADA = '{5}',
-    PROTOCOLAR_SAIDA = '{6}',
-    PROTOCOLAR_ENTRADA = '{7}',
-    DECLARAR_SIMPLES_NACIONAL = {8},
-    PERIODO_DOWNLOAD_SAIDA = '{9}',
-	PERIODO_PDF_SAIDA = '{10}',
-    PERIODO_DOWNLOAD_ENTRADA = '{11}',
-	PERIODO_PDF_ENTRADA = '{12}',
-    PERIODO_DECLARACAO_SAIDA = '{13}',
-    PERIODO_DECLARACAO_ENTRADA = '{14}'
-WHERE ID_CLIENTE = {0} AND ID_PERFIL = {Perfil};"]</InArgument>
+    CODIGO_LOGIN = '"+in_TransactionItem("CODIGO_LOGIN").ToString()+"',
+    CADASTRO_ECONOMICO = '"+in_TransactionItem("CADASTRO_ECONOMICO").ToString()+"',
+	CODIGO_TOMADOR = '"+in_TransactionItem("CODIGO_TOMADOR").ToString()+"',
+	DOWNLOAD_SAIDA = '"+in_TransactionItem("DOWNLOAD_SAIDA").ToString()+"',
+    DOWNLOAD_ENTRADA = '"+in_TransactionItem("DOWNLOAD_ENTRADA").ToString()+"',
+    PROTOCOLAR_SAIDA = '"+in_TransactionItem("PROTOCOLAR_SAIDA").ToString()+"',
+    PROTOCOLAR_ENTRADA = '"+in_TransactionItem("PROTOCOLAR_ENTRADA").ToString()+"',
+    DECLARAR_SIMPLES_NACIONAL = "+in_TransactionItem("DECLARAR_SIMPLES_NACIONAL").ToString()+",
+    PERIODO_DOWNLOAD_SAIDA = '"+in_TransactionItem("PERIODO_DOWNLOAD_SAIDA").ToString()+"',
+	PERIODO_PDF_SAIDA = '"+in_TransactionItem("PERIODO_PDF_SAIDA").ToString()+"',
+    PERIODO_DOWNLOAD_ENTRADA = '"+in_TransactionItem("PERIODO_DOWNLOAD_ENTRADA").ToString()+"',
+	PERIODO_PDF_ENTRADA = '"+in_TransactionItem("PERIODO_PDF_ENTRADA").ToString()+"',
+    PERIODO_DECLARACAO_SAIDA = '"+in_TransactionItem("PERIODO_DECLARACAO_SAIDA").ToString()+"',
+    PERIODO_DECLARACAO_ENTRADA = '"+in_TransactionItem("PERIODO_DECLARACAO_ENTRADA").ToString()+"',
+	TOTAL_SAIDA = "+in_TransactionItem("TOTAL_SAIDA").ToString()+",
+	TOTAL_ENTRADA = "+in_TransactionItem("TOTAL_ENTRADA").ToString()+"
+WHERE ID_CLIENTE = "+in_TransactionItem("ID_CLIENTE").ToString()+" AND ID_PERFIL = {Perfil};"]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
@@ -144,30 +146,6 @@ WHERE ID_CLIENTE = {0} AND ID_PERFIL = {Perfil};"]</InArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
               <InArgument x:TypeArguments="x:String">[querySql.Replace("{Perfil}", in_Config("Perfil").ToString())]</InArgument>
-            </ui:AssignOperation.Value>
-          </ui:AssignOperation>
-          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
-            <ui:AssignOperation.To>
-              <OutArgument x:TypeArguments="x:String">[querySql]</OutArgument>
-            </ui:AssignOperation.To>
-            <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String" xml:space="preserve">[String.Format(querySql,
-in_TransactionItem("ID_CLIENTE").ToString(),
-in_TransactionItem("CODIGO_LOGIN").ToString(),
-in_TransactionItem("CADASTRO_ECONOMICO").ToString(),
-in_TransactionItem("CODIGO_TOMADOR").ToString(),
-in_TransactionItem("DOWNLOAD_SAIDA").ToString(),
-in_TransactionItem("DOWNLOAD_ENTRADA").ToString(),
-in_TransactionItem("PROTOCOLAR_SAIDA").ToString(),
-in_TransactionItem("PROTOCOLAR_ENTRADA").ToString(),
-in_TransactionItem("DECLARAR_SIMPLES_NACIONAL").ToString(),
-in_TransactionItem("PERIODO_DOWNLOAD_SAIDA").ToString(),
-in_TransactionItem("PERIODO_PDF_SAIDA").ToString(),
-in_TransactionItem("PERIODO_DOWNLOAD_ENTRADA").ToString(),
-in_TransactionItem("PERIODO_PDF_ENTRADA").ToString(),
-in_TransactionItem("PERIODO_DECLARACAO_SAIDA").ToString(),
-in_TransactionItem("PERIODO_DECLARACAO_ENTRADA").ToString(),
-in_TransactionItem("PERIODO_SIMPLES_NACIONAL").ToString())]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
         </scg:List>
@@ -179,15 +157,15 @@ in_TransactionItem("PERIODO_SIMPLES_NACIONAL").ToString())]</InArgument>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:MultipleAssign>
-    <ui:IfElseIf DisplayName="Remover" sap:VirtualizedContainerService.HintSize="479,248" sap2010:WorkflowViewState.IdRef="IfElseIf_1">
+    <ui:IfElseIf DisplayName="Remover" sap:VirtualizedContainerService.HintSize="489,666" sap2010:WorkflowViewState.IdRef="IfElseIf_1">
       <ui:IfElseIf.ConditionBlocks>
         <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
           <ui:IfElseIfBlock BlockType="If" Condition="[Not in_Config(&quot;ToDo&quot;).ToString().Equals(&quot;Relatorio&quot;) And Not in_Config(&quot;ToDo&quot;).ToString().IsNullOrEmpty]">
             <ui:IfElseIfBlock.Then>
-              <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+              <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="438,471" sap2010:WorkflowViewState.IdRef="TryCatch_2">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     <x:Boolean x:Key="IsPinned">False</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
