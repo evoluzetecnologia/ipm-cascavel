@@ -1,12 +1,4 @@
-﻿<!-- form
-{
-  "Metadata": {
-    "Id": "a499eabf-3567-4b70-86a1-a909b832fdd8",
-    "Kind": "Html"
-  }
-}
--->
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR" data-bs-theme="auto">
 <head>
  <meta charset="UTF-8">
@@ -14,11 +6,12 @@
  <title>truNaN</title>
  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+ <!--link rel="stylesheet" href="styles.css"-->
  <link rel="stylesheet" href="https://trunan.com.br/_trunan/www/css/style.css">
- <link rel="stylesheet" href="style.css">
- 
+ <!--link rel="stylesheet" href="style.css"-->
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+
  <script type="text/javascript">
 	var uiPathApi = {
 		getValue: function (elementId) {
@@ -420,8 +413,6 @@
 					}
 				});
 				
-				hideLoading(); // desativa animação
-				
 			} else if (elementId === 'listaImportacao') {
 				var tabela = document.getElementById('myTableImportacao');
 				while (tabela.rows.length > 0) {
@@ -523,8 +514,10 @@
 	}
 	
 	function changedPerfil(perfil) {
-		//document.getElementById('overlay').style.display = 'flex';
-		showLoading();
+		var tabela = document.getElementById('myTable');
+		while (tabela.rows.length > 0) {
+			tabela.deleteRow(0);
+		}
 		var jsonDataObj = jsonData();
 		
 		jsonDataObj['Perfil'] = perfil;
@@ -711,13 +704,12 @@
  	
 </head>
 <body>
-	
 	<div class="overlay" id="overlay">
-		<!--div class="loader"></div-->
-		<div class="lottie-animation" id="lottie-animation"></div>
+		<div class="loader"></div>
+		<div id="lottie-animation"></div>
 		<div class="loading-text">Carregando...</div>
 	</div>
-	
+  
 	<header>
 	  <div class="logo d-flex justify-content-center align-items-center">
 		 <img src="https://trunan.com.br/_trunan/img/rpa.png" alt="truNaN" width="150" height="auto">
@@ -1203,9 +1195,30 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.8/lottie.min.js"></script>
 <script src="scripts.js"></script>
-
 <!-- CNPJ Validação -->
 <script>
+	function showLoading() {
+	  document.getElementById('overlay').style.display = 'flex';
+	  // Carrega a animação JSON do LottieFiles
+	  var animation = bodymovin.loadAnimation({
+		container: document.getElementById('lottie-animation'),
+		renderer: 'svg',
+		loop: true,
+		autoplay: true,
+		path: 'truNaN - Robo 2.json' // Nome do arquivo JSON da animação
+	  });
+	}
+
+	function hideLoading() {
+	  document.getElementById('overlay').style.display = 'none';
+	}
+
+	// Chamada de exemplo para mostrar o loading por 3 segundos e depois escondê-lo
+	showLoading();
+	setTimeout(() => {
+	  hideLoading();
+	}, 3000);
+
 	var cnpjCpfInput = document.getElementById('CNPJ');
 
 	cnpjCpfInput.addEventListener('input', function() {
