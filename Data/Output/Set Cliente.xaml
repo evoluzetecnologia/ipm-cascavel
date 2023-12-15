@@ -7,7 +7,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1174,1763</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1254,2043</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Set_Cliente_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -117,7 +117,7 @@
       <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Set_Cliente" sap:VirtualizedContainerService.HintSize="617,1698" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Set_Cliente" sap:VirtualizedContainerService.HintSize="617,1978" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="querySql" />
     </Sequence.Variables>
@@ -134,7 +134,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </rs:Cliente>
-    <If Condition="[in_Excluir]" DisplayName="Excluir" sap:VirtualizedContainerService.HintSize="555,873" sap2010:WorkflowViewState.IdRef="If_3">
+    <If Condition="[in_Excluir]" DisplayName="Excluir" sap:VirtualizedContainerService.HintSize="555,1153" sap2010:WorkflowViewState.IdRef="If_3">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -165,7 +165,7 @@
         </Sequence>
       </If.Then>
       <If.Else>
-        <Sequence sap:VirtualizedContainerService.HintSize="521,487" sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <Sequence sap:VirtualizedContainerService.HintSize="521,767" sap2010:WorkflowViewState.IdRef="Sequence_3">
           <Sequence.Variables>
             <Variable x:TypeArguments="x:String" Name="password" />
           </Sequence.Variables>
@@ -174,7 +174,7 @@
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Assign sap:VirtualizedContainerService.HintSize="479,82" sap2010:WorkflowViewState.IdRef="Assign_1">
+          <Assign sap:VirtualizedContainerService.HintSize="479,81" sap2010:WorkflowViewState.IdRef="Assign_1">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[password]</OutArgument>
             </Assign.To>
@@ -183,10 +183,30 @@
             </Assign.Value>
           </Assign>
           <rt:Encrypt_Decrypt DisplayName="Encrypt-Decrypt" sap:VirtualizedContainerService.HintSize="479,90" sap2010:WorkflowViewState.IdRef="Encrypt_Decrypt_1" io_Texto="[password]" />
-          <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,147" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
+          <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,116" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
             <ui:MultipleAssign.AssignOperations>
               <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
-                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="x:Object">[io_Cliente("PASSWORD")]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="x:Object">[password]</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+              </scg:List>
+            </ui:MultipleAssign.AssignOperations>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:MultipleAssign>
+          <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,116" sap2010:WorkflowViewState.IdRef="MultipleAssign_4">
+            <ui:MultipleAssign.AssignOperations>
+              <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
                   <ui:AssignOperation.To>
                     <OutArgument x:TypeArguments="x:String">[querySql]</OutArgument>
                   </ui:AssignOperation.To>
@@ -198,21 +218,7 @@ REPLACE INTO ipm (
                         LOGIN,
                         PASSWORD,
                         CODIGO_LOGIN,
-                        CADASTRO_ECONOMICO,
-                        DOWNLOAD_SAIDA,
-                        DOWNLOAD_ENTRADA,
-                        PROTOCOLAR_SAIDA,
-                        PROTOCOLAR_ENTRADA,
-                        DECLARAR_SIMPLES_NACIONAL,
-                        LANCAR_NOTA_ENTRADA,
-                        PERIODO_DOWNLOAD_SAIDA,
-						PERIODO_PDF_SAIDA,
-                        PERIODO_DOWNLOAD_ENTRADA,
-						PERIODO_PDF_ENTRADA,
-                        PERIODO_DECLARACAO_SAIDA,
-                        PERIODO_DECLARACAO_ENTRADA,
-                        PERIODO_SIMPLES_NACIONAL,
-                        PERIODO_CERTIDAO
+                        CADASTRO_ECONOMICO
                     )
                     VALUES (
                         {0},
@@ -220,48 +226,34 @@ REPLACE INTO ipm (
                         '{2}',
                         '{3}',
                         '{4}',
-                        '{5}',
-                        '{6}',
-                        '{7}',
-                        '{8}',
-                        '{9}',
-                        {10},
-                        {11},
-                        '{12}',
-                        '{13}',
-                        '{14}',
-                        '{15}',
-                        '{16}',
-                        '{17}',
-						'{18}'
+                        '{5}'
                     );"]</InArgument>
                   </ui:AssignOperation.Value>
                 </ui:AssignOperation>
-                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
+              </scg:List>
+            </ui:MultipleAssign.AssignOperations>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:MultipleAssign>
+          <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,116" sap2010:WorkflowViewState.IdRef="MultipleAssign_5">
+            <ui:MultipleAssign.AssignOperations>
+              <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_11">
                   <ui:AssignOperation.To>
                     <OutArgument x:TypeArguments="x:String">[querySql]</OutArgument>
                   </ui:AssignOperation.To>
                   <ui:AssignOperation.Value>
-                    <InArgument x:TypeArguments="x:String" xml:space="preserve">[String.Format(querySql, 
-in_Config("Perfil").ToString(),
+                    <InArgument x:TypeArguments="x:String" xml:space="preserve">[String.Format(querySql,  
+in_Config("Perfil").ToString(), 
 io_Cliente("ID_CLIENTE").ToString(),
 io_Cliente("LOGIN").ToString(),
-password,
+io_Cliente("PASSWORD").ToString(),
 io_Cliente("CODIGO_LOGIN").ToString(),
-io_Cliente("CADASTRO_ECONOMICO").ToString(),
-"Default",
-"Default",
-"Default",
-"Default",
-"True",
-"False",
-io_Cliente("PERIODO_DOWNLOAD_SAIDA").ToString(),
-io_Cliente("PERIODO_PDF_SAIDA").ToString(),
-io_Cliente("PERIODO_DOWNLOAD_ENTRADA").ToString(),
-io_Cliente("PERIODO_PDF_ENTRADA").ToString(),
-io_Cliente("PERIODO_DECLARACAO_SAIDA").ToString(),
-io_Cliente("PERIODO_DECLARACAO_ENTRADA").ToString(),
-io_Cliente("PERIODO_SIMPLES_NACIONAL").ToString())]</InArgument>
+io_Cliente("CADASTRO_ECONOMICO").ToString())]</InArgument>
                   </ui:AssignOperation.Value>
                 </ui:AssignOperation>
               </scg:List>
