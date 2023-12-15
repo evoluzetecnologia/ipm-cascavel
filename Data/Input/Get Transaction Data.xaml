@@ -6,7 +6,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1174,2347</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1254,2697</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Get_Transaction_Data_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -108,7 +108,7 @@
       <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Get_Transaction_Data" sap:VirtualizedContainerService.HintSize="881,2282" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Get_Transaction_Data" sap:VirtualizedContainerService.HintSize="881,2632" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="querySql" />
     </Sequence.Variables>
@@ -127,13 +127,13 @@
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
               <InArgument x:TypeArguments="x:String" xml:space="preserve">["SELECT  (CASE WHEN (
-            (PERIODO_DOWNLOAD_SAIDA &lt;&gt; '{PERIODO}' AND DOWNLOAD_SAIDA &lt;&gt; 'Nenhum') OR 
-			(PERIODO_PDF_SAIDA &lt;&gt; '{PERIODO}' AND DOWNLOAD_SAIDA &lt;&gt; 'Nenhum') OR 
-            (PERIODO_DOWNLOAD_ENTRADA &lt;&gt; '{PERIODO}' AND DOWNLOAD_ENTRADA  &lt;&gt; 'Nenhum') OR
-			(PERIODO_PDF_ENTRADA &lt;&gt; '{PERIODO}' AND DOWNLOAD_ENTRADA  &lt;&gt; 'Nenhum') OR
-            (PERIODO_DECLARACAO_SAIDA &lt;&gt; '{PERIODO}' AND PROTOCOLAR_SAIDA  &lt;&gt; 'Nenhum') OR
-            (PERIODO_DECLARACAO_ENTRADA &lt;&gt; '{PERIODO}' AND PROTOCOLAR_ENTRADA  &lt;&gt; 'Nenhum') OR
-            (PERIODO_SIMPLES_NACIONAL &lt;&gt; '{PERIODO}' AND (REGIME_TRIBUTARIO = 'Microempresa' OR REGIME_TRIBUTARIO = 'Empresa de Pequeno Porte') AND DECLARAR_SIMPLES_NACIONAL)
+            (PERIODO_DOWNLOAD_SAIDA &lt;&gt; '11/2023' AND DOWNLOAD_SAIDA &lt;&gt; 'Nenhum') OR 
+			(PERIODO_PDF_SAIDA &lt;&gt; '11/2023' AND DOWNLOAD_SAIDA &lt;&gt; 'Nenhum') OR 
+            (PERIODO_DOWNLOAD_ENTRADA &lt;&gt; '11/2023' AND DOWNLOAD_ENTRADA  &lt;&gt; 'Nenhum') OR
+			(PERIODO_PDF_ENTRADA &lt;&gt; '11/2023' AND DOWNLOAD_ENTRADA  &lt;&gt; 'Nenhum') OR
+            (PERIODO_DECLARACAO_SAIDA &lt;&gt; '11/2023' AND PROTOCOLAR_SAIDA  &lt;&gt; 'Nenhum') OR
+            (PERIODO_DECLARACAO_ENTRADA &lt;&gt; '11/2023' AND PROTOCOLAR_ENTRADA  &lt;&gt; 'Nenhum') OR
+            (PERIODO_SIMPLES_NACIONAL &lt;&gt; '11/2023' AND (REGIME_TRIBUTARIO = 'Microempresa' OR REGIME_TRIBUTARIO = 'Empresa de Pequeno Porte') AND DECLARAR_SIMPLES_NACIONAL)
          ) THEN 'True' ELSE 'False' END) AS EXECUTAR,
         'Todos' AS PENDENCIA,
 		
@@ -141,31 +141,31 @@
         CNPJ,
         CODIGO,
         EMPRESA,
-		NOME,
+        NOME,
         LOGIN,
         PASSWORD,
         CODIGO_LOGIN,
         CODIGO_TOMADOR,
         CADASTRO_ECONOMICO,
         DOWNLOAD_SAIDA,
-		PERIODO_PDF_SAIDA,
+        PERIODO_PDF_SAIDA,
         DOWNLOAD_ENTRADA,
-		PERIODO_PDF_ENTRADA,
+        PERIODO_PDF_ENTRADA,
         PROTOCOLAR_SAIDA,
         PROTOCOLAR_ENTRADA,
         DECLARAR_SIMPLES_NACIONAL,
         LANCAR_NOTA_ENTRADA,
         PERIODO_DOWNLOAD_SAIDA,
-		PERIODO_PDF_SAIDA,
+        PERIODO_PDF_SAIDA,
         PERIODO_DOWNLOAD_ENTRADA,
-		PERIODO_PDF_ENTRADA,
+        PERIODO_PDF_ENTRADA,
         PERIODO_DECLARACAO_SAIDA,
         PERIODO_DECLARACAO_ENTRADA,
         PERIODO_SIMPLES_NACIONAL,
-		PERIODO_CANCELAMENTO,
-		TOTAL_SAIDA,
-		TOTAL_ENTRADA,
-         (CASE WHEN ( 
+        PERIODO_CANCELAMENTO,
+        TOTAL_SAIDA,
+        TOTAL_ENTRADA,
+        (CASE WHEN ( 
           LOGIN &lt;&gt; '' AND PASSWORD &lt;&gt; ''
          ) THEN 'Login do Cliente' ELSE '' END) AS OBSERVACAO
         
@@ -348,7 +348,7 @@ WHERE  (per.ID_PERFIL = {Perfil} AND cli.SITUACAO = True AND per.SITUACAO = True
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:MultipleAssign>
-    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="819,1613" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="819,1963" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -356,7 +356,7 @@ WHERE  (per.ID_PERFIL = {Perfil} AND cli.SITUACAO = True AND per.SITUACAO = True
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <TryCatch.Try>
-        <Sequence sap:VirtualizedContainerService.HintSize="781,1385" sap2010:WorkflowViewState.IdRef="Sequence_14">
+        <Sequence sap:VirtualizedContainerService.HintSize="781,1735" sap2010:WorkflowViewState.IdRef="Sequence_14">
           <Sequence.Variables>
             <Variable x:TypeArguments="sd:DataTable" Name="dt_Tmp" />
           </Sequence.Variables>
@@ -365,26 +365,26 @@ WHERE  (per.ID_PERFIL = {Perfil} AND cli.SITUACAO = True AND per.SITUACAO = True
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <rd:Get_Transaction_Data DisplayName="Get Transaction Data" sap:VirtualizedContainerService.HintSize="719,52" sap2010:WorkflowViewState.IdRef="Get_Transaction_Data_3" in_Config="[io_Config]" in_EnvironmentCurrentDirectory="[Environment.CurrentDirectory]" in_NameFile="Get Transaction Data IPM" in_QuerySql="[querySql]" out_TransactionData="[out_TransactionData]">
+          <rd:Get_Transaction_Data DisplayName="Get Transaction Data" sap:VirtualizedContainerService.HintSize="719,294" sap2010:WorkflowViewState.IdRef="Get_Transaction_Data_3" in_Config="[io_Config]" in_EnvironmentCurrentDirectory="[Environment.CurrentDirectory]" in_NameFile="Get Transaction Data IPM" in_QuerySql="[querySql]" out_TransactionData="[out_TransactionData]">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </rd:Get_Transaction_Data>
-          <ui:IfElseIf DisplayName="Primeira Vez" sap:VirtualizedContainerService.HintSize="719,1062" sap2010:WorkflowViewState.IdRef="IfElseIf_2">
+          <ui:IfElseIf DisplayName="Primeira Vez" sap:VirtualizedContainerService.HintSize="719,1170" sap2010:WorkflowViewState.IdRef="IfElseIf_2">
             <ui:IfElseIf.ConditionBlocks>
               <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
                 <ui:IfElseIfBlock BlockType="If" Condition="[Not io_Config.ContainsKey(&quot;QueryTransactionData&quot;)]">
                   <ui:IfElseIfBlock.Then>
-                    <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="472,866" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                    <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="472,975" sap2010:WorkflowViewState.IdRef="Sequence_19">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <ui:FilterDataTable DataTable="[out_TransactionData]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="410,52" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[dt_Tmp]" SelectColumnsMode="Remove">
+                      <ui:FilterDataTable DataTable="[out_TransactionData]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="410,161" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[dt_Tmp]" SelectColumnsMode="Remove">
                         <ui:FilterDataTable.Filters>
                           <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
                             <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
@@ -404,7 +404,7 @@ WHERE  (per.ID_PERFIL = {Perfil} AND cli.SITUACAO = True AND per.SITUACAO = True
                         </ui:FilterDataTable.SelectColumns>
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                             <x:Boolean x:Key="IsPinned">False</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>

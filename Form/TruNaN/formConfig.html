@@ -278,9 +278,6 @@
 				
 				var jsonData = value;
 				var data = JSON.parse(jsonData);
-				
-				console.log(jsonData);
-				
 				$('table tr').each(function() {
 					var row = $(this);
 					var ID_CLIENTE = row.find("#ID_EXECUTAR").val();
@@ -290,7 +287,6 @@
 						return false;
 					}
 				});
-			
 			} else if (elementId === 'listaClientes') {
 				var altura = window.innerHeight;
 				var nPag = 22;
@@ -412,7 +408,7 @@
 								processCheckbox.checked = true;
 								observacaoCheckboxes[index].style.display = 'block';
 								if (observacaoCheckboxes[index].textContent  === '' || observacaoCheckboxes[index].textContent  === null || observacaoCheckboxes[index].textContent  === undefined){
-									repetirCliente(executarCheckboxes[index].value,'Todos')
+									repetirCliente(executarCheckboxes[index].value, null);
 								}
 								
 							}
@@ -423,6 +419,7 @@
 							processCheckbox.indeterminate = false;
 							processCheckbox.checked = false;
 							observacaoCheckboxes[index].style.display = 'none';
+							processCheckbox.name = executarCheckboxes[index].value+'Nenhum';
 						});
 					}
 				});
@@ -1446,6 +1443,7 @@
 	document.getElementById('ProtocolarSaida').addEventListener('change', perfilChanged);
 	document.getElementById('ProtocolarEntrada').addEventListener('change', perfilChanged);
 	document.getElementById('SimplesNacional').addEventListener('change', perfilChanged);
+	document.getElementById('SolicitacaoCancelamento').addEventListener('change', perfilChanged);
 	
 
 </script>
