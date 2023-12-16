@@ -6,7 +6,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1254,774</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1254,810</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Relatorio_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -133,17 +133,13 @@
       <AssemblyReference>UiPath.Platform</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Relatorio" sap:VirtualizedContainerService.HintSize="450,709" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Relatorio" sap:VirtualizedContainerService.HintSize="450,745" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:List(x:String)" Default="[New List(Of String)({&quot;Saida&quot;,&quot;Entrada&quot;})]" Name="lista" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_Relatorio" />
       <Variable x:TypeArguments="x:String" Default="x" Name="var" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_Resumo" />
-      <Variable x:TypeArguments="scg:List(x:String)" Name="documentos">
-        <Variable.Default>
-          <VisualBasicValue x:TypeArguments="scg:List(x:String)" ExpressionText="New List(Of String)({&quot;XML&quot;,&quot;TXT&quot;,&quot;PDF&quot;})" />
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[New List(Of String)({&quot;XML&quot;,&quot;TXT&quot;,&quot;PDF&quot;})]" Name="documentos" />
       <Variable x:TypeArguments="sd:DataRow" Name="row" />
       <Variable x:TypeArguments="njl:JArray" Name="jsonArray" />
     </Sequence.Variables>
@@ -152,6 +148,16 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Form\Animacao\Animacao.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Form\Animacao\Animacao.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Status">
+          <Literal x:TypeArguments="x:String">Start</Literal>
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Text">
+          <Literal x:TypeArguments="x:String">Gerando o Relatório</Literal>
+        </InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
     <If Condition="[io_Config.ContainsKey(&quot;DataRelatorio&quot;)]" DisplayName="Criar DataBase" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="If_5">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -246,7 +252,13 @@
         </Sequence>
       </If.Else>
     </If>
-    <If Condition="[Convert.ToBoolean(io_Config(&quot;Relatorio&quot;))]" DisplayName="Gerar Relatorio XML" sap:VirtualizedContainerService.HintSize="388,322" sap2010:WorkflowViewState.IdRef="If_7">
+    <If Condition="[Convert.ToBoolean(io_Config(&quot;Relatorio&quot;))]" DisplayName="Gerar Relatorio XML" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="If_7">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
       <If.Then>
         <Sequence sap:VirtualizedContainerService.HintSize="300,140" sap2010:WorkflowViewState.IdRef="Sequence_29">
           <sap:WorkflowViewStateService.ViewState>
@@ -830,5 +842,13 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ForEach>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Form\Animacao\Animacao.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Form\Animacao\Animacao.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Status">
+          <Literal x:TypeArguments="x:String">Close</Literal>
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Text" />
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
   </Sequence>
 </Activity>

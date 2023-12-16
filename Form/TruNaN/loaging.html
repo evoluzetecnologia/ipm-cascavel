@@ -1,0 +1,114 @@
+﻿<!-- form
+{
+  "Metadata": {
+    "Id": "54b812a9-c0c6-41a1-a34d-19e534d56691",
+    "Kind": "Html"
+  }
+}
+-->
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="auto">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>truNaN</title>
+ <link rel="stylesheet" href="https://trunan.com.br/_trunan/www/css/styles.css">
+	<style>
+		body {
+      margin: 0;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+    }
+	</style>
+  
+  <script type="text/javascript">
+	var uiPathApi = {
+		getValue: function (elementId) {
+			var el = document.getElementById(elementId);
+			if (el.value == undefined) {
+				return el.innerHTML;
+			} else {
+				if (el.checked == undefined) {
+					return el.value;
+				} else {
+					return el.checked;
+				}
+			}
+		},
+
+		setValue: function (elementId, value) {
+		
+			var el = document.getElementById(elementId);
+				if (el == null) {
+					var el = document.getElementById(value);
+				}
+			if (elementId === 'loading'){
+				var el = document.getElementById(elementId);
+				
+				if (value === true || value === 'True'){
+					showLoading();
+				} else {
+					hideLoading();
+				}
+			} else if (elementId === 'text'){
+				var el = document.getElementById(elementId);
+				el.text = value;
+			}
+		},
+		sendMessage: function (id, value) { },
+	};
+ </script>
+ 
+</head>
+<body>
+	<canvas id="matrixEffect"></canvas>
+	<div class="overlay" id="overlay">
+		<!--div class="loader"></div-->
+		<div class="lottie-animation" id="lottie-animation"></div>
+		<div class="loading-text" id="text">Carregando...</div>
+	</div>
+
+  
+	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.8/lottie.min.js"></script>
+<script src="animacao.js"></script>
+<script>
+    const canvas = document.getElementById('matrixEffect');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const columns = Math.floor(canvas.width / 15);
+    const drops = [];
+    
+    for (let i = 0; i < columns; i++) {
+      drops[i] = Math.floor(Math.random() * canvas.height);
+    }
+
+    function draw() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#FFDD00';
+      ctx.font = '15px monospace';
+      
+      for (let i = 0; i < drops.length; i++) {
+        const text = String.fromCharCode(Math.floor(Math.random() * 94) + 33);
+        ctx.fillText(text, i * 15, drops[i] * 15);
+        
+        if (drops[i] * 15 > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        
+        drops[i]++;
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    draw();
+  </script>
+</body>
+</html>
