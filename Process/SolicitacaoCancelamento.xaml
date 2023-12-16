@@ -7,7 +7,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1254,3531</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1254,2919</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>SolicitacaoCancelamento_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -143,28 +143,20 @@
       <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="SolicitacaoCancelamento" sap:VirtualizedContainerService.HintSize="904,3466" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="SolicitacaoCancelamento" sap:VirtualizedContainerService.HintSize="668,2854" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Boolean" Default="True" Name="varBool" />
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="parametro" />
       <Variable x:TypeArguments="x:String" Default="1" Name="var" />
-      <Variable x:TypeArguments="x:Int32" Name="i">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:Int32" Value="1" />
-        </Variable.Default>
-      </Variable>
-      <Variable x:TypeArguments="x:String" Name="relatorio">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">Solicitacoes de Cancelamento.pdf</Literal>
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="x:Int32" Default="1" Name="i" />
+      <Variable x:TypeArguments="x:String" Default="Solicitacoes de Cancelamento.pdf" Name="relatorio" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <r:Config sap:VirtualizedContainerService.HintSize="842,192" sap2010:WorkflowViewState.IdRef="Config_2" in_ApplicationName="IPM" in_Directory="[Environment.CurrentDirectory]" io_Config="[in_Config]">
+    <r:Config sap:VirtualizedContainerService.HintSize="606,192" sap2010:WorkflowViewState.IdRef="Config_2" in_ApplicationName="IPM" in_Directory="[Environment.CurrentDirectory]" io_Config="[in_Config]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -172,7 +164,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </r:Config>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="842,52" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="606,52" sap2010:WorkflowViewState.IdRef="CommentOut_1">
       <ui:CommentOut.Body>
         <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,252" sap2010:WorkflowViewState.IdRef="Sequence_25">
           <sap:WorkflowViewStateService.ViewState>
@@ -190,7 +182,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
-    <If Condition="[io_TransactionItem IsNot Nothing]" DisplayName="Salvar" sap:VirtualizedContainerService.HintSize="842,1368" sap2010:WorkflowViewState.IdRef="If_1">
+    <If Condition="[io_TransactionItem IsNot Nothing]" DisplayName="Salvar" sap:VirtualizedContainerService.HintSize="606,1368" sap2010:WorkflowViewState.IdRef="If_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -292,7 +284,7 @@ Not in_Config("PeriodoCancelamento").ToString().Equals(in_Config("PERIODO").ToSt
         </Sequence>
       </If.Else>
     </If>
-    <ui:IfElseIf DisplayName="Gerar Relatório" sap:VirtualizedContainerService.HintSize="842,766" sap2010:WorkflowViewState.IdRef="IfElseIf_4">
+    <ui:IfElseIf DisplayName="Gerar Relatório" sap:VirtualizedContainerService.HintSize="606,766" sap2010:WorkflowViewState.IdRef="IfElseIf_4">
       <ui:IfElseIf.ConditionBlocks>
         <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
           <ui:IfElseIfBlock BlockType="If" Condition="[varBool]">
@@ -889,7 +881,7 @@ Not in_Config("PeriodoCancelamento").ToString().Equals(in_Config("PERIODO").ToSt
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
                               </uix:NClick>
-                              <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="555,1280" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_2">
+                              <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" Condition="[Convert.ToInt32(in_Config(&quot;Tentativas&quot;)) &lt; 10 And Not var.Equals(in_Config(&quot;PERIODO&quot;).ToString())]" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="555,1280" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_2">
                                 <ui:InterruptibleDoWhile.Body>
                                   <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="521,1144" sap2010:WorkflowViewState.IdRef="Sequence_85">
                                     <sap:WorkflowViewStateService.ViewState>
@@ -1023,23 +1015,15 @@ Not in_Config("PeriodoCancelamento").ToString().Equals(in_Config("PERIODO").ToSt
                                                         </uix:NClick>
                                                         <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\Salvar PDF.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="555,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_16" UnSafe="False" WorkflowFileName="Process\Salvar PDF.xaml">
                                                           <ui:InvokeWorkflowFile.Arguments>
-                                                            <InArgument x:TypeArguments="x:String" x:Key="in_Path">
-                                                              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="relatorio" />
-                                                            </InArgument>
-                                                            <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
-                                                              <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="in_Config" />
-                                                            </InArgument>
+                                                            <InArgument x:TypeArguments="x:String" x:Key="in_Path">[relatorio]</InArgument>
+                                                            <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
                                                             <InArgument x:TypeArguments="x:String" x:Key="in_Url" />
                                                           </ui:InvokeWorkflowFile.Arguments>
                                                         </ui:InvokeWorkflowFile>
                                                         <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\Arquivos\PDF Solicitacao Cancelamento.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="555,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_18" UnSafe="False" WorkflowFileName="Process\Arquivos\PDF Solicitacao Cancelamento.xaml">
                                                           <ui:InvokeWorkflowFile.Arguments>
-                                                            <InArgument x:TypeArguments="x:String" x:Key="in_Pdf">
-                                                              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="relatorio" />
-                                                            </InArgument>
-                                                            <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="out_Dados">
-                                                              <VisualBasicReference x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="dados" />
-                                                            </OutArgument>
+                                                            <InArgument x:TypeArguments="x:String" x:Key="in_Pdf">[relatorio]</InArgument>
+                                                            <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="out_Dados">[dados]</OutArgument>
                                                           </ui:InvokeWorkflowFile.Arguments>
                                                         </ui:InvokeWorkflowFile>
                                                         <If Condition="[Not dados(&quot;Relatorio&quot;).ToString().IsNullOrEmpty]" DisplayName="Finalizar" sap:VirtualizedContainerService.HintSize="555,451" sap2010:WorkflowViewState.IdRef="If_17">
@@ -1134,9 +1118,6 @@ Not in_Config("PeriodoCancelamento").ToString().Equals(in_Config("PERIODO").ToSt
                                     </If>
                                   </Sequence>
                                 </ui:InterruptibleDoWhile.Body>
-                                <ui:InterruptibleDoWhile.Condition>
-                                  <VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="Convert.ToInt32(in_Config(&quot;Tentativas&quot;)) &lt; 10 And Not var.Equals(in_Config(&quot;PERIODO&quot;).ToString())" />
-                                </ui:InterruptibleDoWhile.Condition>
                               </ui:InterruptibleDoWhile>
                             </Sequence>
                           </If.Then>
@@ -1183,7 +1164,7 @@ Not in_Config("PeriodoCancelamento").ToString().Equals(in_Config("PERIODO").ToSt
         </sc:BindingList>
       </ui:IfElseIf.ConditionBlocks>
     </ui:IfElseIf>
-    <ui:IfElseIf DisplayName="Salvar" sap:VirtualizedContainerService.HintSize="842,817" sap2010:WorkflowViewState.IdRef="IfElseIf_2">
+    <ui:IfElseIf DisplayName="Salvar" sap:VirtualizedContainerService.HintSize="606,52" sap2010:WorkflowViewState.IdRef="IfElseIf_2">
       <ui:IfElseIf.ConditionBlocks>
         <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
           <ui:IfElseIfBlock BlockType="If" Condition="[varBool And io_TransactionItem IsNot Nothing]">
@@ -1257,10 +1238,15 @@ Not in_Config("PeriodoCancelamento").ToString().Equals(in_Config("PERIODO").ToSt
       </ui:IfElseIf.ConditionBlocks>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:IfElseIf>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process\IPM\Fechar Todas as Janelas.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="606,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_19" UnSafe="False" WorkflowFileName="Process\IPM\Fechar Todas as Janelas.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <scg:Dictionary x:TypeArguments="x:String, Argument" />
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
   </Sequence>
 </Activity>
