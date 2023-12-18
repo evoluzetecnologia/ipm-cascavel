@@ -106,3 +106,26 @@ function aplicarMascaraCnpj(cnpj) {
     cnpj = cnpj.replace(/\D/g, ''); // Remove caracteres não numéricos
     return cnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
 }
+
+function repetirAutomacao(repetir) {
+    if (document.getElementById('easterEgg').innerText === 'Parcial') {
+        var modal = document.getElementById('repetirRotinaModal');
+        if (repetir === null && document.getElementById('RepetirAutomacao').innerText === 'False') {
+            modal.style.display = 'block';
+        } else if (repetir === true) {
+            modal.style.display = 'none';
+            document.getElementById('RepetirAutomacao').innerText = 'True';
+            document.getElementById('easterEgg').innerText = 'Entregue o seu caminho ao Senhor; Confie nele e ele agirá';
+            changedPerfil(document.getElementById('Perfil').value);
+        } else if (repetir === false) {
+            modal.style.display = 'none';
+            document.getElementById('RepetirAutomacao').innerText = 'False';
+            document.getElementById('easterEgg').innerText = 'Entregue o seu caminho ao Senhor; Confie nele e ele agirá';
+            changedPerfil(document.getElementById('Perfil').value);
+        }
+    }
+}
+
+$(document).ready(function () {
+	  Inputmask("99999-999").mask("#Periodo");
+});

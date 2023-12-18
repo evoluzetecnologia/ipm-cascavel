@@ -38,43 +38,7 @@
 
 		setValue: function (elementId, value) {
 			
-			if (elementId === 'financeiro'){
-				if (value === 'Fatura'){
-					var divElement = document.createElement('div');
-					  divElement.classList.add('row');
-					  var linkElement = document.createElement('a');
-					  linkElement.classList.add('btn', 'btn-full', 'btn-warning');
-					  linkElement.href = '#';
-					  linkElement.textContent = 'Sua fatura já está disponível aqui!';
-
-					  divElement.appendChild(linkElement);
-					  var containerElement = document.getElementById('financeiro');
-					  containerElement.appendChild(divElement);
-					
-				
-				} else if (value === 'Atencao' || value === 'Bloqueado')  {
-				 
-				  var texto = 'Atenção! Sua licença está expirada, efetue o pagamento da fatura para liberar todas as funções da automação.'
-				  if (value === 'Bloqueado'){
-					var texto = 'Atenção! O seu sistema está bloqueado no momento, efetue o pagamento para continuar usando as automações'
-				  }
-				  
-				  var spanElement = document.createElement('span');
-				  spanElement.classList.add('d-block', 'p-1', 'text-bg-danger');
-				  spanElement.textContent = texto;
-
-				  var linkElement = document.createElement('a');
-				  linkElement.classList.add('btn', 'btn-light', 'btn-sm');
-				  linkElement.href = '#';
-				  linkElement.textContent = 'Gerar Fatura Online';
-
-				  spanElement.appendChild(linkElement);
-				  var containerElement = document.getElementById('financeiro');
-				  containerElement.appendChild(spanElement);
-				}
-				
-				
-			} else if (elementId === 'dataCliente') {
+			if (elementId === 'dataCliente') {
 				limparModalCliente();
 				var jsonData = value;
 				var data = JSON.parse(jsonData);
@@ -482,234 +446,7 @@
 		sendMessage: function (id, value) { },
 	};
  </script>
- <script>
-	
-	function addNovoPerfilClicked(){
-		var perfilNome = document.getElementById("novoPerfil").value;
-		
-		if (perfilNome !== null && perfilNome !== '') {
-			var jsonData = {
-				"Perfil": perfilNome
-			}
-			var jsonString = JSON.stringify(jsonData);
-			uiPathApi.sendMessage("addPerfil", jsonString );
-		}
-		perfilNome.value = '';
-	}
-	
-	function atualizaPerfil(value){
-		var jsonData = [];
-		var tbody = document.getElementById('myTablePerfil');
-		var rows = tbody.getElementsByTagName('tr');
-		for (var i = 0; i < rows.length; i++) {
-		  var row = rows[i];
-		  var ID_PERFIL = row.querySelector('input[id^="ID_PERFIL_"]').value;
-		  var PERFIL = row.querySelector('input[id^="PERFIL_"]').value;
-		  var SITUACAO = row.querySelector('input[id^="SITUACAO_"]').checked;
-			
-		  var rowValues = {
-			  'ID_PERFIL': ID_PERFIL,
-			  'PERFIL': PERFIL,
-			  'SITUACAO': SITUACAO
-			};
-			if(ID_PERFIL){
-				jsonData.push(rowValues);
-			}
-		}
-		var jsonResult = JSON.stringify(jsonData);
-		uiPathApi.sendMessage("atualizarPerfil", jsonResult);
-	}
-	
-	function fecharAutomacao() {
-		uiPathApi.sendMessage("close");
-	}
-	
-	function changedPerfil(perfil) {
-		showLoading();
-		var jsonDataObj = jsonData();
-		jsonDataObj['Perfil'] = perfil;
-		var jsonString = JSON.stringify(jsonDataObj);
-		uiPathApi.sendMessage("perfil", jsonString );
-	}
-	
-	function iniciarAutomacao() {
-		
-		var jsonClientes = []; // Array para armazenar os objetos JSON de cada linha
-		$('table tr').each(function() {
-			var row = $(this);
-			var ID_CLIENTE = row.find("#ID_EXECUTAR").val();
-			if(ID_CLIENTE){
-				var rowValues = {
-					'ID_CLIENTE': ID_CLIENTE,
-					'PENDENCIA': row.find(".PendenciaInput").attr('name'),
-					'EXECUTAR': row.find(".ProcessCheckbox").is(":checked")
-				};
-				jsonClientes.push(rowValues);
-			}
-		});
-		
-		var jsonAutomacao = {
-			"Perfil": document.getElementById("Perfil").value,
-			"Periodo": document.getElementById("Periodo").value,
-			"RepetirAutomacao": document.getElementById("RepetirAutomacao").innerText,
-			
-			"IPMLogin": document.getElementById("IPMLogin").value,
-			"IPMPassword": document.getElementById("IPMPassword").value,
-			"IPMCodigoLogin": document.getElementById("IPMCodigoLogin").value,
-			
-			"DownloadSaida": document.getElementById("DownloadSaida").value,
-			"DownloadEntrada": document.getElementById("DownloadEntrada").value,
-			"ProtocolarSaida": document.getElementById("ProtocolarSaida").value,
-			"ProtocolarEntrada": document.getElementById("ProtocolarEntrada").value,
-			"SimplesNacional": document.getElementById("SimplesNacional").value,
-			"SolicitacaoCancelamento": document.getElementById("SolicitacaoCancelamento").value,
-			"Relatorio": document.getElementById("Relatorio").value
-		};
-		
-		var jsonData = {
-			"Automacao": jsonAutomacao,
-			"Clientes": jsonClientes
-		};
-		
-		var jsonString = JSON.stringify(jsonData);
 
-		uiPathApi.sendMessage("start", jsonString);
-	}
-	
-	function salvarParametros() {
-		var jsonString = JSON.stringify(jsonData());
-		uiPathApi.sendMessage("save", jsonString);
-	}
-	
-	function salvarDominio() {
-		var jsonDominio = {
-			"Perfil": document.getElementById("Perfil").value,
-			"DominioLogin": document.getElementById("DominioLogin").value,
-			"DominioPassword": document.getElementById("DominioPassword").value
-		};
-		uiPathApi.sendMessage("dominio", jsonDominio);
-	}
-	
-	function jsonData(){
-		var jsonData = {
-			"Perfil": document.getElementById("Perfil").value,
-			"Periodo": document.getElementById("Periodo").value,
-			"RepetirAutomacao": document.getElementById("RepetirAutomacao").innerText,
-			
-			
-			"IPMLogin": document.getElementById("IPMLogin").value,
-			"IPMPassword": document.getElementById("IPMPassword").value,
-			"IPMCodigoLogin": document.getElementById("IPMCodigoLogin").value,
-			
-			"DownloadSaida": document.getElementById("DownloadSaida").value,
-			"DownloadEntrada": document.getElementById("DownloadEntrada").value,
-			"ProtocolarSaida": document.getElementById("ProtocolarSaida").value,
-			"ProtocolarEntrada": document.getElementById("ProtocolarEntrada").value,
-			"SimplesNacional": document.getElementById("SimplesNacional").value,
-			"SolicitacaoCancelamento": document.getElementById("SolicitacaoCancelamento").value,
-			"Relatorio": document.getElementById("Relatorio").value
-		};
-		return jsonData;
-	}
-	
-	function jsonCliente(){
-		var jsonData = {
-			"ID_CLIENTE": document.getElementById("ID_CLIENTE").value,
-			"CNPJ": document.getElementById("CNPJ").value,
-			"CODIGO": document.getElementById("CODIGO").value,
-			"EMPRESA": document.getElementById("EMPRESA").value,
-			"NOME": document.getElementById("NOME").value,
-			"REGIME_TRIBUTARIO": document.getElementById("REGIME_TRIBUTARIO").value,
-			"SITUACAO": document.getElementById("SITUACAO").checked,
-			
-			"LOGIN": document.getElementById("LOGIN").value,
-			"PASSWORD": document.getElementById("PASSWORD").value,
-			"CODIGO_LOGIN": document.getElementById("CODIGO_LOGIN").value,
-			"CADASTRO_ECONOMICO": document.getElementById("CADASTRO_ECONOMICO").value
-		};
-		jsonString = JSON.stringify(jsonData);
-		return jsonString;
-	}
-	
-	function buscarCliente(valor){
-		
-		if (valor !== null && valor !== '') {
-			var codigoInput = document.getElementById('CODIGO').value;
-			var cnpjInput = document.getElementById('CNPJ').value;
-		
-			var jsonData = {
-				"var": valor,
-				"CODIGO": codigoInput,
-				"CNPJ": cnpjInput
-			}
-			var jsonString = JSON.stringify(jsonData);
-			//alert(jsonString);
-			uiPathApi.sendMessage("buscarCliente", jsonString );
-			
-		}
-	} 
-	
-	function excluirCliente(){
-		var jsonString = jsonCliente();
-		limparModalCliente();
-		uiPathApi.sendMessage("excluirCliente", jsonString );
-	}
-			
-	function salvarCliente() {
-		uiPathApi.sendMessage("salvarCliente", jsonCliente());
-		limparModalCliente();
-	}
-	
-	function importarClientes() {
-		limparModalCliente();
-		document.getElementById("divClienteCadastro").style.display = "none";
-		document.getElementById("divClienteImportar").style.display = "block";
-		uiPathApi.sendMessage("importarClientes");
-	}
-	
-	function adicionarCliente(valor){
-		var jsonData = {
-			"CODIGO": valor
-		}
-		var jsonString = JSON.stringify(jsonData);
-		//alert(jsonString);
-		uiPathApi.sendMessage("adicionarCliente", jsonString );
-	}
-
-	function repetirCliente(id, tipo) {
-		var tipos = ['Parcial', 'Todos', 'Nenhum'];
-		if (tipo === null){
-			for (var i = 0; i < tipos.length; i++) {
-				var checkboxes = document.getElementsByName(id + tipos[i]);
-				var observacao= document.getElementById('ID_OBSERVACAO_'+id);
-				if (checkboxes.length > 0) {
-					var checkbox = checkboxes[0];
-					checkbox.indeterminate = false;
-					if (checkbox.checked) {
-						tipo = 'Todos';
-						checkbox.name = id + 'Todos';
-						observacao.style.display = 'block';
-					} else {
-						tipo = 'Nenhum';
-						checkbox.name = id + 'Nenhum';
-						observacao.style.display = 'none';
-					}
-					break;
-				}
-			}
-		}
-		
-		var jsonData = {
-			"ID_CLIENTE": id,
-			"PENDENCIA": tipo
-		}
-		var jsonString = JSON.stringify(jsonData);
-		//alert(jsonString);
-		uiPathApi.sendMessage("repetirCliente", jsonString );
-	}
- 
- </script>
- 	
 </head>
 <body>
 	
@@ -810,25 +547,7 @@
 		</div>
     </main>
 	
-   <footer>
-		<div class="position-fixed d-flex align-items-center bottom-0 start-0 mb-0 ms-0 bd-mode-toggle" style="width: 250px; height: 30px">
-		  <button class="btn btn-warning py-1 rounded-0 border-0 w-100" type="button" onclick="iniciarAutomacao()" >
-			<div class="d-flex justify-content-center align-items-center">
-				Iniciar
-			</div>
-		  </button>
-		</div>
-		<div class="d-flex justify-content-center align-items-end">
-			<div class="pagination pagination-sm small-text" data-bs-theme="dark" id="pagination" style="height: 25px"></div>
-		</div>
-		<div class="position-fixed d-flex align-items-center bottom-0 end-0 mb-1 me-2 bd-mode-toggle">
-			<label class="col-form-label" id="easterEgg" style="color: transparent;">Parcial</label>
-			<label class="col-form-label" id="RepetirAutomacao" style="color: transparent;">False</label>
-			<label class="col-form-label">Total Clientes: </label><label class="col-form-label" id="TotalClientes"></label>
-		</div>
-	</footer>
-
-  <div name="ModalRobo">
+	<footer id="footer"></footer>
   
 	<div id="modal_repetir_automacao"></div>
 	<div id="modal_dominio"></div>
@@ -836,51 +555,6 @@
 	<div id="modal_parametros"></div>
 	<div id="modal_perfil"></div>
 	
-	
-
-	<div class="modal" data-bs-theme="dark" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalTitle" aria-hidden="true">
-		<!--div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable"-->
-		<div class="modal-dialog modal-dialog-scrollable">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h6 class="modal-title" id="perfilModalTitle">Cadastro de Perfil</h6>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<div class="row">
-						<input class="form-control form-control-extra-sm me-2" type="text" id="novoPerfil" placeholder="Nome do novo perfil" style="width: 380px; height: 29px">
-						<button id="addPerfil" type="button" class="btn btn-warning custom-btn-extra-small" style="width: 85px; height: 29px" id="addPerfillLista" onclick="addNovoPerfilClicked()">Adicionar</button>
-					</div>	
-					
-					<div class="row">
-						<table class="table table-sm table-dark caption-top table-striped table-hover" >
-							<thead class="table-dark">
-								<tr>
-									<th scope="col-2">#</th>
-									<th scope="col-8">Perfil</th>
-									<th scope="col-2"><div class="d-flex justify-content-center">Situaçao</div></th>
-								</tr>
-							</thead>
-							<tbody id="myTablePerfil">
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<!--button type="button" class="btn btn-secondary custom-btn-extra-small" style="width: 85px; height: 29px" data-bs-dismiss="modal">Cancelar</button-->
-					<button type="button" class="btn btn-primary custom-btn-extra-small" style="width: 85px; height: 29px" data-bs-dismiss="modal" onclick="atualizaPerfil()">Salvar</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	
-
-  </div >
-
-
-
-<!-- Limpar Cadastros -->
 <script>
 	function limparModalCliente() {
 		//Chave = ID do campo, Valor = Bloquear ou não o campo se for input
@@ -901,61 +575,17 @@
 	selectPerfil.addEventListener('change', perfilChanged);
 	document.getElementById('Periodo').addEventListener('blur', perfilChanged);
 	
-	$(document).ready(function () {
-		  Inputmask("99999-999").mask("#Periodo");
-    });
-
+	
 </script>
-	
-<!-- Tabela>	
-<script>
-	
-	document.addEventListener('DOMContentLoaded', function () {
-	  const linhasTabela = document.querySelectorAll('#myTable tr');
 
-	  linhasTabela.forEach((linha) => {
-		let clicado = false;
-
-		linha.addEventListener('click', function () {
-		  if (clicado) {
-			const checkbox = this.querySelector('input[type="checkbox"]');
-			if (checkbox) {
-			  checkbox.checked = !checkbox.checked;
-			}
-			clicado = false;
-		  } else {
-			clicado = true;
-			setTimeout(() => clicado = false, 300); // Definindo o limite de tempo para o segundo clique
-		  }
-		});
-	  });
-	});
-	
-	// Adicionando evento de duplo clique às linhas da tabela
-	let table = document.getElementById('myTable');
-	let rows = table.getElementsByTagName('tr');
-
-	for (let i = 0; i < rows.length; i++) {
-		rows[i].ondblclick = function() {
-		  // Executa uma ação ao dar duplo clique na linha
-		  console.log('Você deu dois cliques na linha:', i + 1);
-		  // Aqui você pode adicionar a lógica que deseja executar ao dar duplo clique na linha
-		};
-	}
-
-	
-	
-	
-</script -->
-
-<script src="js/content.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.8/lottie.min.js"></script>
+
+<script src="js/uipath_input.js"></script>
+<script src="js/uipath_output.js"></script>
+<script src="js/contents.js"></script>
 <script src="animacao.js"></script>
-<script src="js/menu.js"></script>
 <script src="js/paginacao.js"></script>	
 <script src="js/validacoes.js"></script>
-<script src="js/modal_cliente.js"></script>
-<script src="js/modal_parametros.js"></script>
 <script src="js/change.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
