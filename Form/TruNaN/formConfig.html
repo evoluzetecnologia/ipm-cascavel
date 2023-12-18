@@ -524,10 +524,8 @@
 	}
 	
 	function changedPerfil(perfil) {
-		//document.getElementById('overlay').style.display = 'flex';
 		showLoading();
 		var jsonDataObj = jsonData();
-		
 		jsonDataObj['Perfil'] = perfil;
 		var jsonString = JSON.stringify(jsonDataObj);
 		uiPathApi.sendMessage("perfil", jsonString );
@@ -1379,7 +1377,6 @@
 
 <!-- Perfil -->
 <script>
-	
 	var codigoInput = document.getElementById('CODIGO');
 	var cnpjInput = document.getElementById('CNPJ');
 
@@ -1438,10 +1435,8 @@
 		}
 	});
 	
-	function todoChanged() {
-	  changedPerfil(document.getElementById('Perfil').value);
-	}
-
+	document.getElementById('Periodo').addEventListener('blur', perfilChanged);
+	
 	document.getElementById('DownloadSaida').addEventListener('change', perfilChanged);
 	document.getElementById('DownloadEntrada').addEventListener('change', perfilChanged);
 	document.getElementById('ProtocolarSaida').addEventListener('change', perfilChanged);
