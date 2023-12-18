@@ -1,0 +1,159 @@
+<div class="modal" data-bs-theme="dark" id="clienteModal"  tabindex="-1" aria-labelledby="clienteModalTitle" aria-hidden="true"  >
+		<!--div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable"-->
+		<div class="modal-dialog modal-xl modal-dialog-scrollable">
+			<div class="modal-content">
+				<div id='divClienteCadastro' style="display: block;">
+					<div class="modal-header">
+						<h6 class="modal-title" id="clienteModalTitle">Cadastro de Cliente</h6>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="limparModalCliente()"></button>
+					</div>
+					<div class="modal-body small-text">
+						<div class="row">
+							<div class="col-2 d-flex justify-content-start align-items-center">
+								<label class="col-form-label me-5">Código Dominio</label>
+							</div>
+							<div class="col-2 d-flex align-items-center ">
+								<input class="form-control form-control-extra-sm me-2" type="text" id="CODIGO" name="CODIGO" placeholder="Código Cliente" value="">
+							</div>
+							<div class="col-1 d-flex justify-content-end align-items-end ">
+								<label class="col-form-label">CNPJ/CPF</label>
+							</div>
+							<div class="col-2 d-flex align-items-center ">
+								<input class="form-control form-control-extra-sm me-2" type="text" id="CNPJ" name="CNPJ" placeholder="CNPJ ou CPF" value="">
+							</div>
+							<div class="col-2 d-flex justify-content-end align-items-end">
+								<label class="col-form-label">Situação</label>
+							</div>
+							<div class="col-2 d-flex justify-content-start align-items-center">
+								<select class="form-select select-control-extra-sm" id="SITUACAO">
+									<option value="true">Ativo</option>
+									<option value="false">Inativo</option>
+								</select>
+							</div>
+							<div class="col-1 d-flex justify-content-end align-items-center">
+								<input class="form-control form-control-extra-sm me-2" type="text" id="ID_CLIENTE" name="ID_CLIENTE" placeholder="" value="" disabled>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-2 d-flex justify-content-start align-items-center">
+								<label class="col-form-label">Apelido Empresa</label>
+							</div>
+							<div class="col-5 d-flex align-items-center ">
+								<input class="form-control form-control-extra-sm me-2" type="text" id="NOME" name="NOME" placeholder="Apelido da Empresa" value="">
+								
+							</div>
+							<div class="col-2 d-flex justify-content-end align-items-end">
+								<label class="col-form-label">Regime Tributário</label>
+							</div>
+							<div class="col-3 d-flex justify-content-start align-items-center ">
+								<select class="form-select select-control-extra-sm" id="REGIME_TRIBUTARIO" style="width: 251px;">
+									<option value=""></option>
+									<option value="Lucro Real">Lucro Real</option>
+									<option value="Lucro Presumido">Lucro Presumido</option>
+									<option value="Lucro Arbitrado">Lucro Arbitrado</option>
+									<option value="Imune do IRPJ">Imune do IRPJ</option>
+									<option value="Isenta do IRPJ">Isenta do IRPJ</option>
+									<option value="Microempresa">Microempresa (Simples Nacional)</option>
+									<option value="Empresa de Pequeno Porte">Empresa de Pequeno Porte (Simples Nacional)</option>
+									<option value="RET - Regime Especial Trib.">RET - Regime Especial Trib.</option>
+								</select>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-2 d-flex justify-content-start align-items-center">
+								<label class="col-form-label">Nome Empresa</label>
+							</div>
+							<div class="col-10 d-flex align-items-center ">
+								<input class="form-control form-control-extra-sm me-2" type="text" id="EMPRESA" name="EMPRESA" placeholder="Nome da Empresa" value="">
+							</div>
+						</div>
+					
+						<nav>
+						  <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+							<button class="nav-link active" id="nav-config-tab" data-bs-toggle="tab" data-bs-target="#nav-config" type="button" role="tab" aria-controls="nav-config" aria-selected="true">Configurações IPM</button>
+							<!--button class="nav-link" id="nav-codigo-tab" data-bs-toggle="tab" data-bs-target="#nav-codigo" type="button" role="tab" aria-controls="nav-codigo" aria-selected="false">Códigos IPM</button>
+							<button class="nav-link" id="nav-nota-tab" data-bs-toggle="tab" data-bs-target="#nav-nota" type="button" role="tab" aria-controls="nav-nota" aria-selected="false">Emissão de Nota</button-->
+						  </div>
+						</nav>
+						<div class="tab-content" id="nav-tabContent">
+							<div class="tab-pane fade show active" id="nav-config" role="tabpanel" aria-labelledby="nav-config-tab">
+								<div id="Configurações do IPM">
+									<div class="row">
+										<div class="col-2 d-flex align-items-center">
+											<label class="col-form-label">IPM Login Cliente</label>
+										</div>
+										<div class="col-4 d-flex align-items-center ">
+											<input class="form-control form-control-extra-sm me-2" type="text" id="LOGIN" name="LOGIN" placeholder="Usuário de acesso do cliente no IPM" value="">
+										</div>
+										<div class="col-2 d-flex justify-content-end align-items-end">
+											<label class="col-form-label">Código Login</label>
+										</div>
+										<div class="col-4 d-flex align-items-center">
+											<input class="form-control form-control-extra-sm me-2" type="text" id="CODIGO_LOGIN" name="CODIGO_LOGIN" placeholder="Cadastro Automatico" value="">
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-2 d-flex align-items-center">
+											<label class="col-form-label">IPM Senha Cliente</label>
+										</div>
+										<div class="col-4 d-flex align-items-center ">
+											<input class="form-control form-control-extra-sm me-2" type="password" id="PASSWORD" name="PASSWORD" placeholder="Senha de acesso do cliente no IPM" value="">
+										</div>
+										<div class="col-2 d-flex justify-content-end align-items-end">
+											<label class="col-form-label">Cadastro Ecônomico</label>
+										</div>
+										<div class="col-4 d-flex align-items-center">
+											<input class="form-control form-control-extra-sm me-2" type="text" id="CADASTRO_ECONOMICO" name="CADASTRO_ECONOMICO" placeholder="Cadastro Automatico" value="">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<div class="col-sm-12 d-flex me-0">
+							<button type="button" class="btn btn-danger custom-btn-extra-small w-25 me-2" style="height: 29px" id="ExcluirCliente" onclick="excluirCliente()" disabled>Excluir</button>
+							<button type="button" class="btn btn-secondary custom-btn-extra-small w-25 me-2" style="height: 29px" onclick="limparModalCliente()">Limpar</button>
+							<button type="button" class="btn btn-success custom-btn-extra-small w-25 me-2" style="height: 29px" id="ImportarCliente" onclick="importarClientes()">Importar</button>
+							<!--button type="button" class="btn btn-danger btn-sm w-25 me-2" data-bs-toggle="modal" data-bs-target="#modalExcluir" data-bs-dismiss="modal" onclick="excluirClientex()">Excluir</button-->
+							<button type="button" class="btn btn-primary custom-btn-extra-small w-25" style="height: 29px" id="SalvarCliente" onclick="salvarCliente()">Salvar</button>
+						</div>
+					</div>
+				</div>
+				<div id='divClienteImportar' style="display: none;">
+					<div class="modal-header">
+						<div class="col-4 d-flex justify-content-start">
+							<h6 class="modal-title" id="clienteModalTitleImportacao" style="color: #FFD700;">Importação de Cliente</h6>
+						</div>
+						<div class="col-4 d-flex justify-content-center">
+							<input type="text" class="form-control form-control-extra-sm" id="myInputImportacao" placeholder="Pesquisar..." style="width: 250px;">
+						</div>
+						<div class="col-4 d-flex justify-content-end">
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="limparModalCliente()"></button>
+						</div>
+					</div>
+					<div class="table-responsive">
+						<div class="modal-body small-text">
+							<table class="table table-sm table-dark caption-top table-striped table-hover" >
+								<thead class="table-dark">
+									<tr>
+										<th scope="col-1">Código</th>
+										<th scope="col-2 me-4"><div class="d-flex justify-content-center">CNPJ</div></th>
+										<th scope="col-8">Empresa</th>
+										<th scope="col-1"><div class="d-flex justify-content-end">Importar</div></th>
+									</tr>
+								</thead>
+								<tbody id="myTableImportacao">
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<div class="col-12 d-flex justify-content-center align-items-center">
+							<div class="pagination pagination-sm small-text" data-bs-theme="dark" id="paginationImportacao" style="height: 25px"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

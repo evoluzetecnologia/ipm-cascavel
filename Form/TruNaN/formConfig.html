@@ -88,7 +88,13 @@
 							el = elements[0];
 						}
 						if (el) {
-							if (el.tagName === 'INPUT' && el.type === 'radio') {
+							if (el.tagName === 'SELECT') {
+								console.log(key + data[key]);
+								el.value = data[key];
+								if(el.value === '' || el.value === null){
+									el.value = 'Default';
+								}
+							} else if (el.tagName === 'INPUT' && el.type === 'radio') {
 								var value = key+'_'+data[key];
 								var radioButton = document.getElementById(value);
 								
@@ -101,14 +107,9 @@
 								var label = document.querySelector('label[for="' + key + '"]');
 								el.checked = data[key];
 								if (key === 'SITUACAO'){
-									label.textContent = data[key] ? 'Ativo' : 'Inativo';
+									//label.textContent = data[key] ? 'Ativo' : 'Inativo';
 								} else {
-									label.textContent = data[key] ? 'Sim' : 'Não';
-								}
-							} else if (el.tagName === 'SELECT') {
-								el.value = data[key];
-								if(el.value === '' || el.value === null){
-									el.value = 'Default';
+									//label.textContent = data[key] ? 'Sim' : 'Não';
 								}
 							} else {
 								el.value = data[key];
@@ -631,6 +632,7 @@
 	}
 	
 	function buscarCliente(valor){
+		
 		if (valor !== null && valor !== '') {
 			var codigoInput = document.getElementById('CODIGO').value;
 			var cnpjInput = document.getElementById('CNPJ').value;
@@ -752,71 +754,7 @@
 	</header>
 	<main>
       <!-- Conteúdo da barra lateral direita -->
-		<aside>
-			<div class="container mt-3">
-				<label for="customSelect" class="custom-label">Download NFSe Saída:</label>
-				<select class="form-select select-control-extra-sm" id="DownloadSaida" required>
-					<option value="XML">XML</option>
-					<option value="TXT">TXT</option>
-					<option value="PDF">PDF</option>
-					<option value="XML-PDF">XML e PDF</option>
-					<option value="TXT-PDF">TXT e PDF</option>
-					<option value="Nenhum">Nenhum</option>
-				</select>
-			</div>
-			<div class="container">
-				<label for="customSelect" class="custom-label">Download NFSe Entrada:</label>
-				<select class="form-select select-control-extra-sm" id="DownloadEntrada" required>
-					<option value="XML">XML</option>
-					<option value="TXT">TXT</option>
-					<option value="PDF">PDF</option>
-					<option value="XML-PDF">XML e PDF</option>
-					<option value="TXT-PDF">TXT e PDF</option>
-					<option value="Nenhum">Nenhum</option>
-				</select>
-			</div>
-			<div class="container">
-				<label for="customSelect" class="custom-label">Protocolar Saídas:</label>
-				<select class="form-select select-control-extra-sm" id="ProtocolarSaida" required>
-					<option value="Todos">Todos</option>
-					<option value="ISS">Com Recolhimento</option>
-					<option value="Nenhum">Nenhum</option>
-				</select>
-			</div>
-			<div class="container">
-				<label for="customSelect" class="custom-label">Protocolar Entrada:</label>
-				<select class="form-select select-control-extra-sm" id="ProtocolarEntrada" required>
-					<option value="Todos">Todos</option>
-					<option value="ISS">Com Recolhimento</option>
-					<option value="Nenhum">Nenhum</option>
-				</select>
-			</div>
-			<div class="container">
-				<label for="customSelect" class="custom-label">Lançar Simples Nacional:</label>
-				<select class="form-select select-control-extra-sm" id="SimplesNacional" required>
-					<option value="True">Sim</option>
-					<option value="False">Não</option>
-				</select>
-			</div>
-			<div class="container">
-				<label for="customSelect" class="custom-label">Rel. de Solicitação de Cancelamento:</label>
-				<select class="form-select select-control-extra-sm" id="SolicitacaoCancelamento" required>
-					<option value="Todos">Todos</option>
-					<option value="Em aberto">Em aberto</option>
-					<option value="Deferido">Deferido</option>
-					<option value="Indeferido">Indeferido</option>
-					<option value="Estornado">Estornado</option>
-					<option value="Nenhum">Nenhum</option>
-				</select>
-			</div>
-			<div class="container">
-				<label for="customSelect" class="custom-label">Gerar Relatório Valores XML:</label>
-				<select class="form-select select-control-extra-sm" id="Relatorio" required>
-					<option value="True">Sim</option>
-					<option value="False">Não</option>
-				</select>
-			</div>
-		</aside>
+		<aside id="menu"></aside>
 	
 		<!-- Conteúdo principal com barra de rolagem -->
 		<div class="scrollable-content">
@@ -892,109 +830,13 @@
 
   <div name="ModalRobo">
   
-	<div class="modal" data-bs-theme="dark" id="repetirRotinaModal" tabindex="-1" aria-labelledby="repetirRotinaModal" aria-hidden="true">
-		<!--div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable"-->
-		<div class="modal-dialog modal-dialog-scrollable">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h6 class="modal-title d-flex justify-content-center align-items-center" id="repetirModalTitle" style="color: #FFD700;">Atenção - Selecione forma de execução</h6>
-					<!--button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button-->
-				</div>
-				<div class="modal-body">
-					<p><strong style="color: #FFD700;">Opção 1 - Rodar apenas as tarefas pendentes.</strong> Ou seja,caso uma parte da automação já tenha sido executada no período, o robô irá pular essa tarefa, indo executar a próxima.</p>
-					<p><strong style="color: #FFD700;">Opção 2 - Repetir todas as tarefas.</strong> O robô irá executar <strong>novamente todas as tarefas já executadas</strong>, repetindo isso para todos os clientes novamente!</p>
-				</div>
-				<div class="modal-footer">
-					<div class="col-sm-12 d-flex me-0">
-						<button type="button" class="btn btn-success custom-btn-extra-small w-50 me-2" style="height: 29px" id="simRepetirBtn" onclick="repetirAutomacao(false)" data-bs-dismiss="modal">Opcão 1, Tarefas Pendêndes</button>
-						<button type="button" class="btn btn-primary custom-btn-extra-small w-50" style="height: 29px" id="naoRepetirBtn" onclick="repetirAutomacao(true)" data-bs-dismiss="modal">Opcão 2, Repetir as Tarefas</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	<div id="modal_repetir_automacao"></div>
+	<div id="modal_dominio"></div>
+	<div id="modal_cliente"></div>
+	<div id="modal_parametros"></div>
+	<div id="modal_perfil"></div>
 	
-	<div class="modal" data-bs-theme="dark" id="parametrosModal" tabindex="-1" aria-labelledby="parametrosModalTitle" aria-hidden="true">
-		<!--div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable"-->
-		<div class="modal-dialog modal-lg modal-dialog-scrollable">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h6 class="modal-title" id="perfilModalTitle">Parâmetros Automação</h6>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<div>
-						<div class="row">
-							<div class="col-4 d-flex align-items-center">
-								<label class="col-form-label">IPM Login</label>
-							</div>
-							<div class="col-8 d-flex align-items-center ">
-								<input class="form-control form-control-extra-sm" type="text" id="IPMLogin" name="IPMLogin" placeholder="Usuário IPM Contador" value="">
-							</div>
-							
-						</div>
-						<div class="row">
-							<div class="col-4 d-flex align-items-center">
-								<label class="col-form-label">IPM Password</label>
-							</div>
-							<div class="col-8 d-flex align-items-center ">
-								<input class="form-control form-control-extra-sm" type="password" id="IPMPassword" name="IPMPassword" placeholder="Senha IPM Contador" value="">
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-4 d-flex align-items-center">
-								<label class="col-form-label">IPM Código Empresa</label>
-							</div>
-							<div class="col-8 d-flex align-items-center ">
-								<input class="form-control form-control-extra-sm" type="text" id="IPMCodigoLogin" name="IPMCodigoLogin" placeholder="Código Automático" value="" disabled>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<!--button type="button" class="btn btn-secondary custom-btn-extra-small" style="width: 85px; height: 29px" data-bs-dismiss="modal">Cancelar</button-->
-					<button type="button" class="btn btn-primary custom-btn-extra-small" style="width: 85px; height: 29px" data-bs-dismiss="modal" onclick="salvarParametros()">Salvar</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="modal" data-bs-theme="dark" id="dominioModal" tabindex="-1" aria-labelledby="dominioModalTitle" aria-hidden="true">
-		<!--div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable"-->
-		<div class="modal-dialog modal-dialog-scrollable">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h6 class="modal-title" id="perfilModalTitle">Parâmetros Domínio</h6>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<div>
-						<div class="row">
-							<div class="col-4 d-flex align-items-center">
-								<label class="col-form-label">Domínio Login</label>
-							</div>
-							<div class="col-8 d-flex align-items-center ">
-								<input class="form-control form-control-extra-sm" type="text" id="DominioLogin" name="DominioLogin" placeholder="Usuário do Domínio" value="">
-							</div>
-							
-						</div>
-						<div class="row">
-							<div class="col-4 d-flex align-items-center">
-								<label class="col-form-label">Dominio Password</label>
-							</div>
-							<div class="col-8 d-flex align-items-center ">
-								<input class="form-control form-control-extra-sm" type="password" id="DominioPassword" name="DominioPassword" placeholder="Senha do Domínio" value="">
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<!--button type="button" class="btn btn-secondary custom-btn-extra-small" style="width: 85px; height: 29px" data-bs-dismiss="modal">Cancelar</button-->
-					<button type="button" class="btn btn-primary custom-btn-extra-small" style="width: 85px; height: 29px" data-bs-dismiss="modal" onclick="salvarDominio()">Salvar</button>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 
 	<div class="modal" data-bs-theme="dark" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalTitle" aria-hidden="true">
 		<!--div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable"-->
@@ -1032,422 +874,40 @@
 		</div>
 	</div>
 
-	<div class="modal" data-bs-theme="dark" id="clienteModal"  tabindex="-1" aria-labelledby="clienteModalTitle" aria-hidden="true"  >
-		<!--div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable"-->
-		<div class="modal-dialog modal-xl modal-dialog-scrollable">
-			<div class="modal-content">
-				<div id='divClienteCadastro' style="display: block;">
-					<div class="modal-header">
-						<h6 class="modal-title" id="clienteModalTitle">Cadastro de Cliente</h6>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="limparModalCliente()"></button>
-					</div>
-					<div class="modal-body small-text">
-						<div class="row">
-							<div class="col-2 d-flex justify-content-start align-items-center">
-								<label class="col-form-label me-5">Código Dominio</label>
-							</div>
-							<div class="col-2 d-flex align-items-center ">
-								<input class="form-control form-control-extra-sm me-2" type="text" id="CODIGO" name="CODIGO" placeholder="Código Cliente" value="">
-							</div>
-							<div class="col-1 d-flex justify-content-end align-items-end ">
-								<label class="col-form-label">CNPJ/CPF</label>
-							</div>
-							<div class="col-2 d-flex align-items-center ">
-								<input class="form-control form-control-extra-sm me-2" type="text" id="CNPJ" name="CNPJ" placeholder="CNPJ ou CPF" value="">
-							</div>
-							<div class="col-2 d-flex justify-content-end align-items-end">
-								<label class="col-form-label">Situação</label>
-							</div>
-							<div class="col-1 d-flex justify-content-start align-items-center">
-								<div class="form-check form-switch form-check-inline">
-									<input class="form-check-input" type="checkbox" role="switch" id="SITUACAO" name="SITUACAO" checked>
-									<label class="form-check-label" for="SITUACAO">Ativa</label>
-								</div>
-							</div>
-							<div class="col-2 d-flex justify-content-end align-items-center">
-								<label class="col-form-label me-2">#ID:</label>
-								<input class="form-control form-control-extra-sm me-2" type="text" id="ID_CLIENTE" name="ID_CLIENTE" placeholder="" value="" disabled>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-2 d-flex justify-content-start align-items-center">
-								<label class="col-form-label">Apelido Empresa</label>
-							</div>
-							<div class="col-5 d-flex align-items-center ">
-								<input class="form-control form-control-extra-sm me-2" type="text" id="NOME" name="NOME" placeholder="Apelido da Empresa" value="">
-								
-							</div>
-							<div class="col-2 d-flex justify-content-end align-items-end">
-								<label class="col-form-label">Regime Tributário</label>
-							</div>
-							<div class="col-3 d-flex justify-content-start align-items-center ">
-								<select class="form-select select-control-extra-sm" id="REGIME_TRIBUTARIO" style="width: 251px;">
-									<option value=""></option>
-									<option value="Lucro Real">Lucro Real</option>
-									<option value="Lucro Presumido">Lucro Presumido</option>
-									<option value="Lucro Arbitrado">Lucro Arbitrado</option>
-									<option value="Imune do IRPJ">Imune do IRPJ</option>
-									<option value="Isenta do IRPJ">Isenta do IRPJ</option>
-									<option value="Microempresa">Microempresa (Simples Nacional)</option>
-									<option value="Empresa de Pequeno Porte">Empresa de Pequeno Porte (Simples Nacional)</option>
-									<option value="RET - Regime Especial Trib.">RET - Regime Especial Trib.</option>
-								</select>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-2 d-flex justify-content-start align-items-center">
-								<label class="col-form-label">Nome Empresa</label>
-							</div>
-							<div class="col-10 d-flex align-items-center ">
-								<input class="form-control form-control-extra-sm me-2" type="text" id="EMPRESA" name="EMPRESA" placeholder="Nome da Empresa" value="">
-							</div>
-						</div>
-					
-						<nav>
-						  <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
-							<button class="nav-link active" id="nav-config-tab" data-bs-toggle="tab" data-bs-target="#nav-config" type="button" role="tab" aria-controls="nav-config" aria-selected="true">Configurações IPM</button>
-							<!--button class="nav-link" id="nav-codigo-tab" data-bs-toggle="tab" data-bs-target="#nav-codigo" type="button" role="tab" aria-controls="nav-codigo" aria-selected="false">Códigos IPM</button>
-							<button class="nav-link" id="nav-nota-tab" data-bs-toggle="tab" data-bs-target="#nav-nota" type="button" role="tab" aria-controls="nav-nota" aria-selected="false">Emissão de Nota</button-->
-						  </div>
-						</nav>
-						<div class="tab-content" id="nav-tabContent">
-							<div class="tab-pane fade show active" id="nav-config" role="tabpanel" aria-labelledby="nav-config-tab">
-								<div id="Configurações do IPM">
-									<div class="row">
-										<div class="col-2 d-flex align-items-center">
-											<label class="col-form-label">IPM Login Cliente</label>
-										</div>
-										<div class="col-4 d-flex align-items-center ">
-											<input class="form-control form-control-extra-sm me-2" type="text" id="LOGIN" name="LOGIN" placeholder="Usuário de acesso do cliente no IPM" value="">
-										</div>
-										<div class="col-2 d-flex justify-content-end align-items-end">
-											<label class="col-form-label">Código Login</label>
-										</div>
-										<div class="col-4 d-flex align-items-center">
-											<input class="form-control form-control-extra-sm me-2" type="text" id="CODIGO_LOGIN" name="CODIGO_LOGIN" placeholder="Cadastro Automatico" value="">
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-2 d-flex align-items-center">
-											<label class="col-form-label">IPM Senha Cliente</label>
-										</div>
-										<div class="col-4 d-flex align-items-center ">
-											<input class="form-control form-control-extra-sm me-2" type="password" id="PASSWORD" name="PASSWORD" placeholder="Senha de acesso do cliente no IPM" value="">
-										</div>
-										<div class="col-2 d-flex justify-content-end align-items-end">
-											<label class="col-form-label">Cadastro Ecônomico</label>
-										</div>
-										<div class="col-4 d-flex align-items-center">
-											<input class="form-control form-control-extra-sm me-2" type="text" id="CADASTRO_ECONOMICO" name="CADASTRO_ECONOMICO" placeholder="Cadastro Automatico" value="">
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<div class="col-sm-12 d-flex me-0">
-							<button type="button" class="btn btn-danger custom-btn-extra-small w-25 me-2" style="height: 29px" id="ExcluirCliente" onclick="excluirCliente()" disabled>Excluir</button>
-							<button type="button" class="btn btn-secondary custom-btn-extra-small w-25 me-2" style="height: 29px" onclick="limparModalCliente()">Limpar</button>
-							<button type="button" class="btn btn-success custom-btn-extra-small w-25 me-2" style="height: 29px" id="ImportarCliente" onclick="importarClientes()">Importar</button>
-							<!--button type="button" class="btn btn-danger btn-sm w-25 me-2" data-bs-toggle="modal" data-bs-target="#modalExcluir" data-bs-dismiss="modal" onclick="excluirClientex()">Excluir</button-->
-							<button type="button" class="btn btn-primary custom-btn-extra-small w-25" style="height: 29px" id="SalvarCliente" onclick="salvarCliente()">Salvar</button>
-						</div>
-					</div>
-				</div>
-				<div id='divClienteImportar' style="display: none;">
-					<div class="modal-header">
-						<div class="col-4 d-flex justify-content-start">
-							<h6 class="modal-title" id="clienteModalTitleImportacao" style="color: #FFD700;">Importação de Cliente</h6>
-						</div>
-						<div class="col-4 d-flex justify-content-center">
-							<input type="text" class="form-control form-control-extra-sm" id="myInputImportacao" placeholder="Pesquisar..." style="width: 250px;">
-						</div>
-						<div class="col-4 d-flex justify-content-end">
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="limparModalCliente()"></button>
-						</div>
-					</div>
-					<div class="table-responsive">
-						<div class="modal-body small-text">
-							<table class="table table-sm table-dark caption-top table-striped table-hover" >
-								<thead class="table-dark">
-									<tr>
-										<th scope="col-1">Código</th>
-										<th scope="col-2 me-4"><div class="d-flex justify-content-center">CNPJ</div></th>
-										<th scope="col-8">Empresa</th>
-										<th scope="col-1"><div class="d-flex justify-content-end">Importar</div></th>
-									</tr>
-								</thead>
-								<tbody id="myTableImportacao">
-								</tbody>
-							</table>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<div class="col-12 d-flex justify-content-center align-items-center">
-							<div class="pagination pagination-sm small-text" data-bs-theme="dark" id="paginationImportacao" style="height: 25px"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 
   </div >
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.8/lottie.min.js"></script>
-<script src="animacao.js"></script>
 
-<!-- CNPJ Validação -->
+
+<!-- Limpar Cadastros -->
 <script>
-	var cnpjCpfInput = document.getElementById('CNPJ');
-
-	cnpjCpfInput.addEventListener('input', function() {
-	  var valor = this.value.replace(/\D/g, '');
-
-	  if (valor.length === 11) {
-		// CPF
-		if (validarCpf(valor)) {
-		  this.value = aplicarMascaraCpf(valor);
-		}
-	  } else if (valor.length === 14) {
-		// CNPJ
-		if (validarCnpj(valor)) {
-		  this.value = aplicarMascaraCnpj(valor);
-		}else {
-			this.value = 'CNPJ Inválido';
-		}
-	  }
-	});
-
-	function validarCpf(cpf) {
-	  cpf = cpf.replace(/\D/g, ''); // Remove caracteres não numéricos
-	  if (cpf.length !== 11 || /^(.)\1+$/.test(cpf)) {
-		return false;
-	  }
-	  
-	  var sum = 0;
-	  var mod;
-	  
-	  for (var i = 1; i <= 9; i++) {
-		sum += parseInt(cpf.substring(i - 1, i)) * (11 - i);
-	  }
-	  
-	  mod = (sum * 10) % 11;
-	  
-	  if (mod === 10 || mod === 11) {
-		mod = 0;
-	  }
-	  
-	  if (mod !== parseInt(cpf.substring(9, 10))) {
-		return false;
-	  }
-	  
-	  sum = 0;
-	  
-	  for (var j = 1; j <= 10; j++) {
-		sum += parseInt(cpf.substring(j - 1, j)) * (12 - j);
-	  }
-	  
-	  mod = (sum * 10) % 11;
-	  
-	  if (mod === 10 || mod === 11) {
-		mod = 0;
-	  }
-	  
-	  if (mod !== parseInt(cpf.substring(10, 11))) {
-		return false;
-	  }
-	  
-	  return true;
-	}
-
-	function aplicarMascaraCpf(cpf) {
-	  cpf = cpf.replace(/\D/g, ''); // Remove caracteres não numéricos
-	  cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
-	  cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
-	  cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-	  return cpf;
-	}
-
-
-	function validarCnpj(cnpj) {
-	  cnpj = cnpj.replace(/[^\d]+/g, ''); // Remove caracteres não numéricos
-
-	  if (cnpj.length !== 14) {
-		return false;
-	  }
-
-	  // Verifica se todos os dígitos são iguais (caso de CNPJs inválidos)
-	  if (/^(\d)\1+$/.test(cnpj)) {
-		return false;
-	  }
-
-	  // Validação do primeiro dígito verificador
-	  var tamanho = cnpj.length - 2;
-	  var numeros = cnpj.substring(0, tamanho);
-	  var digitos = cnpj.substring(tamanho);
-	  var soma = 0;
-	  var pos = tamanho - 7;
-
-	  for (var i = tamanho; i >= 1; i--) {
-		soma += parseInt(numeros.charAt(tamanho - i), 10) * pos--;
-		if (pos < 2) {
-		  pos = 9;
-		}
-	  }
-
-	  var resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
-	  if (resultado !== parseInt(digitos.charAt(0), 10)) {
-		return false;
-	  }
-
-	  // Validação do segundo dígito verificador
-	  tamanho += 1;
-	  numeros = cnpj.substring(0, tamanho);
-	  digitos = cnpj.substring(tamanho);
-	  soma = 0;
-	  pos = tamanho - 7;
-
-	  for (i = tamanho; i >= 1; i--) {
-		soma += parseInt(numeros.charAt(tamanho - i), 10) * pos--;
-		if (pos < 2) {
-		  pos = 9;
-		}
-	  }
-
-	  resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
-	  if (resultado !== parseInt(digitos.charAt(0), 10)) {
-		return false;
-	  }
-
-	  return true;
-	}
-
-	function aplicarMascaraCnpj(cnpj) {
-	  cnpj = cnpj.replace(/\D/g, ''); // Remove caracteres não numéricos
-	  return cnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
-	}
-
 	function limparModalCliente() {
-		document.getElementById("ID_CLIENTE").value = '0';
-		document.getElementById("CODIGO").value = '';
-		document.getElementById("CNPJ").value = '';
-		document.getElementById("SITUACAO").checked = true;
-		document.querySelector('label[for="SITUACAO"]').textContent = "Ativo";
-		document.getElementById("NOME").value = '';
-		document.getElementById("EMPRESA").value = '';
-		document.getElementById("REGIME_TRIBUTARIO").value = '';
-		document.getElementById("LOGIN").value = '';
-		document.getElementById("PASSWORD").value = '';
-		var codigoLogin = document.getElementById("CODIGO_LOGIN");
-		var cadastroEconomico = document.getElementById("CADASTRO_ECONOMICO");
-		codigoLogin.value = '';
-		cadastroEconomico.value = '';
-		codigoLogin.disabled = true;
-		cadastroEconomico.disabled = true;
-		
-		document.getElementById("ExcluirCliente").disabled = true;
-		document.getElementById("SalvarCliente").disabled = true;
-		
-		document.getElementById("divClienteCadastro").style.display = "block";
-		document.getElementById("divClienteImportar").style.display = "none";
-	}
-	
-	function repetirAutomacao(repetir) {
-		if (document.getElementById('easterEgg').innerText === 'Parcial'){
-			var modal = document.getElementById('repetirRotinaModal');
-			if (repetir === null && document.getElementById('RepetirAutomacao').innerText === 'False'){
-				modal.style.display = 'block';
-			} else if (repetir === true){
-				modal.style.display = 'none';
-				document.getElementById('RepetirAutomacao').innerText = 'True';
-				document.getElementById('easterEgg').innerText  = 'Entregue o seu caminho ao Senhor; Confie nele e ele agirá';
-				changedPerfil(document.getElementById('Perfil').value);
-			} else if (repetir === false){
-				modal.style.display = 'none';
-				document.getElementById('RepetirAutomacao').innerText = 'False';
-				document.getElementById('easterEgg').innerText = 'Entregue o seu caminho ao Senhor; Confie nele e ele agirá';
-				changedPerfil(document.getElementById('Perfil').value);
-			}
-		}
-	}
-
-</script>
-
-<!-- Perfil -->
-<script>
-	var codigoInput = document.getElementById('CODIGO');
-	var cnpjInput = document.getElementById('CNPJ');
-
-	codigoInput.addEventListener('blur', capturarInformacoes);
-	cnpjInput.addEventListener('blur', capturarInformacoes);
-
-	function capturarInformacoes() {
-		var codigo = codigoInput.value;
-		var cnpj = cnpjInput.value;		  
-		var inputElement = event.target;
-		var inputValue = inputElement.value;
-		var cnpjCpf = inputValue.replace(/\D/g, '');
-		if (inputValue !== ''){
-			//console.log(inputValue);
-			if (inputValue === codigo){
-				buscarCliente(codigo);
-			} else if (inputValue === cnpj){
-				inputValue = cnpj.replace(/\D/g, ''); 
-				if (inputValue.length === 11) {
-					if (validarCpf(inputValue)) {
-						//console.log(cnpj);
-						document.getElementById("SalvarCliente").disabled = false;
-						buscarCliente(cnpj);
-					} else {
-						document.getElementById("SalvarCliente").disabled = true;
-					}
-				} else if (inputValue.length === 14) {
-					if (validarCnpj(inputValue)) {
-						//console.log(cnpj);
-						document.getElementById("SalvarCliente").disabled = false;
-						buscarCliente(cnpj);
-					} else {
-						document.getElementById("SalvarCliente").disabled = true;
-					}
-				}
-			}
-		} else {
-			document.getElementById("SalvarCliente").disabled = true;
-		}
-		return;
+		//Chave = ID do campo, Valor = Bloquear ou não o campo se for input
+		var jsonData = {
+			"LOGIN": false,
+			"PASSWORD": false,
+			"CODIGO_LOGIN": true,
+			"CADASTRO_ECONOMICO": true
+		};
+		limparFormCliente(JSON.stringify(jsonData));
 	}
 	
 	var selectPerfil = document.getElementById('Perfil');
 	function perfilChanged() {
-	  var selectedValue = selectPerfil.value;
-	  changedPerfil(selectedValue);
+		var selectedValue = selectPerfil.value;
+		changedPerfil(selectedValue);
 	}
 	selectPerfil.addEventListener('change', perfilChanged);
-	
-
-	document.getElementById('SITUACAO').addEventListener('change', function() {
-		if (this.checked) {
-		  document.querySelector('label[for="SITUACAO"]').textContent = 'Ativo';
-		} else {
-		  document.querySelector('label[for="SITUACAO"]').textContent = 'Inativo';
-		}
-	});
-	
 	document.getElementById('Periodo').addEventListener('blur', perfilChanged);
 	
-	document.getElementById('DownloadSaida').addEventListener('change', perfilChanged);
-	document.getElementById('DownloadEntrada').addEventListener('change', perfilChanged);
-	document.getElementById('ProtocolarSaida').addEventListener('change', perfilChanged);
-	document.getElementById('ProtocolarEntrada').addEventListener('change', perfilChanged);
-	document.getElementById('SimplesNacional').addEventListener('change', perfilChanged);
-	document.getElementById('SolicitacaoCancelamento').addEventListener('change', perfilChanged);
-	
+	$(document).ready(function () {
+		  Inputmask("99999-999").mask("#Periodo");
+    });
 
 </script>
 	
-<!-- Tabela -->	
+<!-- Tabela>	
 <script>
 	
 	document.addEventListener('DOMContentLoaded', function () {
@@ -1483,67 +943,21 @@
 		};
 	}
 
-	function initializePagination(data, nItems, table, pagination) {
-	  var itemsPerPage = nItems; // Number of items to display per page
-	  var totalPages = Math.ceil(data.length / itemsPerPage);
-	  var container = $('#'+table);
-	  
-	  // Initialize the bootpag plugin
-	  var pagination = $('#'+pagination).bootpag({
-		total: totalPages,
-		page: 1,
-		maxVisible: 10, // Maximum number of visible pages
-		leaps: true, // Enable/disable next/previous leaps through maxVisible
-		firstLastUse: true, // Enable/disable first/last buttons
-		href: "#pro-page-{{number}}",
-		
-		
-	  }).on("page", function(event, num) {
-		var startIndex = (num - 1) * itemsPerPage;
-		var endIndex = startIndex + itemsPerPage;
-
-		// Hide all rows
-		container.find('tr').hide();
-
-		// Show rows for the current page
-		container.find('tr').slice(startIndex, endIndex).show();
-	  });
-
-	// Click on the first page after loading
-		container.find('tr').slice(0, itemsPerPage).show();
-	}
 	
 	
-</script>
+	
+</script -->
 
-<!-- Mascara -->
-<script>
-	$(document).ready(function(){
-	  $("#myInput").on("keyup", function() {
-		var value = $(this).val().toLowerCase();
-		$("#myTable tr").filter(function() {
-		  $(this).toggle( $(this).text().toLowerCase().indexOf(value) > -1 );
-		});
-	  });
-	});
-	
-	$(document).ready(function () {
-		$("#myInputImportacao").on("keyup", function () {
-			var value = $(this).val().toLowerCase();
-			if (value === '') {
-				importarClientes();
-			} else {
-				$("#myTableImportacao tr").filter(function() {
-				  $(this).toggle( $(this).text().toLowerCase().indexOf(value) > -1 );
-				});
-			}
-		});
-	});
-	$(document).ready(function() {
-		Inputmask("99999-999").mask("#Periodo");
-	});
-</script>
-	
+<script src="js/content.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.8/lottie.min.js"></script>
+<script src="animacao.js"></script>
+<script src="js/menu.js"></script>
+<script src="js/paginacao.js"></script>	
+<script src="js/validacoes.js"></script>
+<script src="js/modal_cliente.js"></script>
+<script src="js/modal_parametros.js"></script>
+<script src="js/change.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://trunan.com.br/_trunan/www/js/bootpag.js"></script>
   
