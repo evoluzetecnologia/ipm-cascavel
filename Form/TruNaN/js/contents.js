@@ -59,7 +59,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function limparFormCliente(data) {
-
     if (data !== null) {
         var data = JSON.parse(data);
 
@@ -77,7 +76,6 @@ function limparFormCliente(data) {
             }
         }
     }
-
     document.getElementById("ID_CLIENTE").value = '0';
     document.getElementById("CODIGO").value = '';
     document.getElementById("CNPJ").value = '';

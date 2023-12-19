@@ -1,3 +1,87 @@
+function jsonData() {
+    var jsonData = {
+        "Perfil": document.getElementById("Perfil").value,
+        "Periodo": document.getElementById("Periodo").value,
+        "RepetirAutomacao": document.getElementById("RepetirAutomacao").innerText,
+
+        "IPMLogin": document.getElementById("IPMLogin").value,
+        "IPMPassword": document.getElementById("IPMPassword").value,
+        "IPMCodigoLogin": document.getElementById("IPMCodigoLogin").value,
+
+        "DownloadSaida": document.getElementById("DownloadSaida").value,
+        "DownloadEntrada": document.getElementById("DownloadEntrada").value,
+        "ProtocolarSaida": document.getElementById("ProtocolarSaida").value,
+        "ProtocolarEntrada": document.getElementById("ProtocolarEntrada").value,
+        "SimplesNacional": document.getElementById("SimplesNacional").value,
+        "SolicitacaoCancelamento": document.getElementById("SolicitacaoCancelamento").value,
+        "Relatorio": document.getElementById("Relatorio").value
+    };
+    return jsonData;
+}
+
+function jsonCliente() {
+    var jsonData = {
+        "ID_CLIENTE": document.getElementById("ID_CLIENTE").value,
+        "CNPJ": document.getElementById("CNPJ").value,
+        "CODIGO": document.getElementById("CODIGO").value,
+        "EMPRESA": document.getElementById("EMPRESA").value,
+        "NOME": document.getElementById("NOME").value,
+        "REGIME_TRIBUTARIO": document.getElementById("REGIME_TRIBUTARIO").value,
+        "SITUACAO": document.getElementById("SITUACAO").checked,
+
+        "LOGIN": document.getElementById("LOGIN").value,
+        "PASSWORD": document.getElementById("PASSWORD").value,
+        "CODIGO_LOGIN": document.getElementById("CODIGO_LOGIN").value,
+        "CADASTRO_ECONOMICO": document.getElementById("CADASTRO_ECONOMICO").value
+    };
+    jsonString = JSON.stringify(jsonData);
+    return jsonString;
+}
+
+function iniciarAutomacao() {
+
+    var jsonClientes = []; // Array para armazenar os objetos JSON de cada linha
+    $('table tr').each(function () {
+        var row = $(this);
+        var ID_CLIENTE = row.find("#ID_EXECUTAR").val();
+        if (ID_CLIENTE) {
+            var rowValues = {
+                'ID_CLIENTE': ID_CLIENTE,
+                'PENDENCIA': row.find(".PendenciaInput").attr('name'),
+                'EXECUTAR': row.find(".ProcessCheckbox").is(":checked")
+            };
+            jsonClientes.push(rowValues);
+        }
+    });
+
+    var jsonAutomacao = {
+        "Perfil": document.getElementById("Perfil").value,
+        "Periodo": document.getElementById("Periodo").value,
+        "RepetirAutomacao": document.getElementById("RepetirAutomacao").innerText,
+
+        "IPMLogin": document.getElementById("IPMLogin").value,
+        "IPMPassword": document.getElementById("IPMPassword").value,
+        "IPMCodigoLogin": document.getElementById("IPMCodigoLogin").value,
+
+        "DownloadSaida": document.getElementById("DownloadSaida").value,
+        "DownloadEntrada": document.getElementById("DownloadEntrada").value,
+        "ProtocolarSaida": document.getElementById("ProtocolarSaida").value,
+        "ProtocolarEntrada": document.getElementById("ProtocolarEntrada").value,
+        "SimplesNacional": document.getElementById("SimplesNacional").value,
+        "SolicitacaoCancelamento": document.getElementById("SolicitacaoCancelamento").value,
+        "Relatorio": document.getElementById("Relatorio").value
+    };
+
+    var jsonData = {
+        "Automacao": jsonAutomacao,
+        "Clientes": jsonClientes
+    };
+
+    var jsonString = JSON.stringify(jsonData);
+
+    uiPathApi.sendMessage("start", jsonString);
+}
+
 function addNovoPerfilClicked() {
     var perfilNome = document.getElementById("novoPerfil").value;
 
@@ -46,50 +130,6 @@ function changedPerfil(perfil) {
     uiPathApi.sendMessage("perfil", jsonString);
 }
 
-function iniciarAutomacao() {
-
-    var jsonClientes = []; // Array para armazenar os objetos JSON de cada linha
-    $('table tr').each(function () {
-        var row = $(this);
-        var ID_CLIENTE = row.find("#ID_EXECUTAR").val();
-        if (ID_CLIENTE) {
-            var rowValues = {
-                'ID_CLIENTE': ID_CLIENTE,
-                'PENDENCIA': row.find(".PendenciaInput").attr('name'),
-                'EXECUTAR': row.find(".ProcessCheckbox").is(":checked")
-            };
-            jsonClientes.push(rowValues);
-        }
-    });
-
-    var jsonAutomacao = {
-        "Perfil": document.getElementById("Perfil").value,
-        "Periodo": document.getElementById("Periodo").value,
-        "RepetirAutomacao": document.getElementById("RepetirAutomacao").innerText,
-
-        "IPMLogin": document.getElementById("IPMLogin").value,
-        "IPMPassword": document.getElementById("IPMPassword").value,
-        "IPMCodigoLogin": document.getElementById("IPMCodigoLogin").value,
-
-        "DownloadSaida": document.getElementById("DownloadSaida").value,
-        "DownloadEntrada": document.getElementById("DownloadEntrada").value,
-        "ProtocolarSaida": document.getElementById("ProtocolarSaida").value,
-        "ProtocolarEntrada": document.getElementById("ProtocolarEntrada").value,
-        "SimplesNacional": document.getElementById("SimplesNacional").value,
-        "SolicitacaoCancelamento": document.getElementById("SolicitacaoCancelamento").value,
-        "Relatorio": document.getElementById("Relatorio").value
-    };
-
-    var jsonData = {
-        "Automacao": jsonData(),
-        "Clientes": jsonClientes
-    };
-
-    var jsonString = JSON.stringify(jsonData);
-
-    uiPathApi.sendMessage("start", jsonString);
-}
-
 function salvarParametros() {
     var jsonString = JSON.stringify(jsonData());
     uiPathApi.sendMessage("save", jsonString);
@@ -103,47 +143,6 @@ function salvarDominio() {
     };
     uiPathApi.sendMessage("dominio", jsonDominio);
 }
-
-function jsonData() {
-    var jsonData = {
-        "Perfil": document.getElementById("Perfil").value,
-        "Periodo": document.getElementById("Periodo").value,
-        "RepetirAutomacao": document.getElementById("RepetirAutomacao").innerText,
-
-        "IPMLogin": document.getElementById("IPMLogin").value,
-        "IPMPassword": document.getElementById("IPMPassword").value,
-        "IPMCodigoLogin": document.getElementById("IPMCodigoLogin").value,
-
-        "DownloadSaida": document.getElementById("DownloadSaida").value,
-        "DownloadEntrada": document.getElementById("DownloadEntrada").value,
-        "ProtocolarSaida": document.getElementById("ProtocolarSaida").value,
-        "ProtocolarEntrada": document.getElementById("ProtocolarEntrada").value,
-        "SimplesNacional": document.getElementById("SimplesNacional").value,
-        "SolicitacaoCancelamento": document.getElementById("SolicitacaoCancelamento").value,
-        "Relatorio": document.getElementById("Relatorio").value
-    };
-    return jsonData;
-}
-
-function jsonCliente() {
-    var jsonData = {
-        "ID_CLIENTE": document.getElementById("ID_CLIENTE").value,
-        "CNPJ": document.getElementById("CNPJ").value,
-        "CODIGO": document.getElementById("CODIGO").value,
-        "EMPRESA": document.getElementById("EMPRESA").value,
-        "NOME": document.getElementById("NOME").value,
-        "REGIME_TRIBUTARIO": document.getElementById("REGIME_TRIBUTARIO").value,
-        "SITUACAO": document.getElementById("SITUACAO").checked,
-
-        "LOGIN": document.getElementById("LOGIN").value,
-        "PASSWORD": document.getElementById("PASSWORD").value,
-        "CODIGO_LOGIN": document.getElementById("CODIGO_LOGIN").value,
-        "CADASTRO_ECONOMICO": document.getElementById("CADASTRO_ECONOMICO").value
-    };
-    jsonString = JSON.stringify(jsonData);
-    return jsonString;
-}
-
 function buscarCliente(valor) {
 
     if (valor !== null && valor !== '') {
@@ -163,7 +162,8 @@ function buscarCliente(valor) {
 }
 
 function excluirCliente() {
-    var jsonString = jsonCliente();
+    showLoading();
+	var jsonString = jsonCliente();
     limparModalCliente();
     uiPathApi.sendMessage("excluirCliente", jsonString);
 }
@@ -174,15 +174,16 @@ function salvarCliente() {
 }
 
 function importarClientes() {
-	showLoading();
-    limparModalCliente();
+    showLoading();
+	limparModalCliente();
     document.getElementById("divClienteCadastro").style.display = "none";
     document.getElementById("divClienteImportar").style.display = "block";
     uiPathApi.sendMessage("importarClientes");
 }
 
 function adicionarCliente(valor) {
-    var jsonData = {
+    showLoading();
+	var jsonData = {
         "CODIGO": valor
     }
     var jsonString = JSON.stringify(jsonData);
