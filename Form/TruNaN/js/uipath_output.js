@@ -174,6 +174,7 @@ function salvarCliente() {
 }
 
 function importarClientes() {
+	showLoading();
     limparModalCliente();
     document.getElementById("divClienteCadastro").style.display = "none";
     document.getElementById("divClienteImportar").style.display = "block";

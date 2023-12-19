@@ -38,7 +38,15 @@
 
 		setValue: function (elementId, value) {
 			
-			if (elementId === 'dominio') {
+			if (elementId === 'FiltroCheckbox'){
+				if (value == 'Todos') {
+					document.getElementById(elementId).checked = true;
+				} else if (value =='Nenhum'){
+					document.getElementById(elementId).checked = false;
+				} else {
+					document.getElementById(elementId).indeterminate = true;
+				} 
+			} else if (elementId === 'dominio') {
 				showLoading();
 				inArrayJson(value, null);
 				
@@ -49,15 +57,7 @@
 			} else if (elementId === 'dataCliente') {
 				limparModalCliente();
 				inArrayJson(value, ['CODIGO_LOGIN', 'CADASTRO_ECONOMICO']);
-			} else if (elementId === 'FiltroCheckbox'){
-				if (value == 'Todos') {
-					document.getElementById(elementId).checked = true;
-				} else if (value =='Nenhum'){
-					document.getElementById(elementId).checked = false;
-				} else {
-					document.getElementById(elementId).indeterminate = true;
-				} 
-			} else  if (elementId === 'listaPerfil') {
+			} else if (elementId === 'listaPerfil') {
 				inPerfil(value);
 			/*
 				var jsonData = value;
@@ -148,7 +148,7 @@
 				});
 				*/
 			} else if (elementId === 'listaClientes') {
-				var altura = window.innerHeight;
+				/*var altura = window.innerHeight;
 				var nPag = 22;
 				var fontSize = 9;
 				if (window.innerHeight > 1080) {
@@ -205,11 +205,7 @@
 					
 					col = $('<div>').prop('class', 'col-1');
 					var divF = $('<div>').prop('class', 'd-flex justify-content-end align-items-center');
-					/*
-					var ico = $('<i>').prop('class', 'bi bi-pencil-square');
-					var btn = $('<button>').attr('type', 'button').prop('class', 'btn btn-warning custom-btn-extra-small me-2').attr('data-bs-theme', 'dark' ).attr('data-bs-toggle', 'modal' ).attr('data-bs-target', '#clienteModal').attr('onclick', 'buscarCliente('+item.CODIGO+')').prop('name', item.ID_CLIENTE).prop("value",item.ID_CLIENTE).append(ico);
-					divF.append(btn)
-					*/
+					
 					
 					var checkbox = $('<input>').attr('type', 'checkbox').prop('class','ProcessCheckbox PendenciaInput form-check-input').prop('id','EXECUTAR').prop('name',item.ID_CLIENTE+item.PENDENCIA).attr('onclick', 'repetirCliente('+item.ID_CLIENTE+', null)');
 					
@@ -220,13 +216,7 @@
 					} else {
 						checkbox.prop('indeterminate', true);
 					} 
-					/*
-					if (item.EXECUTAR === 'True') {
-						checkbox.prop('checked', true);
-					} else {
-						//checkbox.prop("disabled", true)
-					}
-					*/
+					
 					divF.append(checkbox);
 					
 					
@@ -249,45 +239,15 @@
 					tableBody.append(row);
 				});
 				
-				initializePagination(data, nPag, 'myTable', 'pagination' );
 				
-				var processCheckboxAll = document.querySelector('.ProcessCheckboxAll');
-				var processCheckboxes = document.querySelectorAll('.ProcessCheckbox');
-				var observacaoCheckboxes = document.querySelectorAll('.observacao');
-				var executarCheckboxes = document.querySelectorAll('.executar');
+				*/
 				
-
-				processCheckboxAll.addEventListener('change', function() {
-					
-					if (processCheckboxAll.checked) {
-						repetirAutomacao(null);
-					  // Marca todos os checkboxes "ProcessCheckbox"
-						processCheckboxes.forEach(function(processCheckbox, index) {
-							if (!processCheckbox.disabled) {
-								processCheckbox.indeterminate = false;
-								processCheckbox.checked = true;
-								observacaoCheckboxes[index].style.display = 'block';
-								if (observacaoCheckboxes[index].textContent  === '' || observacaoCheckboxes[index].textContent  === null || observacaoCheckboxes[index].textContent  === undefined){
-									//repetirCliente(executarCheckboxes[index].value, null);
-								}
-								
-							}
-						});
-					} else {
-						// Desmarca todos os checkboxes "ProcessCheckbox"
-						processCheckboxes.forEach(function(processCheckbox, index) {
-							processCheckbox.indeterminate = false;
-							processCheckbox.checked = false;
-							observacaoCheckboxes[index].style.display = 'none';
-							processCheckbox.name = executarCheckboxes[index].value+'Nenhum';
-						});
-					}
-				});
-				
-				hideLoading(); // desativa animação
+				inDataClientes(value);
+				hideLoading(); 
 				
 			} else if (elementId === 'listaImportacao') {
-				var tabela = document.getElementById('myTableImportacao');
+				inClientesDominio(value);
+				/*var tabela = document.getElementById('myTableImportacao');
 				while (tabela.rows.length > 0) {
 					tabela.deleteRow(0);
 				}
@@ -324,7 +284,8 @@
 					tableBody.append(row);
 				});
 				initializePagination(data, nPag, 'myTableImportacao', 'paginationImportacao');
-						//initializePagination(data, nPag);
+				*/
+				hideLoading();
 			} else {
 				var el = document.getElementById(elementId);
 				if (el == null) {
@@ -477,12 +438,11 @@
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.8/lottie.min.js"></script>
-
+<script src="js/paginacao.js"></script>	
 <script src="js/uipath_input.js"></script>
 <script src="js/uipath_output.js"></script>
 <script src="js/contents.js"></script>
 <script src="animacao.js"></script>
-<script src="js/paginacao.js"></script>	
 <script src="js/validacoes.js"></script>
 <script src="js/change.js"></script>
 
