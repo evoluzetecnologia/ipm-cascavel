@@ -40,10 +40,20 @@
 			
 			if (elementId === 'dataCliente') {
 				limparModalCliente();
+				inArrayJson(value, ['CODIGO_LOGIN', 'CADASTRO_ECONOMICO']);
+				
+				/*
+				else if (disableArray.includes(key)) {
+						if (data[key] === '' || data[key] === null || data[key] === undefined) {
+                            el.disabled = true;
+                        } else {
+                            el.disabled = false;
+                        }
+					}
 				var jsonData = value;
 				var data = JSON.parse(jsonData);
 				var idCliente = data['ID_CLIENTE'];
-
+				
 				for (var key in data) {
 					if (data.hasOwnProperty(key)) {
 						var el = document.getElementById(key);
@@ -95,6 +105,7 @@
 						}
 					}
 				}
+				*/
 			} else if (elementId === 'FiltroCheckbox'){
 				if (value == 'Todos') {
 					document.getElementById(elementId).checked = true;
@@ -104,65 +115,14 @@
 					document.getElementById(elementId).indeterminate = true;
 					//$('#FitroCheckbox').prop('indeterminate', true);
 				} 
+			} else if (elementId === 'dominio') {
+				showLoading();
+				inArrayJson(value, null);
+				
 			} else if (elementId === 'parametros') {
 				showLoading();
-				var jsonData = value;
-				var data = JSON.parse(jsonData);
+				inArrayJson(value, ['IPMCodigoLogin']);
 				
-				for (var key in data) {
-					if (data.hasOwnProperty(key)) {
-						var el = document.getElementById(key);
-						if (el == null) {
-							var elements = document.querySelectorAll('[name="' + key + '"]');
-							el = elements[0];
-						}
-						if (el) {
-							if (el.tagName === 'INPUT' && el.type === 'radio') {
-								var radioButtonXML = document.getElementById(key + 'XML');
-								var radioButtonTXT = document.getElementById(key + 'TXT');
-								if (data[key] === 'XML') {
-									radioButtonXML.checked = true;
-									radioButtonTXT.checked = false;
-								} else {
-									radioButtonXML.checked = false;
-									radioButtonTXT.checked = true;
-								}
-							} else if (typeof data[key] === 'boolean') {
-								var label = document.querySelector('label[for="' + key + '"]');
-								el.checked = data[key];
-								if (key === 'FiltrarClientesPendentes'){
-									//label.textContent = data[key] ? 'Clientes Pendentes' : 'Todos os Clientes';
-								} else {
-									try {
-									  label.textContent = data[key] ? 'Sim' : 'Não';
-									} catch (error) {
-									}
-								}
-							} else {
-								el.value = data[key];
-								if (key === 'IPMCodigoLogin') {
-									if (data[key] === '' || data[key] === null || data[key] === undefined){
-										document.getElementById('IPMCodigoLogin').disabled = true;
-									} else {
-										document.getElementById('IPMCodigoLogin').disabled = false;
-									}
-								}
-							}
-						}
-					}
-				}
-			} else if (elementId === 'dominio') {
-				var jsonData = value;
-				var data = JSON.parse(jsonData);
-				
-				for (var key in data) {
-					if (data.hasOwnProperty(key)) {
-						var el = document.getElementById(key);
-						if (el) {
-							el.value = data[key];
-						}
-					}
-				}
 			} else if (elementId === 'listaPerfil') {
 				var jsonData = value;
 				var data = JSON.parse(jsonData);
