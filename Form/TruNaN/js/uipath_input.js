@@ -47,6 +47,9 @@ function inArrayJson(value, campos) {
             }
         }
     }
+	$(document).ready(function () {
+		Inputmask("99999-999").mask("#Periodo");
+	});
 }
 
 // função do perfil
@@ -275,6 +278,15 @@ function inDataClientes(value) {
             });
         }
     });
+	
+	$(document).ready(function(){
+		$("#myInput").on("keyup", function () {
+			var value = $(this).val().toLowerCase();
+			$("#myTable tr").filter(function () {
+				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+			});
+		});
+	});
 }
 
 function inClientesDominio(value) {

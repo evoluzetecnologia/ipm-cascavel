@@ -7,13 +7,13 @@ function jsonData() {
         "IPMLogin": document.getElementById("IPMLogin").value,
         "IPMPassword": document.getElementById("IPMPassword").value,
         "IPMCodigoLogin": document.getElementById("IPMCodigoLogin").value,
-
+		
+		"SolicitacaoCancelamento": document.getElementById("SolicitacaoCancelamento").value,
         "DownloadSaida": document.getElementById("DownloadSaida").value,
         "DownloadEntrada": document.getElementById("DownloadEntrada").value,
-        "ProtocolarSaida": document.getElementById("ProtocolarSaida").value,
+		"ProtocolarSaida": document.getElementById("ProtocolarSaida").value,
         "ProtocolarEntrada": document.getElementById("ProtocolarEntrada").value,
         "SimplesNacional": document.getElementById("SimplesNacional").value,
-        "SolicitacaoCancelamento": document.getElementById("SolicitacaoCancelamento").value,
         "Relatorio": document.getElementById("Relatorio").value
     };
     return jsonData;
@@ -62,13 +62,13 @@ function iniciarAutomacao() {
         "IPMLogin": document.getElementById("IPMLogin").value,
         "IPMPassword": document.getElementById("IPMPassword").value,
         "IPMCodigoLogin": document.getElementById("IPMCodigoLogin").value,
-
+		
+		"SolicitacaoCancelamento": document.getElementById("SolicitacaoCancelamento").value,
         "DownloadSaida": document.getElementById("DownloadSaida").value,
         "DownloadEntrada": document.getElementById("DownloadEntrada").value,
         "ProtocolarSaida": document.getElementById("ProtocolarSaida").value,
         "ProtocolarEntrada": document.getElementById("ProtocolarEntrada").value,
         "SimplesNacional": document.getElementById("SimplesNacional").value,
-        "SolicitacaoCancelamento": document.getElementById("SolicitacaoCancelamento").value,
         "Relatorio": document.getElementById("Relatorio").value
     };
 

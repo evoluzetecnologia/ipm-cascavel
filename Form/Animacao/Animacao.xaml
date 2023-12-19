@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Sequence" this:Sequence.in_Status="Start, Update, Close" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ufa="clr-namespace:UiPath.Forms.Activities;assembly=UiPath.Forms.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Sequence" this:Sequence.in_Status="Start, Update, Close" this:Sequence.in_Text="Olá Mundo" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ufa="clr-namespace:UiPath.Forms.Activities;assembly=UiPath.Forms.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_Status" Type="InArgument(x:String)" />
     <x:Property Name="in_Text" Type="InArgument(x:String)" />
@@ -6,7 +6,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1254,914</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1254,810</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -121,12 +121,13 @@
       <AssemblyReference>System.Windows.Forms</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Sequence" sap:VirtualizedContainerService.HintSize="559,849" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Sequence" sap:VirtualizedContainerService.HintSize="559,745" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Int32" Name="width" />
       <Variable x:TypeArguments="x:Int32" Name="heigth" />
       <Variable x:TypeArguments="x:Int32" Name="posX" />
       <Variable x:TypeArguments="x:Int32" Name="posY" />
+      <Variable x:TypeArguments="x:String" Name="code" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -201,7 +202,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:MultipleAssign>
-    <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[in_Status]" sap:VirtualizedContainerService.HintSize="497,266" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+    <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[in_Status]" sap:VirtualizedContainerService.HintSize="497,162" sap2010:WorkflowViewState.IdRef="Switch`1_1">
       <Switch.Default>
         <ufa:CloseFormActivity InstanceName="{x:Null}" DisplayName="Close Form" FormId="bc8d2667-5174-4c0b-9ddc-d0cf94c72b81" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="CloseFormActivity_1">
           <sap:WorkflowViewStateService.ViewState>
@@ -221,7 +222,7 @@
       <ufa:ShowFormActivity InstanceName="{x:Null}" ShowInTaskbar="{x:Null}" Title="{x:Null}" x:Key="Start" DisplayName="Show Form" FormId="54b812a9-c0c6-41a1-a34d-19e534d56691" Height="[heigth]" sap:VirtualizedContainerService.HintSize="334,186" sap2010:WorkflowViewState.IdRef="ShowFormActivity_1" IsAsync="True" Left="[posX]" Top="[posY]" Width="[width]" WindowState="[UiPath.Studio.Forms.Runtime.WindowState.Normal]">
         <ufa:ShowFormActivity.Arguments>
           <InArgument x:TypeArguments="x:String" x:Key="loading">True</InArgument>
-          <InArgument x:TypeArguments="x:String" x:Key="text">Esout Analizando XML</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="text">[in_Text]</InArgument>
         </ufa:ShowFormActivity.Arguments>
         <ufa:ShowFormActivity.ShowMargin>
           <InArgument x:TypeArguments="s:Nullable(x:Boolean)">
@@ -234,7 +235,7 @@
           </InArgument>
         </ufa:ShowFormActivity.TopMost>
       </ufa:ShowFormActivity>
-      <ufa:SetFormFieldsActivity InstanceName="{x:Null}" x:Key="Update" FormId="54b812a9-c0c6-41a1-a34d-19e534d56691" sap:VirtualizedContainerService.HintSize="334,140" sap2010:WorkflowViewState.IdRef="SetFormFieldsActivity_1">
+      <ufa:SetFormFieldsActivity InstanceName="{x:Null}" x:Key="Update" FormId="54b812a9-c0c6-41a1-a34d-19e534d56691" sap:VirtualizedContainerService.HintSize="334,141" sap2010:WorkflowViewState.IdRef="SetFormFieldsActivity_1">
         <ufa:SetFormFieldsActivity.Arguments>
           <InArgument x:TypeArguments="x:String" x:Key="text">[in_Text]</InArgument>
         </ufa:SetFormFieldsActivity.Arguments>

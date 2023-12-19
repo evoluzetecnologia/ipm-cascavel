@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    var data = ['menu', 'modal_repetir_automacao', 'modal_parametros', 'modal_dominio', 'modal_perfil', 'footer', 'modal_cliente'];
+    var data = ['header', 'menu', 'modal_repetir_automacao', 'modal_parametros', 'modal_dominio', 'modal_perfil', 'footer', 'modal_cliente'];
 
     data.forEach(function (item) {
         const modal = document.getElementById(item);
@@ -8,53 +8,52 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.text())
         .then(html => {
             modal.innerHTML = html;
-			if (item === 'menu'){
+			if (item === 'header' || item === 'menu'){
 				modal.addEventListener('change', function (event) {
 					const target = event.target;
-
-					if (target.id === 'DownloadSaida' || target.id === 'DownloadEntrada' || target.id === 'ProtocolarSaida' || target.id === 'ProtocolarEntrada' || target.id === 'SimplesNacional' || target.id === 'SolicitacaoCancelamento') {
+					if (target.id === 'Perfil', target.id === 'DownloadSaida' || target.id === 'DownloadEntrada' || target.id === 'ProtocolarSaida' || target.id === 'ProtocolarEntrada' || target.id === 'SimplesNacional' || target.id === 'SolicitacaoCancelamento') {
 						perfilChanged();
 						console.log('Input ' + target.id + ' mudou para:', target.value);
+					}
+				});
+			}
+			if (item === 'header' || item === 'modal_cliente'){
+				modal.addEventListener('input', function (event) {
+					const target = event.target;
+					if (target.id === 'CNPJ') {
+							var valor = target.value.replace(/\D/g, '');
+							if (valor.length === 11) {
+								// CPF
+								if (validarCpf(valor)) {
+									target.value = aplicarMascaraCpf(valor);
+								}
+							} else if (valor.length > 13) {
+								// CNPJ
+								if (validarCnpj(valor)) {
+									target.value = aplicarMascaraCnpj(valor);
+								} else {
+									target.value = 'CNPJ Inválido';
+								}
+							}
+							console.log('Input ' + target.id + ' digitou :', target.value);
+						}
+					});
+				modal.addEventListener('focusout', function (event) {
+					const target = event.target;
+
+					if (target.id === 'Periodo'){
+						perfilChanged();
+					} else  if (target.id === 'CODIGO') {
+						capturarInformacoes(target.value, null)
+					} else if (target.id === 'CNPJ') {
+						capturarInformacoes(null, target.value)
 					}
 				});
 			}
         })
         .catch(error => console.log('Erro content ' + item + ':', error));
 
-		if (item === 'modal_cliente'){
-			modal.addEventListener('input', function (event) {
-                const target = event.target;
-
-                if (target.id === 'CNPJ') {
-                        var valor = target.value.replace(/\D/g, '');
-                        if (valor.length === 11) {
-                            // CPF
-                            if (validarCpf(valor)) {
-                                target.value = aplicarMascaraCpf(valor);
-                            }
-                        } else if (valor.length > 13) {
-                            // CNPJ
-                            if (validarCnpj(valor)) {
-                                target.value = aplicarMascaraCnpj(valor);
-                            } else {
-                                target.value = 'CNPJ Inválido';
-                            }
-                        }
-                        console.log('Input ' + target.id + ' digitou :', target.value);
-                    }
-                });
-
-			modal.addEventListener('focusout', function (event) {
-				const target = event.target;
-
-				// Verifica se o evento foi acionado por um input com o ID "CNPJ"
-				if (target.id === 'CODIGO') {
-					capturarInformacoes(target.value, null)
-				} else if (target.id === 'CODIGO' || target.id === 'CNPJ') {
-					capturarInformacoes(null, target.value)
-				}
-			});
-		}
+		
     });
 });
 
@@ -119,4 +118,8 @@ function capturarInformacoes(codigo, cnpj) {
     }
 
     return;
+}
+
+function perfilChanged() {
+	changedPerfil(document.getElementById('Perfil').value);
 }

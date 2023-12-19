@@ -37,7 +37,6 @@
 		},
 
 		setValue: function (elementId, value) {
-			
 			if (elementId === 'FiltroCheckbox'){
 				if (value == 'Todos') {
 					document.getElementById(elementId).checked = true;
@@ -49,249 +48,22 @@
 			} else if (elementId === 'dominio') {
 				showLoading();
 				inArrayJson(value, null);
-				
 			} else if (elementId === 'parametros') {
 				showLoading();
 				inArrayJson(value, ['IPMCodigoLogin']);
-				
 			} else if (elementId === 'dataCliente') {
 				limparModalCliente();
 				inArrayJson(value, ['CODIGO_LOGIN', 'CADASTRO_ECONOMICO']);
 			} else if (elementId === 'listaPerfil') {
 				inPerfil(value);
-			/*
-				var jsonData = value;
-				var data = JSON.parse(jsonData);
-				var perfilSelect  = document.getElementById('Perfil');
-				
-				while (perfilSelect.options.length > 0) {
-				  perfilSelect.remove(0);
-				}
-				perfilSelect.innerHTML = '';
-				
-				var tabela = document.getElementById('myTablePerfil');
-				
-				while (tabela.rows.length > 0) {
-					tabela.deleteRow(0);
-				}
-				
-				var tableBody = $("#myTablePerfil");
-				
-				data.forEach(function(item) {
-					
-					if (item.SITUACAO) {
-						var option = document.createElement('option');
-						option.value = item.ID_PERFIL;
-						option.text = item.PERFIL;
-					  perfilSelect.appendChild(option);
-					}
-					
-					var row = $('<tr>');
-					var codigoInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-extra-sm').prop('id', 'ID_PERFIL_'+ item.ID_PERFIL).prop('name', 'ID_PERFIL_'+ item.ID_PERFIL).prop("value",item.ID_PERFIL).prop('readonly', true);
-					var codigoCell = $("<td>").prop('class', 'col-2 fw-normal').append(codigoInput);
-					row.append(codigoCell);
-									
-					var perfilInput = $('<input>').attr('type', 'text').prop('class', 'form-control form-control-extra-sm').prop('id', 'PERFIL_'+ item.ID_PERFIL).prop('name', 'PERFIL_'+ item.ID_PERFIL).prop("value",item.PERFIL);
-					var perfilCell = $("<td>").prop('class', 'col-10').append(perfilInput);
-					row.append(perfilCell);
-					
-					//Ativou ou Inativo
-					var td = $('<td>').prop('class', 'col-2 fw-normal');
-					var div = $('<div>').prop('class', 'd-flex justify-content-center align-items-center');
-					var formCheck = $('<div>').prop('class', 'form-check form-switch form-check-inline');
-					var input = $('<input>').prop('class', 'form-check-input SITUACAO').attr('type', 'checkbox').attr('role', 'switch').attr('id', 'SITUACAO_'+ item.ID_PERFIL).attr('name', 'SITUACAO_'+ item.ID_PERFIL);
-					if (item.SITUACAO) {
-					  input.prop('checked', true);
-					}
-					var label = $('<label>').prop('class', 'form-check-label').attr('for', 'SITUACAO_'+ item.ID_PERFIL).text(item.SITUACAO ? 'Ativo' : 'Inativo');
-					formCheck.append(input, label);
-					div.append(formCheck);
-					td.append(div);
-					row.append(td);
-					
-					tableBody.append(row);
-					
-					$('.btn-excluir-perfil').click(function() {
-					  var id = $(this).attr('id');
-					  excluirPerfil(id);
-					});
-					
-				  
-				});
-				
-				var ckPerfilSituacao = document.querySelectorAll('input[id^="SITUACAO_"]');
-					ckPerfilSituacao.forEach(function(checkbox) {
-					  var labelPerfil = document.querySelector('label[for="' + checkbox.id + '"]');
-
-					  checkbox.addEventListener('change', function() {
-						if (this.checked) {
-						  labelPerfil.textContent = 'Sim';
-						} else {
-						  labelPerfil.textContent = 'Não';
-						}
-					  });
-					});
-			*/
-				
 			} else if (elementId === 'rowCliente') {
 				inRowCliente(value);
-				/*var jsonData = value;
-				var data = JSON.parse(jsonData);
-				$('table tr').each(function() {
-					var row = $(this);
-					var ID_CLIENTE = row.find("#ID_EXECUTAR").val();
-					console.log(ID_CLIENTE);
-					if(ID_CLIENTE === data['ID_CLIENTE']){
-						row.find('.observacao').text(data['OBSERVACAO']);
-						return false;
-					}
-				});
-				*/
 			} else if (elementId === 'listaClientes') {
-				/*var altura = window.innerHeight;
-				var nPag = 22;
-				var fontSize = 9;
-				if (window.innerHeight > 1080) {
-				  nPag = 40;
-				  fontSize = 11;
-				} else if (window.innerHeight > 900 ) {
-				  nPag = 35;
-				  fontSize = 10;
-				} else if (window.innerHeight > 720) {
-				  nPag = 25;
-				}
-				var myTableHead  = document.getElementById('myTableHead');
-				myTableHead.style.fontSize = ''+fontSize+'px';
-				
-				var tabela = document.getElementById('myTable');
-				while (tabela.rows.length > 0) {
-					tabela.deleteRow(0);
-				}
-				var jsonData = value;
-				var data = JSON.parse(jsonData);
-				var tableBody = $("#myTable");
-				var nItem = 0;
-					
-				data.forEach(function(item) {
-					var row = $('<tr>').prop('class', 'align-items-center').prop('style', 'font-size: '+fontSize+'px;');
-					nItem++;
-					if(nItem > nPag){
-						row.css('display', 'none');
-					}
-					// TD 1
-					var td = $('<td>').prop('class', 'col-6 fw-normal');
-					var div = $('<div>').prop('class', 'd-flex justify-content-start align-items-center');
-					var col = $('<div>').prop('class', 'col-1 executar').prop('id','ID_EXECUTAR').prop('value', item.ID_CLIENTE).text(item.CODIGO);
-					var ico = $('<i>').prop('class', 'bi bi-pencil-square');
-					var btn = $('<button>').attr('type', 'button').prop('class', 'btn btn-warning custom-btn-extra-small me-2').attr('data-bs-theme', 'dark' ).attr('data-bs-toggle', 'modal' ).attr('data-bs-target', '#clienteModal').attr('onclick', 'buscarCliente('+item.CODIGO+')').prop('name', item.ID_CLIENTE).prop("value",item.ID_CLIENTE).append(ico);
-					div.append(btn)
-					div.append(col);
-					col = $('<div>').prop('class', 'col-2 d-flex justify-content-center  me-2').text(item.CNPJ);
-					div.append(col);
-					col = $('<div>').prop('class', 'col-9').text(item.EMPRESA);
-					div.append(col);
-					
-					td.append(div);
-					row.append(td);
-					
-					// TD 2
-					var td = $('<td>').prop('class', 'col-6 fw-normal');
-					var div = $('<div>').prop('class', 'd-flex justify-content-start align-items-center');
-					var col = $('<div>').prop('class', 'col-11');
-					var obs = $('<div>').prop('class', 'observacao').prop('id','ID_OBSERVACAO_'+item.ID_CLIENTE).text(item.OBSERVACAO).attr('style', 'display: block;');
-					col.append(obs);
-					div.append(col);
-					
-					
-					col = $('<div>').prop('class', 'col-1');
-					var divF = $('<div>').prop('class', 'd-flex justify-content-end align-items-center');
-					
-					
-					var checkbox = $('<input>').attr('type', 'checkbox').prop('class','ProcessCheckbox PendenciaInput form-check-input').prop('id','EXECUTAR').prop('name',item.ID_CLIENTE+item.PENDENCIA).attr('onclick', 'repetirCliente('+item.ID_CLIENTE+', null)');
-					
-					if (item.PENDENCIA == 'Todos') {
-						checkbox.prop('checked', true);
-					} else if (item.PENDENCIA =='Nenhum'){
-						checkbox.prop('checked', false);
-					} else {
-						checkbox.prop('indeterminate', true);
-					} 
-					
-					divF.append(checkbox);
-					
-					
-					col.append(divF);
-					div.append(col);
-					td.append(div);
-					row.append(td);
-					
-					row.on('dblclick', function () {
-						const checkbox = $(this).find('input[type="checkbox"]');
-						if (checkbox.prop('indeterminate')){
-							checkbox.prop('indeterminate', false);
-							checkbox.prop('checked', false);
-						} else if (checkbox) {
-							checkbox.prop('checked', !checkbox.prop('checked'));
-						}
-						repetirCliente(item.ID_CLIENTE, null);
-					});
-					
-					tableBody.append(row);
-				});
-				
-				
-				*/
-				
-				console.log('Lista Cliente A');
 				inDataClientes(value);
-				console.log('Lista Cliente B');
 				hideLoading(); 
-				console.log('Lista Cliente C');
-				
 			} else if (elementId === 'listaImportacao') {
-				console.log('Lista Importacao A');
 				inClientesDominio(value);
-				console.log('Lista Importacao B');
-				/*var tabela = document.getElementById('myTableImportacao');
-				while (tabela.rows.length > 0) {
-					tabela.deleteRow(0);
-				}
-				var jsonData = value;
-				var data = JSON.parse(jsonData);
-				var tableBody = $("#myTableImportacao");
-				var nItem = 0;
-				var altura = window.innerHeight;
-				var nPag = 15;
-				data.forEach(function(item) {
-					var row = $('<tr>');
-					nItem++;
-					if(nItem > nPag){
-						row.css('display', 'none');
-					}
-					var td = $('<td>').prop('class', 'col-1').prop('id','IMP_CODIGO').prop('value', item.CODIGO).text(item.CODIGO);
-					row.append(td);
-					
-					td = $('<td>').prop('class', 'col-2 me-2');
-					var div = $('<div>').prop('class', 'd-flex justify-content-center').text(item.CNPJ);
-					td.append(div);
-					row.append(td);
-					
-					td = $('<td>').prop('class', 'col-8').text(item.EMPRESA);
-					row.append(td);
-					
-					td = $('<td>').prop('class', 'col-1');
-					var btn = $('<button>').attr('type', 'button').prop('class', 'btn btn-warning custom-btn-extra-small').attr('onclick', 'adicionarCliente('+item.CODIGO+')').prop('name', item.CODIGO).prop("value",item.CODIGO).text('Importar');
-					div = $('<div>').prop('class', 'd-flex justify-content-end');
-					div.append(btn);
-					td.append(div);
-					row.append(td);
-					
-					tableBody.append(row);
-				});
-				initializePagination(data, nPag, 'myTableImportacao', 'paginationImportacao');
-				*/
 				hideLoading();
-				console.log('Lista Importacao C');
 			} else {
 				var el = document.getElementById(elementId);
 				if (el == null) {
@@ -321,44 +93,9 @@
 		<div class="loading-text">Carregando...</div>
 	</div>
 	
-	<header>
-	  <div class="logo d-flex justify-content-center align-items-center">
-		 <img src="https://trunan.com.br/_trunan/img/rpa.png" alt="truNaN" width="150" height="auto">
-	  </div>
-
-	  <div class="search d-flex align-items-center " >
-		<div class="col-4 d-flex justify-content-start align-items-center">
-			<input type="text" class="form-control form-control-extra-sm m-2" id="Periodo" name="Periodo" data-inputmask="'mask': '99/9999'" placeholder="" value="" style="width: 75px;">
-			<select class="form-select select-control-extra-sm me-2" id="Perfil" style="width: 250px;"></select>
-			<!--select class="form-select select-control-extra-sm me-2" id="RepetirAutomacao" style="width: 125px;">
-				<option value="False">Rotinas Pendentes</option>
-				<option value="True">Repetir as Rotinas</option>
-			</select-->
-		</div>
-		<div class="col-4 d-flex justify-content-center">
-			<input type="text" class="form-control form-control-extra-sm" id="myInput" placeholder="Pesquisar..." style="width: 250px;">
-		</div>
-		<div class="col-4 d-flex justify-content-end">
-			<div class="dropdown">
-			  <button class="btn btn-warning custom-btn-extra-small" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width: 100px; height: 25px">
-				<i class="bi bi-gear"></i> Configurações
-			  </button>
-			  <ul class="dropdown-menu dropdown-menu-dark  small-text">
-				<li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#parametrosModal">Parâmetros</a></li>
-				<li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#dominioModal">Sistema Domínio</a></li>
-				<li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#perfilModal">Perfil Automação</a></li>
-				<li><hr class="dropdown-divider"></li>
-				<li><a class="dropdown-item" onclick="fecharAutomacao()">Fechar</a></li>
-			  </ul>
-			</div>
-		</div>
-	  </div>
-	</header>
+	<header id="header"></header>
 	<main>
-      <!-- Conteúdo da barra lateral direita -->
 		<aside id="menu"></aside>
-	
-		<!-- Conteúdo principal com barra de rolagem -->
 		<div class="scrollable-content">
 			<div class="table-responsive-sm ">
 				<table class="table table-sm table-dark caption-top table-striped table-hover" >
@@ -432,16 +169,8 @@
 		limparFormCliente(JSON.stringify(jsonData));
 	}
 	
-	var selectPerfil = document.getElementById('Perfil');
-	function perfilChanged() {
-		var selectedValue = selectPerfil.value;
-		changedPerfil(selectedValue);
-	}
-	selectPerfil.addEventListener('change', perfilChanged);
-	document.getElementById('Periodo').addEventListener('blur', perfilChanged);
-	
-	
 </script>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.8/lottie.min.js"></script>
 <script src="animacao.js"></script>
@@ -451,9 +180,6 @@
 <script src="js/paginacao.js"></script>	
 <script src="js/uipath_input.js"></script>
 <script src="js/uipath_output.js"></script>
-
-
-
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://trunan.com.br/_trunan/www/js/bootpag.js"></script>

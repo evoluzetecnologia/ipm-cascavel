@@ -125,7 +125,3 @@ function repetirAutomacao(repetir) {
         }
     }
 }
-
-$(document).ready(function () {
-	  Inputmask("99999-999").mask("#Periodo");
-});
