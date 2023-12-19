@@ -4,7 +4,7 @@ var animation = bodymovin.loadAnimation({
   renderer: 'svg',
   loop: true,
   autoplay: false, // Alterado para não iniciar automaticamente
-  path: 'truNaN.json'
+  path: 'css/truNaN.json'
 });
 
 function showLoading() {
