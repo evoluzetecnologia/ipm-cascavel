@@ -38,84 +38,7 @@
 
 		setValue: function (elementId, value) {
 			
-			if (elementId === 'dataCliente') {
-				limparModalCliente();
-				inArrayJson(value, ['CODIGO_LOGIN', 'CADASTRO_ECONOMICO']);
-				
-				/*
-				else if (disableArray.includes(key)) {
-						if (data[key] === '' || data[key] === null || data[key] === undefined) {
-                            el.disabled = true;
-                        } else {
-                            el.disabled = false;
-                        }
-					}
-				var jsonData = value;
-				var data = JSON.parse(jsonData);
-				var idCliente = data['ID_CLIENTE'];
-				
-				for (var key in data) {
-					if (data.hasOwnProperty(key)) {
-						var el = document.getElementById(key);
-						if (el == null) {
-							var elements = document.querySelectorAll('[name="' + key + '"]');
-							el = elements[0];
-						}
-						if (el) {
-							if (el.tagName === 'SELECT') {
-								console.log(key + data[key]);
-								el.value = data[key];
-								if(el.value === '' || el.value === null){
-									el.value = 'Default';
-								}
-							} else if (el.tagName === 'INPUT' && el.type === 'radio') {
-								var value = key+'_'+data[key];
-								var radioButton = document.getElementById(value);
-								
-								if (radioButton) {
-									radioButton.checked = true;
-								}
-								
-							} else if (typeof data[key] === 'boolean') {
-								//alert(key);
-								var label = document.querySelector('label[for="' + key + '"]');
-								el.checked = data[key];
-								if (key === 'SITUACAO'){
-									//label.textContent = data[key] ? 'Ativo' : 'Inativo';
-								} else {
-									//label.textContent = data[key] ? 'Sim' : 'Não';
-								}
-							} else {
-								el.value = data[key];
-								if (key === 'ID_CLIENTE'){
-									document.getElementById('SalvarCliente').disabled = false;
-									if (data[key] === 0 || data[key] === '' || data[key] === null || data[key] === undefined ){
-										document.getElementById('ExcluirCliente').disabled = true;
-									} else {
-										document.getElementById('ExcluirCliente').disabled = false;
-									}
-								} else if (key === 'CODIGO_LOGIN' || key === 'CADASTRO_ECONOMICO') {
-									if (data[key] === '' || data[key] === null || data[key] === undefined ){
-										document.getElementById(key).disabled = true;
-									} else {
-										document.getElementById(key).disabled = false;
-									}
-								}
-							}
-						}
-					}
-				}
-				*/
-			} else if (elementId === 'FiltroCheckbox'){
-				if (value == 'Todos') {
-					document.getElementById(elementId).checked = true;
-				} else if (value =='Nenhum'){
-					document.getElementById(elementId).checked = false;
-				} else {
-					document.getElementById(elementId).indeterminate = true;
-					//$('#FitroCheckbox').prop('indeterminate', true);
-				} 
-			} else if (elementId === 'dominio') {
+			if (elementId === 'dominio') {
 				showLoading();
 				inArrayJson(value, null);
 				
@@ -123,7 +46,20 @@
 				showLoading();
 				inArrayJson(value, ['IPMCodigoLogin']);
 				
-			} else if (elementId === 'listaPerfil') {
+			} else if (elementId === 'dataCliente') {
+				limparModalCliente();
+				inArrayJson(value, ['CODIGO_LOGIN', 'CADASTRO_ECONOMICO']);
+			} else if (elementId === 'FiltroCheckbox'){
+				if (value == 'Todos') {
+					document.getElementById(elementId).checked = true;
+				} else if (value =='Nenhum'){
+					document.getElementById(elementId).checked = false;
+				} else {
+					document.getElementById(elementId).indeterminate = true;
+				} 
+			} else  if (elementId === 'listaPerfil') {
+				inPerfil(value);
+			/*
 				var jsonData = value;
 				var data = JSON.parse(jsonData);
 				var perfilSelect  = document.getElementById('Perfil');
@@ -195,10 +131,11 @@
 						}
 					  });
 					});
+			*/
 				
 			} else if (elementId === 'rowCliente') {
-				
-				var jsonData = value;
+				inRowCliente(value);
+				/*var jsonData = value;
 				var data = JSON.parse(jsonData);
 				$('table tr').each(function() {
 					var row = $(this);
@@ -209,6 +146,7 @@
 						return false;
 					}
 				});
+				*/
 			} else if (elementId === 'listaClientes') {
 				var altura = window.innerHeight;
 				var nPag = 22;
