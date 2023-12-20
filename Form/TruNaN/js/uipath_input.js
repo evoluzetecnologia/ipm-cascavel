@@ -255,7 +255,12 @@ function inDataClientes(value) {
     var executarCheckboxes = document.querySelectorAll('.executar');
     processCheckboxAll.addEventListener('change', function () {
         if (processCheckboxAll.checked) {
-            repetirAutomacao(null);
+			if (document.getElementById('easterEgg').innerText === 'Atualizar') {
+				document.getElementById('easterEgg').innerText = 'Parcial';
+				repetirAutomacao(true);
+			} else {
+				repetirAutomacao(null);
+			}
             // Marca todos os checkboxes "ProcessCheckbox"
             processCheckboxes.forEach(function (processCheckbox, index) {
                 if (!processCheckbox.disabled) {
