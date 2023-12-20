@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     const target = event.target;
                     if (target.id === 'Perfil' || target.id === 'DownloadSaida' || target.id === 'DownloadEntrada' || target.id === 'ProtocolarSaida' || target.id === 'ProtocolarEntrada' || target.id === 'SimplesNacional' || target.id === 'SolicitacaoCancelamento') {
                         perfilChanged();
-                        console.log('Input ' + target.id + ' mudou para:', target.value);
                     }
                 });
             }
@@ -22,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 modal.addEventListener('keydown', function (event) {
                     const target = event.target;
                     if (target.id === 'Periodo') {
-                        if (isNaN(event.key) && !['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Home', 'End', 'PageUp', 'PageDown'].includes(event.key)) {
+                        if (isNaN(event.key) && !['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Home', 'End', 'PageUp', 'PageDown', 'Tab', 'Enter'].includes(event.key)) {
                             event.preventDefault();
                             return;
                         }
@@ -52,6 +51,18 @@ document.addEventListener('DOMContentLoaded', function () {
                             // Previne a ação padrão do evento
                             event.preventDefault();
                         }
+                        // Se a tecla pressionada é Enter, move o foco para o próximo campo de entrada
+                        if (event.key === 'Enter') {
+                            event.preventDefault();
+                            var inputs = Array.prototype.slice.call(document.querySelectorAll('input, select, textarea, button'));
+                            var index = inputs.indexOf(document.activeElement);
+                            if (index > -1) {
+                                var nextInput = inputs[index + 1];
+                                if (nextInput) {
+                                    nextInput.focus();
+                                }
+                            }
+                        }
                     }
                 });
 
@@ -72,7 +83,6 @@ document.addEventListener('DOMContentLoaded', function () {
                                 target.value = 'CNPJ Inválido';
                             }
                         }
-                        console.log('Input ' + target.id + ' digitou :', target.value);
                     }
                 });
                 modal.addEventListener('focusout', function (event) {
