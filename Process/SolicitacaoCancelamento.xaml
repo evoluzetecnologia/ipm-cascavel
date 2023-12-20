@@ -7,7 +7,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1254,2595</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1254,3285</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>SolicitacaoCancelamento_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -68,6 +68,8 @@
       <x:String>System.Text.RegularExpressions</x:String>
       <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
       <x:String>UiPath.DataTableUtilities</x:String>
+      <x:String>UiPath.Database</x:String>
+      <x:String>UiPath.Database.Activities</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -141,12 +143,12 @@
       <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>UiPath.Database</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="SolicitacaoCancelamento" sap:VirtualizedContainerService.HintSize="668,2530" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="SolicitacaoCancelamento" sap:VirtualizedContainerService.HintSize="668,3220" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Boolean" Default="True" Name="varBool" />
-      <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="parametro" />
       <Variable x:TypeArguments="x:String" Default="1" Name="var" />
       <Variable x:TypeArguments="x:Int32" Default="1" Name="i" />
       <Variable x:TypeArguments="x:String" Default="Solicitacoes de Cancelamento.pdf" Name="relatorio" />
@@ -258,7 +260,7 @@ Not in_Config("PeriodoCancelamento").ToString().Equals(in_Config("PERIODO").ToSt
         </Sequence>
       </If.Else>
     </If>
-    <ui:IfElseIf DisplayName="Gerar Relatório" sap:VirtualizedContainerService.HintSize="606,766" sap2010:WorkflowViewState.IdRef="IfElseIf_4">
+    <ui:IfElseIf DisplayName="Gerar Relatório" sap:VirtualizedContainerService.HintSize="606,767" sap2010:WorkflowViewState.IdRef="IfElseIf_4">
       <ui:IfElseIf.ConditionBlocks>
         <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
           <ui:IfElseIfBlock BlockType="If" Condition="[varBool]">
@@ -1138,7 +1140,7 @@ Not in_Config("PeriodoCancelamento").ToString().Equals(in_Config("PERIODO").ToSt
         </sc:BindingList>
       </ui:IfElseIf.ConditionBlocks>
     </ui:IfElseIf>
-    <ui:IfElseIf DisplayName="Salvar" sap:VirtualizedContainerService.HintSize="606,52" sap2010:WorkflowViewState.IdRef="IfElseIf_2">
+    <ui:IfElseIf DisplayName="Salvar" sap:VirtualizedContainerService.HintSize="606,741" sap2010:WorkflowViewState.IdRef="IfElseIf_2">
       <ui:IfElseIf.ConditionBlocks>
         <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
           <ui:IfElseIfBlock BlockType="If" Condition="[varBool And io_TransactionItem IsNot Nothing]">
@@ -1161,50 +1163,13 @@ Not in_Config("PeriodoCancelamento").ToString().Equals(in_Config("PERIODO").ToSt
           </ui:IfElseIfBlock>
           <ui:IfElseIfBlock BlockType="ElseIf" Condition="[varBool]">
             <ui:IfElseIfBlock.Then>
-              <Sequence sap:VirtualizedContainerService.HintSize="541,381" sap2010:WorkflowViewState.IdRef="Sequence_8">
+              <Sequence sap:VirtualizedContainerService.HintSize="450,303" sap2010:WorkflowViewState.IdRef="Sequence_8">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,178" sap2010:WorkflowViewState.IdRef="MultipleAssign_6">
-                  <ui:MultipleAssign.AssignOperations>
-                    <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
-                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
-                        <ui:AssignOperation.To>
-                          <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)">[parametro]</OutArgument>
-                        </ui:AssignOperation.To>
-                        <ui:AssignOperation.Value>
-                          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)">[Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(in_Config("Parametro").ToString())]</InArgument>
-                        </ui:AssignOperation.Value>
-                      </ui:AssignOperation>
-                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
-                        <ui:AssignOperation.To>
-                          <OutArgument x:TypeArguments="x:Object">[parametro("PeriodoCancelamento")]</OutArgument>
-                        </ui:AssignOperation.To>
-                        <ui:AssignOperation.Value>
-                          <InArgument x:TypeArguments="x:Object">[var]</InArgument>
-                        </ui:AssignOperation.Value>
-                      </ui:AssignOperation>
-                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
-                        <ui:AssignOperation.To>
-                          <OutArgument x:TypeArguments="x:Object">[in_Config("Parametro")]</OutArgument>
-                        </ui:AssignOperation.To>
-                        <ui:AssignOperation.Value>
-                          <InArgument x:TypeArguments="x:Object">[Newtonsoft.Json.JsonConvert.SerializeObject(parametro, Newtonsoft.Json.Formatting.Indented)]</InArgument>
-                        </ui:AssignOperation.Value>
-                      </ui:AssignOperation>
-                    </scg:List>
-                  </ui:MultipleAssign.AssignOperations>
-                </ui:MultipleAssign>
-                <rs:Set_Assets DisplayName="Set Assets" sap:VirtualizedContainerService.HintSize="479,52" sap2010:WorkflowViewState.IdRef="Set_Assets_1" in_Automation="[in_Config(&quot;ApplicationKey&quot;).ToString()]" in_Config="[in_Config]" in_Key="Parametro" in_Value="[in_Config(&quot;Parametro&quot;).ToString()]">
-                  <sap:WorkflowViewStateService.ViewState>
-                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                    </scg:Dictionary>
-                  </sap:WorkflowViewStateService.ViewState>
-                </rs:Set_Assets>
+                <rs:Set_Config DisplayName="Set Config" sap:VirtualizedContainerService.HintSize="388,192" sap2010:WorkflowViewState.IdRef="Set_Config_1" in_Config="[in_Config]" in_Key="PeriodoCancelamento" in_Value="[var]" />
               </Sequence>
             </ui:IfElseIfBlock.Then>
           </ui:IfElseIfBlock>
@@ -1212,7 +1177,7 @@ Not in_Config("PeriodoCancelamento").ToString().Equals(in_Config("PERIODO").ToSt
       </ui:IfElseIf.ConditionBlocks>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
