@@ -1,43 +1,3 @@
-function jsonData() {
-    var jsonData = {
-        "Perfil": document.getElementById("Perfil").value,
-        "Periodo": document.getElementById("Periodo").value,
-        "RepetirAutomacao": document.getElementById("RepetirAutomacao").innerText,
-
-        "IPMLogin": document.getElementById("IPMLogin").value,
-        "IPMPassword": document.getElementById("IPMPassword").value,
-        "IPMCodigoLogin": document.getElementById("IPMCodigoLogin").value,
-		
-		"SolicitacaoCancelamento": document.getElementById("SolicitacaoCancelamento").value,
-        "DownloadSaida": document.getElementById("DownloadSaida").value,
-        "DownloadEntrada": document.getElementById("DownloadEntrada").value,
-		"ProtocolarSaida": document.getElementById("ProtocolarSaida").value,
-        "ProtocolarEntrada": document.getElementById("ProtocolarEntrada").value,
-        "SimplesNacional": document.getElementById("SimplesNacional").value,
-        "Relatorio": document.getElementById("Relatorio").value
-    };
-    return jsonData;
-}
-
-function jsonCliente() {
-    var jsonData = {
-        "ID_CLIENTE": document.getElementById("ID_CLIENTE").value,
-        "CNPJ": document.getElementById("CNPJ").value,
-        "CODIGO": document.getElementById("CODIGO").value,
-        "EMPRESA": document.getElementById("EMPRESA").value,
-        "NOME": document.getElementById("NOME").value,
-        "REGIME_TRIBUTARIO": document.getElementById("REGIME_TRIBUTARIO").value,
-        "SITUACAO": document.getElementById("SITUACAO").checked,
-
-        "LOGIN": document.getElementById("LOGIN").value,
-        "PASSWORD": document.getElementById("PASSWORD").value,
-        "CODIGO_LOGIN": document.getElementById("CODIGO_LOGIN").value,
-        "CADASTRO_ECONOMICO": document.getElementById("CADASTRO_ECONOMICO").value
-    };
-    jsonString = JSON.stringify(jsonData);
-    return jsonString;
-}
-
 function iniciarAutomacao() {
 
     var jsonClientes = []; // Array para armazenar os objetos JSON de cada linha
@@ -54,23 +14,7 @@ function iniciarAutomacao() {
         }
     });
 
-    var jsonAutomacao = {
-        "Perfil": document.getElementById("Perfil").value,
-        "Periodo": document.getElementById("Periodo").value,
-        "RepetirAutomacao": document.getElementById("RepetirAutomacao").innerText,
-
-        "IPMLogin": document.getElementById("IPMLogin").value,
-        "IPMPassword": document.getElementById("IPMPassword").value,
-        "IPMCodigoLogin": document.getElementById("IPMCodigoLogin").value,
-		
-		"SolicitacaoCancelamento": document.getElementById("SolicitacaoCancelamento").value,
-        "DownloadSaida": document.getElementById("DownloadSaida").value,
-        "DownloadEntrada": document.getElementById("DownloadEntrada").value,
-        "ProtocolarSaida": document.getElementById("ProtocolarSaida").value,
-        "ProtocolarEntrada": document.getElementById("ProtocolarEntrada").value,
-        "SimplesNacional": document.getElementById("SimplesNacional").value,
-        "Relatorio": document.getElementById("Relatorio").value
-    };
+    var jsonAutomacao = jsonParametros();
 
     var jsonData = {
         "Automacao": jsonAutomacao,
@@ -124,14 +68,14 @@ function fecharAutomacao() {
 
 function changedPerfil(perfil) {
     showLoading();
-    var jsonDataObj = jsonData();
+    var jsonDataObj = jsonParametros();
     jsonDataObj['Perfil'] = perfil;
     var jsonString = JSON.stringify(jsonDataObj);
     uiPathApi.sendMessage("perfil", jsonString);
 }
 
 function salvarParametros() {
-    var jsonString = JSON.stringify(jsonData());
+    var jsonString = JSON.stringify(jsonParametros());
     uiPathApi.sendMessage("save", jsonString);
 }
 
