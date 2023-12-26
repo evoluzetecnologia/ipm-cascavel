@@ -11,7 +11,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1254,2386</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1254,1692</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GetTransactionData_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -171,7 +171,7 @@
       <x:Boolean x:Key="ShouldExpandAll">False</x:Boolean>
     </scg:Dictionary>
   </sap:WorkflowViewStateService.ViewState>
-  <Sequence DisplayName="Get Transaction Data" sap:VirtualizedContainerService.HintSize="886,2321" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Get Transaction Data" sap:VirtualizedContainerService.HintSize="734,1627" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="var" />
     </Sequence.Variables>
@@ -180,10 +180,10 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:RetryScope DisplayName="Retry Get transaction item" sap:VirtualizedContainerService.HintSize="824,2026" sap2010:WorkflowViewState.IdRef="RetryScope_2" NumberOfRetries="[Cint(io_Config(&quot;RetryNumberGetTransactionItem&quot;))]">
+    <ui:RetryScope DisplayName="Retry Get transaction item" sap:VirtualizedContainerService.HintSize="672,1332" sap2010:WorkflowViewState.IdRef="RetryScope_2" NumberOfRetries="[Cint(io_Config(&quot;RetryNumberGetTransactionItem&quot;))]">
       <ui:RetryScope.ActivityBody>
         <ActivityAction>
-          <TryCatch DisplayName="Try Catch Get transaction item" sap:VirtualizedContainerService.HintSize="782,1851" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+          <TryCatch DisplayName="Try Catch Get transaction item" sap:VirtualizedContainerService.HintSize="630,1157" sap2010:WorkflowViewState.IdRef="TryCatch_2">
             <TryCatch.Variables>
               <Variable x:TypeArguments="x:Int32" Default="2" Name="i" />
               <Variable x:TypeArguments="sd:DataTable" Name="dt_cliente" />
@@ -196,15 +196,15 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <TryCatch.Try>
-              <ui:IfElseIf DisplayName="Get Data" sap:VirtualizedContainerService.HintSize="744,1623" sap2010:WorkflowViewState.IdRef="IfElseIf_15">
+              <ui:IfElseIf DisplayName="Get Data" sap:VirtualizedContainerService.HintSize="592,929" sap2010:WorkflowViewState.IdRef="IfElseIf_15">
                 <ui:IfElseIf.ConditionBlocks>
                   <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
                     <ui:IfElseIfBlock BlockType="If" Condition="[in_TransactionNumber = 1 And io_Config(&quot;ToDo&quot;).ToString.Equals(&quot;Relatorio&quot;)]">
                       <ui:IfElseIfBlock.Then>
-                        <Sequence DisplayName="Relatorio" sap:VirtualizedContainerService.HintSize="450,405" sap2010:WorkflowViewState.IdRef="Sequence_223">
+                        <Sequence DisplayName="Relatorio" sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_223">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                               <x:Boolean x:Key="IsPinned">False</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
@@ -224,9 +224,9 @@
                         </Sequence>
                       </ui:IfElseIfBlock.Then>
                     </ui:IfElseIfBlock>
-                    <ui:IfElseIfBlock BlockType="ElseIf" Condition="[in_TransactionNumber = 1 And Not io_Config.ContainsKey(&quot;QueryTransactionData&quot;)]">
+                    <ui:IfElseIfBlock BlockType="ElseIf" Condition="[in_TransactionNumber = 1 And Not io_Config.ContainsKey(&quot;QueryTransactionData&quot;) And Not io_Config(&quot;ToDo&quot;).ToString.IsNullOrEmpty]">
                       <ui:IfElseIfBlock.Then>
-                        <Sequence DisplayName="Normal" sap:VirtualizedContainerService.HintSize="541,657" sap2010:WorkflowViewState.IdRef="Sequence_215">
+                        <Sequence DisplayName="Normal" sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_215">
                           <Sequence.Variables>
                             <Variable x:TypeArguments="x:String" Name="Query">
                               <Variable.Default>
@@ -234,15 +234,11 @@
                               </Variable.Default>
                             </Variable>
                             <Variable x:TypeArguments="sd:DataTable" Name="dt_Tmp" />
-                            <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Name="filtroToDo">
-                              <Variable.Default>
-                                <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:String)" ExpressionText="New Dictionary(Of String, String)" />
-                              </Variable.Default>
-                            </Variable>
+                            <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Default="[New Dictionary(Of String, String)]" Name="filtroToDo" />
                           </Sequence.Variables>
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                               <x:Boolean x:Key="IsPinned">False</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
@@ -409,7 +405,7 @@
                         </Sequence>
                       </ui:IfElseIfBlock.Then>
                     </ui:IfElseIfBlock>
-                    <ui:IfElseIfBlock BlockType="ElseIf" Condition="[in_TransactionNumber = 1 And io_Config.ContainsKey(&quot;QueryTransactionData&quot;)]">
+                    <ui:IfElseIfBlock BlockType="ElseIf" Condition="[in_TransactionNumber = 1 And io_Config.ContainsKey(&quot;QueryTransactionData&quot;) And Not io_Config(&quot;ToDo&quot;).ToString.IsNullOrEmpty]">
                       <ui:IfElseIfBlock.Then>
                         <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Data\Input\Get Transaction Data.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_21" UnSafe="False" WorkflowFileName="Data\Input\Get Transaction Data.xaml">
                           <ui:InvokeWorkflowFile.Arguments>
@@ -423,6 +419,11 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                         </ui:InvokeWorkflowFile>
+                      </ui:IfElseIfBlock.Then>
+                    </ui:IfElseIfBlock>
+                    <ui:IfElseIfBlock BlockType="ElseIf" Condition="[io_Config(&quot;ToDo&quot;).ToString().IsNullOrEmpty]">
+                      <ui:IfElseIfBlock.Then>
+                        <ui:ClearDataTable DataTable="[io_TransactionData]" DisplayName="Clear Data Table" sap:VirtualizedContainerService.HintSize="334,80" sap2010:WorkflowViewState.IdRef="ClearDataTable_19" />
                       </ui:IfElseIfBlock.Then>
                     </ui:IfElseIfBlock>
                   </sc:BindingList>
@@ -498,7 +499,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:InvokeWorkflowFile>
-          <ui:IfElseIf DisplayName="ToDo" sap:VirtualizedContainerService.HintSize="501,1075" sap2010:WorkflowViewState.IdRef="IfElseIf_16">
+          <ui:IfElseIf DisplayName="ToDo" sap:VirtualizedContainerService.HintSize="334,52" sap2010:WorkflowViewState.IdRef="IfElseIf_16">
             <ui:IfElseIf.ConditionBlocks>
               <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
                 <ui:IfElseIfBlock BlockType="If" Condition="[io_Config(&quot;ToDo&quot;).ToString.Equals(&quot;AcessoCliente&quot;)]">
