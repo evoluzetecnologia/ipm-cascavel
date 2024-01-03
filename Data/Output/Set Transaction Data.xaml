@@ -6,7 +6,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1254,1029</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1254,1030</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Set_Transaction_Data_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -46,6 +46,12 @@
       <x:String>UiPath.Database.Activities</x:String>
       <x:String>UiPath.Platform.ResourceHandling</x:String>
       <x:String>UiPath.Activities.System.Arrays</x:String>
+      <x:String>Roboluze_Libre_Config.Tools</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>Roboluze_Libre_DataBase.System</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>UiPath.DataTableUtilities</x:String>
+      <x:String>Newtonsoft.Json</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -101,9 +107,13 @@
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.ViewModels</AssemblyReference>
       <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Set_Transaction_Data" sap:VirtualizedContainerService.HintSize="551,964" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Set_Transaction_Data" sap:VirtualizedContainerService.HintSize="551,965" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="querySql" />
     </Sequence.Variables>
@@ -159,10 +169,10 @@ WHERE ID_CLIENTE = "+in_TransactionItem("ID_CLIENTE").ToString()+" AND ID_PERFIL
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:MultipleAssign>
-    <ui:IfElseIf DisplayName="Remover" sap:VirtualizedContainerService.HintSize="489,666" sap2010:WorkflowViewState.IdRef="IfElseIf_1">
+    <ui:IfElseIf DisplayName="Remover" sap:VirtualizedContainerService.HintSize="489,667" sap2010:WorkflowViewState.IdRef="IfElseIf_1">
       <ui:IfElseIf.ConditionBlocks>
         <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
-          <ui:IfElseIfBlock BlockType="If" Condition="[Not in_Config(&quot;ToDo&quot;).ToString().Equals(&quot;Relatorio&quot;) And Not in_Config(&quot;ToDo&quot;).ToString().IsNullOrEmpty]">
+          <ui:IfElseIfBlock BlockType="If" Condition="[Not in_Config(&quot;ToDo&quot;).ToString().IsNullOrEmpty]">
             <ui:IfElseIfBlock.Then>
               <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="438,471" sap2010:WorkflowViewState.IdRef="TryCatch_2">
                 <sap:WorkflowViewStateService.ViewState>

@@ -1,12 +1,12 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="Relatorio" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:rs="clr-namespace:Roboluze_Libre_Config.System;assembly=Roboluze.Libre.Config" xmlns:rt="clr-namespace:Roboluze_Libre_Config.Tools;assembly=Roboluze.Libre.Config" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.ComponentModel;assembly=System.ComponentModel.TypeConverter" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:si="clr-namespace:System.IO;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="io_Config" Type="InOutArgument(scg:Dictionary(x:String, x:Object))" />
-    <x:Property Name="in_TransactionItem" Type="InArgument(sd:DataRow)" />
+    <x:Property Name="io_TransactionItem" Type="InOutArgument(sd:DataRow)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1254,633</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1254,2849</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Relatorio_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -133,7 +133,7 @@
       <AssemblyReference>UiPath.Platform</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Relatorio" sap:VirtualizedContainerService.HintSize="450,439" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Relatorio" sap:VirtualizedContainerService.HintSize="882,2784" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:List(x:String)" Default="[New List(Of String)({&quot;Saida&quot;,&quot;Entrada&quot;})]" Name="lista" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_Relatorio" />
@@ -148,7 +148,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <If Condition="[io_Config.ContainsKey(&quot;DataRelatorio&quot;)]" DisplayName="Criar DataBase" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="If_5">
+    <If Condition="[io_Config.ContainsKey(&quot;DataRelatorio&quot;)]" DisplayName="Criar DataBase" sap:VirtualizedContainerService.HintSize="820,52" sap2010:WorkflowViewState.IdRef="If_5">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -195,7 +195,7 @@
         </Sequence>
       </If.Else>
     </If>
-    <If Condition="[io_Config.ContainsKey(&quot;DataResumo&quot;)]" DisplayName="Criar Resumo" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="If_6">
+    <If Condition="[io_Config.ContainsKey(&quot;DataResumo&quot;)]" DisplayName="Criar Resumo" sap:VirtualizedContainerService.HintSize="820,52" sap2010:WorkflowViewState.IdRef="If_6">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -242,7 +242,7 @@
         </Sequence>
       </If.Else>
     </If>
-    <If Condition="[Convert.ToBoolean(io_Config(&quot;Relatorio&quot;))]" DisplayName="Gerar Relatorio XML" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="If_7">
+    <If Condition="[Convert.ToBoolean(io_Config(&quot;Relatorio&quot;))]" DisplayName="Gerar Relatorio XML" sap:VirtualizedContainerService.HintSize="820,52" sap2010:WorkflowViewState.IdRef="If_7">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -291,7 +291,7 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:MultipleAssign>
-                  <rt:Arquivo BreakTriggerScopeInArgument="{x:Null}" sap:VirtualizedContainerService.HintSize="434,52" sap2010:WorkflowViewState.IdRef="Arquivo_1" in_Config="[io_Config]" in_Tipo="[&quot;XML\NFS_&quot;+var]" io_FilePath="[var]" io_TransactionItem="[in_TransactionItem]">
+                  <rt:Arquivo BreakTriggerScopeInArgument="{x:Null}" sap:VirtualizedContainerService.HintSize="434,52" sap2010:WorkflowViewState.IdRef="Arquivo_1" in_Config="[io_Config]" in_Tipo="[&quot;XML\NFS_&quot;+var]" io_FilePath="[var]" io_TransactionItem="[io_TransactionItem]">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -512,7 +512,7 @@
                                                                     <OutArgument x:TypeArguments="x:Object">[row(valor.Key)]</OutArgument>
                                                                   </ui:AssignOperation.To>
                                                                   <ui:AssignOperation.Value>
-                                                                    <InArgument x:TypeArguments="x:Object">[in_TransactionItem("EMPRESA").ToString()]</InArgument>
+                                                                    <InArgument x:TypeArguments="x:Object">[io_TransactionItem("EMPRESA").ToString()]</InArgument>
                                                                   </ui:AssignOperation.Value>
                                                                 </ui:AssignOperation>
                                                               </scg:List>
@@ -530,7 +530,7 @@
                                                                     <OutArgument x:TypeArguments="x:Object">[row(valor.Key)]</OutArgument>
                                                                   </ui:AssignOperation.To>
                                                                   <ui:AssignOperation.Value>
-                                                                    <InArgument x:TypeArguments="x:Object">[in_TransactionItem("EMPRESA").ToString()]</InArgument>
+                                                                    <InArgument x:TypeArguments="x:Object">[io_TransactionItem("EMPRESA").ToString()]</InArgument>
                                                                   </ui:AssignOperation.Value>
                                                                 </ui:AssignOperation>
                                                               </scg:List>
@@ -614,25 +614,25 @@
         <Sequence sap2010:WorkflowViewState.IdRef="Sequence_30" />
       </If.Else>
     </If>
-    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="Documentos" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="ForEach`1_6" Values="[documentos]">
+    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="Documentos" sap:VirtualizedContainerService.HintSize="820,2397" sap2010:WorkflowViewState.IdRef="ForEach`1_6" Values="[documentos]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="x:String">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:String" Name="doc" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="786,2419" sap2010:WorkflowViewState.IdRef="Sequence_27">
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="786,2211" sap2010:WorkflowViewState.IdRef="Sequence_27">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="Tipo" sap:VirtualizedContainerService.HintSize="744,2331" sap2010:WorkflowViewState.IdRef="ForEach`1_7" Values="[lista]">
+            <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="Tipo" sap:VirtualizedContainerService.HintSize="744,2123" sap2010:WorkflowViewState.IdRef="ForEach`1_7" Values="[lista]">
               <ui:ForEach.Body>
                 <ActivityAction x:TypeArguments="x:String">
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="x:String" Name="tipo" />
                   </ActivityAction.Argument>
-                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="710,2145" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="710,1937" sap2010:WorkflowViewState.IdRef="Sequence_28">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -658,29 +658,29 @@
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
                     </ui:MultipleAssign>
-                    <rt:Arquivo BreakTriggerScopeInArgument="{x:Null}" sap:VirtualizedContainerService.HintSize="668,52" sap2010:WorkflowViewState.IdRef="Arquivo_2" in_Config="[io_Config]" in_Tipo="[doc+&quot;\NFS_&quot;+tipo]" io_FilePath="[var]" io_TransactionItem="[in_TransactionItem]">
+                    <rt:Arquivo BreakTriggerScopeInArgument="{x:Null}" sap:VirtualizedContainerService.HintSize="668,294" sap2010:WorkflowViewState.IdRef="Arquivo_2" in_Config="[io_Config]" in_Tipo="[doc+&quot;\NFS_&quot;+tipo.ToUpper()]" io_FilePath="[var]" io_TransactionItem="[io_TransactionItem]">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           <x:Boolean x:Key="IsPinned">False</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
                     </rt:Arquivo>
-                    <ui:IfElseIf DisplayName="Existe Pendencias" sap:VirtualizedContainerService.HintSize="668,1809" sap2010:WorkflowViewState.IdRef="IfElseIf_2">
+                    <ui:IfElseIf DisplayName="Existe Pendencias" sap:VirtualizedContainerService.HintSize="668,1359" sap2010:WorkflowViewState.IdRef="IfElseIf_2">
                       <ui:IfElseIf.ConditionBlocks>
                         <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
                           <ui:IfElseIfBlock BlockType="If" Condition="[File.Exists(var)]">
                             <ui:IfElseIfBlock.Then>
-                              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="617,1613" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="592,1163" sap2010:WorkflowViewState.IdRef="Sequence_22">
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                     <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
-                                <ui:ReadTextFile File="{x:Null}" Content="[var]" DisplayName="Read Text File" FileName="[var]" sap:VirtualizedContainerService.HintSize="555,80" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
-                                <ui:DeserializeJsonArray DisplayName="Deserialize JSON Array" sap:VirtualizedContainerService.HintSize="555,60" sap2010:WorkflowViewState.IdRef="DeserializeJsonArray_1" JsonArray="[jsonArray]" JsonString="[var]" />
-                                <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="555,116" sap2010:WorkflowViewState.IdRef="MultipleAssign_17">
+                                <ui:ReadTextFile File="{x:Null}" Content="[var]" DisplayName="Read Text File" FileName="[var]" sap:VirtualizedContainerService.HintSize="530,80" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
+                                <ui:DeserializeJsonArray DisplayName="Deserialize JSON Array" sap:VirtualizedContainerService.HintSize="530,60" sap2010:WorkflowViewState.IdRef="DeserializeJsonArray_1" JsonArray="[jsonArray]" JsonString="[var]" />
+                                <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="530,52" sap2010:WorkflowViewState.IdRef="MultipleAssign_17">
                                   <ui:MultipleAssign.AssignOperations>
                                     <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
                                       <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_22">
@@ -695,8 +695,14 @@
                                       </ui:AssignOperation>
                                     </scg:List>
                                   </ui:MultipleAssign.AssignOperations>
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
                                 </ui:MultipleAssign>
-                                <ui:ForEach x:TypeArguments="njl:JToken" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="555,390" sap2010:WorkflowViewState.IdRef="ForEach`1_5" Values="[jsonArray]">
+                                <ui:ForEach x:TypeArguments="njl:JToken" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="530,52" sap2010:WorkflowViewState.IdRef="ForEach`1_5" Values="[jsonArray]">
                                   <ui:ForEach.Body>
                                     <ActivityAction x:TypeArguments="njl:JToken">
                                       <ActivityAction.Argument>
@@ -727,12 +733,12 @@
                                   </ui:ForEach.Body>
                                   <sap:WorkflowViewStateService.ViewState>
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
                                 </ui:ForEach>
-                                <ui:IfElseIf DisplayName="Qtde" sap:VirtualizedContainerService.HintSize="555,464" sap2010:WorkflowViewState.IdRef="IfElseIf_3">
+                                <ui:IfElseIf DisplayName="Qtde" sap:VirtualizedContainerService.HintSize="530,52" sap2010:WorkflowViewState.IdRef="IfElseIf_3">
                                   <ui:IfElseIf.ConditionBlocks>
                                     <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
                                       <ui:IfElseIfBlock BlockType="If" Condition="[jsonArray.Count = 1]">
@@ -787,19 +793,79 @@
                                   </ui:IfElseIf.ConditionBlocks>
                                   <sap:WorkflowViewStateService.ViewState>
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
                                 </ui:IfElseIf>
-                                <rs:Relatorio_Erros DisplayName="Relatorio Erros" sap:VirtualizedContainerService.HintSize="555,192" sap2010:WorkflowViewState.IdRef="Relatorio_Erros_2" in_Erro="[var]" in_TransactionItem="[in_TransactionItem]" io_Config="[io_Config]">
+                                <rs:Relatorio_Erros DisplayName="Relatorio Erros" sap:VirtualizedContainerService.HintSize="530,52" sap2010:WorkflowViewState.IdRef="Relatorio_Erros_2" in_Erro="[var]" in_TransactionItem="[io_TransactionItem]" io_Config="[io_Config]">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                </rs:Relatorio_Erros>
+                                <ui:IfElseIf DisplayName="Documento" sap:VirtualizedContainerService.HintSize="530,464" sap2010:WorkflowViewState.IdRef="IfElseIf_4">
+                                  <ui:IfElseIf.ConditionBlocks>
+                                    <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
+                                      <ui:IfElseIfBlock BlockType="If" Condition="[doc.ToUpper().Equals(&quot;PDF&quot;)]">
+                                        <ui:IfElseIfBlock.Then>
+                                          <ui:MultipleAssign DisplayName="Finalizado" sap:VirtualizedContainerService.HintSize="479,116" sap2010:WorkflowViewState.IdRef="MultipleAssign_23">
+                                            <ui:MultipleAssign.AssignOperations>
+                                              <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_28">
+                                                  <ui:AssignOperation.To>
+                                                    <OutArgument x:TypeArguments="x:Object">[io_TransactionItem("PERIODO_PDF_"+tipo.ToUpper())]</OutArgument>
+                                                  </ui:AssignOperation.To>
+                                                  <ui:AssignOperation.Value>
+                                                    <InArgument x:TypeArguments="x:Object">[""]</InArgument>
+                                                  </ui:AssignOperation.Value>
+                                                </ui:AssignOperation>
+                                              </scg:List>
+                                            </ui:MultipleAssign.AssignOperations>
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                          </ui:MultipleAssign>
+                                        </ui:IfElseIfBlock.Then>
+                                      </ui:IfElseIfBlock>
+                                      <ui:IfElseIfBlock BlockType="Else">
+                                        <ui:IfElseIfBlock.Then>
+                                          <ui:MultipleAssign DisplayName="Finalizado" sap:VirtualizedContainerService.HintSize="479,116" sap2010:WorkflowViewState.IdRef="MultipleAssign_24">
+                                            <ui:MultipleAssign.AssignOperations>
+                                              <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_29">
+                                                  <ui:AssignOperation.To>
+                                                    <OutArgument x:TypeArguments="x:Object">[io_TransactionItem("PERIODO_DOWNLOAD_"+tipo.ToUpper())]</OutArgument>
+                                                  </ui:AssignOperation.To>
+                                                  <ui:AssignOperation.Value>
+                                                    <InArgument x:TypeArguments="x:Object">[""]</InArgument>
+                                                  </ui:AssignOperation.Value>
+                                                </ui:AssignOperation>
+                                              </scg:List>
+                                            </ui:MultipleAssign.AssignOperations>
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                          </ui:MultipleAssign>
+                                        </ui:IfElseIfBlock.Then>
+                                      </ui:IfElseIfBlock>
+                                    </sc:BindingList>
+                                  </ui:IfElseIf.ConditionBlocks>
                                   <sap:WorkflowViewStateService.ViewState>
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
-                                </rs:Relatorio_Erros>
+                                </ui:IfElseIf>
                               </Sequence>
                             </ui:IfElseIfBlock.Then>
                           </ui:IfElseIfBlock>
@@ -827,7 +893,7 @@
       </ui:ForEach.Body>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
